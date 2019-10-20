@@ -4,13 +4,14 @@ from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
 import time
+import math
 from spockbots.colorsensor import SpockbotsColorSensors
 from ev3dev2.wheel import Wheel
 
 colorsensors = SpockbotsColorSensors()
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
-diameter=6.24 # mm
+diameter=62.4 # mm
 width=20      # mm
 tire = Wheel(diameter, 20) # width is 20mm
 
