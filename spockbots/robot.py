@@ -7,6 +7,8 @@ import time
 import math
 from spockbots.colorsensor import SpockbotsColorSensors
 from ev3dev2.wheel import Wheel
+from ev3dev2.power import PowerSupply
+
 
 colorsensors = SpockbotsColorSensors()
 
@@ -27,6 +29,11 @@ ev3button = Button()
 def button(which):
     # which = up, down, left, right, enter, backspace
     return ev3button.check_buttons(buttons=[which])
+
+def power():
+    p = Powersupply()
+    print (p.max_voltage/p.measured_voltage)
+    return p.measured_voltage
 
 def stop():
     tank.on(SpeedPercent(0), SpeedPercent(0))
