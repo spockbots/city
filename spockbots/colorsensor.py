@@ -64,11 +64,11 @@ class SpockbotsColorSensor:
         button=Button()
 
         colorsensor = [0,0,0]
-        for i in [2]:
-            colorsensor[i] = SpockbotsColorSensor(i)
+        colorsensor[self.number] = SpockbotsColorSensor(i)
 
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
-        tank.on(SpeedPercent(-5), SpeedPercent(-5))
+        tank.left_motor.polarity='inversed'
+        tank.right_motor.polarity='inversed'
 
         while True:
 
