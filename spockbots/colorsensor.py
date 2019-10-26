@@ -64,7 +64,7 @@ class SpockbotsColorSensor:
         button=Button()
 
         colorsensor = [0,0,0]
-        colorsensor[self.number] = SpockbotsColorSensor(i)
+        colorsensor[self.number] = SpockbotsColorSensor(self.number)
 
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
         tank.left_motor.polarity='inversed'
@@ -80,14 +80,14 @@ class SpockbotsColorSensor:
 
             #print("%s 2: %3d"  % ( txt, colorsensor[2].value(), "\n"))
 
-            for i in [2]:
-                colorsensor[i].set_white()
-                colorsensor[i].set_black()
+
+            colorsensor[self.number].set_white()
+            colorsensor[self.number].set_black()
 
         tank.off()
 
         f= open("colcal2.txt","w+")
-        f.write("%3d, %3d" % (colorsensor[2].black, colorsensor[2].white))
+        f.write("%3d, %3d" % (colorsensor[self.number].black, colorsensor[self.number].white))
         f.close()
         return colorsensor
 
