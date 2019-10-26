@@ -1,4 +1,4 @@
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B, 
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B
 from ev3dev2.motor import MoveTank, SpeedPercent
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
@@ -6,8 +6,9 @@ from ev3dev2.button import Button
 import time
 import math
 from ev3dev2.wheel import Wheel
+from spockbots.colorsensor import SpockbotsColorSensors
 
-colorsensors = SpockbotsColorSensors()
+
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
 diameter=62.4 # mm
@@ -21,11 +22,37 @@ tank = MoveTank(OUTPUT_B, OUTPUT_A)
 tank.left_motor.polarity='inversed'
 tank.right_motor.polarity='inversed'
 
+colorsensors = SpockbotsColorSensors()
+
+
 ev3button = Button() 
 
 def button(which):
     # which = up, down, left, right, enter, backspace
     return ev3button.check_buttons(buttons=[which])
+
+def button_wait(which):
+    while True:
+        if button(which):
+            return
+
+
+
+def direction(movement):
+    """
+    Sets the direction of the robot
+
+    :param movement: either 'front' or 'back'
+    :return:
+    """
+    if movement == 'front':
+        tank.left_motor.polarity = 'inversed'
+        tank.right_motor.polarity = 'inversed'
+    elif movement == 'back':
+        tank.left_motor.polarity = 'normal'
+        tank.right_motor.polarity = 'normal'
+
+
 
 def power():
     p = Powersupply()
@@ -77,6 +104,36 @@ def dist(cm):
     # check if the robot traveled the distance 
     raise NotImplementedError
 
+
+def followline(run=True, black=15, port=2):
+    """
+    Follows the line on a given port.
+    run is a True-False function.
+    If its true it continues.
+    If its falls it stops
+
+    Example:
+
+    robot.followline_simple(robot.forever())
+
+    """
+    # this needs to be replaced with the spockbots color sensors
+    cs = SpockbotsColorSensor(port)
+    cs.mode = 'COL-REFLECT'
+
+    while (run):
+        value = cs.value()
+        print (value)
+        if value < black:
+            tank.on(30, SpeedPercent(10))
+        elif value > black:
+            tank.on(-30, SpeedPercent(20))
+        else:
+            tank.on(0, SpeedPercent(20))
+    stop()
+
+
+
 def followline_simple(run, port):
     """
     Follows the line on a given port. 
@@ -90,7 +147,7 @@ def followline_simple(run, port):
 
     """
     # this needs to be replaced with the spockbots color sensors
-    cs = ColorSensor(port)
+    cs = SpockbotsColorSensor(port)
     cs.mode = 'COL-REFLECT'
  
     while (run):
@@ -98,7 +155,7 @@ def followline_simple(run, port):
             tank.on(SpeedPercent(10), SpeedPercent(20))
         while (cs.value() > 15):
             tank.on(SpeedPercent(20), SpeedPercent(10))
-    tank.on(SpeedPercent(0), SpeedPercent(0))
+    stop()
 
 def sleep(seconds):
     """
@@ -209,8 +266,11 @@ def forward(speed, distance):
     rotations=distance_to_rotation(distance)
     forward_rotations(speed, rotations)
 
- 
-# forward_rotations(10,1) 
+
+
+
+
+# forward_rotations(10,1)
 # left(25,146.5)
 # left_90_degrees(25)
 # left_90_degrees(40)

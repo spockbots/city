@@ -1,12 +1,12 @@
 #!/usr/bin/env micropython
 
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B, 
-from ev3dev2.motor import MoveTank, SpeedPercent
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B
+from ev3dev2.motor import MoveTank, SpeedPercent, MoveDifferential
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4
 from ev3dev2.button import Button
 from time import sleep
-
+from ev3dev2.sound import Sound
 
 class SpockbotsColorSensor:
 
@@ -25,7 +25,7 @@ class SpockbotsColorSensor:
             self.sensor = ColorSensor(INPUT_3)
         elif port == 4:
             self.sensor = ColorSensor(INPUT_4)
-        
+
         self.port = port
         self.black = 1000
         self.white = 0
@@ -60,17 +60,20 @@ class SpockbotsColorSensor:
             c = 0
         if c > 100:
             c = 100
-        return c
+        return int(c)
     
-    def calibrate(self):
+    def calibrate(self, direction='front'):
 
         button=Button()
 
-        colorsensor = SpockbotsColorSensor(self.port)
-
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
-        tank.left_motor.polarity='inversed'
-        tank.right_motor.polarity='inversed'
+
+        if direction == 'front':
+            tank.left_motor.polarity='inversed'
+            tank.right_motor.polarity='inversed'
+        else:
+            tank.left_motor.polarity = 'normal'
+            tank.right_motor.polarity = 'normal'
 
         while True:
 
@@ -83,21 +86,42 @@ class SpockbotsColorSensor:
             #print("%s 2: %3d"  % ( txt, colorsensor[2].value(), "\n"))
 
 
-            colorsensor.set_white()
-            colorsensor.set_black()
+            self.sensor.set_white()
+            self.sensor.set_black()
 
         tank.off()
 
         f= open("colcal2.txt","w+")
-        f.write("%3d, %3d" % (colorsensor.black, colorsensor.white))
+        f.write("%3d, %3d" % (self.black, self.white))
         f.close()
-        return colorsensor
 
     def clear(self):
         f= open("/home/robot/calibrate.txt","w")
         f.close()
 
-    
+    def flash(self):
+        sound = Sound()
+        sound.beep()
+
+        self.sensor.mode = 'COL-COLOR'
+        color = self.sensor.color
+        sleep(0.5)
+
+        self.sensor.mode = 'COL-REFLECT'
+        light = self.sensor.reflected_light_intensity
+        sleep(0.5)
+
+    def write(self):
+
+        f= open("/home/robot/calibrate.txt","w+")
+        f.write(str(self.sensor.black)+"\n")
+        f.write(str(self.sensor.white)+"\n")
+        f.close()
+
+    def info(self):
+        print ("Cloorsensor", self.port, self.black, self.white)
+
+
 class SpockbotsColorSensors:
 
 
@@ -105,7 +129,7 @@ class SpockbotsColorSensors:
         self.ports=ports
         self.speed = speed
         self.colorsensor = [0,0,0,0,0]
-
+        self.ports = ports
         for i in ports:
             self.colorsensor[i] = SpockbotsColorSensor(i)
 
@@ -113,19 +137,32 @@ class SpockbotsColorSensors:
     def value(i):
         return self.colorsensor[i].value()
 
-    def calibrate(self, ports=[2,3,4]):
+    def calibrate(self, ports=[2,3,4], direction='front'):
+
+
+        print(direction)
+        print(ports)
+        print (self.speed)
 
         button=Button()
 
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
-        tank.left_motor.polarity='inversed'
-        tank.right_motor.polarity='inversed'
+
+        if direction == 'front':
+            tank.left_motor.polarity='inversed'
+            tank.right_motor.polarity='inversed'
+        else:
+            tank.left_motor.polarity = 'normal'
+            tank.right_motor.polarity = 'normal'
+
         tank.on(SpeedPercent(self.speed), SpeedPercent(self.speed))
+
+
 
         while True:
 
             txt = "exit"
-            if button.check_buttons(buttons=['up', 'down']):
+            if button.check_buttons(buttons=['backspace']):
                 break
             else:
                 txt = "Press Backspace to Stop"
@@ -143,7 +180,7 @@ class SpockbotsColorSensors:
             print(i, self.colorsensor[i].black, self.colorsensor[i].white)
 
 
-    def write(self):
+    def write(self, ports=[2,3,4]):
 
         f= open("/home/robot/calibrate.txt","w")
         for i in ports:
@@ -164,7 +201,26 @@ class SpockbotsColorSensors:
             self.colorsensor[i].white = int(f.readline())
         f.close()
 
+    def flash(self, ports=[2,3,4]):
+        for port in ports:
+            self.colorsensor[port].flash()
 
+    def info(self, ports=[2,3,4]):
+        print("")
+        print("Color sensor black and white values")
+        print("")
+
+        for port in ports:
+            self.colorsensor[port].info()
+
+    def test(self, ports=[2,3,4]):
+        print("")
+        print("Color sensor tests")
+        print("")
+
+        for port in ports:
+            v = self.colorsensor[port].value()
+            print ("Color sensor", port, v)
 
 # from spockbots.colorsensor import SpockbotsColorSensors
 # 
