@@ -1,9 +1,9 @@
 #!/usr/bin/env micropython
 
-import spockbots.robot as robot
-from run.test1 import run_test1
-from run.test2 import run_test2
-from run.calibrate import run_calibrate
+import code.spockbots.robot as robot
+from code.run.test1 import run_test1
+from code.run import run_test2
+from code.run.calibrate import run_calibrate
 
 
 while True:

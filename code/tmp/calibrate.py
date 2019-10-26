@@ -1,18 +1,12 @@
 #!/usr/bin/env micropython
 
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, MoveTank, SpeedPercent
-from ev3dev2.sensor.lego import ColorSensor
-from ev3dev2.sensor import INPUT_2
 from ev3dev2.button import Button
-
-from ev3dev2.sensor import INPUT_2
-
-from time import sleep
 
 button = Button() # up, down, left, right, enter, backspace
 
 # Connect EV3 color sensor
-from spockbots.colorsensor
+from code.spockbots
 
 colorsensor = [0,0,0]
 for i in [2]:

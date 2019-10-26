@@ -1,14 +1,12 @@
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, 
-from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor
+from ev3dev2.motor import MoveTank, SpeedPercent
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
 import time
 import math
-from spockbots.colorsensor import SpockbotsColorSensors
+from code.spockbots import SpockbotsColorSensors
 from ev3dev2.wheel import Wheel
-from ev3dev2.power import PowerSupply
-
 
 colorsensors = SpockbotsColorSensors()
 

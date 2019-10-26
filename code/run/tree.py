@@ -1,6 +1,6 @@
-import spockbots.robot as robot
+import code.spockbots.robot as robot
 
-def run_swing():
+def run_tree():
 
     robot.led("LEFT", "YELLOW")
     robot.led("RIGHT", "YELLOW")

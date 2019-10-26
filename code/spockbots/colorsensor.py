@@ -6,6 +6,8 @@ from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4
 from ev3dev2.button import Button
 
+from spoclbots.robot import tank
+
 from time import sleep
 
 # Connect EV3 color sensor
@@ -13,7 +15,7 @@ from time import sleep
 
 class SpockbotsColorSensor:
 
-    def __init__(self, number):
+    def __init__(self, number, speed=5):
         """
         :param: number  number of color sensor on ev3
         """
@@ -27,6 +29,7 @@ class SpockbotsColorSensor:
         self.number = number
         self.black = 1000
         self.white = 0
+        self.speed = speed
         self.sensor.mode='COL-REFLECT'
 
     def set_white(self):
@@ -63,8 +66,7 @@ class SpockbotsColorSensor:
 
         button=Button()
 
-        colorsensor = [0,0,0]
-        colorsensor[self.number] = SpockbotsColorSensor(self.number)
+        colorsensor = SpockbotsColorSensor(self.number)
 
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
         tank.left_motor.polarity='inversed'
@@ -81,35 +83,47 @@ class SpockbotsColorSensor:
             #print("%s 2: %3d"  % ( txt, colorsensor[2].value(), "\n"))
 
 
-            colorsensor[self.number].set_white()
-            colorsensor[self.number].set_black()
+            colorsensor.set_white()
+            colorsensor.set_black()
 
         tank.off()
 
         f= open("colcal2.txt","w+")
-        f.write("%3d, %3d" % (colorsensor[self.number].black, colorsensor[self.number].white))
+        f.write("%3d, %3d" % (colorsensor.black, colorsensor.white))
         f.close()
         return colorsensor
+
+    def clear(self):
+        f= open("/home/robot/calibrate.txt","w")
+        f.close()
 
     
 class SpockbotsColorSensors:
 
-    def __init__(self):
+
+    def __init__(self, ports=[2,3,4], speed=5):
+        self.ports=ports
+        self.speed = speed
         self.colorsensor = [0,0,0,0,0]
-        for i in [2,3,4]:
+
+        for i in ports:
             self.colorsensor[i] = SpockbotsColorSensor(i)
+
+    def clear(self):
+        f= open("/home/robot/calibrate.txt","w")
+        f.close()
 
     def value(i):
         return self.colorsensor[i].value()
 
-    def calibrate(self, speed=5):
+    def calibrate(self):
 
         button=Button()
 
         tank = MoveTank(OUTPUT_A, OUTPUT_B)
         tank.left_motor.polarity='inversed'
         tank.right_motor.polarity='inversed'
-        tank.on(SpeedPercent(speed), SpeedPercent(speed))
+        tank.on(SpeedPercent(self.speed), SpeedPercent(self.speed))
 
         while True:
 
@@ -121,26 +135,26 @@ class SpockbotsColorSensors:
 
             #print("%s 2: %3d"  % ( txt, colorsensor[2].value(), "\n"))
 
-            for i in [2,3,4]:
+            for i in self.ports:
                 self.colorsensor[i].set_white()
                 self.colorsensor[i].set_black()
                 print(i, self.colorsensor[i].black, self.colorsensor[i].white, sep=' ')
 
         tank.off()
 
-        for i in [2,3,4]:
+        for i in self.ports:
             print(i, self.colorsensor[i].black, self.colorsensor[i].white)
 
 
         f= open("/home/robot/calibrate.txt","w")
-        for i in [2,3,4]:
+        for i in self.ports:
             f.write(str(self.colorsensor[i].black)+"\n")
             f.write(str(self.colorsensor[i].white)+"\n")
         f.close()
 
     def read(self):
         f= open("/home/robot/calibrate.txt","r")
-        for i in [2,3,4]:
+        for i in self.ports:
             self.colorsensor[i].black = int(f.readline())
             self.colorsensor[i].white = int(f.readline())
         f.close()

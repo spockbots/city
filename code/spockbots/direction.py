@@ -4,7 +4,7 @@ from ev3dev2.motor import MoveSteering, MoveDifferential
 from ev3dev2.motor import SpeedPercent
 
 # DEFINE OUR OWN TIRE CLASS
-from spockbots.wheel import SpockbotsTire, STUD_MM
+from code.spockbots.wheel import SpockbotsTire, STUD_MM
 
 gyro_sensor = GyroSensor(INPUT_1)
 
