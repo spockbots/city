@@ -1,6 +1,6 @@
 #!/usr/bin/env micropython
 
-import code.spockbots.robot as robot
+import spockbots.robot as robot
 
 txt = "run"
 print(txt)

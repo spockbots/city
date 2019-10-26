@@ -6,7 +6,7 @@ from ev3dev2.button import Button
 button = Button() # up, down, left, right, enter, backspace
 
 # Connect EV3 color sensor
-from code.spockbots
+from spockbots
 
 colorsensor = [0,0,0]
 for i in [2]:

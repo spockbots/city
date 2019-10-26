@@ -1,4 +1,4 @@
-import code.spockbots.robot as robot
+import spockbots.robot as robot
 
 def run_calibrate():
 

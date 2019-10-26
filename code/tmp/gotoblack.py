@@ -2,7 +2,7 @@
 
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, MoveTank, SpeedPercent
 
-from code.spockbots import SpockbotsColorSensors
+from spockbots import SpockbotsColorSensors
 
 
 
