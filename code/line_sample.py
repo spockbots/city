@@ -14,9 +14,17 @@ motor_right = LargeMotor(OUTPUT_A)
 robot.beep()
 robot.read()
 robot.colorsensors.info()
+#robot.colorsensors.flash(ports=[3])
 
+#robot.followline_1(t=3, port=3, speed=25, factor=2.0, black=0, white=100)
+#robot.followline_2(t=10, port=3, speed=25, black=0, white=100)
 
-robot.followline_1(port=2, speed=25, factor=2, black=0, white=100)
-#robot.followline_2(port=2, speed=50, black=0, white=100)
-#robot.followline_3(port=2, speed=50, black=0, white=100,
-#                 kp=1.0, ki=1.0, kd=1.0)
+#robot.followline_3(t=3.0, port=3,
+#				   speed=25,
+#				   black=0, white=100,
+#                   kp=3.0, ki=0.01, kd=0.0)
+
+robot.followline_4(t=3.0, port=3,
+				   speed=25,
+				   black=0, white=100,
+                   kp=3.0, ki=0.01, kd=0.0)

@@ -133,7 +133,8 @@ class SpockbotsColorSensors:
         for i in ports:
             self.colorsensor[i] = SpockbotsColorSensor(i)
 
-
+    def sensor(self, port):
+        return self.colorsensor[port]
 
     def value(self, i):
         return self.colorsensor[i].value()
@@ -196,11 +197,14 @@ class SpockbotsColorSensors:
 
 
     def read(self):
-        f= open("/home/robot/calibrate.txt","r")
-        for i in self.ports:
-            self.colorsensor[i].black = int(f.readline())
-            self.colorsensor[i].white = int(f.readline())
-        f.close()
+        try:
+            f= open("/home/robot/calibrate.txt","r")
+            for i in self.ports:
+                self.colorsensor[i].black = int(f.readline())
+                self.colorsensor[i].white = int(f.readline())
+            f.close()
+        except:
+            print ("we can not find the calibration file")
 
     def flash(self, ports=[2,3,4]):
         for port in ports:
