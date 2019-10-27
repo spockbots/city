@@ -134,7 +134,7 @@ class SpockbotsColorSensors:
             self.colorsensor[i] = SpockbotsColorSensor(i)
 
 
-    def value(i):
+    def value(self, i):
         return self.colorsensor[i].value()
 
     def calibrate(self, ports=[2,3,4], direction='front'):

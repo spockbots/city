@@ -66,10 +66,10 @@ def calibrate():
     colorsensors.calibrate()
 
 def colorvalue(port):
-    return colersensors.value(port)
+    return colorsensor.value(port)
 
 def read():
-    colersensors.read()
+    colorsensors.read()
 
 def gotoblack(speed, port, black=10):
     """
@@ -105,7 +105,7 @@ def dist(cm):
     raise NotImplementedError
 
 
-def followline(run=True, black=15, port=2):
+def followline(run=True, steering=15, speed=10, black=15, port=2):
     """
     Follows the line on a given port.
     run is a True-False function.
@@ -118,23 +118,18 @@ def followline(run=True, black=15, port=2):
 
     """
     # this needs to be replaced with the spockbots color sensors
-    cs = SpockbotsColorSensor(port)
-    cs.mode = 'COL-REFLECT'
 
-    while (run):
-        value = cs.value()
+    while run:
+        value = colorsensors.value(port)
         print (value)
         if value < black:
-            tank.on(30, SpeedPercent(10))
-        elif value > black:
-            tank.on(-30, SpeedPercent(20))
+            tank.on(-steering, SpeedPercent(speed))
         else:
-            tank.on(0, SpeedPercent(20))
+            tank.on(steering, SpeedPercent(speed))
     stop()
 
 
-
-def followline_simple(run, port):
+def followline_simple(run=True, steering=15, speed=10, black=15, port=2):
     """
     Follows the line on a given port. 
     run is a True-False function. 
@@ -147,14 +142,12 @@ def followline_simple(run, port):
 
     """
     # this needs to be replaced with the spockbots color sensors
-    cs = SpockbotsColorSensor(port)
-    cs.mode = 'COL-REFLECT'
- 
+
     while (run):
-        while (cs.value() < 15):
-            tank.on(SpeedPercent(10), SpeedPercent(20))
-        while (cs.value() > 15):
-            tank.on(SpeedPercent(20), SpeedPercent(10))
+        while colorsensors.value(port) < black:
+            tank.on(SpeedPercent(speed), SpeedPercent(2*speed))
+        while colorsensors.value(port) > black:
+            tank.on(SpeedPercent(2*speed), SpeedPercent(speed))
     stop()
 
 def sleep(seconds):

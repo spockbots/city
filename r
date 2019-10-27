@@ -10,7 +10,7 @@ scp -r code/spockbots code/*.py robot@ev3dev.local:.
 PRG="color"
 #PRG="main"
 #PRG="diff" # interpreter must by python3
-PRG="line"
+#PRG="line"
 
 #scp -r code/$PRG.py robot@ev3dev.local:.
 

@@ -11,59 +11,20 @@ import spockbots.robot as robot
 
 from ev3dev2.sound import Sound
 
-#robot.beep()
+robot.beep()
+robot.read()
+
+robot.colorsensors.info()
 
 
-
-#robot.followline()C
+#robot.followline(run=True, steering=15, black=15, speed=10, port=3)
+robot.followline_simple(run=True, steering=15, black=15, speed=10, port=3)
 
 #sensor = SpockbotsColorSensor(4)
 #sensor.flash()
 
-
-
-sensors = SpockbotsColorSensors(ports=[2,3,4])
-
-#sensors.flash(ports=[2,3,4])
-
-print("front")
-robot.beep()
-robot.button_wait("enter")
-
-sensors.calibrate(ports=[2,3], direction='front')
-
-print("back")
-robot.beep()
-robot.button_wait("enter")
-sensors.calibrate(ports=[4], direction='back')
-
-
-sensors.info(ports=[2,3,4])
-
-sensors.clear()
-
-
-sensors.write(ports=[2,3,4])
-
-robot.beep()
+time.sleep(1)
 robot.beep()
 
-robot.button_wait("enter")
-print()
-print("test")
-
-while (True):
-    sensors.test(ports=[2,3,4])
-    time.sleep(1)
-    if robot.button('backspace'):
-        break
 
 
-#    color = sensor.color
-#    print (color)
-
-
-
-#    time.sleep(1)
-
-#
