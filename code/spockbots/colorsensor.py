@@ -134,6 +134,7 @@ class SpockbotsColorSensors:
             self.colorsensor[i] = SpockbotsColorSensor(i)
 
 
+
     def value(self, i):
         return self.colorsensor[i].value()
 

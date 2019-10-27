@@ -1,5 +1,5 @@
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B
-from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor, MoveSteering
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B,OUTPUT_C, OUTPUT_D
+from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
@@ -8,6 +8,7 @@ import math
 from ev3dev2.wheel import Wheel
 from spockbots.colorsensor import SpockbotsColorSensors
 
+from ev3dev2.sound import Sound
 
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
@@ -26,12 +27,27 @@ tank.right_motor.polarity='inversed'
 motor_left = LargeMotor(OUTPUT_B)
 motor_right = LargeMotor(OUTPUT_A)
 
+mediummotor_left = MediumMotor(OUTPUT_D)
+mediummotor_right = MediumMotor(OUTPUT_C)
+
+
 steering = MoveSteering(OUTPUT_B, OUTPUT_A)
 
 colorsensors = SpockbotsColorSensors()
 
 
-ev3button = Button() 
+ev3button = Button()
+
+sound = Sound()
+
+def speak(text):
+    sound.speak(text)
+
+def sing(song):
+    sound.play_song(song)
+
+def wav(source):
+    sound.play_file("/home/robot/wav/" + source)
 
 def button(which):
     # which = up, down, left, right, enter, backspace
@@ -265,9 +281,6 @@ def right_90_degrees (speed):
 def forward(speed, distance):
     rotations=distance_to_rotation(distance)
     forward_rotations(speed, rotations)
-
-
-
 
 
 # forward_rotations(10,1)
