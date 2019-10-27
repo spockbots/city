@@ -1,5 +1,5 @@
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B
-from ev3dev2.motor import MoveTank, SpeedPercent
+from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor, MoveSteering
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
@@ -22,6 +22,12 @@ tank = MoveTank(OUTPUT_B, OUTPUT_A)
 tank.left_motor.polarity='inversed'
 tank.right_motor.polarity='inversed'
 
+
+motor_left = LargeMotor(OUTPUT_B)
+motor_right = LargeMotor(OUTPUT_A)
+
+steering = MoveSteering(OUTPUT_B, OUTPUT_A)
+
 colorsensors = SpockbotsColorSensors()
 
 
@@ -35,7 +41,6 @@ def button_wait(which):
     while True:
         if button(which):
             return
-
 
 
 def direction(movement):
@@ -53,6 +58,8 @@ def direction(movement):
         tank.right_motor.polarity = 'normal'
 
 
+def light(port):
+    return colorsensors.value(port)
 
 def power():
     p = Powersupply()
