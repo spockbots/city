@@ -1,4 +1,4 @@
-#!/usr/bin/env micropython
+#! /usr/bin/env micropython
 
 # Simple program to just turn off all the motors
 

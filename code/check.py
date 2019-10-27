@@ -1,3 +1,5 @@
+#! /usr/bin/env micropython
+
 import spockbots.robot as robot
 from time import sleep
 

@@ -1,5 +1,5 @@
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B,OUTPUT_C, OUTPUT_D
-from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
+from ev3dev2.motor import Motor, MoveTank, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
