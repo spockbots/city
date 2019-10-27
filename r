@@ -14,7 +14,9 @@ scp -r code/spockbots code/*.py robot@ev3dev.local:.
 #PRG="diff" # interpreter must by python3
 #PRG="line"
 #PRG="sound"
-PRG="motor"
+#PRG="check"
+PRG="gyro"
+
 
 #scp -r code/$PRG.py robot@ev3dev.local:.
 

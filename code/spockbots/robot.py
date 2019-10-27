@@ -3,6 +3,8 @@ from ev3dev2.motor import MoveTank, SpeedPercent, LargeMotor, MoveSteering, Medi
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
+from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4
+from ev3dev2.sensor.lego import GyroSensor
 import time
 import math
 from ev3dev2.wheel import Wheel
@@ -35,6 +37,54 @@ steering = MoveSteering(OUTPUT_B, OUTPUT_A)
 
 colorsensors = SpockbotsColorSensors()
 
+ev3gyro = GyroSensor(INPUT_1)
+
+
+class Gyro(object):
+    # The following link gives some hine why it does not work fo rthe Gyror in mindstorm
+    # http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf
+
+    # in python we have three issues
+
+    # value is not 0 after reset
+    # value drifts after reset as it takes time to settle down
+    # value is not returened as no value is available
+
+    # This code fixes it.
+
+    def __init__(self, gyro):
+        self.gyro = gyro
+        self.last_angle = -1000
+        self.gyro.mode = 'GYRO-ANG'
+
+    def angle(self):
+        try:
+            self.last_angle = a = self.gyro.angle
+        except:
+            print("Gyro read error")
+            a = self.last_angle
+        return a
+
+    def reset(self):
+
+        self.gyro.reset()
+        angle = self.gyro.angle
+
+        count = 10
+        while count >= 0:
+            time.sleep(0.1)
+            try:
+                angle = self.gyro.angle
+            except:
+                print("Gyro read error")
+            print(count, "Gyro Angle: ", angle)
+            if angle == 0:
+                count = count - 1
+        self.last_angle = angle
+        print("Gyro Angle, final: ", angle)
+
+
+gyro = Gyro(ev3gyro)
 
 ev3button = Button()
 
