@@ -1,5 +1,3 @@
-#!/usr/bin/env micropython
-
 import spockbots.robot as robot
 from run.test1 import run_test1
 from run import run_test2

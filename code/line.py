@@ -1,5 +1,3 @@
-#!/usr/bin/env micropython
-
 import spockbots.robot as robot
 from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4

@@ -213,6 +213,7 @@ class SpockbotsColorSensors:
 
         for port in ports:
             self.colorsensor[port].info()
+        print()
 
     def test(self, ports=[2,3,4]):
         print("")
@@ -222,6 +223,7 @@ class SpockbotsColorSensors:
         for port in ports:
             v = self.colorsensor[port].value()
             print ("Color sensor", port, v)
+        print()
 
 # from spockbots.colorsensor import SpockbotsColorSensors
 # 

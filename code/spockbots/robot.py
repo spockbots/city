@@ -11,7 +11,8 @@ from ev3dev2.wheel import Wheel
 from spockbots.colorsensor import SpockbotsColorSensors
 
 from ev3dev2.sound import Sound
-
+# from threading import Thread
+import sys
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
 diameter=62.4 # mm
@@ -39,6 +40,25 @@ colorsensors = SpockbotsColorSensors()
 
 ev3gyro = GyroSensor(INPUT_1)
 
+mediummotor_left.off()
+mediummotor_right.off()
+
+"""
+def buttonStop():
+    print("RUNNING")
+    count = 0
+    while count > 1:
+        if button('backspace'):
+            Sound.beep()
+            count = count + 1
+            sleep(0.01)
+    kill()
+    print ("KILL")
+    sys.exit()
+
+t = Thread(target=buttonStop)
+t.start()
+"""
 
 class Gyro(object):
     # The following link gives some hine why it does not work fo rthe Gyror in mindstorm
@@ -132,8 +152,23 @@ def power():
     print (p.max_voltage/p.measured_voltage)
     return p.measured_voltage
 
+
+def kill():
+    ports = [OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D]
+    for port in ports:
+        motor = Motor(port)
+        motor.off()
+
+def medium_stop():
+    mediummotor_left.off()
+    mediummotor_right.off()
+
+
 def stop():
-    tank.on(SpeedPercent(0), SpeedPercent(0))
+    tank.off()
+    steering.off()
+    motor_left.off()
+    motor_right.off()
 
 def calibrate():
     colorsensors.calibrate()
@@ -177,6 +212,56 @@ def dist(cm):
     # check if the robot traveled the distance 
     raise NotImplementedError
 
+
+
+def followline_1(port=2, speed=50, factor=2, black=0, white=100):
+
+	midpoint = ( white - black ) / 2 + black
+
+	while True:
+
+		value = light(port)
+
+		if value < midpoint:
+			motor_left.on(SpeedPercent(speed))
+			motor_right.on(SpeedPercent(int(speed/factor)))
+        else:
+            motor_left.on(SpeedPercent(int(speed / factor)))
+            motor_right.on(SpeedPercent(speed))
+
+
+def followline_2(port=2, speed=50, black=0, white=100):
+
+	midpoint = ( white - black ) / 2 + black
+	kp=1.0
+
+	while True:
+
+		value = light(port)
+		correction = kp * ( midpoint - value )
+
+		steering.on(correction, speed)
+
+
+def followline_3(port=2, speed=50, black=0, white=100,
+                 kp=1.0, ki=1.0, kd=1.0):
+
+	midpoint = ( white - black ) / 2 + black
+	lasterror=0.0
+
+	while True:
+
+		value = light(port)
+
+		error = midpoint - value
+		integral = error + integral
+		derivative = error - lasterror
+
+		correction = kp * error + ki * integral + kd * derivative
+
+		steering.on(correction, speed)
+
+		lasterror = error
 
 def followline(run=True, steering=15, speed=10, black=15, port=2):
     """
