@@ -33,4 +33,4 @@ robot.followline_4(t=10.0, port=3,
                    kp=3.0, ki=0.01, kd=0.0)
 
 robot.followline_5(t=3, port=3, speed=25, black=0, white=100, delta=-35, factor=0.7)
-robot.followline_5(t=3, port=3, speed=25, black=0, white=100, delta=-35, factor=0.4)
+robot.followline_5(t=4, port=3, speed=25, black=0, white=100, delta=-35, factor=0.4)

@@ -459,7 +459,16 @@ def forward_rotations(speed, rotations):
     The robot moves forward with the given number of 
     rotations
     """
+    left_start = motor_left.position
+    right_start = motor_right.position
+
     tank.on_for_rotations(speed, speed, rotations)
+
+    left_end = motor_left.position
+    right_end = motor_right.position
+
+    print("Distance Position", left_end - left_start, right_end - right_start)
+
 
 
 def left(speed, rotations):
@@ -515,6 +524,14 @@ def right_90_degrees(speed):
 
 
 def forward(speed, distance):
+    """
+
+    Go forward
+
+    :param speed: The speed of the robot
+    :param distance: distance in cm
+    :return:
+    """
     rotations = distance_to_rotation(distance)
     forward_rotations(speed, rotations)
 
