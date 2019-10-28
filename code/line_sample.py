@@ -24,7 +24,7 @@ robot.colorsensors.info()
 #				   black=0, white=100,
 #                   kp=3.0, ki=0.01, kd=0.0)
 
-robot.followline_4(t=3.0, port=3,
+robot.followline_4(t=10.0, port=3,
 				   speed=25,
 				   black=0, white=100,
                    kp=3.0, ki=0.01, kd=0.0)

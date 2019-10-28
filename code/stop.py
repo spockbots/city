@@ -6,6 +6,7 @@ from ev3dev2.motor import Motor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 
 motorlist = [OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D]
 for motorport in motorlist:
+    print("Switch off ", motorport)
     motor = Motor(motorport)
     motor.off()
     del motor

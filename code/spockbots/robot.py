@@ -1,6 +1,10 @@
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.motor import follow_for_ms
-from ev3dev2.motor import Motor, MoveTank, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
+from ev3dev2.motor import Motor, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
+
+#from ev3dev2.motor import MoveTank
+from spockbots.motor import MoveTank
+
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
 from ev3dev2.button import Button
@@ -12,8 +16,9 @@ from ev3dev2.wheel import Wheel
 from spockbots.colorsensor import SpockbotsColorSensors
 
 from ev3dev2.sound import Sound
-# from threading import Thread
+from threading import Thread
 import sys
+import os
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
 diameter = 62.4  # mm
@@ -40,23 +45,6 @@ ev3gyro = GyroSensor(INPUT_1)
 
 mediummotor_left.off()
 mediummotor_right.off()
-
-"""
-def buttonStop():
-    print("RUNNING")
-    count = 0
-    while count > 1:
-        if button('backspace'):
-            Sound.beep()
-            count = count + 1
-            sleep(0.01)
-    kill()
-    print ("KILL")
-    sys.exit()
-
-t = Thread(target=buttonStop)
-t.start()
-"""
 
 
 class Gyro(object):
@@ -121,6 +109,9 @@ def sing(song):
 def wav(source):
     sound.play_file("/home/robot/wav/" + source)
 
+###########################################################
+# Buttons
+###########################################################
 
 def button(which):
     # which = up, down, left, right, enter, backspace
@@ -132,6 +123,18 @@ def button_wait(which):
         if button(which):
             return
 
+def button_kill(which="backspace"):
+    print("RUNNING")
+    count = 0
+    button_wait(which)
+    print ("KILL")
+    os.system("micropython /home/robot/stop.py")
+    sys.exit()
+
+t = Thread(target=button_kill)
+t.start()
+
+###########################################################
 
 def direction(movement):
     """
@@ -321,10 +324,10 @@ def followline_4(t=3.0, port=3,
 
     tank.cs = colorsensors.colorsensor[port].sensor
     try:
-        tank.follow_line(
+        tank.follow_line_debug(
             target_light_intensity=None,
             kp=kp, ki=ki, kd=kd,
-            speed=SpeedPercent(45),
+            speed=SpeedPercent(speed),
             white=60,
             follow_for=follow_for_ms,
             ms=t*1000
@@ -500,6 +503,39 @@ def right_90_degrees(speed):
 def forward(speed, distance):
     rotations = distance_to_rotation(distance)
     forward_rotations(speed, rotations)
+
+
+def check():
+    beep()
+
+    speak('Large Motors')
+
+    speak('Left')
+    motor_left.on_for_seconds(25, 1)
+
+    speak('Right')
+    motor_right.on_for_seconds(25, 1)
+
+    speak('Medium Motors')
+
+    speak('Left')
+    mediummotor_left.on_for_seconds(25, 1)
+
+    speak('Right')
+    mediummotor_right.on_for_seconds(25, 1)
+
+    speak('Light')
+
+    speak('Left')
+    colorsensors.flash(ports=[2])
+
+    speak('Right')
+    colorsensors.flash(ports=[3])
+
+    speak('Back')
+    colorsensors.flash(ports=[4])
+
+    speak('finished')
 
 # forward_rotations(10,1)
 # left(25,146.5)

@@ -17,8 +17,10 @@ scp -r code/spockbots code/*.py robot@ev3dev.local:.
 #PRG="check"
 #PRG="gyro"
 #PRG="interpreter"
-PRG="line_sample"
+#PRG="line_sample"
 #PRG="calibrate"
+
+PRG=$1
 
 #scp -r code/$PRG.py robot@ev3dev.local:.
 
