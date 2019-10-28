@@ -18,11 +18,11 @@ def reset():
 
 def left(speed, degrees=90):
     mdiff.odometry_start()
-    mdiff.turn_to_angle(SpeedPercent(speed), degrees))
+    mdiff.turn_to_angle(SpeedPercent(speed), degrees)
 
 def right(speed, degrees=90):
     mdiff.odometry_start()
-    mdiff.turn_to_angle(SpeedPercent(speed), -degrees))
+    mdiff.turn_to_angle(SpeedPercent(speed), -degrees)
 
 def followline(distance,oort=INPUT_1):
 
