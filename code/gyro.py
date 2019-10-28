@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import spockbots.robot as robot
 import time
 

@@ -1,3 +1,5 @@
+#! /usr/bin/env micropython
+
 import spockbots.robot as robot
 
 #robot.wav("3-5_live_long2.wav")

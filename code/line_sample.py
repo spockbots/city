@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # from http://thetechnicgear.com/2014/03/howto-create-line-following-robot-using-mindstorms/
 
 from ev3dev2.motor import LargeMotor, SpeedPercent

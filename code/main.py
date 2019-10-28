@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import spockbots.robot as robot
 from run.test1 import run_test1
 from run import run_test2
