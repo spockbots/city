@@ -263,10 +263,8 @@ def followline_1(t=2, port=2, speed=50, factor=2, black=0, white=100):
     motor_left.off()
     motor_right.off()
 
-def followline_2(t=2, port=2, speed=50, black=0, white=100):
+def followline_2(t=2, port=2, speed=25, black=0, white=100, kp=0.3):
     midpoint = (white - black) / 2 + black
-    kp = 1.0
-
 
     current = time.time()
     end_time = current + t
@@ -315,6 +313,22 @@ def followline_3(t=2, port=2, speed=25, black=0, white=100,
         current = time.time()
     steering.off()
 
+def followline_5(t=2, port=3, speed=25, black=0, white=100, delta=-35, factor=0.7):
+
+    current = time.time()
+    end_time = current + t
+
+    while current < end_time:
+        value = light(port)
+
+        correction = delta + (factor * value)
+
+        print(correction)
+
+        steering.on(correction, speed)
+
+        current = time.time()
+    steering.off()
 
 
 def followline_4(t=3.0, port=3,
