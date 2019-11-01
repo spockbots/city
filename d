@@ -1,8 +1,9 @@
 #! /bin/sh
 
-scp -r ./code/* robot@ev3dev.local:.
+scp -r ./code/* yellow:.
+scp -r ./docs yellow:.
 
-ssh robot
+ssh yellow
 
 
 

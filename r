@@ -1,6 +1,7 @@
 #! /bin/sh
 
-scp -r code/spockbots code/*.py robot@ev3dev.local:.
+#scp -r code/spockbots code/*.py robot@ev3dev$ROBOT.local:.
+scp -r code/spockbots code/*.py yellow:.
 
 #scp -r code/wav code/*.py robot@ev3dev.local:.
 

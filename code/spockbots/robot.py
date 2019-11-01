@@ -2,7 +2,7 @@ from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.motor import follow_for_ms
 from ev3dev2.motor import Motor, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
 
-#from ev3dev2.motor import MoveTank
+# from ev3dev2.motor import MoveTank
 from spockbots.motor import MoveTank
 
 from ev3dev2.sound import Sound
@@ -23,6 +23,8 @@ import os
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
 diameter = 62.4  # mm
 width = 20  # mm
+position_per_cm = 1.842
+
 tire = Wheel(diameter, 20)  # width is 20mm
 
 sound = Sound()
@@ -38,13 +40,14 @@ mediummotor_right = MediumMotor(OUTPUT_C)
 
 steering = MoveSteering(OUTPUT_B, OUTPUT_A)
 
-
 colorsensors = SpockbotsColorSensors()
 
 ev3gyro = GyroSensor(INPUT_1)
 
 mediummotor_left.off()
 mediummotor_right.off()
+
+moves_forward = True
 
 
 class Gyro(object):
@@ -53,18 +56,27 @@ class Gyro(object):
 
     # in python we have three issues
 
-    # value is not 0 after reset
-    # value drifts after reset as it takes time to settle down
-    # value is not returened as no value is available
+    # sensor value is not 0 after reset
+    # sensor value drifts after reset as it takes time to settle down
+    # sensor value is not returned as no value is available from the sensor
 
     # This code fixes it.
 
     def __init__(self, gyro):
+        """
+        Initializes the Gyro Sensor
+        :param gyro: The gyro sensor on a given port
+        """
         self.gyro = gyro
-        self.last_angle = -1000
-        self.gyro.mode = 'GYRO-ANG'
+        self.last_angle = -1000 # just set the current value to get us started
+        self.gyro.mode = 'GYRO-ANG' # set the sensor in angle mode
 
     def angle(self):
+        """
+        Gets the angle
+
+        :return: The angle in degrees
+        """
         try:
             self.last_angle = a = self.gyro.angle
         except:
@@ -109,6 +121,7 @@ def sing(song):
 def wav(source):
     sound.play_file("/home/robot/wav/" + source)
 
+
 ###########################################################
 # Buttons
 ###########################################################
@@ -127,12 +140,14 @@ def button_kill(which="backspace"):
     print("RUNNING")
     count = 0
     button_wait(which)
-    print ("KILL")
+    print("KILL")
     os.system("micropython /home/robot/stop.py")
     sys.exit()
 
+
 t = Thread(target=button_kill)
 t.start()
+
 
 ###########################################################
 
@@ -144,6 +159,7 @@ def direction(movement):
     :return:
     """
     if movement == 'front':
+        moves_forward = True
         tank.left_motor.polarity = 'inversed'
         tank.right_motor.polarity = 'inversed'
 
@@ -155,6 +171,7 @@ def direction(movement):
 
 
     elif movement == 'back':
+        moves_forward = False
         tank.left_motor.polarity = 'normal'
         tank.right_motor.polarity = 'normal'
 
@@ -165,18 +182,30 @@ def direction(movement):
         motor_right.polarity = 'normal'
 
 
-
 def light(port):
+    """
+    get the light value from the colorsensor on the port
+    :param port: The port, number 2, 3, 4
+    :return: The light value
+    """
     return colorsensors.value(port)
 
 
-def power():
+def voltage():
+    """
+    Gets the current vultage.
+
+    :return: The measured voltage
+    """
     p = Powersupply()
-    print(p.max_voltage / p.measured_voltage)
+    print("Voltage: ", p.max_voltage / p.measured_voltage)
     return p.measured_voltage
 
 
 def kill():
+    """
+    stops the motors
+    """
     ports = [OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D]
     for port in ports:
         motor = Motor(port)
@@ -184,32 +213,55 @@ def kill():
 
 
 def medium_stop():
+    """
+    stops all medium motors
+    """
     mediummotor_left.off()
     mediummotor_right.off()
 
 
 def stop():
+    """
+    stops all motors on all different drive modes
+    """
     tank.off()
     steering.off()
     motor_left.off()
     motor_right.off()
-
+    kill()
 
 def calibrate():
+    """
+    runs the calibraion for the 3 color sensors
+    :return:
+    """
     colorsensors.calibrate()
 
 
 def colorvalue(port):
+    """
+    returns the color value from the given port
+    :param port: The port number 2, 3, 4
+    :return: the color value
+    """
     return colorsensor.value(port)
 
 
 def read():
+    """
+    reads the color values from the file that were written by calibrate
+    :return:
+    """
     colorsensors.read()
 
 
 def gotoblack(speed, port, black=10):
     """
     The robot moves to the black line while using the sensor on the given port
+
+    :param speed: The speed
+    :param port: The port 2,3,4
+    :param black: The value to stop
     """
     tank.on(SpeedPercent(speed), SpeedPercent(speed))
     while colorvalue(port) > black:
@@ -219,7 +271,11 @@ def gotoblack(speed, port, black=10):
 
 def gotowhite(speed, sensor, white=90):
     """
-    The robot moves to the black line while using the sensor on the given port
+    The robot moves to the white line while using the sensor on the given port
+
+    :param speed: The speed
+    :param port: The port 2,3,4
+    :param white: The value to stop
     """
     tank.on(SpeedPercent(speed), SpeedPercent(speed))
     while colorvalue(port) < white:
@@ -243,163 +299,56 @@ def dist(cm):
     raise NotImplementedError
 
 
-def followline_1(t=2, port=2, speed=50, factor=2, black=0, white=100):
-    midpoint = (white - black) / 2 + black
+def followline(
+        speed=25,  # speed 0 - 100
+        t=None,  # time in seconds
+        distance=None,  # distance in cm
+        port=3,  # the port number we use to follow the line
+        black=0,  # minimal balck
+        white=100,  # maximal white
+        delta=-35,  # paramaters to control smoothness
+        factor=0.7):  # parameters to control smoothness
 
-    end_time = time.time() + t
-    while end_time > time.time():
+    global moves_forward  # taken from the direction function
+    if moves_forward:  # set to + if forward and - if backward
+        f = 1.0
+    else:
+        f = -1.0
 
-        value = light(port)
+    current = time.time()  # the current time
+    if t is not None:
+        end_time = current + t  # the end time
 
-        position = motor_left.position
-        print(position)
+    steering.left_motor.position = 0  # set the motor position to 0
+    # 1.842 positions is 1cm
 
-        if value > midpoint:
-            motor_left.on(SpeedPercent(speed))
-            motor_right.on(SpeedPercent(int(speed / factor)))
-        else:
-            motor_left.on(SpeedPercent(int(speed / factor)))
-            motor_right.on(SpeedPercent(speed))
-    motor_left.off()
-    motor_right.off()
+    while True:
+        value = light(port)  # get the light value
 
-def followline_2(t=2, port=2, speed=25, black=0, white=100, kp=0.3):
-    midpoint = (white - black) / 2 + black
-
-    current = time.time()
-    end_time = current + t
-
-    #	while True:
-
-    print ("AAA", end_time, current)
-    while current < end_time:
-        value = light(port)
-        position = motor_left.position
-        print(current, position, value)
-
-        correction = kp * (midpoint - value)
-
-        steering.on(-correction, speed)
-
-        #steering.on(correction, speed)
-        current = time.time()
-    steering.off()
-
-def followline_3(t=2, port=2, speed=25, black=0, white=100,
-                 kp=1.0, ki=1.0, kd=1.0):
-
-    integral = 0
-
-    midpoint = (white - black) / 2 + black
-    lasterror = 0.0
-
-    current = time.time()
-    end_time = current + t
-
-    while current < end_time:
-        value = light(port)
-
-        error = midpoint - value
-        integral = error + integral
-        derivative = error - lasterror
-
-        correction = kp * error + ki * integral + kd * derivative
+        correction = delta + (factor * value)  # calculate the correction for steering
+        correction = f * correction  # if we drive backwards negate the correction
 
         print(correction)
 
-        steering.on(-correction, speed)
+        steering.on(correction, speed)  # switch the steering on with the given correction and speed
 
-        lasterror = error
-        current = time.time()
-    steering.off()
+        current = time.time()  # measure the crurrent time
 
-def followline_5(t=2, port=3, speed=25, black=0, white=100, delta=-35, factor=0.7):
+        # if the time is used we set run to false once the end time is reached
+        # if the distance is greater than the position than the leave the
+        if t is not None and current > end_time:
+            break  # leave the loop
+        if distance is not None and distance > position_per_cm * steering.left_motor.position
+            break  # leave the loop
 
-    current = time.time()
-    end_time = current + t
-
-    while current < end_time:
-        value = light(port)
-
-        correction = delta + (factor * value)
-
-        print(correction)
-
-        steering.on(correction, speed)
-
-        current = time.time()
-    steering.off()
-
-
-def followline_4(t=3.0, port=3,
-				 speed=25,
-				 black=0, white=100,
-                 kp=3.0, ki=0.01, kd=0.0):
-
-    tank.cs = colorsensors.colorsensor[port].sensor
-    try:
-        tank.follow_line_debug(
-            target_light_intensity=None,
-            kp=kp, ki=ki, kd=kd,
-            speed=SpeedPercent(speed),
-            white=60,
-            follow_for=follow_for_ms,
-            ms=t*1000
-        )
-    except Exception:
-        tank.stop()
-        raise
-
-
-def followline(run=True, steering=15, speed=10, black=15, port=2):
-    """
-    Follows the line on a given port.
-    run is a True-False function.
-    If its true it continues.
-    If its falls it stops
-
-    Example:
-
-    robot.followline_simple(robot.forever())
-
-    """
-    # this needs to be replaced with the spockbots color sensors
-
-    while run:
-        value = colorsensors.value(port)
-        print(value)
-        if value < black:
-            tank.on(-steering, SpeedPercent(speed))
-        else:
-            tank.on(steering, SpeedPercent(speed))
-    stop()
-
-
-def followline_simple(run=True, steering=15, speed=10, black=15, port=2):
-    """
-    Follows the line on a given port. 
-    run is a True-False function. 
-    If its true it continues.
-    If its falls it stops
-
-    Example:
-
-    robot.followline_simple(robot.forever())
-
-    """
-    # this needs to be replaced with the spockbots color sensors
-
-    while run:
-        while colorsensors.value(port) < black:
-            tank.on(SpeedPercent(speed), SpeedPercent(2 * speed))
-        while colorsensors.value(port) > black:
-            tank.on(SpeedPercent(2 * speed), SpeedPercent(speed))
-    stop()
+    steering.off()  # stop the robot
 
 
 def sleep(seconds):
     """
     The robot will sleep for the number of seconds
+
+    :param seconds: number of seconds
     """
     time.sleep(seconds)
 
@@ -415,17 +364,14 @@ def led(group, color):
     """
     The robot will switch on the LEDS with the given color
 
-    group:
-        LEFT
-        RIGHT
-
-    color:
-        BLACK
-        RED
-        GREEN
-        AMBER
-        ORANGE
-        YELLOW
+    :param group: LED's can be on the LEFT or RIGHT
+    :param color: the color to be used. One of
+                  BLACK
+                  RED
+                  GREEN
+                  AMBER
+                  ORANGE
+                  YELLOW
     """
     # direction, LEFT
     # Color: GREEN, RED
@@ -446,8 +392,11 @@ def flash():
 
 def distance_to_rotation(distance):
     """
-    calculation to convert the distence from 
+    calculation to convert the distance from
     cm into rotations.
+
+    :param distance:  The distance in cm
+    :return: The rotations to be traveled for the given distance
     """
     circumference = diameter * math.pi
     rotation = distance / circumference
@@ -456,8 +405,11 @@ def distance_to_rotation(distance):
 
 def forward_rotations(speed, rotations):
     """
-    The robot moves forward with the given number of 
-    rotations
+    drive forward for the given rotations
+
+    :param speed: the speed
+    :param rotations: the rotations
+    :return:
     """
     left_start = motor_left.position
     right_start = motor_right.position
@@ -470,10 +422,12 @@ def forward_rotations(speed, rotations):
     print("Distance Position", left_end - left_start, right_end - right_start)
 
 
-
 def left(speed, rotations):
     """
-    The robot truns left with the number of rotations
+    drive to the left for the given rotations
+
+    :param speed: The speed
+    :param rotations: The rotations
     """
     tank.on_for_rotations(speed, -speed, rotations)
 
@@ -481,13 +435,20 @@ def left(speed, rotations):
 def left_degrees(speed, degrees):
     """
     The robot turns left with the given number of degrees
+
+    :param speed: The speed
+    :param degrees: The degrees
+
     """
     tank.on_for_degrees(speed, -speed, degrees)
 
 
 def right(speed, rotations):
     """
-    The robot turns right with the number of rotations
+    drive to the right for the given rotations
+
+    :param speed: The speed
+    :param rotations: The rotations
     """
     tank.on_for_rotations(-speed, speed, rotations)
 
@@ -495,6 +456,9 @@ def right(speed, rotations):
 def right_degrees(speed, degrees):
     """
     The robot turns left with the given number of degrees
+
+    :param speed: The speed
+    :param degrees: The degrees
     """
     tank.on_for_degrees(-speed, speed, degrees)
 
@@ -537,6 +501,13 @@ def forward(speed, distance):
 
 
 def check():
+    """
+    do a robot check by
+
+    a) turning on the large motors one at a time
+    b) turning on the medium motors one at a time
+    c) turning on the light sensors one at a time
+    """
     beep()
 
     speak('Large Motors')
@@ -567,6 +538,7 @@ def check():
     colorsensors.flash(ports=[4])
 
     speak('finished')
+ 
 
 # forward_rotations(10,1)
 # left(25,146.5)
@@ -574,4 +546,4 @@ def check():
 # left_90_degrees(40)
 # forward(25,100)
 
-direction('front')
+direction('front') # set the defualt direction to move to the front so we do not forget.
