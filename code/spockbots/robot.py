@@ -225,7 +225,7 @@ class Gyro(object):
         :param degrees: The degrees
         """
         if speed == 25:
-            offset = 5
+            offset = 8
 
         self.zero()
 
@@ -248,7 +248,7 @@ class Gyro(object):
         :param degrees: The degrees
         """
         if speed == 25:
-            offset = 6
+            offset = 8
 
         self.zero()
 
@@ -281,6 +281,13 @@ while error:
         print(e)
 
 gyro = Gyro(ev3gyro)
+
+
+def left(speed=25, degrees=90, offset=0):
+    gyro.left(speed, degrees)
+
+def right(speed=25, degrees=90, offset=0):
+    gyro.right(speed, degrees)
 
 
 #######################################################
