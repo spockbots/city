@@ -1,0 +1,15 @@
+Host robot
+     HostName ev3dev.local
+     User robot
+
+Host green
+     HostName ev3dev-green.local
+     User robot
+
+Host red
+     HostName ev3dev-red.local
+     User robot
+
+Host yellow
+     HostName ev3dev-yellow.local
+     User robot
