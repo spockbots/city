@@ -1,20 +1,22 @@
 #!/usr/bin/env micropython
 
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B
-from ev3dev2.motor import MoveTank, SpeedPercent, MoveDifferential
-from ev3dev2.sensor.lego import ColorSensor
-from ev3dev2.sensor import INPUT_1,INPUT_2,INPUT_3,INPUT_4
-from ev3dev2.button import Button
 from time import sleep
+
+from ev3dev2.button import Button
+from ev3dev2.motor import MoveTank, SpeedPercent
+from ev3dev2.motor import OUTPUT_A, OUTPUT_B
+from ev3dev2.sensor import INPUT_2, INPUT_3, INPUT_4
+from ev3dev2.sensor.lego import ColorSensor
 from ev3dev2.sound import Sound
+
 
 class SpockbotsColorSensor:
 
     def __init__(self, port, speed=5):
         """
 
-        :param port:
-        :param speed:
+        :param port: the port
+        :param speed: teh speed for calibartion
         """
         """
         :param: number  number of color sensor on ev3
@@ -33,11 +35,18 @@ class SpockbotsColorSensor:
         self.sensor.mode='COL-REFLECT'
 
     def set_white(self):
+        """
+        sets the current value to white
+        :return:
+        """
         value = self.sensor.reflected_light_intensity
         if value > self.white:
             self.white = value 
     
     def set_black(self):
+        """
+        sets the current value to black
+        """
         value = self.sensor.reflected_light_intensity
         if value < self.black:
             self.black = value 
@@ -50,6 +59,10 @@ class SpockbotsColorSensor:
     """
 
     def value(self):
+        """
+        reads the current value mapped between 0 and 100
+        :return:
+        """
         val = self.sensor.reflected_light_intensity
         b = self.black
         t1 = val - b
@@ -63,6 +76,11 @@ class SpockbotsColorSensor:
         return int(c)
     
     def calibrate(self, direction='front'):
+        """
+        runs over the lines and finds the largest black and white value
+        :param direction:
+        :return:
+        """
 
         button=Button()
 
@@ -100,6 +118,9 @@ class SpockbotsColorSensor:
         f.close()
 
     def flash(self):
+        """
+        flashes the color sensor by switching between color and reflective mode
+        """
         sound = Sound()
         sound.beep()
 
@@ -112,16 +133,25 @@ class SpockbotsColorSensor:
         sleep(0.5)
 
     def write(self):
-
+        """
+        append the black and white value to a file
+        """
         f= open("/home/robot/calibrate.txt","w+")
         f.write(str(self.sensor.black)+"\n")
         f.write(str(self.sensor.white)+"\n")
         f.close()
 
     def info(self):
+        """
+        prints the black and white value read form the sensor
+        """
         print ("Cloorsensor", self.port, self.black, self.white)
 
     def read(self):
+        """
+        reads the color sensor data form the file
+        :return:
+        """
         try:
             f= open("/home/robot/calibrate.txt","r")
             self.colorsensor[port].black = int(f.readline())
@@ -132,7 +162,6 @@ class SpockbotsColorSensor:
 
 
 class SpockbotsColorSensors:
-
 
     def __init__(self, ports=[2,3,4], speed=5):
         self.ports=ports

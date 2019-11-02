@@ -1,0 +1,8 @@
+#! /bin/sh
+
+ROBOT=$1
+
+scp code/spockbots/robot.py  $ROBOT:spockbots/.
+
+
+
