@@ -16,7 +16,7 @@ while True:
         print ("quit")
         sys.exit()
     try:
-        eval(line)
+        eval("robot." + line)
     except Exception as e:
         print()
         print(e)

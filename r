@@ -1,7 +1,11 @@
 #! /bin/sh
 
-#scp -r code/spockbots code/*.py robot@ev3dev$ROBOT.local:.
-scp -r code/spockbots code/*.py yellow:.
+ROBOT=robot@ev3dev.local
+
+scp -r code/spockbots code/*.py $ROBOT:.
+
+#scp -r code/spockbots code/*.py yellow:.
+#scp -r code/spockbots code/*.py robot:.
 
 #scp -r code/wav code/*.py robot@ev3dev.local:.
 
@@ -23,9 +27,9 @@ scp -r code/spockbots code/*.py yellow:.
 
 PRG=$1
 
-#scp -r code/$PRG.py robot@ev3dev.local:.
+scp -r code/$PRG.py $ROBOT:.
 
-ssh robot@ev3dev.local "micropython ./$PRG.py"
+ssh $ROBOT "micropython ./$PRG.py"
 #ssh robot@ev3dev.local "python3 ./$PRG.py"
 
 

@@ -2,8 +2,8 @@ from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.motor import follow_for_ms
 from ev3dev2.motor import Motor, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
 
-# from ev3dev2.motor import MoveTank
-from spockbots.motor import MoveTank
+from ev3dev2.motor import MoveTank
+#from spockbots.motor import MoveTank
 
 from ev3dev2.sound import Sound
 from ev3dev2.led import Leds
@@ -21,9 +21,9 @@ import sys
 import os
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
-diameter = 62.4  # mm
-width = 20  # mm
-position_per_cm = 1.842
+diameter = 6.24  # cm
+width = 2.0  # cm
+position_per_cm = 1.0/18.42
 
 tire = Wheel(diameter, 20)  # width is 20mm
 
@@ -48,6 +48,16 @@ mediummotor_left.off()
 mediummotor_right.off()
 
 moves_forward = True
+
+def medium_left(speed, degrees):
+    mediummotor_left.on_for_rotations(speed, int(degrees/360))
+    mediummotor_left.off()
+
+def door_open(speed=50, degree=360):
+    medium_left(speed, degree)
+
+def door_closed(speed=-50, degree=360):
+    medium_left(speed, degree)
 
 
 class Gyro(object):
@@ -83,6 +93,10 @@ class Gyro(object):
             print("Gyro read error")
             a = self.last_angle
         return a
+
+    def zero(self):
+        self.gyro.reset()
+        time.sleep(0.2)
 
     def reset(self):
 
@@ -282,11 +296,6 @@ def gotowhite(speed, sensor, white=90):
         pass
     stop()
 
-
-def forever():
-    True
-
-
 def reset_distance():
     """
     Resests the distnace measure of the motor to 0
@@ -338,7 +347,7 @@ def followline(
         # if the distance is greater than the position than the leave the
         if t is not None and current > end_time:
             break  # leave the loop
-        if distance is not None and distance > position_per_cm * steering.left_motor.position
+        if distance is not None and distance > position_per_cm * steering.left_motor.position:
             break  # leave the loop
 
     steering.off()  # stop the robot
@@ -419,73 +428,69 @@ def forward_rotations(speed, rotations):
     left_end = motor_left.position
     right_end = motor_right.position
 
+    tank.wait_while('running', timeout=3000)
+    tank.off()
+
     print("Distance Position", left_end - left_start, right_end - right_start)
 
 
-def left(speed, rotations):
+def left_rotations(speed, rotations):
     """
     drive to the left for the given rotations
 
     :param speed: The speed
     :param rotations: The rotations
     """
-    tank.on_for_rotations(speed, -speed, rotations)
+    tank.on_for_rotations(-speed, speed, rotations)
+    tank.off()
 
 
-def left_degrees(speed, degrees):
-    """
-    The robot turns left with the given number of degrees
-
-    :param speed: The speed
-    :param degrees: The degrees
-
-    """
-    tank.on_for_degrees(speed, -speed, degrees)
-
-
-def right(speed, rotations):
+def right_rotations(speed, rotations):
     """
     drive to the right for the given rotations
 
     :param speed: The speed
     :param rotations: The rotations
     """
-    tank.on_for_rotations(-speed, speed, rotations)
+    tank.on_for_rotations(speed, -speed, rotations)
+    tank.off()
 
-
-def right_degrees(speed, degrees):
+def left(speed=25, degrees=90, offset=0):
     """
     The robot turns left with the given number of degrees
 
     :param speed: The speed
     :param degrees: The degrees
     """
-    tank.on_for_degrees(-speed, speed, degrees)
+    if speed == 25:
+        offset = 5
+
+    gyro.zero()
+
+    tank.on(-speed, speed)
+    while gyro.angle() > -degrees + offset:
+        pass
+    #tank.on_for_degrees(speed, -speed, degrees)
+    tank.off()
 
 
-def left_90_degrees(speed):
+def right(speed=25, degrees=90, offset=0):
     """
-    The robot turns left by 90 degrees
+    The robot turns left with the given number of degrees
+
+    :param speed: The speed
+    :param degrees: The degrees
     """
     if speed == 25:
-        sound.speak("slow left")
-        left_degrees(speed, 146.5)
-    elif speed == 40:
-        sound.speak("fast left")
-        raise NotImplementedError
+        offset = 5
 
-
-def right_90_degrees(speed):
-    """
-    The robot turns left by 90 degrees
-    """
-    if speed == 25:
-        sound.speak("slow right")
-        right_degrees(speed, 146.5)
-    elif speed == 40:
-        sound.speak("fast right")
-        raise NotImplementedError
-
+    gyro.zero()
+    tank.on(speed, -speed)
+    while gyro.angle() < degrees - offset:
+        pass
+#
+    #tank.on_for_degrees(speed, -speed, degrees)
+    tank.off()
 
 def forward(speed, distance):
     """
@@ -498,7 +503,6 @@ def forward(speed, distance):
     """
     rotations = distance_to_rotation(distance)
     forward_rotations(speed, rotations)
-
 
 def check():
     """
@@ -538,7 +542,7 @@ def check():
     colorsensors.flash(ports=[4])
 
     speak('finished')
- 
+
 
 # forward_rotations(10,1)
 # left(25,146.5)
