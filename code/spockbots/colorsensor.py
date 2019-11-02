@@ -27,7 +27,7 @@ class SpockbotsColorSensor:
             self.sensor = ColorSensor(INPUT_4)
 
         self.port = port
-        self.black = 1000
+        self.black = 100
         self.white = 0
         self.speed = speed
         self.sensor.mode='COL-REFLECT'
@@ -120,6 +120,15 @@ class SpockbotsColorSensor:
 
     def info(self):
         print ("Cloorsensor", self.port, self.black, self.white)
+
+    def read(self):
+        try:
+            f= open("/home/robot/calibrate.txt","r")
+            self.colorsensor[port].black = int(f.readline())
+            self.colorsensor[port].white = int(f.readline())
+            f.close()
+        except:
+            print ("we can not find the calibration file")
 
 
 class SpockbotsColorSensors:

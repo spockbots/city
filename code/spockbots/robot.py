@@ -21,6 +21,7 @@ import sys
 import os
 
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
+
 diameter = 6.24  # cm
 width = 2.0  # cm
 position_per_cm = 1.0/18.42
@@ -334,10 +335,12 @@ def followline(
     while True:
         value = light(port)  # get the light value
 
-        correction = delta + (factor * value)  # calculate the correction for steering
-        correction = f * correction  # if we drive backwards negate the correction
+        #correction = delta + (factor * value)  # calculate the correction for steering
+        correction = factor * (value+delta)
+        #correction = f * correction  # if we drive backwards negate the correction
 
         print(correction)
+        print(steering.left_motor.position)
 
         steering.on(correction, speed)  # switch the steering on with the given correction and speed
 
@@ -346,7 +349,7 @@ def followline(
         # if the time is used we set run to false once the end time is reached
         # if the distance is greater than the position than the leave the
         if t is not None and current > end_time:
-            break  # leave the loop
+            break  # leave the loopK
         if distance is not None and distance > position_per_cm * steering.left_motor.position:
             break  # leave the loop
 
