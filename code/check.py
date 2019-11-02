@@ -35,3 +35,4 @@ def check_robot():
 
     robot.speak('finished')
 
+check_robot()

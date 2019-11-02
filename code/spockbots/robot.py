@@ -23,7 +23,8 @@ import os
 # Wheel https://www.bricklink.com/v2/catalog/catalogitem.page?P=86652c01#T=C
 diameter = 62.4  # mm
 width = 20  # mm
-position_per_cm = 1.842
+#this was 1.842, which was cm/degrees
+position_per_cm = 0.06 #this is approximate ratio of cm/motor degrees
 
 tire = Wheel(diameter, 20)  # width is 20mm
 
@@ -325,10 +326,12 @@ def followline(
     while True:
         value = light(port)  # get the light value
 
-        correction = delta + (factor * value)  # calculate the correction for steering
-        correction = f * correction  # if we drive backwards negate the correction
+        #correction = delta + (factor * value)  # calculate the correction for steering
+        correction = factor * (value+delta)
+        #correction = f * correction  # if we drive backwards negate the correction
 
         print(correction)
+        print(steering.left_motor.position)
 
         steering.on(correction, speed)  # switch the steering on with the given correction and speed
 
@@ -338,7 +341,7 @@ def followline(
         # if the distance is greater than the position than the leave the
         if t is not None and current > end_time:
             break  # leave the loop
-        if distance is not None and distance > position_per_cm * steering.left_motor.position
+        if distance is not None and distance < position_per_cm * steering.left_motor.position:
             break  # leave the loop
 
     steering.off()  # stop the robot
