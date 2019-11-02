@@ -1,8 +1,11 @@
+#! /usr/bin/env python
+
 import easygui
 import sys
 import os
 
 debug = True
+debug = False
 
 def run(command):
     print(command)
@@ -42,6 +45,10 @@ while 1:
             run(f"scp -r code/spockbots code/*.py {robot}:.")
         elif action == "Run":
             run(f'ssh {robot} "{python} ./{prg}.py"')
+
+        print("Action complete ...")
+        os.system("say ok")
+        print()
 
     elif choice in pythons:
         python = choice

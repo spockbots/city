@@ -7,7 +7,7 @@ from threading import Thread
 from ev3dev2.button import Button
 from ev3dev2.led import Leds
 from ev3dev2.motor import Motor, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
-from ev3dev2.motor import MoveDifferential
+#from ev3dev2.motor import MoveDifferential
 from ev3dev2.motor import MoveTank
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.sensor import INPUT_1
@@ -55,18 +55,18 @@ moves_forward = True
 # Differential move
 #######################################################
 
-mdiff = MoveDifferential(OUTPUT_A, OUTPUT_B, SpockbotsTire, 14 * STUD_MM)
+#mdiff = MoveDifferential(OUTPUT_A, OUTPUT_B, SpockbotsTire, 14 * STUD_MM)
 
 
-def left(speed, degrees=90):
-    mdiff.odometry_start()
-    mdiff.turn_to_angle(SpeedPercent(speed), degrees)
-    mdiff.wait_while('running')
+#def left(speed, degrees=90):
+#    mdiff.odometry_start()
+#    mdiff.turn_to_angle(SpeedPercent(speed), degrees)
+#    mdiff.wait_while('running')
 
-def right(speed, degrees=90):
-    mdiff.odometry_start()
-    mdiff.turn_to_angle(SpeedPercent(speed), -degrees)
-    mdiff.wait_while('running')
+#def right(speed, degrees=90):
+#    mdiff.odometry_start()
+#    mdiff.turn_to_angle(SpeedPercent(speed), -degrees)
+#    mdiff.wait_while('running')
 
 #######################################################
 # Door
@@ -169,10 +169,12 @@ class Gyro(object):
         :return: The angle in degrees
         """
         try:
-            self.last_angle = a = self.gyro.angle
+            a = self.gyro.angle
+            self.last_angle = a
         except:
             print("Gyro read error")
             a = self.last_angle
+
         return a
 
     def zero(self):
@@ -180,8 +182,12 @@ class Gyro(object):
         set the gyro angle to 0
         :return:
         """
+        angle = 90
         self.gyro.reset()
-        time.sleep(0.2)
+        angle = self.angle()
+        while angle != 0:
+            time.sleep(0.1)
+            angle = self.angle()
 
     def reset(self):
         """
@@ -190,7 +196,12 @@ class Gyro(object):
         """
 
         self.gyro.reset()
-        angle = self.gyro.angle
+        try:
+            self.last_angle = angle = self.gyro.angle
+        except:
+            print("Gyro read error", angle)
+            self.last_angle = angle = -1000
+
 
         count = 10
         while count >= 0:
@@ -198,7 +209,7 @@ class Gyro(object):
             try:
                 angle = self.gyro.angle
             except:
-                print("Gyro read error")
+                print("Gyro read error", angle)
             print(count, "Gyro Angle: ", angle)
             if angle == 0:
                 count = count - 1
@@ -206,7 +217,7 @@ class Gyro(object):
         print("Gyro Angle, final: ", angle)
 
 
-    def left(speed=25, degrees=90, offset=0):
+    def left(self, speed=25, degrees=90, offset=0):
         """
         The robot turns left with the given number of degrees
 
@@ -216,35 +227,40 @@ class Gyro(object):
         if speed == 25:
             offset = 5
 
-        gyro.zero()
+        self.zero()
 
         tank.on(-speed, speed)
-        while gyro.angle() > -degrees + offset:
-            pass
+        angle = self.angle()
+        print(angle, -degrees + offset)
+        while angle > -degrees + offset:
+            # print(angle, -degrees + offset)
+            angle = self.angle()
+        tank.off()
         tank.wait_while('running')
 
-        # tank.on_for_degrees(speed, -speed, degrees)
-        tank.off()
 
 
-    def right(speed=25, degrees=90, offset=0):
+    def right(self, speed=25, degrees=90, offset=0):
         """
-        The robot turns left with the given number of degrees
+        The robot turns right with the given number of degrees
 
         :param speed: The speed
         :param degrees: The degrees
         """
         if speed == 25:
-            offset = 5
+            offset = 6
 
-        gyro.zero()
+        self.zero()
+
         tank.on(speed, -speed)
-        while gyro.angle() < degrees - offset:
-            pass
-        #
-        # tank.on_for_degrees(speed, -speed, degrees)
-        tank.wait_while('running')
+        angle = self.angle()
+        print(angle, degrees - offset)
+        while angle < degrees - offset:
+            #print(angle, degrees - offset)
+            angle = self.angle()
         tank.off()
+        tank.wait_while('running')
+
 
 
 # ev3dev2.DeviceNotFound: GyroSensor(ev3-ports:in1) is not connected
@@ -678,6 +694,8 @@ def setup():
     read()
     colorsensors.info()
     beep()
+    #mdiff.odometry_start()
+    direction('front')  # set the defualt direction to move to the front so we do not forget.
 
 direction('front')  # set the defualt direction to move to the front so we do not forget.
 
