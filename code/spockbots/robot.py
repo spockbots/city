@@ -7,7 +7,7 @@ from threading import Thread
 from ev3dev2.button import Button
 from ev3dev2.led import Leds
 from ev3dev2.motor import Motor, SpeedPercent, LargeMotor, MoveSteering, MediumMotor
-#from ev3dev2.motor import MoveDifferential
+from ev3dev2.motor import MoveDifferential
 from ev3dev2.motor import MoveTank
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 from ev3dev2.sensor import INPUT_1
@@ -58,12 +58,12 @@ moves_forward = True
 #mdiff = MoveDifferential(OUTPUT_A, OUTPUT_B, SpockbotsTire, 14 * STUD_MM)
 
 
-#def left(speed, degrees=90):
+#def sleft(speed, degrees=90):
 #    mdiff.odometry_start()
 #    mdiff.turn_to_angle(SpeedPercent(speed), degrees)
 #    mdiff.wait_while('running')
 
-#def right(speed, degrees=90):
+#def sright(speed, degrees=90):
 #    mdiff.odometry_start()
 #    mdiff.turn_to_angle(SpeedPercent(speed), -degrees)
 #    mdiff.wait_while('running')
@@ -184,7 +184,8 @@ class Gyro(object):
         """
         angle = 90
         self.gyro.reset()
-        angle = self.angle()
+
+        angle = 1000
         while angle != 0:
             time.sleep(0.1)
             angle = self.angle()
@@ -597,12 +598,14 @@ def forward_rotations(speed, rotations):
     right_start = motor_right.position
 
     tank.on_for_rotations(speed, speed, rotations)
-    tank.wait_while('running')
+
+    #tank.wait_while('running')
 
     left_end = motor_left.position
     right_end = motor_right.position
 
     tank.off()
+    #tank.wait_while('running')
 
     l = left_end - left_start
     r = right_end - right_start
@@ -645,8 +648,10 @@ def forward(speed, distance):
     :param distance: distance in cm
     :return:
     """
+    print ("forward", speed, distance, "cm")
     rotations = distance_to_rotation(distance)
     forward_rotations(speed, rotations)
+
 
 
 def check():
@@ -707,3 +712,21 @@ def setup():
 direction('front')  # set the defualt direction to move to the front so we do not forget.
 
 print("Version 1")
+
+def crane():
+    setup()
+    forward(50, 10)
+    right(25, 45)
+    forward(50, 30)
+
+    time.sleep(1)
+
+
+    left(25, 45)
+    gotowhite(25, 3)
+    gotoblack(10, 3)
+    gotowhite(10, 3)
+    forward(5, 2)
+    forward(-20, 20)
+    right(20, 45)
+    forward(-75, 60)
