@@ -17,10 +17,10 @@ robot.turn(25, -90)
 robot.gotoblack(25, 3)
 """
 
-robot.color.flash()
+# robot.color.flash()
 
 
-robot.followline(speed=25, port=3, distance=30)
+robot.followline(speed=20, port=3, distance=40)
 
 
 time.sleep(1)

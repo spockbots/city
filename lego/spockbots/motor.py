@@ -261,9 +261,9 @@ class SpockbotsMotor(object):
             factor=0.7): # parameters to control smoothness
 
         if right:
-            f = - 1.0
-        else:
             f = 1.0
+        else:
+            f = - 1.0
 
         if distance is not None:
             distance = 10 * distance
