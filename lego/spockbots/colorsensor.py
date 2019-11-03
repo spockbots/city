@@ -5,6 +5,7 @@ from time import sleep
 from pybricks.parameters import Port
 
 from pybricks.ev3devices import Motor, ColorSensor
+from pybricks import ev3brick as brick
 
 
 class SpockbotsColorSensor:
@@ -51,6 +52,9 @@ class SpockbotsColorSensor:
     def reflection(self):
         return self.sensor.reflection()
 
+    def light(self):
+        return self.value()
+
     def value(self):
         """
         reads the current value mapped between 0 and 100
@@ -76,16 +80,14 @@ class SpockbotsColorSensor:
         """
         flashes the color sensor by switching between color and reflective mode
         """
-        sound = Sound()
-        sound.beep()
 
-        self.sensor.mode = 'COL-COLOR'
-        color = self.sensor.color
+
+        brick.sound.beep()
+        light = self.sensor.rgb()
+        sleep(0.5)
+        light = self.sensor.reflection()
         sleep(0.5)
 
-        self.sensor.mode = 'COL-REFLECT'
-        light = self.sensor.reflected_light_intensity
-        sleep(0.5)
 
     def write(self):
         """
