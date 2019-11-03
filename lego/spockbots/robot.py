@@ -14,12 +14,25 @@ import math
 import os
 import time
 
+#######################################################
+# Motor
+#######################################################
 
-diameter = 62.4  # mm
-width = 20.0  # mm
-circumference = (diameter / 10.0) * math.pi   # as diameter is in mm but we like cm
+from spockbots.motor import left_motor
+from spockbots.motor import right_motor
+from spockbots.motor import tank
+from spockbots.motor import distance_to_rotation
+from spockbots.motor import distance_to_angle
+from spockbots.motor import angle_to_distance
+from spockbots.motor import on
+from spockbots.motor import stop
+from spockbots.motor import forward
+from spockbots.motor import reset_motors
+from spockbots.motor import diameter
+from spockbots.motor import width
+from spockbots.motor import circumference
+from spockbots.motor import axle_track
 
-axle_track = 8 * 14
 
 #######################################################
 # Color Sensor
@@ -149,82 +162,6 @@ def voltage():
     voltage = brick.battery.voltage() / 1000
     Print("Voltage: " + str(voltage) + " V", 10, 20)
 
-#######################################################
-# Motor
-#######################################################
-
-
-#left_motor = Motor(Port.A, direction=Direction.CLOCKWISE)
-#right_motor = Motor(Port.B, direction=Direction.CLOCKWISE)
-
-left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-right_motor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-
-tank = DriveBase(left_motor, right_motor, diameter, axle_track)
-
-
-def distance_to_rotation(distance):
-    """
-    calculation to convert the distance from
-    cm into rotations.
-
-    :param distance:  The distance in cm
-    :return: The rotations to be traveled for the given distance
-    """
-    rotation = distance / circumference
-    return rotation
-
-def distance_to_angle(distance):
-    """
-    calculation to convert the distance from
-    cm into rotations.
-
-    :param distance:  The distance in cm
-    :return: The rotations to be traveled for the given distance
-    """
-    rotation = distance_to_rotation(distance) * 360.0
-    return rotation
-
-def angle_to_distance(angle):
-    d = circumference / 360.0 * angle
-    print("A to D", angle, d)
-    return d
-
-def on(speed, steering=0):
-    tank.drive(speed * 10, steering)
-
-
-def stop(brake=None):
-    """
-    stops all motors on all different drive modes
-
-    :param brake: None, brake, coast, hold
-    :return:
-    """
-    """
-
-    """
-    # motor_left.stop()
-    # motor_right.stop()
-    if not brake or brake == "brake":
-        tank.stop(stop_type=Stop.BRAKE)
-    elif brake == "coast":
-        tank.stop(stop_type=Stop.COAST)
-    elif brake == "hold":
-        tank.stop(stop_type=Stop.HOLD)
-
-
-def forward(speed, distance, brake=None):
-    left_motor.reset_angle(0)
-    angle = distance_to_angle(distance)
-    on(speed)
-    while left_motor.angle() < angle:
-        pass
-    stop(brake=brake)
-
-def reset_motors():
-    left_motor.reset_angle(0)
-    right_motor.reset_angle(0)
 
 #######################################################
 # Turn
@@ -244,11 +181,12 @@ def turn(speed, angle):
     d = c / fraction
     a = distance_to_angle(d) / 10.0
 
-    left_motor.run_angle(speed * 10, a, Stop.BRAKE, False)
-    right_motor.run_angle(speed * 10, -a, Stop.BRAKE, False)
+    left_motor.run_angle(speed * 10, -a, Stop.BRAKE, False)
+    right_motor.run_angle(speed * 10, a, Stop.BRAKE, False)
 
     while abs(left_motor.angle()) < abs(a) and abs(left_motor.angle()) < abs(a):
         pass
+    stop()
 
 
 #######################################################
@@ -260,12 +198,18 @@ def followline(
         t=None,  # time in seconds
         distance=None,  # distance in cm
         port=3,  # the port number we use to follow the line
+        right=True,
         black=0,  # minimal balck
         white=100,  # maximal white
         delta=-35,  # paramaters to control smoothness
         factor=0.7):  # parameters to control smoothness
 
     print (distance)
+
+    if right:
+        f = - 1.0
+    else:
+        f = 1.0
 
     current = time.time()  # the current time
     if t is not None:
@@ -277,10 +221,8 @@ def followline(
         value = light(port)  # get the light value
 
         # correction = delta + (factor * value)  # calculate the correction for steering
-        correction = - factor * (value + delta)
+        correction = f * factor * (value + delta)
         # correction = f * correction  # if we drive backwards negate the correction
-
-
 
         on(speed, correction)  # switch the steering on with the given correction and speed
 
@@ -302,35 +244,82 @@ def followline(
     stop()  # stop the robot
 
 
+#######################################################
+# Setup
+#######################################################
+
+
+def gotoblack(speed, port, black=10):
+    """
+    The robot moves to the black line while using the sensor on the given port
+
+    :param speed: The speed
+    :param port: The port 2,3,4
+    :param black: The value to stop
+    """
+    on(speed, 0)
+    while  light(port)  > black:
+        pass
+    stop()
+
+
+def gotowhite(speed, port, white=90):
+    """
+    The robot moves to the white line while using the sensor on the given port
+
+    :param speed: The speed
+    :param port: The port 2,3,4
+    :param white: The value to stop
+    """
+
+    on(speed, 0)
+    while light(port) < white:
+        pass
+    stop()
+
 
 #######################################################
 # Setup
 #######################################################
 def setup():
+    pass
     # beep()
     # sound()
 
 
-    """
-    font(32)
-    led(None, "RED")
-    led(None, "GREEN")
-    led(None, "YELLOW")
-    flash()
+    # led(None, "RED")
+    # led(None, "GREEN")
+    # led(None, "YELLOW")
+    # flash()
 
-    clear()
-    Print("Hallo")
-    Print("World")
-    voltage()
+    # clear()
+    # Print("Hallo")
+    # Print("World")
+    # voltage()
 
-    forward(20, 30)
-    forward(20, 30)
-    turn(25, 90)
-    forward(20, 30)
-    turn(25, 10)
-    forward(20, 30)
-    forward(20, 30)
 
-    sleep(2)
-    """
-    followline(speed=20, distance=30)
+
+    forward(25, 10)
+    #time.sleep(1)
+    turn(25, 45)
+    #time.sleep(1)
+    forward(25, 30)
+    #time.sleep(1)
+
+
+    turn(25, -50)
+    #time.sleep(1)
+    forward(25,10)
+    #time.sleep(1)
+
+    # gotowhite(25, 3)
+    # gotoblack(10, 3)
+    # gotowhite(10, 3)
+    #forward(5, 2)
+    #forward(-20, 20)
+
+    # turn(20, 45)
+    # forward(-75, 60)
+    # sleep(2)
+
+    #followline(speed=20, distance=30)
