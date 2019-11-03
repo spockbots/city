@@ -80,8 +80,8 @@ class SpockbotsMotor(object):
 
         self.tank = DriveBase(self.left, self.right, self.diameter, self.axle_track)
 
-        self.left_medium = Motor(Port.C, Direction.CLOCKWISE)
-        self.right_medium = Motor(Port.D, Direction.CLOCKWISE)
+        self.left_medium = Motor(Port.D, Direction.CLOCKWISE)
+        self.right_medium = Motor(Port.C, Direction.CLOCKWISE)
 
 
         return self.left, self.right, self.tank
