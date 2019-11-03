@@ -3,33 +3,26 @@ from pybricks.ev3devices import Motor
 from pybricks.parameters import Port
 from pybricks.parameters import Stop, Direction
 import math
-from pybricks.ev3devices import ColorSensor
+#from pybricks.ev3devices import ColorSensor
+from spockbots.colorsensor import SpockbotsColorSensor, SpockbotsColorSensors
+from pybricks import ev3brick as brick
 import time
+
+debug = False
+
+def PRINT(*args):
+    if debug:
+        print(args)
+
+
 
 #######################################################
 # Motor
 #######################################################
 
-colorsensor = [None,None,None,None,None]
-
-class SpockbotsColorSensor(object):
-
-    def __init__(self, port=3):
-        if port == 1:
-            self.sensor = ColorSensor(Port.S1)
-        elif port == 2:
-            self.sensor = ColorSensor(Port.S2)
-        elif port == 3:
-            self.sensor = ColorSensor(Port.S3)
-        elif port == 4:
-            self.sensor = ColorSensor(Port.S4)
-
-    def light(self):
-        return self.sensor.reflection()
 
 
-for i in [2,3,4]:
-    colorsensor[i] = SpockbotsColorSensor(port=i)
+
 
 class SpockbotsMotor(object):
 
@@ -38,10 +31,22 @@ class SpockbotsMotor(object):
         self.diameter = round(62.4, 3)  # mm
         self.width = 20.0  # mm
         self.circumference = round(self.diameter * math.pi, 3)  # as diameter is in mm
-        self.axle_track = round(8.0 * 14, 3)
-
+        #self.axle_track = round(8.0 * 14, 3)
+        self.axle_track = 140.0
 
         self.left, self.right, self.tank = self.setup(direction=direction)
+
+        self.color = SpockbotsColorSensors(ports=[2,3,4])
+        self.colorsensor =[None, None, None, None, None]
+
+        for port in [2,3,4]:
+            self.colorsensor[port] = self.color.colorsensor[port]
+
+    def beep(self):
+        """
+        The robot will make a beep
+        """
+        brick.sound.beep()
 
     def __str__(self):
         print()
@@ -78,7 +83,7 @@ class SpockbotsMotor(object):
         return self.left, self.right, self.tank
 
     def light(self, port):
-        return colorsensor[port].light()
+        return self.colorsensor[port].light()
 
     def reset(self):
         self.left.reset_angle(0)
@@ -140,6 +145,8 @@ class SpockbotsMotor(object):
 
     def still(self):
 
+        PRINT("Still Start")
+
         count = 10
         angle_left_old = self.left.angle()
         angle_right_old = self.right.angle()
@@ -152,7 +159,11 @@ class SpockbotsMotor(object):
                 angle_left_old = angle_left_current
                 angle_right_old = angle_right_current
 
+        PRINT("Still Stop")
+
     def forward(self, speed, distance, brake=None):
+
+        PRINT("Forward", speed, distance, brake)
 
         if distance < 0:
             speed = -speed
@@ -169,6 +180,8 @@ class SpockbotsMotor(object):
 
         self.stop(brake=brake)
 
+        PRINT("Forward Stop")
+
 
     def turn(self, speed, angle):
         """
@@ -177,6 +190,9 @@ class SpockbotsMotor(object):
         :param angle:
         :return:
         """
+
+        PRINT("Turn", speed, angle)
+
         self.reset()
 
         c = self.axle_track * math.pi
@@ -188,8 +204,11 @@ class SpockbotsMotor(object):
         self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
         while abs(self.left.angle()) < abs(a) or abs(self.right.angle()) < abs(a):
+            PRINT("TURN CHECK", abs(self.left.angle()), abs(self.right.angle()))
             pass
         self.stop()
+
+        PRINT("Turn Stop")
 
 
     def gotoblack(self, speed, port, black=10):
@@ -200,10 +219,15 @@ class SpockbotsMotor(object):
         :param port: The port 1,2,3,4
         :param black: The value to stop
         """
+
+        PRINT("Gotoblack", speed, port, black)
+
         self.on(speed, 0)
         while self.light(port)  > black:
             pass
         self.stop()
+
+        PRINT("Gotoblack Stop")
 
 
     def gotowhite(self, speed, port, white=90):
@@ -215,10 +239,14 @@ class SpockbotsMotor(object):
         :param white: The value to stop
         """
 
+        PRINT("Gotoblack", speed, port, white)
+
         self.on(speed, 0)
         while self.light(port) < white:
             pass
         self.stop()
+
+        PRINT("Gotowhite Stop")
 
 
     def followline(self,
@@ -268,4 +296,30 @@ class SpockbotsMotor(object):
                 break  # leave the loop
 
         self.stop()  # stop the robot
+
+
+    def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
+
+        print(direction)
+        print(ports)
+        print(speed)
+
+        self.reset()
+        self.on(speed, 0)
+        distance = self.distance_to_angle(distance * 10)
+
+        while self.left.angle() < distance:
+
+            for i in ports:
+                self.colorsensor[i].set_white()
+                self.colorsensor[i].set_black()
+                print(i,
+                      self.colorsensor[i].black,
+                      self.colorsensor[i].white,
+                      sep=' ')
+
+        self.stop()
+
+        for i in ports:
+            print(i, self.colorsensor[i].black, self.colorsensor[i].white)
 

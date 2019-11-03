@@ -35,16 +35,6 @@ from spockbots.motor import axle_track
 
 
 #######################################################
-# Color Sensor
-#######################################################
-
-
-colorsensor = ColorSensor(Port.S3)
-
-def light(port):
-    return colorsensor.reflection()
-
-#######################################################
 # Sound
 #######################################################
 
