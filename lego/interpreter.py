@@ -1,6 +1,14 @@
 #!/usr/bin/env pybricks-micropython
+from spockbots.motor import SpockbotsMotor
+import time
 
-import spockbots.robot as robot
+robot = SpockbotsMotor()
+robot.setup()
+
+robot.color.read()
+print(robot)
+
+
 import sys
 import os
 # from importlib import reload

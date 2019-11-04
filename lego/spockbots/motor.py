@@ -8,7 +8,7 @@ from spockbots.colorsensor import SpockbotsColorSensor, SpockbotsColorSensors
 from pybricks import ev3brick as brick
 import time
 
-debug = False
+debug = True
 
 def PRINT(*args):
     if debug:
@@ -82,7 +82,6 @@ class SpockbotsMotor(object):
 
         self.left_medium = Motor(Port.D, Direction.CLOCKWISE)
         self.right_medium = Motor(Port.C, Direction.CLOCKWISE)
-
 
         return self.left, self.right, self.tank
 
@@ -207,9 +206,22 @@ class SpockbotsMotor(object):
         self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
         self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
+        count = 10
+        old = abs(self.left.angle())
         while abs(self.left.angle()) < abs(a) or abs(self.right.angle()) < abs(a):
-            PRINT("TURN CHECK", abs(self.left.angle()), abs(self.right.angle()))
-            pass
+
+
+
+            PRINT("TURN CHECK", count, old, abs(self.left.angle()), abs(self.right.angle()))
+            if old == abs(self.left.angle()):
+                count = count - 1
+            else:
+                old = abs(self.left.angle())
+
+            if count < 0:
+                PRINT("FORCED STOP IN TURN")
+                self.beep()
+                break
         self.stop()
 
         PRINT("Turn Stop")
