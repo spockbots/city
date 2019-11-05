@@ -1,4 +1,5 @@
-from spockbots.output import led, flash
+#!/usr/bin/env pybricks-micropython
+# from spockbots.output import led, flash
 import time
 
 led("RED")

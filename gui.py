@@ -3,6 +3,7 @@
 import easygui
 import sys
 import os
+from time import time
 
 debug = True
 debug = False
@@ -10,7 +11,10 @@ debug = False
 def run(command):
     print(command)
     if not debug:
+        t_start = time()
         os.system(command)
+        t_end = time()
+        print ("Time:", t_end - t_start)
 
 robot = "red"
 prg = "interpreter"

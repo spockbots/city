@@ -1,4 +1,5 @@
-from spockbots.motor import SpockbotsMotor
+#!/usr/bin/env pybricks-micropython
+# from spockbots.motor import SpockbotsMotor
 from time import sleep
 
 robot = SpockbotsMotor()

@@ -8,7 +8,10 @@ robot.setup()
 print(robot)
 
 robot.beep()
-robot.calibrate(10, distance=30, ports=[2, 3, 4], direction='front')
+robot.calibrate(10,
+                distance=30,
+                ports=[2, 3, 4],
+                direction='front')
 robot.beep()
 
 # robot.forward(25,10)

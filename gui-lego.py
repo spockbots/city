@@ -3,15 +3,20 @@
 import easygui
 import sys
 import os
+from time import time
 
 debug = True
 debug = False
 base = "lego"
 
+
 def run(command):
     print(command)
     if not debug:
+        t_start = time()
         os.system(command)
+        t_end = time()
+        print ("Time:", round(t_end - t_start, 2), "s")
 
 robot = "blue"
 prg = "interpreter"

@@ -1,4 +1,5 @@
-from spockbots.gyro import SpockbotsGyro
+#!/usr/bin/env pybricks-micropython
+# from spockbots.gyro import SpockbotsGyro
 import time
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
