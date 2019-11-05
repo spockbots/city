@@ -7,6 +7,7 @@ from time import sleep
 
 import os
 
+
 #######################################################
 # READ AND WRITE FILES
 #######################################################
@@ -21,15 +22,20 @@ def readfile(name):
     except:
         return None
 
+
 def writefile(name, msg):
+
     #print ("WRITE", name, msg)
-    #f = open(name)
-    #.write(msg)
-    #f.close()
-    command = "echo " + msg + " > " + name
-    command = command.replace("&", "\&")
-    command = command.replace(":", "\:")
-    print(command)
+    #try:
+    #    f = open(name)
+    #    f.write(msg)
+    #    f.close()
+    #except Exception as e:
+    #    print("FILE WRITE ERROR")
+    #    print(e)
+
+    command = 'echo \"' + msg + '\" > ' + name
+    # print("COMMNAD:", command)
     os.system(command)
 
 
@@ -69,7 +75,6 @@ def sound(pitch=1500, duration=300):
 #######################################################
 
 def led(color, brightness=255):
-
     if color == "RED":
         led_color = Color.RED
     elif color == "GREEN":
@@ -83,6 +88,7 @@ def led(color, brightness=255):
     else:
         led_color = None
     brick.light(led_color)
+
 
 def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"], delay=0.1):
     """
@@ -103,20 +109,16 @@ def clear():
     brick.display.clear()
 
 
-def PRINT(text, x=None, y=None):
+def PRINT(*args, x=None, y=None):
+    text = ""
+    for a in args:
+        if a is not None:
+            text = text + str(a) + " "
     if x is not None and y is not None:
         brick.display.text(text, (x, y))
     else:
         brick.display.text(text)
         print(text)
-
-def font(size):
-    s = "14"
-    if size == 14:
-        s = "14"
-    elif size == 32:
-        s = "32x16"
-    os.system('setfont Lat15-TerminusBold' + s)
 
 
 #######################################################
@@ -126,4 +128,3 @@ def font(size):
 def voltage():
     value = brick.battery.voltage() / 1000
     Print("Voltage: " + str(value) + " V", 10, 20)
-
