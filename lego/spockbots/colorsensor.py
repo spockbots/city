@@ -2,10 +2,9 @@
 
 from time import sleep
 
-from pybricks.parameters import Port
-
-from pybricks.ev3devices import Motor, ColorSensor
 from pybricks import ev3brick as brick
+from pybricks.ev3devices import ColorSensor
+from pybricks.parameters import Port
 
 
 class SpockbotsColorSensor:
