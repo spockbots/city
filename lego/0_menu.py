@@ -1,7 +1,6 @@
 #!/usr/bin/env pybricks-micropython
-# from pybricks import ev3brick as brick
-from time import sleep
-from pybricks.parameters import Button
+from pybricks import ev3brick as brick
+from pybricks.parameters import Button, ImageFile, Align
 from pybricks.tools import wait
 
 # brick.display.text(text)
@@ -12,39 +11,43 @@ menu = [
     [2, "Red Building", 40, 30]
 ]
 
-
-
-brick.sound.beep()
-
 selection = 0
 selections = len(menu)
 
-while True:
-    brick.display.clear()
 
+def marker(line):
+    y = line * 10 + 10
+    brick.display.text(">>>", (10, y))
+
+def print_menu():
+    brick.display.clear()
     for line in menu:
         i = line[0]
         text = line[1]
         x = line[2]
         y = line[3]
         brick.display.text(text, (x, y))
+    marker(selection)
 
-    # marker
+brick.sound.beep()
 
+print_menu()
+
+while True:
     if Button.UP in brick.buttons():
-        # print ("UP", selection)
         selection = (selection - 1) % selections
+        print_menu()
+
     elif Button.DOWN in brick.buttons():
-        # print ("DOWN", selection)
         selection = (selection + 1) % selections
+        print_menu()
     elif Button.RIGHT in brick.buttons():
         break
-    brick.display.text(">>>", (10, selection * 10 + 10))
-
     wait(100)
+
+brick.display.clear()
 
 print(selection)
 
 brick.sound.beep()
-brick.display.clear()
 
