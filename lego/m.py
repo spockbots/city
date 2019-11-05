@@ -22,5 +22,4 @@ robot.gotoblack(25, 3)
 
 robot.followline(speed=20, port=3, distance=40)
 
-
 time.sleep(1)

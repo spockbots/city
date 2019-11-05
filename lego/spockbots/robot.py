@@ -14,7 +14,6 @@ import math
 import os
 import time
 
-
 """
 #######################################################
 # Motor
@@ -35,7 +34,3 @@ from spockbots.motor import width
 from spockbots.motor import circumference
 from spockbots.motor import axle_track
 """
-
-
-
-

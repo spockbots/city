@@ -7,6 +7,7 @@ from spockbots.output import beep
 
 from spockbots.output import readfile, writefile
 
+
 class Gyro(object):
 
     def __init__(self):
@@ -19,12 +20,11 @@ class Gyro(object):
         PRINT("GYRO CONNECT", self.sensor)
         connected = False
         while not connected:
-           if self.sensor is None:
+            if self.sensor is None:
                 self.sensor = self.info()
-           else:
-               break
+            else:
+                break
         PRINT("GYRO CONNECT. ok", self.sensor)
-
 
     def reset(self):
         PRINT("GYRO RESET")
@@ -72,7 +72,7 @@ class Gyro(object):
             if value == 0:
                 still_count = still_count + 1
             i = i - 1
-        PRINT("STILL:", still_count, "of", count )
+        PRINT("STILL:", still_count, "of", count)
         return still_count >= still
 
     def info(self):
@@ -89,26 +89,26 @@ class Gyro(object):
                 id = sensor
                 break
         PRINT("")
-        PRINT("GYRO:",  sensor, data)
+        PRINT("GYRO:", sensor, data)
         for directive in ['address',
-                          #'bin_data',
+                          # 'bin_data',
                           'bin_data_format',
-                          #'command',
-                          #'commands',
+                          # 'command',
+                          # 'commands',
                           'decimals',
-                          #'device',
-                          #'direct',
+                          # 'device',
+                          # 'direct',
                           'driver_name',
-                          #'fw_version',
+                          # 'fw_version',
                           'mode',
                           'modes',
                           'num_values',
-                          #'poll_ms',
-                          #'power',
-                          #'subsystem',
-                          #'text_value',
+                          # 'poll_ms',
+                          # 'power',
+                          # 'subsystem',
+                          # 'text_value',
                           'uevent',
-                          #'units',
+                          # 'units',
                           'value0',
                           'value1',
                           # 'value2',
@@ -134,7 +134,7 @@ class Gyro(object):
         :param kind:
         :return:
         """
-        #kind = kind.replace("&", "\\&")
+        # kind = kind.replace("&", "\\&")
         writefile("/sys/class/lego-sensor/" + self.sensor + "/mode", kind)
 
     def test(self, n):
@@ -142,6 +142,5 @@ class Gyro(object):
         while counter < n:
             angle, rate = self.get()
 
-            PRINT("GYRO TEST:",  counter, angle, rate)
+            PRINT("GYRO TEST:", counter, angle, rate)
             counter = counter + 1
-

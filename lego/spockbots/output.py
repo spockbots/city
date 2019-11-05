@@ -24,13 +24,12 @@ def readfile(name):
 
 
 def writefile(name, msg):
-
-    #print ("WRITE", name, msg)
-    #try:
+    # print ("WRITE", name, msg)
+    # try:
     #    f = open(name)
     #    f.write(msg)
     #    f.close()
-    #except Exception as e:
+    # except Exception as e:
     #    print("FILE WRITE ERROR")
     #    print(e)
 

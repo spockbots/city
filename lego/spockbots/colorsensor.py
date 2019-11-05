@@ -80,13 +80,11 @@ class SpockbotsColorSensor:
         flashes the color sensor by switching between color and reflective mode
         """
 
-
         brick.sound.beep()
         light = self.sensor.rgb()
         sleep(0.5)
         light = self.sensor.reflection()
         sleep(0.5)
-
 
     def write(self):
         """
@@ -162,7 +160,6 @@ class SpockbotsColorSensors:
             self.colorsensor[4].white = 48
             print("Using the following defaults")
             self.info()
-
 
     def flash(self, ports=[2, 3, 4]):
         for port in ports:

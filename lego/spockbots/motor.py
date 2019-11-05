@@ -3,12 +3,13 @@ from pybricks.ev3devices import Motor
 from pybricks.parameters import Port
 from pybricks.parameters import Stop, Direction
 import math
-#from pybricks.ev3devices import ColorSensor
+# from pybricks.ev3devices import ColorSensor
 from spockbots.colorsensor import SpockbotsColorSensor, SpockbotsColorSensors
 from pybricks import ev3brick as brick
 import time
 
 debug = True
+
 
 def PRINT(*args):
     if debug:
@@ -27,15 +28,15 @@ class SpockbotsMotor(object):
         self.diameter = round(62.4, 3)  # mm
         self.width = 20.0  # mm
         self.circumference = round(self.diameter * math.pi, 3)  # as diameter is in mm
-        #self.axle_track = round(8.0 * 14, 3)
+        # self.axle_track = round(8.0 * 14, 3)
         self.axle_track = 140.0
 
         self.left, self.right, self.tank = self.setup(direction=direction)
 
-        self.color = SpockbotsColorSensors(ports=[2,3,4])
-        self.colorsensor =[None, None, None, None, None]
+        self.color = SpockbotsColorSensors(ports=[2, 3, 4])
+        self.colorsensor = [None, None, None, None, None]
 
-        for port in [2,3,4]:
+        for port in [2, 3, 4]:
             self.colorsensor[port] = self.color.colorsensor[port]
 
     def beep(self):
@@ -64,7 +65,6 @@ class SpockbotsMotor(object):
             self.direction = "forward"
         else:
             self.direction = direction
-
 
         if self.direction == "forward":
 
@@ -181,7 +181,6 @@ class SpockbotsMotor(object):
 
         PRINT("Forward Stop")
 
-
     def turn(self, speed, angle):
         """
         takes the radius of the robot and dives on it for a distance based on the ancle
@@ -206,8 +205,6 @@ class SpockbotsMotor(object):
         old = abs(self.left.angle())
         while abs(self.left.angle()) < abs(a) or abs(self.right.angle()) < abs(a):
 
-
-
             PRINT("TURN CHECK", count, old, abs(self.left.angle()), abs(self.right.angle()))
             if old == abs(self.left.angle()):
                 count = count - 1
@@ -222,7 +219,6 @@ class SpockbotsMotor(object):
 
         PRINT("Turn Stop")
 
-
     def gotoblack(self, speed, port, black=10):
         """
         The robot moves to the black line while using the sensor on the given port
@@ -235,12 +231,11 @@ class SpockbotsMotor(object):
         PRINT("Gotoblack", speed, port, black)
 
         self.on(speed, 0)
-        while self.light(port)  > black:
+        while self.light(port) > black:
             pass
         self.stop()
 
         PRINT("Gotoblack Stop")
-
 
     def gotowhite(self, speed, port, white=90):
         """
@@ -260,17 +255,16 @@ class SpockbotsMotor(object):
 
         PRINT("Gotowhite Stop")
 
-
     def followline(self,
-            speed=25,    # speed 0 - 100
-            distance=None, # distance in cm
-            t=None,
-            port=3,      # the port number we use to follow the line
-            right=True,  # the side on which to follow the line
-            black=0,     # minimal balck
-            white=100,   # maximal white
-            delta=-35,   # paramaters to control smoothness
-            factor=0.7): # parameters to control smoothness
+                   speed=25,  # speed 0 - 100
+                   distance=None,  # distance in cm
+                   t=None,
+                   port=3,  # the port number we use to follow the line
+                   right=True,  # the side on which to follow the line
+                   black=0,  # minimal balck
+                   white=100,  # maximal white
+                   delta=-35,  # paramaters to control smoothness
+                   factor=0.7):  # parameters to control smoothness
 
         if right:
             f = 1.0
@@ -309,7 +303,6 @@ class SpockbotsMotor(object):
 
         self.stop()  # stop the robot
 
-
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
 
         print(direction)
@@ -334,4 +327,3 @@ class SpockbotsMotor(object):
 
         for i in ports:
             print(i, self.colorsensor[i].black, self.colorsensor[i].white)
-

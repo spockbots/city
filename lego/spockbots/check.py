@@ -36,7 +36,6 @@ def check(speed=100, angle=360):
 
     led("GREEN")
 
-
     PRINT('Large Motors')
 
     PRINT('Left')

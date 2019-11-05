@@ -8,9 +8,9 @@ robot.setup()
 robot.color.read()
 print(robot)
 
-
 import sys
 import os
+
 # from importlib import reload
 
 robot.setup()
@@ -18,14 +18,14 @@ robot.setup()
 while True:
     line = input("spockbots >>> ")
     if line == "q":
-        print ("quit")
+        print("quit")
         sys.exit()
     elif line == "s":
         os.system("./stop.py")
     elif line.startswith("p "):
         try:
             line = line[2:]
-            print (line)
+            print(line)
             eval("print (robot." + line + ")")
         except Exception as e:
             print()
@@ -34,13 +34,13 @@ while True:
     elif line == "r":
         try:
             print("Reloading ....")
-            #x = reload(robot)
-            #print(x)
+            # x = reload(robot)
+            # print(x)
             robot.beep()
-            #robot.gyro.reset()
-            #robot.read()
-            #robot.colorsensors.info()
-            #robot.beep()
+            # robot.gyro.reset()
+            # robot.read()
+            # robot.colorsensors.info()
+            # robot.beep()
         except Exception as e:
             print()
             print(e)

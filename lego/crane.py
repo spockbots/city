@@ -36,11 +36,7 @@ sleep(dt)
 robot.turn(25, -10)
 sleep(dt)
 
-robot.forward(50,15)
+robot.forward(50, 15)
 sleep(dt)
 
 sleep(0.5)
-
-
-
-

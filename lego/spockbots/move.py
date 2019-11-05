@@ -1,5 +1,3 @@
-
-
 #######################################################
 # Turn
 #######################################################
@@ -41,7 +39,7 @@ def followline(
         delta=-35,  # paramaters to control smoothness
         factor=0.7):  # parameters to control smoothness
 
-    print (distance)
+    print(distance)
 
     if right:
         f = - 1.0
@@ -95,7 +93,7 @@ def gotoblack(speed, port, black=10):
     :param black: The value to stop
     """
     on(speed, 0)
-    while  light(port)  > black:
+    while light(port) > black:
         pass
     stop()
 
@@ -123,7 +121,6 @@ def setup():
     # beep()
     # sound()
 
-
     # led(None, "RED")
     # led(None, "GREEN")
     # led(None, "YELLOW")
@@ -134,29 +131,26 @@ def setup():
     # Print("World")
     # voltage()
 
-
-
     forward(25, 10)
-    #time.sleep(1)
+    # time.sleep(1)
     turn(25, 45)
-    #time.sleep(1)
+    # time.sleep(1)
     forward(25, 30)
-    #time.sleep(1)
-
+    # time.sleep(1)
 
     turn(25, -50)
-    #time.sleep(1)
-    forward(25,10)
-    #time.sleep(1)
+    # time.sleep(1)
+    forward(25, 10)
+    # time.sleep(1)
 
     # gotowhite(25, 3)
     # gotoblack(10, 3)
     # gotowhite(10, 3)
-    #forward(5, 2)
-    #forward(-20, 20)
+    # forward(5, 2)
+    # forward(-20, 20)
 
     # turn(20, 45)
     # forward(-75, 60)
     # sleep(2)
 
-    #followline(speed=20, distance=30)
+    # followline(speed=20, distance=30)

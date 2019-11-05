@@ -7,16 +7,13 @@ robot.setup()
 print(robot)
 
 robot.beep()
-robot.calibrate(10, distance=30, ports=[2,3,4], direction='front')
+robot.calibrate(10, distance=30, ports=[2, 3, 4], direction='front')
 robot.beep()
 
-#robot.forward(25,10)
+# robot.forward(25,10)
 
-#robot.calibrate(10, ports=[4], direction='back')
+# robot.calibrate(10, ports=[4], direction='back')
 
 robot.color.write()
 
 time.sleep(1)
-
-
-
