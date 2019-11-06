@@ -1,0 +1,150 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{angle()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{angle\_to\_distance()}\spxextra{spockbots.motor.SpockbotsMotor method}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter B
+  \item \spxentry{beep()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{beep()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{3}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{calibrate()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{3}
+  \item \spxentry{check()}\spxextra{in module spockbots.check}, \hyperpage{2}
+  \item \spxentry{clear()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{clear()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{clear()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{connect()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{distance\_to\_angle()}\spxextra{spockbots.motor.SpockbotsMotor method}, 
+		\hyperpage{3}
+  \item \spxentry{distance\_to\_rotation()}\spxextra{spockbots.motor.SpockbotsMotor method}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{flash()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{flash()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{flash()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{followline()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{3}
+  \item \spxentry{forward()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{3}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{get()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{gotoblack()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{3}
+  \item \spxentry{gotowhite()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+  \item \spxentry{Gyro}\spxextra{class in spockbots.systemgyro}, \hyperpage{5}
+
+  \indexspace
+  \bigletter I
+  \item \spxentry{info()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{info()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{info()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{led()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{light()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{light()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{mode()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+
+  \indexspace
+  \bigletter O
+  \item \spxentry{on()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{PRINT()}\spxextra{in module spockbots.motor}, \hyperpage{3}
+  \item \spxentry{PRINT()}\spxextra{in module spockbots.output}, \hyperpage{4}
+
+  \indexspace
+  \bigletter R
+  \item \spxentry{rate()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{read()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{read()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{readfile()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{reflection()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{reset()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+  \item \spxentry{reset()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{run.calibrate}\spxextra{module}, \hyperpage{1}
+  \item \spxentry{run.check}\spxextra{module}, \hyperpage{1}
+  \item \spxentry{run.crane}\spxextra{module}, \hyperpage{2}
+  \item \spxentry{run.led}\spxextra{module}, \hyperpage{2}
+  \item \spxentry{run.swing}\spxextra{module}, \hyperpage{2}
+  \item \spxentry{run\_calibrate()}\spxextra{in module run.calibrate}, \hyperpage{1}
+  \item \spxentry{run\_check()}\spxextra{in module run.check}, \hyperpage{1}
+  \item \spxentry{run\_crane()}\spxextra{in module run.crane}, \hyperpage{2}
+  \item \spxentry{run\_led()}\spxextra{in module run.led}, \hyperpage{2}
+  \item \spxentry{run\_swing()}\spxextra{in module run.swing}, \hyperpage{2}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{sensor()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{set\_black()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{2}
+  \item \spxentry{set\_white()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{3}
+  \item \spxentry{setup()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+  \item \spxentry{sound()}\spxextra{in module spockbots.output}, \hyperpage{4}
+  \item \spxentry{spockbots.check}\spxextra{module}, \hyperpage{2}
+  \item \spxentry{spockbots.colorsensor}\spxextra{module}, \hyperpage{2}
+  \item \spxentry{spockbots.motor}\spxextra{module}, \hyperpage{3}
+  \item \spxentry{spockbots.output}\spxextra{module}, \hyperpage{4}
+  \item \spxentry{spockbots.robot}\spxextra{module}, \hyperpage{5}
+  \item \spxentry{spockbots.systemgyro}\spxextra{module}, \hyperpage{5}
+  \item \spxentry{SpockbotsColorSensor}\spxextra{class in spockbots.colorsensor}, \hyperpage{2}
+  \item \spxentry{SpockbotsColorSensors}\spxextra{class in spockbots.colorsensor}, \hyperpage{3}
+  \item \spxentry{SpockbotsMotor}\spxextra{class in spockbots.motor}, \hyperpage{3}
+  \item \spxentry{still()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+  \item \spxentry{still()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{stop()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{test()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{test()}\spxextra{spockbots.systemgyro.Gyro method}, \hyperpage{5}
+  \item \spxentry{tunrtoblack()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+  \item \spxentry{turn()}\spxextra{spockbots.motor.SpockbotsMotor method}, \hyperpage{4}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{value()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{3}
+  \item \spxentry{value()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{voltage()}\spxextra{in module spockbots.output}, \hyperpage{4}
+
+  \indexspace
+  \bigletter W
+  \item \spxentry{write()}\spxextra{spockbots.colorsensor.SpockbotsColorSensor method}, 
+		\hyperpage{3}
+  \item \spxentry{write()}\spxextra{spockbots.colorsensor.SpockbotsColorSensors method}, 
+		\hyperpage{3}
+  \item \spxentry{writefile()}\spxextra{in module spockbots.output}, \hyperpage{4}
+
+\end{sphinxtheindex}

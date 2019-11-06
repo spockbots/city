@@ -1,0 +1,27 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Spockbots API}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Menu}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}City Runs}{1}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}run.calibrate}{1}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}run.check}{1}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}run.crane}{2}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}run.led}{2}{subsection.1.2.4}
+\contentsline {subsection}{\numberline {1.2.5}run.swing}{2}{subsection.1.2.5}
+\contentsline {subsection}{\numberline {1.2.6}run.turn\_to\_black module}{2}{subsection.1.2.6}
+\contentsline {section}{\numberline {1.3}Spockbots API}{2}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}spockbots.check}{2}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}spockbots.colorsensor}{2}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}spockbots.gyro}{3}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}spockbots.motor}{3}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}spockbots.output}{4}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}spockbots.robot}{5}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}spockbots.systemgyro}{5}{subsection.1.3.7}
+\contentsline {section}{\numberline {1.4}Examples}{5}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}door}{5}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}gyro}{5}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}interpreter}{5}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}m}{5}{subsection.1.4.4}
+\contentsline {subsection}{\numberline {1.4.5}test}{5}{subsection.1.4.5}
+\contentsline {chapter}{\numberline {2}Indices and tables}{7}{chapter.2}
+\contentsline {chapter}{Python Module Index}{9}{section*.67}
+\contentsline {chapter}{Index}{11}{section*.68}

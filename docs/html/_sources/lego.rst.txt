@@ -1,0 +1,17 @@
+Spockbots API
+==============
+
+.. toctree::
+
+   lego.run
+   lego.spockbots
+   lego.x_examples
+
+Brick Menu
+----------
+
+.. automodule:: 0_menu
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

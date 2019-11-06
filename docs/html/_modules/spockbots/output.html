@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>spockbots.output &mdash; Spockbots 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Spockbots
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../x_examples.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Spockbots</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>spockbots.output</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for spockbots.output</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">pybricks</span> <span class="k">import</span> <span class="n">ev3brick</span> <span class="k">as</span> <span class="n">brick</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="k">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="k">import</span> <span class="n">Color</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># READ AND WRITE FILES</span>
+<span class="c1">#######################################################</span>
+
+<span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># READ AND WRITE FILES</span>
+<span class="c1">#######################################################</span>
+
+<div class="viewcode-block" id="readfile"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.readfile">[docs]</a><span class="k">def</span> <span class="nf">readfile</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># print (&quot;READ&quot;, name)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="writefile"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.writefile">[docs]</a><span class="k">def</span> <span class="nf">writefile</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="c1"># print (&quot;WRITE&quot;, name, msg)</span>
+    <span class="c1"># try:</span>
+    <span class="c1">#    f = open(name)</span>
+    <span class="c1">#    f.write(msg)</span>
+    <span class="c1">#    f.close()</span>
+    <span class="c1"># except Exception as e:</span>
+    <span class="c1">#    print(&quot;FILE WRITE ERROR&quot;)</span>
+    <span class="c1">#    print(e)</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;echo </span><span class="se">\&quot;</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1"> &gt; &#39;</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1"># print(&quot;COMMNAD:&quot;, command)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span></div>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Sound</span>
+<span class="c1">#######################################################</span>
+
+<span class="c1"># sound = Sound()</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">def speak(text):</span>
+<span class="sd">    sound.speak(text)</span>
+
+
+<span class="sd">def sing(song):</span>
+<span class="sd">    sound.play_song(song)</span>
+
+
+<span class="sd">def wav(source):</span>
+<span class="sd">    sound.play_file(&quot;/home/robot/wav/&quot; + source)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="beep"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.beep">[docs]</a><span class="k">def</span> <span class="nf">beep</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The robot will make a beep</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="sound"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.sound">[docs]</a><span class="k">def</span> <span class="nf">sound</span><span class="p">(</span><span class="n">pitch</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span></div>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># LED</span>
+<span class="c1">#######################################################</span>
+
+<div class="viewcode-block" id="led"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.led">[docs]</a><span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;RED&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">RED</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;GREEN&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">GREEN</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;YELLOW&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">YELLOW</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">BLACK</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;ORANGE&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">ORANGE</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">led_color</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="flash"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.flash">[docs]</a><span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">,</span> <span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">,</span> <span class="s2">&quot;GREEN&quot;</span><span class="p">],</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The robot will flash the LEDs and beep twice</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">beep</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+        <span class="n">led</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">beep</span><span class="p">()</span></div>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># LCD</span>
+<span class="c1">#######################################################</span>
+
+<div class="viewcode-block" id="clear"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.clear">[docs]</a><span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PRINT"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.PRINT">[docs]</a><span class="k">def</span> <span class="nf">PRINT</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Voltage</span>
+<span class="c1">#######################################################</span>
+
+<div class="viewcode-block" id="voltage"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.voltage">[docs]</a><span class="k">def</span> <span class="nf">voltage</span><span class="p">():</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">brick</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">voltage</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Voltage: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; V&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Spockbots
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
