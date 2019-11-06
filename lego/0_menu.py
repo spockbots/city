@@ -3,12 +3,18 @@ from pybricks import ev3brick as brick
 from pybricks.parameters import Button, ImageFile, Align
 from pybricks.tools import wait
 
+from run.crane import run_crane
+from run.swing import run_swing
+from run.led import run_led
+
+
 # brick.display.text(text)
 
 menu = [
-    [0, "Crane", 40, 10],
-    [1, "Swing", 40, 20],
-    [2, "Red Building", 40, 30]
+    [0, "Crane", 40, 10, run_crane],
+    [1, "Swing", 40, 20, run_swing],
+    [2, "Red Building", 40, 30, None],
+    [3, "LED", 40, 40, run_led],
 ]
 
 selection = 0
@@ -41,8 +47,15 @@ while True:
     elif Button.DOWN in brick.buttons():
         selection = (selection + 1) % selections
         print_menu()
+
     elif Button.RIGHT in brick.buttons():
+        prg = menu[selection][4]
+        prg()
+
+    elif Button.LEFT in brick.buttons():
         break
+
+
     wait(100)
 
 brick.display.clear()
