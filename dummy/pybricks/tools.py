@@ -1,0 +1,2 @@
+def wait (x):
+    pass
