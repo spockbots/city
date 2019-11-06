@@ -126,4 +126,4 @@ def PRINT(*args, x=None, y=None):
 
 def voltage():
     value = brick.battery.voltage() / 1000
-    Print("Voltage: " + str(value) + " V", 10, 20)
+    PRINT("Voltage: " + str(value) + " V", 80, 10)

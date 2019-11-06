@@ -4,8 +4,10 @@ from pybricks.parameters import Button
 from pybricks.tools import wait
 
 from old.run.crane import run_crane
-from old.run import run_swing
-from old.run import run_led
+from old.run.swing import run_swing
+from old.run.led import run_led
+from old.run.calibrate import run_calibrate
+from old.run.check import run_check
 
 
 # brick.display.text(text)
