@@ -166,6 +166,11 @@
 <span class="c1">#######################################################</span>
 
 <div class="viewcode-block" id="readfile"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.readfile">[docs]</a><span class="k">def</span> <span class="nf">readfile</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param name:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># print (&quot;READ&quot;, name)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -177,6 +182,12 @@
 
 
 <div class="viewcode-block" id="writefile"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.writefile">[docs]</a><span class="k">def</span> <span class="nf">writefile</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param name:</span>
+<span class="sd">    :param msg:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># print (&quot;WRITE&quot;, name, msg)</span>
     <span class="c1"># try:</span>
     <span class="c1">#    f = open(name)</span>
@@ -227,6 +238,12 @@
 <span class="c1">#######################################################</span>
 
 <div class="viewcode-block" id="led"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.led">[docs]</a><span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param color:</span>
+<span class="sd">    :param brightness:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;RED&quot;</span><span class="p">:</span>
         <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">RED</span>
     <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;GREEN&quot;</span><span class="p">:</span>
@@ -258,10 +275,24 @@
 <span class="c1">#######################################################</span>
 
 <div class="viewcode-block" id="clear"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.clear">[docs]</a><span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
 
+<span class="c1">#</span>
+<span class="c1"># BUG THERE IS SOMEWHERE ANOTHER PRINT</span>
+<span class="c1">#</span>
 <div class="viewcode-block" id="PRINT"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.PRINT">[docs]</a><span class="k">def</span> <span class="nf">PRINT</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param args:</span>
+<span class="sd">    :param x:</span>
+<span class="sd">    :param y:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -278,6 +309,10 @@
 <span class="c1">#######################################################</span>
 
 <div class="viewcode-block" id="voltage"><a class="viewcode-back" href="../../spockbots.html#spockbots.output.voltage">[docs]</a><span class="k">def</span> <span class="nf">voltage</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">brick</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">voltage</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>
     <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Voltage: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; V&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span></div>
 </pre></div>

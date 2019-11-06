@@ -95,6 +95,10 @@ class SpockbotsGyro(object):
             angle = self.angle()
 
     def drift(self):
+        """
+
+        :return:
+        """
         while True:  # loop in case we get a read error from the gyro speed
             try:
                 speed = self.sensor.speed()
@@ -106,6 +110,11 @@ class SpockbotsGyro(object):
                 print("ERROR: DRIFT no value found")  # No speed value found, so repeat
 
     def status(self, count=10):
+        """
+
+        :param count:
+        :return:
+        """
         last = self.angle()
         i = 0
         still = 0

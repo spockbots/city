@@ -159,11 +159,18 @@
 <div class="viewcode-block" id="Gyro"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro">[docs]</a><span class="k">class</span> <span class="nc">Gyro</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_rate</span> <span class="o">=</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="Gyro.connect"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;GYRO CONNECT&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">)</span>
         <span class="n">connected</span> <span class="o">=</span> <span class="kc">False</span>
@@ -175,6 +182,10 @@
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;GYRO CONNECT. ok&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Gyro.reset"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;GYRO RESET&quot;</span><span class="p">)</span>
         <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">360</span>
         <span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
@@ -190,11 +201,19 @@
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span></div>
 
 <div class="viewcode-block" id="Gyro.get"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
         <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">rate</span></div>
 
 <div class="viewcode-block" id="Gyro.angle"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.angle">[docs]</a>    <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">angle</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">readfile</span><span class="p">(</span><span class="s2">&quot;/sys/class/lego-sensor/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">+</span> <span class="s2">&quot;/value0&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span>
@@ -204,6 +223,10 @@
         <span class="k">return</span> <span class="n">angle</span></div>
 
 <div class="viewcode-block" id="Gyro.rate"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.rate">[docs]</a>    <span class="k">def</span> <span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">rate</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">readfile</span><span class="p">(</span><span class="s2">&quot;/sys/class/lego-sensor/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">+</span> <span class="s2">&quot;/value1&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">last_rate</span> <span class="o">=</span> <span class="n">rate</span>
@@ -213,6 +236,12 @@
         <span class="k">return</span> <span class="n">rate</span></div>
 
 <div class="viewcode-block" id="Gyro.still"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.still">[docs]</a>    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">still</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param count:</span>
+<span class="sd">        :param still:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">still_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">count</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -224,6 +253,10 @@
         <span class="k">return</span> <span class="n">still_count</span> <span class="o">&gt;=</span> <span class="n">still</span></div>
 
 <div class="viewcode-block" id="Gyro.info"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># find gyro</span>
 
@@ -286,6 +319,11 @@
         <span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;/sys/class/lego-sensor/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">+</span> <span class="s2">&quot;/mode&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Gyro.test"><a class="viewcode-back" href="../../spockbots.html#spockbots.systemgyro.Gyro.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param n:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
             <span class="n">angle</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>

@@ -8,6 +8,9 @@ from pybricks.parameters import Port
 
 
 class SpockbotsColorSensor:
+    """
+    TBD
+    """
 
     def __init__(self, port=3):
         """
@@ -49,9 +52,17 @@ class SpockbotsColorSensor:
             self.black = value
 
     def reflection(self):
+        """
+
+        :return:
+        """
         return self.sensor.reflection()
 
     def light(self):
+        """
+
+        :return:
+        """
         return self.value()
 
     def value(self):
@@ -72,6 +83,9 @@ class SpockbotsColorSensor:
         return int(c)
 
     def clear(self):
+        """
+
+        """
         f = open("/home/robot/calibrate.txt", "w")
         f.close()
 
@@ -116,8 +130,16 @@ class SpockbotsColorSensor:
 
 
 class SpockbotsColorSensors:
+    """
+    TBD
+    """
 
     def __init__(self, ports=[2, 3, 4], speed=5):
+        """
+
+        :param ports:
+        :param speed:
+        """
         self.ports = ports
         self.speed = speed
         self.colorsensor = [0, 0, 0, 0, 0]
@@ -126,12 +148,27 @@ class SpockbotsColorSensors:
             self.colorsensor[i] = SpockbotsColorSensor(port=i)
 
     def sensor(self, port):
+        """
+
+        :param port:
+        :return:
+        """
         return self.colorsensor[port]
 
     def value(self, i):
+        """
+
+        :param i:
+        :return:
+        """
         return self.colorsensor[i].value()
 
     def write(self, ports=[2, 3, 4]):
+        """
+
+        :param ports:
+        :return:
+        """
 
         f = open("/home/robot/calibrate.txt", "w")
         for i in ports:
@@ -140,10 +177,18 @@ class SpockbotsColorSensors:
         f.close()
 
     def clear(self):
+        """
+
+        :return:
+        """
         f = open("/home/robot/calibrate.txt", "w")
         f.close()
 
     def read(self):
+        """
+
+        :return:
+        """
         try:
             f = open("/home/robot/calibrate.txt", "r")
             for i in self.ports:
@@ -162,10 +207,20 @@ class SpockbotsColorSensors:
             self.info()
 
     def flash(self, ports=[2, 3, 4]):
+        """
+
+        :param ports:
+        :return:
+        """
         for port in ports:
             self.colorsensor[port].flash()
 
     def info(self, ports=[2, 3, 4]):
+        """
+
+        :param ports:
+        :return:
+        """
         print("")
         print("Color sensor black and white values")
         print("")
@@ -175,6 +230,11 @@ class SpockbotsColorSensors:
         print()
 
     def test(self, ports=[2, 3, 4]):
+        """
+
+        :param ports:
+        :return:
+        """
         print("")
         print("Color sensor tests")
         print("")

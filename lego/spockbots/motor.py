@@ -24,6 +24,10 @@ def PRINT(*args):
 class SpockbotsMotor(object):
 
     def __init__(self, direction=None):
+        """
+
+        :param direction:
+        """
 
         self.diameter = round(62.4, 3)  # mm
         self.width = 20.0  # mm
@@ -60,6 +64,11 @@ class SpockbotsMotor(object):
         PRINT()
 
     def setup(self, direction=None):
+        """
+
+        :param direction:
+        :return:
+        """
 
         if direction is None:
             self.direction = "forward"
@@ -82,13 +91,28 @@ class SpockbotsMotor(object):
         return self.left, self.right, self.tank
 
     def light(self, port):
+        """
+
+        :param port:
+        :return:
+        """
         return self.colorsensor[port].light()
 
     def reset(self):
+        """
+
+        :return:
+        """
         self.left.reset_angle(0)
         self.right.reset_angle(0)
 
     def on(self, speed, steering=0):
+        """
+
+        :param speed:
+        :param steering:
+        :return:
+        """
         self.tank.drive(speed * 10, steering)
 
     def distance_to_rotation(self, distance):
@@ -114,6 +138,11 @@ class SpockbotsMotor(object):
         return rotation
 
     def angle_to_distance(self, angle):
+        """
+
+        :param angle:
+        :return:
+        """
         d = self.circumference / 360.0 * angle
         return d
 
@@ -140,6 +169,10 @@ class SpockbotsMotor(object):
         self.still()
 
     def still(self):
+        """
+
+        :return:
+        """
 
         PRINT("Still Start")
 
@@ -158,6 +191,13 @@ class SpockbotsMotor(object):
         PRINT("Still Stop")
 
     def forward(self, speed, distance, brake=None):
+        """
+
+        :param speed:
+        :param distance:
+        :param brake:
+        :return:
+        """
 
         PRINT("Forward", speed, distance, brake)
 
@@ -286,6 +326,19 @@ class SpockbotsMotor(object):
                    white=100,  # maximal white
                    delta=-35,  # paramaters to control smoothness
                    factor=0.7):  # parameters to control smoothness
+        """
+
+        :param speed:
+        :param distance:
+        :param t:
+        :param port:
+        :param right:
+        :param black:
+        :param white:
+        :param delta:
+        :param factor:
+        :return:
+        """
 
         if right:
             f = 1.0
@@ -325,6 +378,14 @@ class SpockbotsMotor(object):
         self.stop()  # stop the robot
 
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
+        """
+
+        :param speed:
+        :param distance:
+        :param ports:
+        :param direction:
+        :return:
+        """
 
         self.reset()
         self.on(speed, 0)

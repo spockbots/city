@@ -4,6 +4,9 @@ from spockbots.output import led, flash
 import time
 
 def run_led():
+    """
+    TBD
+    """
 
     led("RED")
     time.sleep(0.2)

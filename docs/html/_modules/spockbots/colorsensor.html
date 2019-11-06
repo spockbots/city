@@ -156,6 +156,9 @@
 
 
 <div class="viewcode-block" id="SpockbotsColorSensor"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensor">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsColorSensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -197,9 +200,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensor.reflection"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensor.reflection">[docs]</a>    <span class="k">def</span> <span class="nf">reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensor.light"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensor.light">[docs]</a>    <span class="k">def</span> <span class="nf">light</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensor.value"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensor.value">[docs]</a>    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -220,6 +231,9 @@
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensor.clear"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensor.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -264,8 +278,16 @@
 
 
 <div class="viewcode-block" id="SpockbotsColorSensors"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsColorSensors</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">speed</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param ports:</span>
+<span class="sd">        :param speed:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ports</span> <span class="o">=</span> <span class="n">ports</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
@@ -274,12 +296,27 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpockbotsColorSensor</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.sensor"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.sensor">[docs]</a>    <span class="k">def</span> <span class="nf">sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param port:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.value"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.value">[docs]</a>    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param i:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.write"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param ports:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
@@ -288,10 +325,18 @@
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.clear"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.read"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="p">:</span>
@@ -310,10 +355,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.flash"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.flash">[docs]</a>    <span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param ports:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">flash</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.info"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param ports:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Color sensor black and white values&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -323,6 +378,11 @@
         <span class="nb">print</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsColorSensors.test"><a class="viewcode-back" href="../../spockbots.html#spockbots.colorsensor.SpockbotsColorSensors.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param ports:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Color sensor tests&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>

@@ -11,11 +11,18 @@ from spockbots.output import readfile, writefile
 class Gyro(object):
 
     def __init__(self):
+        """
+
+        """
         self.sensor = None
         self.last_angle = 0
         self.last_rate = 0
 
     def connect(self):
+        """
+
+        :return:
+        """
 
         PRINT("GYRO CONNECT", self.sensor)
         connected = False
@@ -27,6 +34,10 @@ class Gyro(object):
         PRINT("GYRO CONNECT. ok", self.sensor)
 
     def reset(self):
+        """
+
+        :return:
+        """
         PRINT("GYRO RESET")
         a = -360
         s = -100
@@ -42,11 +53,19 @@ class Gyro(object):
         return a, s
 
     def get(self):
+        """
+
+        :return:
+        """
         angle = self.angle()
         rate = self.rate()
         return angle, rate
 
     def angle(self):
+        """
+
+        :return:
+        """
         try:
             angle = int(readfile("/sys/class/lego-sensor/" + self.sensor + "/value0"))
             self.last_angle = angle
@@ -56,6 +75,10 @@ class Gyro(object):
         return angle
 
     def rate(self):
+        """
+
+        :return:
+        """
         try:
             rate = int(readfile("/sys/class/lego-sensor/" + self.sensor + "/value1"))
             self.last_rate = rate
@@ -65,6 +88,12 @@ class Gyro(object):
         return rate
 
     def still(self, count=10, still=5):
+        """
+
+        :param count:
+        :param still:
+        :return:
+        """
         still_count = 0
         i = count
         while i > 0:
@@ -76,6 +105,10 @@ class Gyro(object):
         return still_count >= still
 
     def info(self):
+        """
+
+        :return:
+        """
 
         # find gyro
 
@@ -138,6 +171,11 @@ class Gyro(object):
         writefile("/sys/class/lego-sensor/" + self.sensor + "/mode", kind)
 
     def test(self, n):
+        """
+
+        :param n:
+        :return:
+        """
         counter = 0
         while counter < n:
             angle, rate = self.get()

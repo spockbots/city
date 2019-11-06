@@ -172,6 +172,10 @@
 <div class="viewcode-block" id="SpockbotsMotor"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsMotor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param direction:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">62.4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># mm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># mm</span>
@@ -208,6 +212,11 @@
         <span class="n">PRINT</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SpockbotsMotor.setup"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param direction:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">direction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
@@ -230,13 +239,28 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tank</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.light"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.light">[docs]</a>    <span class="k">def</span> <span class="nf">light</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param port:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">light</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.reset"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.on"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.on">[docs]</a>    <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param speed:</span>
+<span class="sd">        :param steering:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tank</span><span class="o">.</span><span class="n">drive</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">steering</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.distance_to_rotation"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.distance_to_rotation">[docs]</a>    <span class="k">def</span> <span class="nf">distance_to_rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
@@ -262,6 +286,11 @@
         <span class="k">return</span> <span class="n">rotation</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.angle_to_distance"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.angle_to_distance">[docs]</a>    <span class="k">def</span> <span class="nf">angle_to_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param angle:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span> <span class="o">/</span> <span class="mf">360.0</span> <span class="o">*</span> <span class="n">angle</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
@@ -288,6 +317,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">still</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.still"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.still">[docs]</a>    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Still Start&quot;</span><span class="p">)</span>
 
@@ -306,6 +339,13 @@
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Still Stop&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.forward"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">brake</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param speed:</span>
+<span class="sd">        :param distance:</span>
+<span class="sd">        :param brake:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Forward&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">brake</span><span class="p">)</span>
 
@@ -434,6 +474,19 @@
                    <span class="n">white</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># maximal white</span>
                    <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span>  <span class="c1"># paramaters to control smoothness</span>
                    <span class="n">factor</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>  <span class="c1"># parameters to control smoothness</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param speed:</span>
+<span class="sd">        :param distance:</span>
+<span class="sd">        :param t:</span>
+<span class="sd">        :param port:</span>
+<span class="sd">        :param right:</span>
+<span class="sd">        :param black:</span>
+<span class="sd">        :param white:</span>
+<span class="sd">        :param delta:</span>
+<span class="sd">        :param factor:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -473,6 +526,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># stop the robot</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.calibrate"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.calibrate">[docs]</a>    <span class="k">def</span> <span class="nf">calibrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;front&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param speed:</span>
+<span class="sd">        :param distance:</span>
+<span class="sd">        :param ports:</span>
+<span class="sd">        :param direction:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>

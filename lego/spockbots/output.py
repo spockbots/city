@@ -18,6 +18,11 @@ debug = True
 #######################################################
 
 def readfile(name):
+    """
+
+    :param name:
+    :return:
+    """
     try:
         # print ("READ", name)
         f = open(name)
@@ -29,6 +34,12 @@ def readfile(name):
 
 
 def writefile(name, msg):
+    """
+
+    :param name:
+    :param msg:
+    :return:
+    """
     # print ("WRITE", name, msg)
     # try:
     #    f = open(name)
@@ -79,6 +90,12 @@ def sound(pitch=1500, duration=300):
 #######################################################
 
 def led(color, brightness=255):
+    """
+
+    :param color:
+    :param brightness:
+    :return:
+    """
     if color == "RED":
         led_color = Color.RED
     elif color == "GREEN":
@@ -110,10 +127,24 @@ def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"], delay=0.1):
 #######################################################
 
 def clear():
+    """
+
+    :return:
+    """
     brick.display.clear()
 
 
+#
+# BUG THERE IS SOMEWHERE ANOTHER PRINT
+#
 def PRINT(*args, x=None, y=None):
+    """
+
+    :param args:
+    :param x:
+    :param y:
+    :return:
+    """
     text = ""
     for a in args:
         if a is not None:
@@ -130,5 +161,9 @@ def PRINT(*args, x=None, y=None):
 #######################################################
 
 def voltage():
+    """
+
+    :return:
+    """
     value = brick.battery.voltage() / 1000
     PRINT("Voltage: " + str(value) + " V", 80, 10)

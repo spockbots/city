@@ -3,6 +3,9 @@ from spockbots.motor import SpockbotsMotor
 import time
 
 def run_swing():
+    """
+    TBD
+    """
     robot = SpockbotsMotor()
     robot.debug = True
 
