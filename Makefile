@@ -1,9 +1,9 @@
 all:
-	cd code; pip install .
-#	mkdir -p docs-source/source/src
-	cd code; sphinx-apidoc -f -o ../docs-source/source/ .
+	mkdir -p docs-source/source/src
+	# cd lego; sphinx-apidoc  -f -o ../docs-source/source/ .
 	cd docs-source; make html
 	make -f Makefile view
+	cd docs-source; make latexpdf
 
 view:
 	open docs/html/index.html

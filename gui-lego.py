@@ -51,11 +51,9 @@ while 1:
             run(f"scp -r {base}/spockbots {base}/run {base}/*.py {robot}:.")
         elif action == "Run":
             run(f'ssh {robot} "{python} ./{prg}.py"')
-
         print("Action complete ...")
         os.system("say ok")
         print()
-
     elif choice in pythons:
         python = choice
 

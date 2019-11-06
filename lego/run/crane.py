@@ -5,6 +5,8 @@ from time import sleep
 
 def run_crane():
     robot = SpockbotsMotor()
+    robot.debug = True
+
     robot.setup()
     robot.color.read()
 

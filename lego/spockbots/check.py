@@ -10,8 +10,14 @@ def check(speed=100, angle=360):
     a) turning on the large motors one at a time
     b) turning on the medium motors one at a time
     c) turning on the light sensors one at a time
+
+    :param speed:
+    :param angle:
+    :return:
     """
     robot = SpockbotsMotor()
+    robot.debug = True
+
     robot.setup()
 
     speed = speed * 10

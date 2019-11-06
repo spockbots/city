@@ -4,6 +4,8 @@ import time
 
 def run_swing():
     robot = SpockbotsMotor()
+    robot.debug = True
+
     robot.setup()
 
     robot.color.read()

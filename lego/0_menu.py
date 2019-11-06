@@ -1,27 +1,33 @@
 #!/usr/bin/env pybricks-micropython
-from pybricks import ev3brick as brick
+""" This is the brick menu
+
+test line
+
+"""
+
 from pybricks.parameters import Button
 from pybricks.tools import wait
 
-from old.run.crane import run_crane
-from old.run.swing import run_swing
-from old.run.led import run_led
-from old.run.calibrate import run_calibrate
-from old.run.check import run_check
 
+from run.crane import run_crane
+from run.swing import run_swing
+from run.led import run_led
+from run.calibrate import run_calibrate
+from run.check import run_check
+from run.turn_to_black import run_turn_to_black
 
 # brick.display.text(text)
 
 menu = [
     [0, "Crane", 40, 10, run_crane],
     [1, "Swing", 40, 20, run_swing],
-    [2, "Red Building", 40, 30, None],
+    [2, "Red Building", 40, 30, run_led],
     [3, "LED", 40, 40, run_led],
+    [4, "Turn to black", 40, 50, run_turn_to_black]
 ]
 
 selection = 0
 selections = len(menu)
-
 
 def marker(line):
     y = line * 10 + 10

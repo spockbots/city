@@ -1,20 +1,20 @@
-from pybricks.robotics import DriveBase
+import math
+import time
+
+from pybricks import ev3brick as brick
 from pybricks.ev3devices import Motor
 from pybricks.parameters import Port
 from pybricks.parameters import Stop, Direction
-import math
+from pybricks.robotics import DriveBase
 # from pybricks.ev3devices import ColorSensor
-from spockbots.colorsensor import SpockbotsColorSensor, SpockbotsColorSensors
-from pybricks import ev3brick as brick
-import time
-
-debug = True
+# from spockbots.colorsensor import SpockbotsColorSensor
+from spockbots.colorsensor import SpockbotsColorSensors
+from spockbots.output import debug
 
 
 def PRINT(*args):
     if debug:
-        print(args)
-
+        print(*args)
 
 #######################################################
 # Motor
@@ -46,18 +46,18 @@ class SpockbotsMotor(object):
         brick.sound.beep()
 
     def __str__(self):
-        print()
-        print("Robot Info")
-        print("============================----------")
-        print("Tire Diameter:", self.diameter)
-        print("Circumference:", self.circumference)
-        print("Tire Width:   ", self.width)
-        print("Axle Track:   ", self.axle_track)
-        print("Angle Left:   ", self.left.angle())
-        print("Angle Right:  ", self.right.angle())
-        print("Direction:    ", self.direction)
+        PRINT()
+        PRINT("Robot Info")
+        PRINT("============================")
+        PRINT("Tire Diameter:", self.diameter)
+        PRINT("Circumference:", self.circumference)
+        PRINT("Tire Width:   ", self.width)
+        PRINT("Axle Track:   ", self.axle_track)
+        PRINT("Angle Left:   ", self.left.angle())
+        PRINT("Angle Right:  ", self.right.angle())
+        PRINT("Direction:    ", self.direction)
 
-        print()
+        PRINT()
 
     def setup(self, direction=None):
 
@@ -123,9 +123,6 @@ class SpockbotsMotor(object):
 
         :param brake: None, brake, coast, hold
         :return:
-        """
-        """
-    
         """
         if not brake or brake == "brake":
             self.left.stop(Stop.BRAKE)
@@ -219,6 +216,30 @@ class SpockbotsMotor(object):
 
         PRINT("Turn Stop")
 
+    def tunrtoblack(self,
+                    speed,
+                    direction="left",
+                    port=3,
+                    black=10):
+        """
+        turns the robot to the balck line.
+        :param speed:
+        :param port:
+        :param black:
+        :return:
+        """
+        PRINT("turntoblack", speed, direction, port, black)
+
+        if direction == "left":
+            self.left.run(speed * 10)
+        else:
+            self.right.run(speed * 10)
+
+        while self.light(port) > black:
+            pass
+        self.stop()
+
+
     def gotoblack(self, speed, port, black=10):
         """
         The robot moves to the black line while using the sensor on the given port
@@ -305,10 +326,6 @@ class SpockbotsMotor(object):
 
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
 
-        print(direction)
-        print(ports)
-        print(speed)
-
         self.reset()
         self.on(speed, 0)
         distance = self.distance_to_angle(distance * 10)
@@ -318,7 +335,7 @@ class SpockbotsMotor(object):
             for i in ports:
                 self.colorsensor[i].set_white()
                 self.colorsensor[i].set_black()
-                print(i,
+                PRINT(i,
                       self.colorsensor[i].black,
                       self.colorsensor[i].white,
                       sep=' ')
@@ -326,4 +343,4 @@ class SpockbotsMotor(object):
         self.stop()
 
         for i in ports:
-            print(i, self.colorsensor[i].black, self.colorsensor[i].white)
+            PRINT(i, self.colorsensor[i].black, self.colorsensor[i].white)

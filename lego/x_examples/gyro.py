@@ -1,11 +1,14 @@
 #!/usr/bin/env pybricks-micropython
+
 # from spockbots.gyro import SpockbotsGyro
+from spockbots.systemgyro import Gyro
+
+
 import time
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
 from time import sleep
 
-from spockbots.systemgyro import Gyro
 from spockbots.output import PRINT
 
 """GYRO-ANG GYRO-RATE GYRO-FAS GYRO-G&A GYRO-CAL TILT-RATE TILT-ANG"""
