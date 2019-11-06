@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import spockbots.robot as robot
-from run.test1 import run_test1
-from run import run_test2
-from run.calibrate import run_calibrate
+from old.run import run_test1
+from old.run import run_test2
+from old.run import run_calibrate
 
 
 while True:

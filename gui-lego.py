@@ -45,10 +45,10 @@ while 1:
 
         if action == 'Quit':
             sys.exit(0)
-        elif action == "Update robot.py":
-            run(f"scp -r {base}/spockbots/robot.py {robot}:spockbots/.")
+        # elif action == "Update robot.py":
+        #     run(f"scp -r {base}/spockbots/robot.py {robot}:spockbots/.")
         elif action == "Upload":
-            run(f"scp -r {base}/spockbots {base}/*.py {robot}:.")
+            run(f"scp -r {base}/spockbots {base}/run {base}/*.py {robot}:.")
         elif action == "Run":
             run(f'ssh {robot} "{python} ./{prg}.py"')
 

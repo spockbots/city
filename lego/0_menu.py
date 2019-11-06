@@ -1,11 +1,11 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks import ev3brick as brick
-from pybricks.parameters import Button, ImageFile, Align
+from pybricks.parameters import Button
 from pybricks.tools import wait
 
-from run.crane import run_crane
-from run.swing import run_swing
-from run.led import run_led
+from old.run.crane import run_crane
+from old.run import run_swing
+from old.run import run_led
 
 
 # brick.display.text(text)
