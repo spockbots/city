@@ -33,17 +33,19 @@ def run_crane():
     #robot.forward(-75, 60)
     """
 
-    dt = 0.3
-
-    robot.turn(25, 50)
-    sleep(dt)
+    dt = 0.4
 
     robot.forward(50, 20)
     sleep(dt)
 
-    robot.turn(25, -10)
+    robot.turntoblack(25, direction="right", port=3)
     sleep(dt)
 
-    robot.forward(50, 15)
+    robot.forward(50, 10)
     sleep(dt)
 
+    turntowhite(25, direction="left", port=2)
+    sleep(dt)
+
+
+    sleep(1.0)

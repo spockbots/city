@@ -16,6 +16,8 @@ from run.calibrate import run_calibrate
 from run.check import run_check
 from run.turn_to_black import run_turn_to_black
 
+from pybricks import ev3brick as brick
+
 # brick.display.text(text)
 
 menu = [
@@ -67,8 +69,6 @@ while True:
     wait(100)
 
 brick.display.clear()
-
-print(selection)
 
 brick.sound.beep()
 

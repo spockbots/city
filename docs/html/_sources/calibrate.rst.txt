@@ -1,4 +1,0 @@
-calibrate
-=========
-
-.. autofunction:: run.calibrate.run_calibrate

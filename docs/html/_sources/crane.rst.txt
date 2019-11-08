@@ -1,7 +1,0 @@
-crane module
-============
-
-.. automodule:: crane
-   :members:
-   :undoc-members:
-   :show-inheritance:

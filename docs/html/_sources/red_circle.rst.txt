@@ -1,7 +1,0 @@
-red\_circle module
-==================
-
-.. automodule:: red_circle
-   :members:
-   :undoc-members:
-   :show-inheritance:

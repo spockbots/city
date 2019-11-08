@@ -256,7 +256,7 @@ class SpockbotsMotor(object):
 
         PRINT("Turn Stop")
 
-    def tunrtoblack(self,
+    def turntoblack(self,
                     speed,
                     direction="left",
                     port=3,
@@ -276,6 +276,30 @@ class SpockbotsMotor(object):
             self.right.run(speed * 10)
 
         while self.light(port) > black:
+            pass
+        self.stop()
+
+
+    def turntowhite(self,
+                    speed,
+                    direction="left",
+                    port=3,
+                    white=80):
+        """
+        turns the robot to the white line.
+        :param speed:
+        :param port:
+        :param white:
+        :return:
+        """
+        PRINT("turntoblack", speed, direction, port, white)
+
+        if direction == "left":
+            self.left.run(speed * 10)
+        else:
+            self.right.run(speed * 10)
+
+        while self.light(port) < white:
             pass
         self.stop()
 

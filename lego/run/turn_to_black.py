@@ -33,5 +33,3 @@ def run_turn_to_black():
 
     sleep(1)
 
-
-run_turn_to_black()

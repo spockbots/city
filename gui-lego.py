@@ -48,7 +48,7 @@ while 1:
         # elif action == "Update robot.py":
         #     run(f"scp -r {base}/spockbots/robot.py {robot}:spockbots/.")
         elif action == "Upload":
-            run(f"scp -r {base}/spockbots {base}/run {base}/*.py {robot}:.")
+            run(f"scp -r {base}/spockbots {base}/x_examples {base}/run {base}/*.py {robot}:.")
         elif action == "Run":
             run(f'ssh {robot} "{python} ./{prg}.py"')
         print("Action complete ...")
