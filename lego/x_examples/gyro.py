@@ -1,20 +1,13 @@
 #!/usr/bin/env pybricks-micropython
 
-# from spockbots.gyro import SpockbotsGyro
-from spockbots.systemgyro import Gyro
-
-
-import time
-from pybricks.ev3devices import UltrasonicSensor
-from pybricks.parameters import Port
-from time import sleep
-
 from spockbots.output import PRINT
+from spockbots.gyro import SpockbotsGyro as Gyro
+# from spockbots.systemgyro import Gyro
 
 """GYRO-ANG GYRO-RATE GYRO-FAS GYRO-G&A GYRO-CAL TILT-RATE TILT-ANG"""
 
 gyro = Gyro()
-gyro.connect()
+# gyro.connect()
 gyro.reset()
 if gyro.still():
     PRINT("ROBOT STILL")

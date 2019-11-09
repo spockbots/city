@@ -5,7 +5,7 @@ import time
 robot = SpockbotsMotor()
 robot.setup()
 
-print(robot)
+print(str(robot))
 
 robot.beep()
 robot.calibrate(10,

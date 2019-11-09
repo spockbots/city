@@ -1,11 +1,10 @@
 #!/usr/bin/env pybricks-micropython
 
-from pybricks import ev3brick as brick
-from pybricks.parameters import Button
-from pybricks.parameters import Color
+import os
 from time import sleep
 
-import os
+from pybricks import ev3brick as brick
+from pybricks.parameters import Color
 
 #######################################################
 # READ AND WRITE FILES

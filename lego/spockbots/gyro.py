@@ -1,14 +1,10 @@
-from time import sleep
-import time
-from pybricks.parameters import Port
-
-from pybricks import ev3brick as brick
-from pybricks.parameters import Direction
 import sys
-from pybricks.ev3devices import GyroSensor
+import time
+from time import sleep
 
-import os
-import glob
+from pybricks.ev3devices import GyroSensor
+from pybricks.parameters import Direction
+from pybricks.parameters import Port
 
 
 #######################################################
@@ -16,6 +12,9 @@ import glob
 #######################################################
 
 class SpockbotsGyro(object):
+    """
+    test
+    """
     # The following link gives some hints why it does not work for the Gyro in mindstorm
     # http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf
 

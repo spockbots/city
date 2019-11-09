@@ -3,8 +3,8 @@ class Motor:
     def __init__(self, port, direction=None, gears=None): pass
 
     def dc(self, duty): pass
-    def angle(self): pass
-    def speed(self, )  : pass
+    def angle(self): return 0.0
+    def speed(self, )  : return 100.0
     def stop(self, stop_type=None)  : pass
     def run(self, speed)  : pass
     def run_time(self, speed, time, stop_type=None, wait=True)  : pass
@@ -15,6 +15,7 @@ class Motor:
     def run_until_stalled(self, speed, stop_type=None, duty_limit=None)  : pass
     def set_run_settings(self, max_speed, acceleration)  : pass
     def set_pid_settings(self, kp, ki, kd, tight_loop_limit, angle_tolerance, speed_tolerance, stall_speed, stall_time): pass
+    def reset_angle(self, angle): pass
 
 class TouchSensor():
     def __init__(self, port): pass
@@ -22,9 +23,10 @@ class TouchSensor():
 
 class ColorSensor():
     def __init__(self, port): pass
-    def color(self): pass
-    def ambient(self): pass
+    def color(self): return 100
+    def ambient(self): return 100
     def rgb(self): pass
+    def reflection(self): return 0
 
 class InfraredSensor():
     def __init__(self, port): pass
@@ -39,3 +41,9 @@ class UltrasonicSensor():
     def speed(self): pass
     def angle(self): pass
     def reset_angle(self, angle): pass
+
+class GyroSensor():
+    def __init__(self, port, direction=None): pass
+    def speed(self): pass
+    def angle(self,): pass
+    def reset_angle(self,angle): pass

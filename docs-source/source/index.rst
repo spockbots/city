@@ -11,8 +11,7 @@ Spockbots API
    0_menu
    run
    spockbots
-   x_examples
-
+   modules
 
 Indices and tables
 ==================

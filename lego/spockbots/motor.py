@@ -9,7 +9,6 @@ from pybricks.robotics import DriveBase
 # from pybricks.ev3devices import ColorSensor
 # from spockbots.colorsensor import SpockbotsColorSensor
 from spockbots.colorsensor import SpockbotsColorSensors
-from spockbots.output import debug
 from spockbots.output import PRINT
 
 
@@ -60,6 +59,7 @@ class SpockbotsMotor(object):
         PRINT("Direction:    ", self.direction)
 
         PRINT()
+        return ""
 
     def setup(self, direction=None):
         """

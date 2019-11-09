@@ -1,10 +1,6 @@
 import os
-import spockbots.robot as robot
+
 from spockbots.output import PRINT
-
-from spockbots.output import led
-from spockbots.output import beep
-
 from spockbots.output import readfile, writefile
 
 

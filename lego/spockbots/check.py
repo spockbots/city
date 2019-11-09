@@ -1,6 +1,5 @@
-from spockbots.output import PRINT, led
 from spockbots.motor import SpockbotsMotor
-import time
+from spockbots.output import PRINT, led
 
 
 def check(speed=100, angle=360):
