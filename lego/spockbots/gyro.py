@@ -27,12 +27,13 @@ class SpockbotsGyro(object):
 
     # This code fixes it.
 
-    def __init__(self, port, direction="front"):
+    def __init__(self, robot, port=1, direction="front"):
         """
         Initializes the Gyro Sensor
         :param gyro: The gyro sensor on a given port
         """
 
+        self.robot = robot
         if direction == "front":
             sensor_direction = Direction.CLOCKWISE
         else:
@@ -94,6 +95,9 @@ class SpockbotsGyro(object):
             sleep(0.1)
             angle = self.angle()
 
+    def still(self):
+        return not self.drift()
+
     def drift(self):
         """
 
@@ -151,10 +155,17 @@ class SpockbotsGyro(object):
             except:
                 print("Gyro read error", angle)
             print(count, "Gyro Angle: ", angle)
-            if angle == 0:
+            if abs(angle) <= 2:
                 count = count - 1
         self.last_angle = angle
         print("Gyro Angle, final: ", angle)
+
+    def turn(self, speed=25, degrees=90):
+        if degrees < 0:
+            self.left(speed=speed, degrees=abs(degrees))
+        elif degrees > 0:
+            self.right(speed=speed, degrees=abs(degrees))
+
 
     def left(self, speed=25, degrees=90, offset=0):
         """
@@ -163,19 +174,23 @@ class SpockbotsGyro(object):
         :param speed: The speed
         :param degrees: The degrees
         """
+        self.reset()
         if speed == 25:
             offset = 8
 
-        self.zero()
+        #self.zero()
 
-        tank.on(-speed, speed)
+        self.robot.on_forever(speed, -speed)
         angle = self.angle()
+
         print(angle, -degrees + offset)
+
+
+
         while angle > -degrees + offset:
             # print(angle, -degrees + offset)
             angle = self.angle()
-        tank.off()
-        tank.wait_while('running')
+        self.robot.stop()
 
     def right(self, speed=25, degrees=90, offset=0):
         """
@@ -184,16 +199,17 @@ class SpockbotsGyro(object):
         :param speed: The speed
         :param degrees: The degrees
         """
+        self.reset()
+
         if speed == 25:
             offset = 8
 
-        self.zero()
+        #self.zero()
 
-        tank.on(speed, -speed)
+        self.robot.on_forever(-speed, speed)
         angle = self.angle()
         print(angle, degrees - offset)
         while angle < degrees - offset:
             # print(angle, degrees - offset)
             angle = self.angle()
-        tank.off()
-        tank.wait_while('running')
+        self.robot.stop()

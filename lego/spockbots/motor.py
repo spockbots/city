@@ -218,6 +218,16 @@ class SpockbotsMotor(object):
 
         PRINT("Forward Stop")
 
+    def on_forever(self, speed_left, speed_right):
+
+        PRINT("on_forever", speed_left, speed_right)
+        self.reset()
+
+        self.left.run(speed_left * 10)
+        self.right.run(speed_right * 10)
+
+
+
     def turn(self, speed, angle):
         """
         takes the radius of the robot and dives on it for a distance based on the ancle

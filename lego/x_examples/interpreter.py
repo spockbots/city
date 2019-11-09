@@ -2,15 +2,32 @@
 from spockbots.motor import SpockbotsMotor
 import time
 
+#from spockbots.systemgyro import Gyro
+from spockbots.gyro import SpockbotsGyro as Gyro
+from spockbots.output import led, PRINT
+
+
 robot = SpockbotsMotor()
 robot.setup()
 
 robot.color.read()
 print(robot)
 
+gyro = Gyro(robot)
+#gyro.connect()
+gyro.reset()
+if gyro.still():
+    PRINT("ROBOT STILL")
+else:
+    PRINT("ROBOT DRIFT")
+    led("RED")
+    robot.beep()
+    robot.beep()
+    robot.beep()
+
+
 import sys
 import os
-
 # from importlib import reload
 
 robot.setup()
@@ -20,6 +37,14 @@ while True:
     if line == "q":
         print("quit")
         sys.exit()
+    elif line.startswith("gyro."):
+        try:
+            print(line)
+            eval(line)
+        except Exception as e:
+            print()
+            print(e)
+            print()
     elif line == "s":
         os.system("./stop.py")
     elif line.startswith("p "):
