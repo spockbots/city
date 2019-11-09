@@ -1,6 +1,3 @@
-""" GGGG.
-test
-"""
 #! /usr/bin/env pybricks-micropython
 
 from spockbots.motor import SpockbotsMotor

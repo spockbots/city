@@ -1,5 +1,5 @@
 from time import sleep
-
+import time
 from pybricks.parameters import Port
 
 from pybricks import ev3brick as brick
@@ -16,7 +16,7 @@ import glob
 #######################################################
 
 class SpockbotsGyro(object):
-    # The following link gives some hine why it does not work fo rthe Gyror in mindstorm
+    # The following link gives some hints why it does not work for the Gyro in mindstorm
     # http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf
 
     # in python we have three issues
@@ -96,6 +96,10 @@ class SpockbotsGyro(object):
             angle = self.angle()
 
     def still(self):
+        """
+
+        :return:
+        """
         return not self.drift()
 
     def drift(self):
@@ -107,7 +111,7 @@ class SpockbotsGyro(object):
             try:
                 speed = self.sensor.speed()
                 if speed == 0:
-                    return False  # no dift if the speed is 0
+                    return False  # no drift if the speed is 0
                 else:
                     return True  # DRIFT IF THE SPEED IS NOT 0
             except:
@@ -144,7 +148,7 @@ class SpockbotsGyro(object):
         try:
             self.last_angle = angle = self.sensor.angle()
         except:
-            print("Gyro read error", angle)
+            print("Gyro read error")
             self.last_angle = angle = -1000
 
         count = 10
@@ -161,11 +165,16 @@ class SpockbotsGyro(object):
         print("Gyro Angle, final: ", angle)
 
     def turn(self, speed=25, degrees=90):
+        """
+
+        :param speed:
+        :param degrees:
+        :return:
+        """
         if degrees < 0:
             self.left(speed=speed, degrees=abs(degrees))
         elif degrees > 0:
             self.right(speed=speed, degrees=abs(degrees))
-
 
     def left(self, speed=25, degrees=90, offset=0):
         """
@@ -173,19 +182,19 @@ class SpockbotsGyro(object):
 
         :param speed: The speed
         :param degrees: The degrees
+        :param offset:
+        :return:
         """
         self.reset()
         if speed == 25:
             offset = 8
 
-        #self.zero()
+        # self.zero()
 
         self.robot.on_forever(speed, -speed)
         angle = self.angle()
 
         print(angle, -degrees + offset)
-
-
 
         while angle > -degrees + offset:
             # print(angle, -degrees + offset)
@@ -198,13 +207,15 @@ class SpockbotsGyro(object):
 
         :param speed: The speed
         :param degrees: The degrees
+        :param offset:
+        :return:
         """
         self.reset()
 
         if speed == 25:
             offset = 8
 
-        #self.zero()
+        # self.zero()
 
         self.robot.on_forever(-speed, speed)
         angle = self.angle()
@@ -213,3 +224,62 @@ class SpockbotsGyro(object):
             # print(angle, degrees - offset)
             angle = self.angle()
         self.robot.stop()
+
+
+    def forward(self,
+                speed=25,  # speed 0 - 100
+                distance=None,  # distance in cm
+                t=None,
+                port=3,  # the port number we use to follow the line
+                delta=-35,  # control smoothness
+                factor=0.7):  # parameters to control smoothness
+        """
+
+        :param speed:
+        :param distance:
+        :param t:
+        :param port:
+        :param right:
+        :param black:
+        :param white:
+        :param delta:
+        :param factor:
+        :return:
+        """
+
+        if right:
+            f = 1.0
+        else:
+            f = - 1.0
+
+        if distance is not None:
+            distance = 10 * distance
+
+        current = time.time()  # the current time
+        if t is not None:
+            end_time = current + t  # the end time
+
+        self.reset()
+
+        while True:
+            value = self.angle()  # get the Gyro angle value
+
+            # correction = delta + (factor * value)  # calculate the correction for steering
+            correction = f * factor * (value + delta)
+            # correction = f * correction  # if we drive backwards negate the correction
+
+            self.on(speed, correction)  # switch the steering on with the given correction and speed
+
+            # if the time is used we set run to false once the end time is reached
+            # if the distance is greater than the position than the leave the
+            distance_angle = self.left.angle()
+
+            traveled = self.angle_to_distance(distance_angle)
+
+            current = time.time()  # measure the current time
+            if t is not None and current > end_time:
+                break  # leave the loopK
+            if distance is not None and distance < traveled:
+                break  # leave the loop
+
+        self.stop()  # stop the robot

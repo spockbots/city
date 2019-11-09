@@ -8,7 +8,6 @@ test line
 from pybricks.parameters import Button
 from pybricks.tools import wait
 
-
 from run.crane import run_crane
 from run.swing import run_swing
 from run.led import run_led
@@ -31,11 +30,22 @@ menu = [
 selection = 0
 selections = len(menu)
 
+
 def marker(line):
+    """
+
+    :param line:
+    :return:
+    """
     y = line * 10 + 10
     brick.display.text(">>>", (10, y))
 
+
 def print_menu():
+    """
+
+    :return:
+    """
     brick.display.clear()
     for line in menu:
         i = line[0]
@@ -44,6 +54,7 @@ def print_menu():
         y = line[3]
         brick.display.text(text, (x, y))
     marker(selection)
+
 
 brick.sound.beep()
 
@@ -65,10 +76,8 @@ while True:
     elif Button.LEFT in brick.buttons():
         break
 
-
     wait(100)
 
 brick.display.clear()
 
 brick.sound.beep()
-

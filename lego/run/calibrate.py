@@ -1,11 +1,12 @@
 from spockbots.motor import SpockbotsMotor
 import time
 
+
 def run_calibrate():
     """
     Run the calibration
 
-    :return: a file called calibrate.txt that containes the minimum black and the maximum white value for the sensors
+    :return: a file called calibrate.txt that contains the minimum black and the maximum white value for the sensors
     """
     robot = SpockbotsMotor()
     robot.debug = True
@@ -25,3 +26,7 @@ def run_calibrate():
     robot.color.write()
 
     time.sleep(0.5)
+
+
+if __name__ == "__main__":
+    run_calibrate()

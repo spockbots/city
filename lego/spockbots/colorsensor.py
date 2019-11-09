@@ -16,7 +16,7 @@ class SpockbotsColorSensor:
         """
 
         :param port: the port
-        :param speed: teh speed for calibartion
+        :param speed: teh speed for calibration
         """
         """
         :param: number  number of color sensor on ev3
@@ -82,13 +82,6 @@ class SpockbotsColorSensor:
             c = 100
         return int(c)
 
-    def clear(self):
-        """
-
-        """
-        f = open("/home/robot/calibrate.txt", "w")
-        f.close()
-
     def flash(self):
         """
         flashes the color sensor by switching between color and reflective mode
@@ -96,9 +89,9 @@ class SpockbotsColorSensor:
 
         brick.sound.beep()
         light = self.sensor.rgb()
-        sleep(0.5)
+        sleep(0.3)
         light = self.sensor.reflection()
-        sleep(0.5)
+        sleep(0.3)
 
     def write(self):
         """
@@ -113,7 +106,7 @@ class SpockbotsColorSensor:
         """
         prints the black and white value read form the sensor
         """
-        print("Cloorsensor", self.port, self.black, self.white)
+        print("colorsensor", self.port, self.black, self.white)
 
     def read(self):
         """
@@ -248,7 +241,7 @@ class SpockbotsColorSensors:
 # 
 #  calibration
 # 
-#  colersensors = SpockbotsColorSensors()
+#  colorsensors = SpockbotsColorSensors()
 #  colorsensors.calibrate([2,3])
 #
 # rotate the robot
@@ -259,7 +252,7 @@ class SpockbotsColorSensors:
 #
 # use
 #
-#  colersensors = SpockbotsColorSensors()
+#  colorsensors = SpockbotsColorSensors()
 #  colorsensors.read()
 #
 #  colorsensor.value(2)

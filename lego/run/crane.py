@@ -3,6 +3,7 @@
 from spockbots.motor import SpockbotsMotor
 from time import sleep
 
+
 def run_crane():
     """
     TBD
@@ -20,7 +21,6 @@ def run_crane():
     robot.turn(25, 45)
     robot.forward(50, 30)
     
-    print("LLLL")
     robot.turn(25, -45)
     
     robot.gotowhite(25, 3)
@@ -44,7 +44,7 @@ def run_crane():
 
     robot.turntowhite(15, direction="left", port=2)
 
-    robot.followline(speed=10,distance=13,port=2,right=True,black=0,  white=100,  delta=-35,  factor=0.4)
+    robot.followline(speed=10, distance=13, port=2, right=True, delta=-35, factor=0.4)
 
     robot.forward(50, -5)
 
@@ -55,16 +55,15 @@ def run_crane():
     robot.forward(2, 4)
     robot.forward(10, 1)
 
-
-    #sleep(0.2)
+    # sleep(0.2)
 
     # back to base
 
-    robot.forward(5, -5) # backup slowly
+    robot.forward(5, -5)  # backup slowly
     robot.forward(75, -20)
     robot.turn(25, 45)
     robot.forward(75, -30)
-    robot.turn(25,45)
+    robot.turn(25, 45)
     robot.forward(75, -20)
 
 

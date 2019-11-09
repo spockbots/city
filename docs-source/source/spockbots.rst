@@ -49,12 +49,5 @@ spockbots.robot
    :undoc-members:
    :show-inheritance:
 
-spockbots.systemgyro
---------------------------------
-
-.. automodule:: spockbots.systemgyro
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 

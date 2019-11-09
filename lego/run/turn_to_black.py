@@ -3,6 +3,7 @@
 from spockbots.motor import SpockbotsMotor
 from time import sleep
 
+
 def run_turn_to_black():
     """
     TBD
@@ -28,8 +29,10 @@ def run_turn_to_black():
                       port=2,
                       black=10)
 
-
     robot.beep()
 
     sleep(1)
 
+
+if __name__ == "__main__":
+    run_turn_to_black()

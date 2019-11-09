@@ -13,6 +13,7 @@ import os
 
 debug = True
 
+
 #######################################################
 # READ AND WRITE FILES
 #######################################################
@@ -82,6 +83,12 @@ def beep():
 
 
 def sound(pitch=1500, duration=300):
+    """
+
+    :param pitch:
+    :param duration:
+    :return:
+    """
     brick.sound.beep(pitch, duration)
 
 
@@ -89,7 +96,7 @@ def sound(pitch=1500, duration=300):
 # LED
 #######################################################
 
-def led(color, brightness=255):
+def led(color):
     """
 
     :param color:

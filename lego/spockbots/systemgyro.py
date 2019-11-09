@@ -113,16 +113,16 @@ class Gyro(object):
         # find gyro
 
         sensors = os.listdir("/sys/class/lego-sensor/")
-        id = None
+        sensor_id = None
         for sensor in sensors:
             location = "/sys/class/lego-sensor/" + sensor + "/mode"
             data = readfile(location)
-            PRINT(sensor + ";" + data, location)
+            PRINT(sensor + ":" + data, location)
             if "GYRO" in data or "TILT" in data:
-                id = sensor
+                sensor_id = sensor
+                PRINT("")
+                PRINT("GYRO:", sensor, data)
                 break
-        PRINT("")
-        PRINT("GYRO:", sensor, data)
         for directive in ['address',
                           # 'bin_data',
                           'bin_data_format',
@@ -152,11 +152,11 @@ class Gyro(object):
                           # 'value7'
                           ]:
             try:
-                data = readfile("/sys/class/lego-sensor/" + id + "/" + directive)
+                data = readfile("/sys/class/lego-sensor/" + sensor_id + "/" + directive)
                 PRINT(directive, ":", data)
             except:
                 PRINT(directive, ":", "not found")
-        return id
+        return sensor_id
 
     def mode(self, kind):
         """

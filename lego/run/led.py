@@ -3,6 +3,7 @@
 from spockbots.output import led, flash
 import time
 
+
 def run_led():
     """
     TBD
@@ -28,3 +29,6 @@ def run_led():
 
     flash()
 
+
+if __name__ == "__main__":
+    run_led()

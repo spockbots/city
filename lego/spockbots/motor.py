@@ -10,11 +10,8 @@ from pybricks.robotics import DriveBase
 # from spockbots.colorsensor import SpockbotsColorSensor
 from spockbots.colorsensor import SpockbotsColorSensors
 from spockbots.output import debug
+from spockbots.output import PRINT
 
-
-def PRINT(*args):
-    if debug:
-        print(*args)
 
 #######################################################
 # Motor
@@ -34,6 +31,7 @@ class SpockbotsMotor(object):
         self.circumference = round(self.diameter * math.pi, 3)  # as diameter is in mm
         # self.axle_track = round(8.0 * 14, 3)
         self.axle_track = 140.0
+        self.direction = "forward"
 
         self.left, self.right, self.tank = self.setup(direction=direction)
 
@@ -226,11 +224,9 @@ class SpockbotsMotor(object):
         self.left.run(speed_left * 10)
         self.right.run(speed_right * 10)
 
-
-
     def turn(self, speed, angle):
         """
-        takes the radius of the robot and dives on it for a distance based on the ancle
+        takes the radius of the robot and dives on it for a distance based on the angle
         :param speed:
         :param angle:
         :return:
@@ -272,8 +268,10 @@ class SpockbotsMotor(object):
                     port=3,
                     black=10):
         """
-        turns the robot to the balck line.
+        turns the robot to the black line.
+
         :param speed:
+        :param direction:
         :param port:
         :param black:
         :return:
@@ -289,7 +287,6 @@ class SpockbotsMotor(object):
             pass
         self.stop()
 
-
     def turntowhite(self,
                     speed,
                     direction="left",
@@ -297,7 +294,9 @@ class SpockbotsMotor(object):
                     white=80):
         """
         turns the robot to the white line.
+
         :param speed:
+        :param direction:
         :param port:
         :param white:
         :return:
@@ -313,6 +312,59 @@ class SpockbotsMotor(object):
             pass
         self.stop()
 
+    def aligntoblack(self, speed, port_left, port_right, black=10):
+        """
+
+        :param speed:
+        :param port_left:
+        :param port_right:
+        :param black:
+        :return:
+        """
+
+        PRINT("aligntoblack", speed, port, black)
+
+        self.on_forever(speed, speed)
+        left_finished = False
+        right_finished = False
+
+        while not left_finished and not right_finished:
+            if self.light(port_left) < black:
+                self.left.stop(Stop.BRAKE)
+                left_finished = True
+            if self.right(port_right) < black:
+                self.right.stop(Stop.BRAKE)
+                right_finished = True
+        self.stop()
+
+        PRINT("aligntoblack Stop")
+
+    def aligntowhite(self, speed, port_left, port_right, white=80):
+        """
+
+        :param speed:
+        :param port_left:
+        :param port_right:
+        :param white:
+        :return:
+        """
+
+        PRINT("aligntoblack", speed, port, black)
+
+        self.on_forever(speed, speed)
+        left_finished = False
+        right_finished = False
+
+        while not left_finished and not right_finished:
+            if self.light(port_left) > white:
+                self.left.stop(Stop.BRAKE)
+                left_finished = True
+            if self.right(port_right) > white:
+                self.right.stop(Stop.BRAKE)
+                right_finished = True
+        self.stop()
+
+        PRINT("aligntowhite Stop")
 
     def gotoblack(self, speed, port, black=10):
         """
@@ -323,14 +375,17 @@ class SpockbotsMotor(object):
         :param black: The value to stop
         """
 
-        PRINT("Gotoblack", speed, port, black)
+        PRINT("aligntoblack", speed, port, black)
+
+        self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
+        self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
         self.on(speed, 0)
         while self.light(port) > black:
             pass
         self.stop()
 
-        PRINT("Gotoblack Stop")
+        PRINT("gotoblack Stop")
 
     def gotowhite(self, speed, port, white=90):
         """
@@ -341,14 +396,14 @@ class SpockbotsMotor(object):
         :param white: The value to stop
         """
 
-        PRINT("Gotoblack", speed, port, white)
+        PRINT("gotoblack", speed, port, white)
 
         self.on(speed, 0)
         while self.light(port) < white:
             pass
         self.stop()
 
-        PRINT("Gotowhite Stop")
+        PRINT("gotowhite Stop")
 
     def followline(self,
                    speed=25,  # speed 0 - 100
@@ -356,9 +411,7 @@ class SpockbotsMotor(object):
                    t=None,
                    port=3,  # the port number we use to follow the line
                    right=True,  # the side on which to follow the line
-                   black=0,  # minimal balck
-                   white=100,  # maximal white
-                   delta=-35,  # paramaters to control smoothness
+                   delta=-35,  # control smoothness
                    factor=0.7):  # parameters to control smoothness
         """
 
@@ -403,7 +456,7 @@ class SpockbotsMotor(object):
 
             traveled = self.angle_to_distance(angle)
 
-            current = time.time()  # measure the crurrent time
+            current = time.time()  # measure the current time
             if t is not None and current > end_time:
                 break  # leave the loopK
             if distance is not None and distance < traveled:
@@ -432,8 +485,7 @@ class SpockbotsMotor(object):
                 self.colorsensor[i].set_black()
                 PRINT(i,
                       self.colorsensor[i].black,
-                      self.colorsensor[i].white,
-                      sep=' ')
+                      self.colorsensor[i].white)
 
         self.stop()
 

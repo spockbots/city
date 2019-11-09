@@ -2,9 +2,12 @@
 from spockbots.motor import SpockbotsMotor
 import time
 
-#from spockbots.systemgyro import Gyro
+# from spockbots.systemgyro import Gyro
 from spockbots.gyro import SpockbotsGyro as Gyro
 from spockbots.output import led, PRINT
+import sys
+import os
+
 
 
 robot = SpockbotsMotor()
@@ -14,7 +17,7 @@ robot.color.read()
 print(robot)
 
 gyro = Gyro(robot)
-#gyro.connect()
+# gyro.connect()
 gyro.reset()
 if gyro.still():
     PRINT("ROBOT STILL")
@@ -25,9 +28,6 @@ else:
     robot.beep()
     robot.beep()
 
-
-import sys
-import os
 # from importlib import reload
 
 robot.setup()
