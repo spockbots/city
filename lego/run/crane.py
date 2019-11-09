@@ -33,19 +33,40 @@ def run_crane():
     #robot.forward(-75, 60)
     """
 
-    dt = 0.4
+    dt = 0.0
 
     robot.forward(50, 20)
-    sleep(dt)
 
+    robot.gotowhite(25, 3)
     robot.turntoblack(25, direction="right", port=3)
-    sleep(dt)
 
-    robot.forward(50, 10)
-    sleep(dt)
+    robot.forward(50, 5)
 
-    turntowhite(25, direction="left", port=2)
-    sleep(dt)
+    robot.turntowhite(15, direction="left", port=2)
+
+    robot.followline(speed=10,distance=13,port=2,right=True,black=0,  white=100,  delta=-35,  factor=0.4)
+
+    robot.forward(50, -5)
+
+    robot.gotowhite(10, 3)
+    robot.gotoblack(10, 3)
+    robot.gotowhite(10, 3)
+
+    robot.forward(2, 4)
+    robot.forward(10, 1)
 
 
-    sleep(1.0)
+    #sleep(0.2)
+
+    # back to base
+
+    robot.forward(5, -5) # backup slowly
+    robot.forward(75, -20)
+    robot.turn(25, 45)
+    robot.forward(75, -30)
+    robot.turn(25,45)
+    robot.forward(75, -20)
+
+
+if __name__ == "__main__":
+    run_crane()
