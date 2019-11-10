@@ -12,6 +12,8 @@
 #
 import os
 import sys
+import guzzle_sphinx_theme
+
 sys.path.insert(0, os.path.abspath('../../lego/.'))
 sys.path.insert(0, os.path.abspath('../../dummy/.'))
 
@@ -52,8 +54,31 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+
+if False:
+    html_theme_path = guzzle_sphinx_theme.html_theme_path()
+    html_theme = 'guzzle_sphinx_theme'
+    html_theme_options = {
+        # Set the name of the project to appear in the sidebar
+        "project_nav_name": "Spockbots",
+    }
+
+#html_theme = 'sphinx_rtd_theme'
+
+#html_theme = 'agogo'
+
+html_theme = 'alabaster'
+#html_theme = 'sphinxdoc'
+#html_theme = 'scrolls'
+
+#html_theme = 'haiku'
+
+#html_theme = 'nature'
+
+#html_theme = 'traditional'
+
+
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

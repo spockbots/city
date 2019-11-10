@@ -8,9 +8,14 @@ Spockbots API
 
 .. toctree::
 
+   design
+   mechanics
    0_menu
    run
    spockbots
+   code
+
+
    modules
 
 Indices and tables

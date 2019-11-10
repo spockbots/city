@@ -1,26 +1,18 @@
 Spockbots API
 =============
 
+spockbots.output
+----------------------------
+
+.. automodule:: spockbots.output
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 spockbots.check
 ---------------------------
 
 .. automodule:: spockbots.check
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-spockbots.colorsensor
----------------------------------
-
-.. automodule:: spockbots.colorsensor
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-spockbots.gyro
---------------------------
-
-.. automodule:: spockbots.gyro
    :members:
    :undoc-members:
    :show-inheritance:
@@ -33,21 +25,22 @@ spockbots.motor
    :undoc-members:
    :show-inheritance:
 
-spockbots.output
-----------------------------
+spockbots.gyro
+--------------------------
 
-.. automodule:: spockbots.output
+.. automodule:: spockbots.gyro
    :members:
    :undoc-members:
    :show-inheritance:
 
-spockbots.robot
----------------------------
+spockbots.colorsensor
+---------------------------------
 
-.. automodule:: spockbots.robot
+.. automodule:: spockbots.colorsensor
    :members:
    :undoc-members:
    :show-inheritance:
+
 
 
 
