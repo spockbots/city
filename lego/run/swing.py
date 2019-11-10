@@ -46,97 +46,50 @@ def run_swing():
 
     # PUT IN COLOR CALIBRATE VALUES
 
+    # go forward overthe curve in line
     robot.forward(25, 35)
+
+    # find the white lien so we can start with line following
     robot.turntowhite(25, direction="right", port=3)
+
+    # follow the line but stop before the dent
     robot.followline(speed=10, distance=45, port=3, right=False, delta=-35, factor=0.4)
+
+    # move over the dent
     robot.forward(25,30)
+
+    # find the line reliably
     robot.turn(10, -5)
     robot.turntoblack(25, direction="right", port=3)
     robot.turntowhite(25, direction="left", port=3)
+
+    # follow the line and hit the swing
     robot.followline(speed=10, distance=16, port=3, right=False, delta=-35, factor=0.4)
     robot.forward(10, 5)
+
+    # turn to knock out strut and place building
     robot.turn(25,30)
-    #robot.forward(10, 2)
-    #robot.turn(25,30)
 
-    # robot.forward(10, 11)
-    # robot.turn(25, 30)
-
-    # wait()
-
+    # back up
     robot.forward(70, -25)
 
+    # turn to elevator
     robot.turn(25, -30)
+    # find the black line
     robot.turntoblack(25, direction="left", port=2)
+    # follow the line to the elevator
     robot.followline(speed=10, distance=13, port=2, right=True, delta=-35, factor=0.4)
-    # place block
-    robot.turn(25, 90)
 
-    #robot.turn(25, 20)
+    # turn to the elevator
+    robot.turn(25, 90)
+    # move toward the elavator to position arm
     robot.forward(20, -15)
+
+    # turn the elevator and turn home at the same time
     robot.turn(75, 130)
+    # go home
     robot.forward(100, 130)
 
-
-    #turn(25, 60)
-    #forward(20, -35)
-    #forward(20, 15)
-    #turn(70, 60)
-    """
-    robot.turntowhite(25, direction="right", port=3)
-    # robot.turntoblack(25, direction="right", port=3)
-
-    # robot.turn (50, 20)  # just robot: -5  just attachment: -20 speed 50  attachment with blocks: ??
-    # wait()
-
-    robot.followline(speed=10,
-                     distance=72,
-                     port=3,
-                     right=False,
-                     black=15,
-                     white=85,
-                     delta=-35,
-                     factor=0.4)
-    # for some reason right=True is left side of line
-    # wait()
-
-    robot.forward(25, 3)
-
-    gyro.turn(26, -10)
-
-    robot.turntoblack(25, direction="right", port=3)
-
-    robot.followline(speed=10,
-                     distance=25,
-                     port=3,
-                     right=False,
-                     black=15,
-                     white=85,
-                     delta=-35,
-                     factor=0.4)
-
-    robot.forward(25, 4)
-    robot.forward(25, 5)
-    gyro.turn(10, 50)
-
-    robot.forward(10, -45)
-    gyro.turn(40, 90)
-
-    robot.forward(90, 140)
-
-    # wait()
-    
-    #robot.forward(25, 15)
-    #wait()
-
-
-    #robot.turn(25, 10)
-    #wait()
-
-
-    #time.sleep(1.0)
-    
-    """
 
 
 if __name__ == "__main__":
