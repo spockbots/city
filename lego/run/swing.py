@@ -46,9 +46,43 @@ def run_swing():
 
     # PUT IN COLOR CALIBRATE VALUES
 
-    robot.forward(20, 33)
+    robot.forward(25, 35)
+    robot.turntowhite(25, direction="right", port=3)
+    robot.followline(speed=10, distance=45, port=3, right=False, delta=-35, factor=0.4)
+    robot.forward(25,30)
+    robot.turn(10, -5)
+    robot.turntoblack(25, direction="right", port=3)
+    robot.turntowhite(25, direction="left", port=3)
+    robot.followline(speed=10, distance=16, port=3, right=False, delta=-35, factor=0.4)
+    robot.forward(10, 5)
+    robot.turn(25,30)
+    #robot.forward(10, 2)
+    #robot.turn(25,30)
+
+    # robot.forward(10, 11)
+    # robot.turn(25, 30)
+
     # wait()
 
+    robot.forward(70, -25)
+
+    robot.turn(25, -30)
+    robot.turntoblack(25, direction="left", port=2)
+    robot.followline(speed=10, distance=13, port=2, right=True, delta=-35, factor=0.4)
+    # place block
+    robot.turn(25, 90)
+
+    #robot.turn(25, 20)
+    robot.forward(20, -15)
+    robot.turn(75, 130)
+    robot.forward(100, 130)
+
+
+    #turn(25, 60)
+    #forward(20, -35)
+    #forward(20, 15)
+    #turn(70, 60)
+    """
     robot.turntowhite(25, direction="right", port=3)
     # robot.turntoblack(25, direction="right", port=3)
 
@@ -91,17 +125,17 @@ def run_swing():
     robot.forward(90, 140)
 
     # wait()
-    """
-
-    robot.forward(25, 15)
-    wait()
+    
+    #robot.forward(25, 15)
+    #wait()
 
 
     #robot.turn(25, 10)
-    wait()
+    #wait()
 
 
-    time.sleep(1.0)
+    #time.sleep(1.0)
+    
     """
 
 

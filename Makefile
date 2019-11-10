@@ -4,6 +4,7 @@ all:
 	cd docs-source; make html
 	make -f Makefile view
 	cd docs-source; make latexpdf
+	make clean
 
 view:
 	open docs/html/index.html

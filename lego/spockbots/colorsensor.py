@@ -9,7 +9,7 @@ from pybricks.parameters import Port
 
 class SpockbotsColorSensor:
     """
-    TBD
+    defines
     """
 
     def __init__(self, port=3):

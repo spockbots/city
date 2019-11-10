@@ -21,8 +21,10 @@ class SpockbotsMotor(object):
 
     def __init__(self, direction=None):
         """
+        defines the large motors (left and right), the tank move, and the medium motors.
 
-        :param direction:
+        :param direction: if the direction is 'forward' the robot moves forward, otherwise backwards.
+
         """
 
         self.diameter = round(62.4, 3)  # mm
@@ -42,7 +44,8 @@ class SpockbotsMotor(object):
 
     def beep(self):
         """
-        The robot will make a beep
+        robot will beep.
+
         """
         brick.sound.beep()
 
@@ -63,9 +66,11 @@ class SpockbotsMotor(object):
 
     def setup(self, direction=None):
         """
+        setup the direction, the motors, and the tank with the appropriate direction.
 
-        :param direction:
-        :return:
+        :param direction: if the direction is 'forward' the robot moves forward, otherwise backwards.
+        :return: left, right motors  and tank
+
         """
 
         if direction is None:
@@ -90,67 +95,79 @@ class SpockbotsMotor(object):
 
     def light(self, port):
         """
+        return the reflective color sensor value.
 
-        :param port:
-        :return:
+        :param port: the port number of the color sensor
+        :return: the reflective color value
+
         """
+
         return self.colorsensor[port].light()
 
     def reset(self):
         """
+        resets the angle in the large motors to 0.
 
-        :return:
         """
+
         self.left.reset_angle(0)
         self.right.reset_angle(0)
 
     def on(self, speed, steering=0):
         """
+        turns the large motors on while using steering.
 
-        :param speed:
-        :param steering:
-        :return:
+        :param speed: the speed of the robot
+        :param steering: an angle for the steering
+
         """
+
         self.tank.drive(speed * 10, steering)
 
     def distance_to_rotation(self, distance):
         """
-        calculation to convert the distance from
-        cm into rotations.
+        calculation to convert the distance from cm into rotations.
 
         :param distance:  The distance in cm
         :return: The rotations to be traveled for the given distance
+
         """
+
         rotation = distance / self.circumference
         return rotation
 
     def distance_to_angle(self, distance):
         """
-        calculation to convert the distance from
-        cm into rotations.
+        calculation to convert the distance from cm into angle.
 
         :param distance:  The distance in cm
-        :return: The rotations to be traveled for the given distance
+        :return: The degrees traveled for the given distance
+
         """
+
         rotation = self.distance_to_rotation(distance) * 360.0
         return rotation
 
     def angle_to_distance(self, angle):
         """
+        calculation to return the distance in cm given an angle.
 
-        :param angle:
-        :return:
+        :param angle: the angle
+        :return: distance in cm for turning an angle
+
         """
+
         d = self.circumference / 360.0 * angle
         return d
 
     def stop(self, brake=None):
         """
-        stops all motors on all different drive modes
+        stops all motors on all different drive modes.
 
         :param brake: None, brake, coast, hold
-        :return:
+
         """
+
         if not brake or brake == "brake":
             self.left.stop(Stop.BRAKE)
             self.right.stop(Stop.BRAKE)
@@ -168,8 +185,8 @@ class SpockbotsMotor(object):
 
     def still(self):
         """
+        waits till the motors are no longer turning.
 
-        :return:
         """
 
         PRINT("Still Start")
@@ -190,11 +207,12 @@ class SpockbotsMotor(object):
 
     def forward(self, speed, distance, brake=None):
         """
+        the robot drives forward for a given distance.
 
-        :param speed:
-        :param distance:
-        :param brake:
-        :return:
+        :param speed: speed of robot
+        :param distance: distance that robot goes forward (in cm)
+        :param brake: one of the values brake, hold, coast
+
         """
 
         PRINT("Forward", speed, distance, brake)
@@ -217,6 +235,13 @@ class SpockbotsMotor(object):
         PRINT("Forward Stop")
 
     def on_forever(self, speed_left, speed_right):
+        """
+        turns motors on with left and right speed.
+
+        :param speed_left: speed of left motor
+        :param speed_right: speed of the right motor
+
+        """
 
         PRINT("on_forever", speed_left, speed_right)
         self.reset()
@@ -226,10 +251,11 @@ class SpockbotsMotor(object):
 
     def turn(self, speed, angle):
         """
-        takes the radius of the robot and dives on it for a distance based on the angle
-        :param speed:
-        :param angle:
-        :return:
+        takes the radius of the robot and dives on it for a distance based on the angle.
+
+        :param speed: speed of turn
+        :param angle: angle of turn
+
         """
 
         PRINT("Turn", speed, angle)
@@ -270,12 +296,13 @@ class SpockbotsMotor(object):
         """
         turns the robot to the black line.
 
-        :param speed:
-        :param direction:
-        :param port:
-        :param black:
-        :return:
+        :param speed: speed of turn
+        :param direction: left or right
+        :param port: port of color sensor
+        :param black: value of black
+
         """
+
         PRINT("turntoblack", speed, direction, port, black)
 
         if direction == "left":
@@ -295,13 +322,14 @@ class SpockbotsMotor(object):
         """
         turns the robot to the white line.
 
-        :param speed:
-        :param direction:
-        :param port:
-        :param white:
-        :return:
+        :param speed: speed of turn
+        :param direction: left or right
+        :param port: port of color sensor
+        :param white: value of white
+
         """
-        PRINT("turntoblack", speed, direction, port, white)
+
+        PRINT("turntowhite", speed, direction, port, white)
 
         if direction == "left":
             self.left.run(speed * 10)
@@ -314,12 +342,13 @@ class SpockbotsMotor(object):
 
     def aligntoblack(self, speed, port_left, port_right, black=10):
         """
+        aligns with black line while driving each motor.
 
-        :param speed:
-        :param port_left:
-        :param port_right:
-        :param black:
-        :return:
+        :param speed: speed of robot
+        :param port_left: port of left color sensor
+        :param port_right: port of right color sensor
+        :param black: value of black
+
         """
 
         PRINT("aligntoblack", speed, port, black)
@@ -341,12 +370,13 @@ class SpockbotsMotor(object):
 
     def aligntowhite(self, speed, port_left, port_right, white=80):
         """
+        aligns with white line while driving each motor.
 
-        :param speed:
-        :param port_left:
-        :param port_right:
-        :param white:
-        :return:
+        :param speed: speed of robot
+        :param port_left: port of left color sensor
+        :param port_right: port of right color sensor
+        :param white: value of white
+
         """
 
         PRINT("aligntoblack", speed, port, black)
@@ -368,14 +398,15 @@ class SpockbotsMotor(object):
 
     def gotoblack(self, speed, port, black=10):
         """
-        The robot moves to the black line while using the sensor on the given port
+        robot moves to the black line while using the sensor on the given port.
 
-        :param speed: The speed
-        :param port: The port 1,2,3,4
-        :param black: The value to stop
+        :param speed: speed of robot
+        :param port: port of color sensor
+        :param black: value of black
+
         """
 
-        PRINT("aligntoblack", speed, port, black)
+        PRINT("gotoblack", speed, port, black)
 
         self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
         self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
@@ -389,14 +420,15 @@ class SpockbotsMotor(object):
 
     def gotowhite(self, speed, port, white=90):
         """
-        The robot moves to the white line while using the sensor on the given port
+        robot moves to the white line while using the sensor on the given port.
 
-        :param speed: The speed
-        :param port: The port 1,2,3,4
-        :param white: The value to stop
+        :param speed: speed of robot
+        :param port: port of color sensor
+        :param white: value of white
+
         """
 
-        PRINT("gotoblack", speed, port, white)
+        PRINT("gotowhite", speed, port, white)
 
         self.on(speed, 0)
         while self.light(port) < white:
@@ -414,17 +446,18 @@ class SpockbotsMotor(object):
                    delta=-35,  # control smoothness
                    factor=0.7):  # parameters to control smoothness
         """
+        follows line for either a distance or for time.
 
-        :param speed:
-        :param distance:
-        :param t:
-        :param port:
-        :param right:
-        :param black:
-        :param white:
-        :param delta:
-        :param factor:
-        :return:
+        :param speed: speed of robot
+        :param distance: distance that robot follows line
+        :param t: time that robot follows line for
+        :param port: port of color sensor
+        :param right: whether the robot is following the right or left side of line
+        :param black: black value
+        :param white: white value
+        :param delta: adjustment value to convert from color sensor values (0 to 100) to motor steering (-100 to 100)
+        :param factor: factor of adjustment, controls smoothness
+
         """
 
         if right:
@@ -467,11 +500,13 @@ class SpockbotsMotor(object):
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
         """
 
-        :param speed:
-        :param distance:
-        :param ports:
-        :param direction:
-        :return:
+        calibrates color sensors by driving over black and white line.
+
+        :param speed: speed of robot
+        :param distance: distance that robot travels
+        :param ports: ports of color sensors
+        :param direction: direction of calibration
+
         """
 
         self.reset()
