@@ -84,7 +84,8 @@ class SpockbotsColorSensor:
 
     def flash(self):
         """
-        flashes the color sensor by switching between color and reflective mode
+        flashes the color sensor by switching between
+        color and reflective mode
         """
 
         brick.sound.beep()
@@ -104,9 +105,13 @@ class SpockbotsColorSensor:
 
     def info(self):
         """
-        prints the black and white value read form the sensor
+        prints the black and white value read form the
+        sensor
         """
-        print("colorsensor", self.port, self.black, self.white)
+        print("colorsensor",
+              self.port,
+              self.black,
+              self.white)
 
     def read(self):
         """

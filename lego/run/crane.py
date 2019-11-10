@@ -44,7 +44,9 @@ def run_crane():
 
     robot.turntowhite(15, direction="left", port=2)
 
-    robot.followline(speed=10, distance=13, port=2, right=True, delta=-35, factor=0.4)
+    robot.followline(speed=10, distance=13,
+                     port=2, right=True,
+                     delta=-35, factor=0.4)
 
     robot.forward(50, -5)
 

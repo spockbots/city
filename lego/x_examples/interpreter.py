@@ -8,8 +8,6 @@ from spockbots.output import led, PRINT
 import sys
 import os
 
-
-
 robot = SpockbotsMotor()
 robot.setup()
 
@@ -37,7 +35,9 @@ while True:
     if line == "q":
         print("quit")
         sys.exit()
-    elif line.startswith("gyro."):
+    elif line.startswith("gyro.") or \
+            line.startswith("robot.") or \
+                line.startswith("run."):
         try:
             print(line)
             eval(line)

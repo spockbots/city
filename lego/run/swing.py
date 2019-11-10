@@ -78,7 +78,9 @@ def run_swing():
     # find the black line
     robot.turntoblack(25, direction="left", port=2)
     # follow the line to the elevator
-    robot.followline(speed=10, distance=13, port=2, right=True, delta=-35, factor=0.4)
+    robot.followline(speed=10, distance=13,
+                     port=2, right=True,
+                     delta=-35, factor=0.4)
 
     # turn to the elevator
     robot.turn(25, 90)

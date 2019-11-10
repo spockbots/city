@@ -12,16 +12,16 @@ from pybricks.parameters import Color
 
 debug = True
 
-
 #######################################################
 # READ AND WRITE FILES
 #######################################################
 
 def readfile(name):
     """
+    Reads the file with the name and returns it as a string.
 
-    :param name:
-    :return:
+    :param name: The file name
+    :return: The data in teh file as string
     """
     try:
         # print ("READ", name)
@@ -35,9 +35,11 @@ def readfile(name):
 
 def writefile(name, msg):
     """
+    Writes a new file with the name. If it exists the
+    old file will be deleted.
 
-    :param name:
-    :param msg:
+    :param name: The name of the file
+    :param msg: The message to be placed in the file
     :return:
     """
     # print ("WRITE", name, msg)
@@ -58,22 +60,6 @@ def writefile(name, msg):
 # Sound
 #######################################################
 
-# sound = Sound()
-
-"""
-def speak(text):
-    sound.speak(text)
-
-
-def sing(song):
-    sound.play_song(song)
-
-
-def wav(source):
-    sound.play_file("/home/robot/wav/" + source)
-"""
-
-
 def beep():
     """
     The robot will make a beep
@@ -83,9 +69,10 @@ def beep():
 
 def sound(pitch=1500, duration=300):
     """
+    plays a sound
 
-    :param pitch:
-    :param duration:
+    :param pitch: sound pitch
+    :param duration: how long the sound plays
     :return:
     """
     brick.sound.beep(pitch, duration)
@@ -97,9 +84,10 @@ def sound(pitch=1500, duration=300):
 
 def led(color):
     """
+    changes color of led light
 
-    :param color:
-    :param brightness:
+    :param color: light color
+    :param brightness: light brightness
     :return:
     """
     if color == "RED":
@@ -117,7 +105,8 @@ def led(color):
     brick.light(led_color)
 
 
-def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"], delay=0.1):
+def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"],
+          delay=0.1):
     """
     The robot will flash the LEDs and beep twice
     """
@@ -134,22 +123,23 @@ def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"], delay=0.1):
 
 def clear():
     """
+    clears display
 
-    :return:
     """
     brick.display.clear()
 
 
-#
-# BUG THERE IS SOMEWHERE ANOTHER PRINT
-#
 def PRINT(*args, x=None, y=None):
     """
+    prints message on screen at x and y and on the console.
+    if x and y are missing prints on next position on lcd screen
+    this message prints test messages.
 
-    :param args:
-    :param x:
-    :param y:
-    :return:
+    The sceensize is maximum x=177, y=127)
+
+    :param args: multible strings to be printed in between them
+    :param x: x value
+    :param y: y value
     """
     text = ""
     for a in args:
@@ -168,8 +158,7 @@ def PRINT(*args, x=None, y=None):
 
 def voltage():
     """
-
-    :return:
+    prints voltage of battery
     """
     value = brick.battery.voltage() / 1000
     PRINT("Voltage: " + str(value) + " V", 80, 10)

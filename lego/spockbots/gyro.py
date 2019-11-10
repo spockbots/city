@@ -15,14 +15,17 @@ class SpockbotsGyro(object):
     """
     test
     """
-    # The following link gives some hints why it does not work for the Gyro in mindstorm
+    # The following link gives some hints why it does not
+    # work for the Gyro in mindstorm
     # http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf
 
     # in python we have three issues
 
     # sensor value is not 0 after reset
-    # sensor value drifts after reset as it takes time to settle down
-    # sensor value is not returned as no value is available from the sensor
+    # sensor value drifts after reset as it takes time
+    #        to settle down
+    # sensor value is not returned as no value is available
+    #        from the sensor
 
     # This code fixes it.
 
@@ -43,13 +46,17 @@ class SpockbotsGyro(object):
             print("FINDING GYRO")
             try:
                 if port == 1:
-                    self.sensor = GyroSensor(Port.S1, sensor_direction)
+                    self.sensor = GyroSensor(Port.S1,
+                                             sensor_direction)
                 elif port == 2:
-                    self.sensor = GyroSensor(Port.S2, sensor_direction)
+                    self.sensor = GyroSensor(Port.S2,
+                                             sensor_direction)
                 elif port == 3:
-                    self.sensor = GyroSensor(Port.S3, sensor_direction)
+                    self.sensor = GyroSensor(Port.S3,
+                                             sensor_direction)
                 elif port == 4:
-                    self.sensor = GyroSensor(Port.S4, sensor_direction)
+                    self.sensor = GyroSensor(Port.S4,
+                                             sensor_direction)
                 print("SENSOR:", self.sensor)
                 sleep(0.1)
                 self.sensor.reset_angle(0)
@@ -62,7 +69,8 @@ class SpockbotsGyro(object):
                     print()
                     sys.exit()
 
-        self.last_angle = -1000  # just set the current value to get us started
+        self.last_angle = -1000  # just set the current value
+                                 # to get us started
         print("GYRO INITIALIZED")
 
     def angle(self):
@@ -106,7 +114,8 @@ class SpockbotsGyro(object):
 
         :return:
         """
-        while True:  # loop in case we get a read error from the gyro speed
+        # loop in case we get a read error from the gyro speed
+        while True:
             try:
                 speed = self.sensor.speed()
                 if speed == 0:
@@ -114,7 +123,8 @@ class SpockbotsGyro(object):
                 else:
                     return True  # DRIFT IF THE SPEED IS NOT 0
             except:
-                print("ERROR: DRIFT no value found")  # No speed value found, so repeat
+                print("ERROR: DRIFT no value found")
+                # No speed value found, so repeat
 
     def status(self, count=10):
         """
@@ -263,14 +273,17 @@ class SpockbotsGyro(object):
         while True:
             value = self.angle()  # get the Gyro angle value
 
-            # correction = delta + (factor * value)  # calculate the correction for steering
+            # correction = delta + (factor * value)
+            # calculate the correction for steering
             correction = f * factor * (value + delta)
-            # correction = f * correction  # if we drive backwards negate the correction
 
-            self.on(speed, correction)  # switch the steering on with the given correction and speed
+            self.on(speed, correction)  # switch the steering on
+                           # with the given correction and speed
 
-            # if the time is used we set run to false once the end time is reached
-            # if the distance is greater than the position than the leave the
+            # if the time is used we set run to false once
+            #        the end time is reached
+            # if the distance is greater than the
+            #        position than the leave the
             distance_angle = self.left.angle()
 
             traveled = self.angle_to_distance(distance_angle)
