@@ -13,7 +13,7 @@ from pybricks.parameters import Port
 
 class SpockbotsGyro(object):
     """
-    test
+    improved gyro class
     """
     # The following link gives some hints why it does not
     # work for the Gyro in mindstorm
@@ -29,14 +29,18 @@ class SpockbotsGyro(object):
 
     # This code fixes it.
 
-    def __init__(self, robot, port=1, direction="front"):
+    def __init__(self, robot, port=1):
         """
         Initializes the Gyro Sensor
-        :param gyro: The gyro sensor on a given port
+
+        :param robot: robot varible
+        :param port: port number for gyro sensor 1,2,3,4
+        :param direction: if front if we drive forward
+                          otherwise backwards
         """
 
         self.robot = robot
-        if direction == "front":
+        if self.robot.direction == "forward":
             sensor_direction = Direction.CLOCKWISE
         else:
             sensor_direction = Direction.COUNTERCLOCKWISE
@@ -104,15 +108,15 @@ class SpockbotsGyro(object):
 
     def still(self):
         """
-
-        :return:
+        tests if robot dosent move
+        :return: True if robot dosent move
         """
         return not self.drift()
 
     def drift(self):
         """
+        tests if robot drifts and waits until its still
 
-        :return:
         """
         # loop in case we get a read error from the gyro speed
         while True:
@@ -128,9 +132,9 @@ class SpockbotsGyro(object):
 
     def status(self, count=10):
         """
-
-        :param count:
-        :return:
+        tests count times if robot is still and returns if its still or drifts
+        :param count: number of times tested if its still
+        :return: still,drift which are true/false
         """
         last = self.angle()
         i = 0
@@ -150,7 +154,6 @@ class SpockbotsGyro(object):
     def reset(self):
         """
         safely resets the gyro
-        :return:
         """
 
         self.sensor.reset_angle(0)
@@ -175,9 +178,9 @@ class SpockbotsGyro(object):
 
     def turn(self, speed=25, degrees=90):
         """
-
-        :param speed:
-        :param degrees:
+        uses gyro to turn positive to right negative to left
+        :param speed: speed it turns at
+        :param degrees: degrees it turns
         :return:
         """
         if degrees < 0:
@@ -239,20 +242,18 @@ class SpockbotsGyro(object):
                 speed=25,  # speed 0 - 100
                 distance=None,  # distance in cm
                 t=None,
-                port=3,  # the port number we use to follow the line
+                port=1,  # the port number we use to follow the line
                 delta=-35,  # control smoothness
                 factor=0.7):  # parameters to control smoothness
         """
+        Moves forward
 
-        :param speed:
-        :param distance:
-        :param t:
-        :param port:
-        :param right:
-        :param black:
-        :param white:
-        :param delta:
-        :param factor:
+        :param speed: The speed
+        :param distance: If set the distance to travle
+        :param t: If set the time to travel
+        :param port: The port number of the Gyro sensor
+        :param delta: controlling the smoothness of the line
+        :param factor: controlling the smoothness of the line
         :return:
         """
 

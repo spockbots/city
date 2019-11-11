@@ -360,17 +360,20 @@ class SpockbotsMotor(object):
 
         """
 
-        PRINT("aligntoblack", speed, port, black)
+        PRINT("aligntoblack", speed, port_left, port_right, black)
 
         self.on_forever(speed, speed)
         left_finished = False
         right_finished = False
 
-        while not left_finished and not right_finished:
-            if self.light(port_left) < black:
+        while not (left_finished and right_finished):
+            left_light = self.light(port_left)
+            right_light = self.light(port_right)
+            PRINT("Light", left_light, right_light)
+            if left_light < black:
                 self.left.stop(Stop.BRAKE)
                 left_finished = True
-            if self.right(port_right) < black:
+            if right_light < black:
                 self.right.stop(Stop.BRAKE)
                 right_finished = True
         self.stop()
@@ -388,17 +391,20 @@ class SpockbotsMotor(object):
 
         """
 
-        PRINT("aligntoblack", speed, port, black)
+        PRINT("aligntoblack", speed, port_left, port_right, white)
 
         self.on_forever(speed, speed)
         left_finished = False
         right_finished = False
 
-        while not left_finished and not right_finished:
-            if self.light(port_left) > white:
+        while not (left_finished and right_finished):
+            left_light = self.light(port_left)
+            right_light = self.light(port_right)
+            PRINT("Light", left_light, right_light)
+            if left_light > white:
                 self.left.stop(Stop.BRAKE)
                 left_finished = True
-            if self.right(port_right) > white:
+            if right_light > white:
                 self.right.stop(Stop.BRAKE)
                 right_finished = True
         self.stop()
@@ -448,14 +454,41 @@ class SpockbotsMotor(object):
 
         PRINT("gotowhite Stop")
 
+    def gotocolor(self, speed, port, colors=[0]):
+        """
+        robot moves to the black line while using the
+        sensor on the given port.
+
+        :param speed: speed of robot
+        :param port: port of color sensor
+        :param black: value of black
+
+        """
+
+        PRINT("gotocolor", speed, port, colors)
+
+        self.on(speed, 0)
+        run = True
+        while run:
+            value = self.colorsensor[port].sensor.color()
+            print("COLOR", value)
+            run = value not in colors
+        self.stop()
+
+        PRINT("gotocolor Stop")
+
     def followline(self,
                    speed=25,  # speed 0 - 100
                    distance=None,  # distance in cm
                    t=None,
                    port=3,  # the port number we use to follow the line
                    right=True,  # the side on which to follow the line
+                   stop_color_sensor=None,
+                   stop_values=None, # [4,5]
+                   stop_color_mode=None, # color, reflective
                    delta=-35,  # control smoothness
-                   factor=0.7):  # parameters to control smoothness
+                   factor=0.4):  # parameters to control smoothness
+
         """
         follows line for either a distance or for time.
 
@@ -513,8 +546,18 @@ class SpockbotsMotor(object):
                 break  # leave the loopK
             if distance is not None and distance < traveled:
                 break  # leave the loop
+            if stop_color_sensor  is not None:
+                if stop_color_mode == "color":
+                    value = self.colorsensor[port].sensor.color()
+                    #value = self.colorsensor[port].sensor.rgb()
+                elif stop_color_mode == "reflective":
+                    value = self.colorsensor[port].light()
+                print("VALUE", value)
+                if value in stop_values:
+                    break # leave the loop
 
         self.stop()  # stop the robot
+
 
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
         """
