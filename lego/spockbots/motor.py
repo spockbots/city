@@ -484,8 +484,8 @@ class SpockbotsMotor(object):
                    port=3,  # the port number we use to follow the line
                    right=True,  # the side on which to follow the line
                    stop_color_sensor=None,
-                   stop_values=None, # [4,5]
-                   stop_color_mode=None, # color, reflective
+                   stop_values=None,  # [4,5]
+                   stop_color_mode=None,  # color, reflective
                    delta=-35,  # control smoothness
                    factor=0.4):  # parameters to control smoothness
 
@@ -546,18 +546,17 @@ class SpockbotsMotor(object):
                 break  # leave the loopK
             if distance is not None and distance < traveled:
                 break  # leave the loop
-            if stop_color_sensor  is not None:
+            if stop_color_sensor is not None:
                 if stop_color_mode == "color":
                     value = self.colorsensor[port].sensor.color()
-                    #value = self.colorsensor[port].sensor.rgb()
+                    # value = self.colorsensor[port].sensor.rgb()
                 elif stop_color_mode == "reflective":
                     value = self.colorsensor[port].light()
                 print("VALUE", value)
                 if value in stop_values:
-                    break # leave the loop
+                    break  # leave the loop
 
         self.stop()  # stop the robot
-
 
     def calibrate(self, speed, distance=15, ports=[2, 3, 4], direction='front'):
         """
@@ -589,3 +588,90 @@ class SpockbotsMotor(object):
             PRINT(i,
                   self.colorsensor[i].black,
                   self.colorsensor[i].white)
+
+    #followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)
+    def followline_pid(self,
+                       debug = False,
+                       distance=None,  # distance in cm
+                       t=None,
+                       right=True,  # the side on which to follow the line
+                       stop_color_sensor=None,
+                       stop_values=None,  # [4,5]
+                       stop_color_mode=None,  # color, reflective
+                       port=3, speed=25, black=0, white=100, kp=0.3, ki=0.0, kd=0.0):
+
+        if right:
+            f = 1.0
+        else:
+            f = - 1.0
+
+        if distance is not None:
+            distance = 10 * distance
+
+        current = time.time()  # the current time
+        if t is not None:
+            end_time = current + t  # the end time
+
+        self.reset()
+
+        integral = 0
+
+        midpoint = (white - black) / 2 + black
+        lasterror = 0.0
+
+        loop_start_time = current = time.time()
+
+        print("kp=", kp, "ki=", ki, "kd=", kd)
+        while True:
+            try:
+                value = self.light(port)  # get the light value
+
+                error = midpoint - value
+                integral = error + integral
+                derivative = error - lasterror
+
+                correction = f * kp * error + ki * integral + kd * derivative
+
+
+                lasterror = error
+
+
+                self.on(speed, correction)
+                # switch the steering on with the given correction and speed
+
+                # if the time is used we set run to
+                #        false once the end time is reached
+                # if the distance is greater than the
+                #        position than the leave the
+                angle = self.left.angle()
+                traveled = self.angle_to_distance(angle)
+                current = time.time()  # measure the current time
+
+                if debug:
+                    if correction > 0.0:
+                        bar = str(30 * ' ') +  str('█' * int(correction))
+                    elif correction < 0.0:
+                        bar = ' ' * int(30 + correction) + '█' * int(abs(correction))
+                    else:
+                        bar = 60 * ' '
+
+                    print("{:4.2f} {:4.2f} {:4.2f} {:3d} {}".format(correction, traveled, current -loop_start_time, value, bar))
+
+                if t is not None and current > end_time:
+                    break  # leave the loopK
+                if distance is not None and distance < traveled:
+                    break  # leave the loop
+                if stop_color_sensor is not None:
+                    if stop_color_mode == "color":
+                        value = self.colorsensor[port].sensor.color()
+                        # value = self.colorsensor[port].sensor.rgb()
+                    elif stop_color_mode == "reflective":
+                        value = self.colorsensor[port].light()
+                    print("VALUE", value)
+                    if value in stop_values:
+                        break  # leave the loop
+            except Exception as e:
+                print (e)
+                break
+        self.stop()  # stop the robot
+
