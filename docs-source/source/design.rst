@@ -18,7 +18,7 @@ Questions
 
 #. Would the robot perform well with the Python program?
 
-#. What general reasosn are there for and against Python?
+#. What general reasons are there for and against Python or Mindstorm?
 
 Previous Mindstorm GUI programs
 
@@ -78,9 +78,21 @@ Previous Mindstorm GUI programs
        between 0 -100, this helps line following.
    * - Editor
      - Equal
-     - GUI is intuitive to undertand but has issues with myblock. Limited space, myblocks do not have names unerd them
-     - Visual code is easy a bit mor complex to understand, but once you know it writing programs is easy.
+     - GUI is intuitive to understand but has issues with myblock. Limited space, myblocks do not have names under them but just icons
+     - Visual code is easy but a bit mor complex to understand, but once you know it writing programs is easy.
        Upload and run code with F5 is convenient
+   * - Interrupting a wrong program with the backspace button
+     - Mindstorm
+     - This can easily be done in mindstorm
+     - This does not work in python. We need to add code for that
+   * - Younger Kids
+     - Mindstorm
+     - Mindstorm GUI is intuitive, but best for small programs
+     - Python is a more difficult to learn by younger kids
+   * - Older Kids
+     - Python
+     - Mindostom GUI becomes cumbersome when we develop more complex programs
+     - Python is easy to learn by older kids
 
 Overall winner:
 

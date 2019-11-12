@@ -82,14 +82,16 @@ Loops
 We used while and for loops the repeat an indented block of code. While loops can
 also loop over elements in a list easily.
 
-### Loop forever
+Loop forever
+~~~~~~~~~~~~
 
 ::
 
     while True:
         print("I loop forever")
 
-### Loop with condition
+Loop with condition
+~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -138,7 +140,8 @@ allows us to organize the code while grouping topical code into a file.
     from spockbots.motor import SpockbotsMotor
     from time import sleep
 
-## Program
+Program
+-------
 
 A program can be executed in a terminal on teh EV3 brick. It must be executable.
 Let us assume the following core it in the file `run_led.py`.
@@ -167,7 +170,7 @@ Here an example::
 
 The first line tells us to use python to run the program.
 
-The if __name__ line tesll us to run the next lines (e.g. the function)
+The if __name__ line tells us to run the next lines (e.g. the function)
 as functions are not run when we define them.
 
 
