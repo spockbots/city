@@ -2,28 +2,89 @@ City Runs
 =========
 
 run.red_circle
--------
+--------------
 
 .. automodule:: run.red_circle
    :members:
    :undoc-members:
    :show-inheritance:
 
+
+.. list-table::
+
+    * - .. figure::  images/IMG_1020.png
+
+           Red Circle 1. Setup is on 30 degree line it does not have to be that precise.
+
+      - .. figure:: images/IMG_1021.png
+
+           Red Circle 2. Setup form the other side
+
+      - .. figure:: images/IMG_1022.png
+
+           Red Cricle 3. The placement is veri precise as we follow the line and stop when we find the tan color.
+
+
+.. literalinclude:: ../../lego/run/red_circle.py
+   :language: python
+
+
 run.tan_circle
--------
+--------------
 
 .. automodule:: run.tan_circle
    :members:
    :undoc-members:
    :show-inheritance:
 
+.. list-table::
+
+    * - .. figure::
+
+           Tan Circle 1. Attachment
+
+      - .. figure::
+
+           Tan Circle 2. Setup
+
+      - .. figure::
+
+           Tan Circle 3. Run
+
+.. literalinclude:: ../../lego/run/tan_circle.py
+   :language: python
+
+
 run.black_circle
--------
+----------------
 
 .. automodule:: run.black_circle
    :members:
    :undoc-members:
    :show-inheritance:
+
+
+.. list-table::
+
+    * - .. figure::  images/IMG_1016.png
+
+           Black Circle 1. Setup is on 30 degree line it does not have to be that precise.
+
+      - .. figure:: images/IMG_1017.png
+
+           Black Circle 2. Setup from the other side
+
+      - .. figure:: images/IMG_1018.png
+
+           Black Circle 3. Run
+
+      - .. figure:: images/IMG_1019.png
+
+           Black Circle 4. Run
+
+
+.. literalinclude:: ../../lego/run/black_circle.py
+   :language: python
 
 run.crane
 ---------
@@ -32,9 +93,6 @@ run.crane
    :members:
    :undoc-members:
    :show-inheritance:
-
-.. literalinclude:: ../../lego/run/crane.py
-   :language: python
 
 
 .. list-table::
@@ -67,6 +125,50 @@ Mechanical
 
 Mission Order
   To avoid the swinging of the line (by other teams moving the table), this is our first mission.
+
+
+.. literalinclude:: ../../lego/run/crane.py
+   :language: python
+
+
+run.ramp
+----------------
+
+.. automodule:: run.ramp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. list-table::
+
+    * - .. figure::  images/IMG_1024.png
+
+           Ramp 1. Setup is on 30 degree line it does not have to be that precise.
+
+      - .. figure:: images/IMG_1025.png
+
+           Ramp 2. Setup from the other side
+
+      - .. figure:: images/IMG_1026.png
+
+           Ramp 3. Run
+
+    * - .. figure:: images/IMG_1027.png
+
+           Ramp 4. Run
+
+      - .. figure:: images/IMG_1028.png
+
+           Ramp 5. Run
+
+      - .. figure::
+
+           Ramp 6. Run
+
+
+.. literalinclude:: ../../lego/run/black_circle.py
+   :language: python
 
 
 run.swing

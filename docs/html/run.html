@@ -34,32 +34,237 @@
             
   <div class="section" id="city-runs">
 <h1>City Runs<a class="headerlink" href="#city-runs" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="run-red-circle">
-<h2>run.red_circle<a class="headerlink" href="#run-red-circle" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-run.red_circle"></span><dl class="function">
+<div class="section" id="module-run.red_circle">
+<span id="run-red-circle"></span><h2>run.red_circle<a class="headerlink" href="#module-run.red_circle" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
 <dt id="run.red_circle.run_red_circle">
 <code class="sig-prename descclassname">run.red_circle.</code><code class="sig-name descname">run_red_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/red_circle.html#run_red_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.red_circle.run_red_circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>TBD</p>
 </dd></dl>
 
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default" id="id1">
+<img alt="_images/IMG_1020.png" src="_images/IMG_1020.png" />
+<p class="caption"><span class="caption-text">Red Circle 1. Setup is on 30 degree line it does not have to be that precise.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="section" id="run-tan-circle">
-<h2>run.tan_circle<a class="headerlink" href="#run-tan-circle" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-run.tan_circle"></span><dl class="function">
+</td>
+<td><div class="figure align-default" id="id2">
+<img alt="_images/IMG_1021.png" src="_images/IMG_1021.png" />
+<p class="caption"><span class="caption-text">Red Circle 2. Setup form the other side</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id3">
+<img alt="_images/IMG_1022.png" src="_images/IMG_1022.png" />
+<p class="caption"><span class="caption-text">Red Cricle 3. The placement is veri precise as we follow the line and stop when we find the tan color.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="kn">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">PRINT</span>
+
+<span class="k">def</span> <span class="nf">run_red_circle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># setup gyro</span>
+    <span class="c1">#</span>
+    <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+    <span class="c1"># gyro.connect()</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">gyro</span><span class="o">.</span><span class="n">still</span><span class="p">():</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT STILL&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT DRIFT&quot;</span><span class="p">)</span>
+        <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+    <span class="c1">#followline(10, port=3, stop_color_sensor=2, stop_values=[7], stop_color_mode=&quot;color&quot;)</span>
+
+
+    <span class="c1"># go forward overthe curve in line</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+
+    <span class="c1"># find the white lien so we can start with line following</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turntowhite</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">followline</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotocolor</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">62</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">45</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="o">-</span><span class="mi">80</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_red_circle</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-run.tan_circle">
+<span id="run-tan-circle"></span><h2>run.tan_circle<a class="headerlink" href="#module-run.tan_circle" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
 <dt id="run.tan_circle.run_tan_circle">
 <code class="sig-prename descclassname">run.tan_circle.</code><code class="sig-name descname">run_tan_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/tan_circle.html#run_tan_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.tan_circle.run_tan_circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>TBD</p>
 </dd></dl>
 
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="kn">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">PRINT</span>
+
+<span class="k">def</span> <span class="nf">run_tan_circle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># setup gyro</span>
+    <span class="c1">#</span>
+    <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+    <span class="c1"># gyro.connect()</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">gyro</span><span class="o">.</span><span class="n">still</span><span class="p">():</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT STILL&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT DRIFT&quot;</span><span class="p">)</span>
+        <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+
+    <span class="c1"># move a long distance</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">85</span><span class="p">)</span>
+    <span class="c1"># trun towards the white line</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span>
+    <span class="c1"># move a bit forward so we are not in the red circle as it colld be interpreted as white</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">23</span><span class="p">)</span>
+
+    <span class="c1"># back up and leave the building</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+    <span class="c1"># turn to home</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="c1"># go back to base</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_tan_circle</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="run-black-circle">
-<h2>run.black_circle<a class="headerlink" href="#run-black-circle" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-run.black_circle"></span><dl class="function">
+</div>
+<div class="section" id="module-run.black_circle">
+<span id="run-black-circle"></span><h2>run.black_circle<a class="headerlink" href="#module-run.black_circle" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
 <dt id="run.black_circle.run_black_circle">
 <code class="sig-prename descclassname">run.black_circle.</code><code class="sig-name descname">run_black_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/black_circle.html#run_black_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.black_circle.run_black_circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>TBD</p>
 </dd></dl>
 
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default" id="id4">
+<img alt="_images/IMG_1016.png" src="_images/IMG_1016.png" />
+<p class="caption"><span class="caption-text">Black Circle 1. Setup is on 30 degree line it does not have to be that precise.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id5">
+<img alt="_images/IMG_1017.png" src="_images/IMG_1017.png" />
+<p class="caption"><span class="caption-text">Black Circle 2. Setup from the other side</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id6">
+<img alt="_images/IMG_1018.png" src="_images/IMG_1018.png" />
+<p class="caption"><span class="caption-text">Black Circle 3. Run</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id7">
+<img alt="_images/IMG_1019.png" src="_images/IMG_1019.png" />
+<p class="caption"><span class="caption-text">Black Circle 4. Run</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+
+<span class="k">def</span> <span class="nf">run_black_circle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_black_circle</span><span class="p">()</span>
+
+</pre></div>
+</div>
 </div>
 <div class="section" id="module-run.crane">
 <span id="run-crane"></span><h2>run.crane<a class="headerlink" href="#module-run.crane" title="Permalink to this headline">¶</a></h2>
@@ -69,6 +274,45 @@
 <dd><p>TBD</p>
 </dd></dl>
 
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default" id="id8">
+<img alt="_images/crane-setup.png" src="_images/crane-setup.png" />
+<p class="caption"><span class="caption-text">Crane 1. Crane setup does not have to be precise</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id9">
+<img alt="_images/crane-setup-2.png" src="_images/crane-setup-2.png" />
+<p class="caption"><span class="caption-text">Crane 2. Crane setup still works well when the peg points to the line.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id10">
+<img alt="_images/crane.png" src="_images/crane.png" />
+<p class="caption"><span class="caption-text">Crane 4. Successful placement</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reliability</strong>:</p>
+<dl class="simple">
+<dt>Setup</dt><dd><p>The setup for the crane mission is important, but it does not have to be precise.
+There is a balck line that we can allign the blue peg with.</p>
+</dd>
+<dt>Run</dt><dd><p>We use the balck line to align the robot so that the attachment is working well.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the block and activates the
+blue levers at the righ time. The drive must not be fast into the crane. The crane block
+must not swing wne  we start.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>To avoid the swinging of the line (by other teams moving the table), this is our first mission.</p>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
 
 <span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
@@ -144,6 +388,15 @@
     <span class="n">run_crane</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="module-run.ramp">
+<span id="run-ramp"></span><h2>run.ramp<a class="headerlink" href="#module-run.ramp" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.ramp.run_ramp">
+<code class="sig-prename descclassname">run.ramp.</code><code class="sig-name descname">run_ramp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/ramp.html#run_ramp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.ramp.run_ramp" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -151,38 +404,64 @@
 <col style="width: 33%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><div class="figure align-default" id="id1">
-<img alt="_images/crane-setup.png" src="_images/crane-setup.png" />
-<p class="caption"><span class="caption-text">Crane 1. Crane setup does not have to be precise</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<tr class="row-odd"><td><div class="figure align-default" id="id11">
+<img alt="_images/IMG_1024.png" src="_images/IMG_1024.png" />
+<p class="caption"><span class="caption-text">Ramp 1. Setup is on 30 degree line it does not have to be that precise.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 </td>
-<td><div class="figure align-default" id="id2">
-<img alt="_images/crane-setup-2.png" src="_images/crane-setup-2.png" />
-<p class="caption"><span class="caption-text">Crane 2. Crane setup still works well when the peg points to the line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<td><div class="figure align-default" id="id12">
+<img alt="_images/IMG_1025.png" src="_images/IMG_1025.png" />
+<p class="caption"><span class="caption-text">Ramp 2. Setup from the other side</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 </td>
-<td><div class="figure align-default" id="id3">
-<img alt="_images/crane.png" src="_images/crane.png" />
-<p class="caption"><span class="caption-text">Crane 4. Successful placement</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<td><div class="figure align-default" id="id13">
+<img alt="_images/IMG_1026.png" src="_images/IMG_1026.png" />
+<p class="caption"><span class="caption-text">Ramp 3. Run</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 </td>
 </tr>
+<tr class="row-even"><td><div class="figure align-default" id="id14">
+<img alt="_images/IMG_1027.png" src="_images/IMG_1027.png" />
+<p class="caption"><span class="caption-text">Ramp 4. Run</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id15">
+<img alt="_images/IMG_1028.png" src="_images/IMG_1028.png" />
+<p class="caption"><span class="caption-text">Ramp 5. Run</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p><strong>Reliability</strong>:</p>
-<dl class="simple">
-<dt>Setup</dt><dd><p>The setup for the crane mission is important, but it does not have to be precise.
-There is a balck line that we can allign the blue peg with.</p>
-</dd>
-<dt>Run</dt><dd><p>We use the balck line to align the robot so that the attachment is working well.</p>
-</dd>
-<dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the block and activates the
-blue levers at the righ time. The drive must not be fast into the crane. The crane block
-must not swing wne  we start.</p>
-</dd>
-<dt>Mission Order</dt><dd><p>To avoid the swinging of the line (by other teams moving the table), this is our first mission.</p>
-</dd>
-</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+
+<span class="k">def</span> <span class="nf">run_black_circle</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_black_circle</span><span class="p">()</span>
+
+</pre></div>
+</div>
 </div>
 <div class="section" id="module-run.swing">
 <span id="run-swing"></span><h2>run.swing<a class="headerlink" href="#module-run.swing" title="Permalink to this headline">¶</a></h2>
@@ -357,10 +636,11 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">City Runs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.red_circle">run.red_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.tan_circle">run.tan_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.black_circle">run.black_circle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.ramp">run.ramp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.led">run.led</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.turn_to_black">run.turn_to_black module</a></li>
@@ -373,10 +653,11 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">lego</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="0_menu.html">Menu</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">City Runs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.red_circle">run.red_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.tan_circle">run.tan_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.black_circle">run.black_circle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.ramp">run.ramp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.led">run.led</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.turn_to_black">run.turn_to_black module</a></li>
@@ -424,7 +705,7 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
       &copy;2019, Spockbots.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
