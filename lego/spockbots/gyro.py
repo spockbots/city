@@ -61,6 +61,7 @@ class SpockbotsGyro(object):
                 elif port == 4:
                     self.sensor = GyroSensor(Port.S4,
                                              sensor_direction)
+
                 print("SENSOR:", self.sensor)
                 sleep(0.1)
                 self.sensor.reset_angle(0)
@@ -73,6 +74,7 @@ class SpockbotsGyro(object):
                     print()
                     sys.exit()
 
+        # bug should be = 0
         self.last_angle = -1000  # just set the current value
                                  # to get us started
         print("GYRO INITIALIZED")
@@ -103,7 +105,7 @@ class SpockbotsGyro(object):
 
         angle = 1000
         while angle != 0:
-            sleep(0.1)
+            # sleep(0.1)
             angle = self.angle()
 
     def still(self):
@@ -165,7 +167,7 @@ class SpockbotsGyro(object):
 
         count = 10
         while count >= 0:
-            sleep(0.1)
+            # sleep(0.1)
             try:
                 angle = self.sensor.angle()
             except:
@@ -244,7 +246,7 @@ class SpockbotsGyro(object):
                 t=None,
                 port=1,  # the port number we use to follow the line
                 delta=-35,  # control smoothness
-                factor=0.7):  # parameters to control smoothness
+                factor=0.4):  # parameters to control smoothness
         """
         Moves forward
 

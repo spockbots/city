@@ -1,0 +1,1680 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spockbots Code &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lego" href="modules.html" />
+    <link rel="prev" title="Spockbots API" href="spockbots.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="spockbots-code">
+<h1>Spockbots Code<a class="headerlink" href="#spockbots-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="spockbots-output">
+<h2>Spockbots Output<a class="headerlink" href="#spockbots-output" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="kn">from</span> <span class="nn">pybricks</span> <span class="kn">import</span> <span class="n">ev3brick</span> <span class="k">as</span> <span class="n">brick</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Color</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># READ AND WRITE FILES</span>
+<span class="c1">#######################################################</span>
+
+<span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># READ AND WRITE FILES</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">def</span> <span class="nf">readfile</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads the file with the name and returns it as a string.</span>
+
+<span class="sd">    :param name: The file name</span>
+<span class="sd">    :return: The data in teh file as string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># print (&quot;READ&quot;, name)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">writefile</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a new file with the name. If it exists the</span>
+<span class="sd">    old file will be deleted.</span>
+
+<span class="sd">    :param name: The name of the file</span>
+<span class="sd">    :param msg: The message to be placed in the file</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># print (&quot;WRITE&quot;, name, msg)</span>
+    <span class="c1"># try:</span>
+    <span class="c1">#    f = open(name)</span>
+    <span class="c1">#    f.write(msg)</span>
+    <span class="c1">#    f.close()</span>
+    <span class="c1"># except Exception as e:</span>
+    <span class="c1">#    print(&quot;FILE WRITE ERROR&quot;)</span>
+    <span class="c1">#    print(e)</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;echo </span><span class="se">\&quot;</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1"> &gt; &#39;</span> <span class="o">+</span> <span class="n">name</span>
+    <span class="c1"># print(&quot;COMMNAD:&quot;, command)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Sound</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">def</span> <span class="nf">beep</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The robot will make a beep</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">sound</span><span class="p">(</span><span class="n">pitch</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    plays a sound</span>
+
+<span class="sd">    :param pitch: sound pitch</span>
+<span class="sd">    :param duration: how long the sound plays</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># LED</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">def</span> <span class="nf">led</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    changes color of led light</span>
+
+<span class="sd">    :param color: light color</span>
+<span class="sd">    :param brightness: light brightness</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;RED&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">RED</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;GREEN&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">GREEN</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;YELLOW&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">YELLOW</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">BLACK</span>
+    <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;ORANGE&quot;</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">ORANGE</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led_color</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">led_color</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">,</span> <span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;BLACK&quot;</span><span class="p">,</span> <span class="s2">&quot;GREEN&quot;</span><span class="p">],</span>
+          <span class="n">delay</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The robot will flash the LEDs and beep twice</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">beep</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+        <span class="n">led</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">beep</span><span class="p">()</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># LCD</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">def</span> <span class="nf">clear</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    clears display</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">PRINT</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    prints message on screen at x and y and on the console.</span>
+<span class="sd">    if x and y are missing prints on next position on lcd screen</span>
+<span class="sd">    this message prints test messages.</span>
+
+<span class="sd">    The sceensize is maximum x=177, y=127)</span>
+
+<span class="sd">    :param args: multible strings to be printed in between them</span>
+<span class="sd">    :param x: x value</span>
+<span class="sd">    :param y: y value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Voltage</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">def</span> <span class="nf">voltage</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    prints voltage of battery</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">brick</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">voltage</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Voltage: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; V&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spockbots-check">
+<h2>Spockbots Check<a class="headerlink" href="#spockbots-check" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="kn">import</span> <span class="n">PRINT</span><span class="p">,</span> <span class="n">led</span>
+
+
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">360</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    do a robot check by</span>
+
+<span class="sd">    a) turning on the large motors one at a time</span>
+<span class="sd">    b) turning on the medium motors one at a time</span>
+<span class="sd">    c) turning on the light sensors one at a time</span>
+
+<span class="sd">    :param speed:</span>
+<span class="sd">    :param angle:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+    <span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Light&#39;</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Left&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">flash</span><span class="p">()</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Right&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;GREEN&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">flash</span><span class="p">()</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Back&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;YELLOW&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">flash</span><span class="p">()</span>
+
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;GREEN&quot;</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Large Motors&#39;</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Left&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Right&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;GREEN&quot;</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Medium Motors&#39;</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Left&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">left_medium</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;Right&#39;</span><span class="p">)</span>
+    <span class="n">led</span><span class="p">(</span><span class="s2">&quot;GREEN&quot;</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">PRINT</span><span class="p">(</span><span class="s1">&#39;finished&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spockbots-colorsensor">
+<h2>Spockbots Colorsensor<a class="headerlink" href="#spockbots-colorsensor" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env micropython</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="kn">from</span> <span class="nn">pybricks</span> <span class="kn">import</span> <span class="n">ev3brick</span> <span class="k">as</span> <span class="n">brick</span>
+<span class="kn">from</span> <span class="nn">pybricks.ev3devices</span> <span class="kn">import</span> <span class="n">ColorSensor</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Port</span>
+
+
+<span class="k">class</span> <span class="nc">SpockbotsColorSensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    defines</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param port: the port</span>
+<span class="sd">        :param speed: teh speed for calibration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param: number  number of color sensor on ev3</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">ColorSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">ColorSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">ColorSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S3</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">ColorSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S4</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">set_white</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        sets the current value to white</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">white</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">set_black</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        sets the current value to black</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">black</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">reflection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">light</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reads the current value mapped between 0 and 100</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">black</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">val</span> <span class="o">-</span> <span class="n">b</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">white</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">black</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">/</span> <span class="n">t2</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ratio</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        flashes the color sensor by switching between</span>
+<span class="sd">        color and reflective mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+        <span class="n">light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+        <span class="n">light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reflection</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        append the black and white value to a file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">black</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">white</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prints the black and white value read form the</span>
+<span class="sd">        sensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;colorsensor&quot;</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reads the color sensor data form the file</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;we can not find the calibration file&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SpockbotsColorSensors</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This is how we create the sensors:</span>
+
+<span class="sd">        colorsensor = SpockbotsColorSensors(ports=[2,3,4])</span>
+<span class="sd">        colorsensor.read()</span>
+
+<span class="sd">    Now you can use</span>
+
+<span class="sd">        colorsensor[i].value()</span>
+
+<span class="sd">    to get the reflective value of the colorsensor on port i.</span>
+<span class="sd">    To get the color value we can use</span>
+
+<span class="sd">        colorsensor[i].color()</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">speed</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the color sensors for our robot.</span>
+<span class="sd">        Once calibrated, the sensor values always return 0-100,</span>
+<span class="sd">        where 0 is black and 100 is white</span>
+
+<span class="sd">        :param ports: the list of ports we use on the robot for color sensors</span>
+<span class="sd">        :param speed: The speed for the calibration run</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ports</span> <span class="o">=</span> <span class="n">ports</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># in python lists start from 0 not 1</span>
+            <span class="c1"># so we simply do not use the firts element in the list</span>
+        <span class="c1"># our robot uses only</span>
+        <span class="c1">#  colorsensor[2]</span>
+        <span class="c1">#  colorsensor[3]</span>
+        <span class="c1">#  colorsensor[4]</span>
+        <span class="c1">#  the ports are passed along as a list [2,3,4]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ports</span> <span class="o">=</span> <span class="n">ports</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpockbotsColorSensor</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the reflective value between 0-100 after</span>
+<span class="sd">        calibration on the port i</span>
+
+<span class="sd">        :param i: number of the port</span>
+<span class="sd">        :return: the reflective color value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the color value between 0-100 after</span>
+<span class="sd">        calibration on the port i</span>
+
+<span class="sd">        :param i: number of the port</span>
+<span class="sd">        :return: The color value, blue = 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        writes the black and white values to the file</span>
+<span class="sd">        calibrate.txt</span>
+
+<span class="sd">        :param ports: the ports used to write</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        removes the file calibrate.txt</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reads the black and white values to the file</span>
+<span class="sd">        calibrate.txt</span>
+
+<span class="sd">        The values must be written previously. If the file</span>
+<span class="sd">        does not exists a default is used.</span>
+<span class="sd">            2: 0, 100</span>
+<span class="sd">            3: 0, 100</span>
+<span class="sd">            4: 4, 40    # because it is higher up so white does</span>
+<span class="sd">                          not read that well</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/home/robot/calibrate.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;we can not find the calibration file&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="mi">9</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">black</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">white</span> <span class="o">=</span> <span class="mi">48</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Using the following defaults&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Flashes the light sensor on teh ports one after another</span>
+
+<span class="sd">        :param ports: the list of ports to flash</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">flash</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prints the information for each port, e.g.</span>
+<span class="sd">        the minimal black and maximum while values</span>
+<span class="sd">        :param ports: the list of ports to flash</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Color sensor black and white values&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_reflective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prints the reflective value of all senors between 0-100</span>
+
+<span class="sd">        :param ports: the list of ports</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Color sensor tests&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Color sensor&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prints the color value of all senors between 0-100</span>
+
+<span class="sd">        :param ports: the list of ports</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Color sensor tests&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Color sensor&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="spockbots-gyro">
+<h2>Spockbots Gyro<a class="headerlink" href="#spockbots-gyro" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="kn">from</span> <span class="nn">pybricks.ev3devices</span> <span class="kn">import</span> <span class="n">GyroSensor</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Direction</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Port</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Gyro</span>
+<span class="c1">#######################################################</span>
+
+<span class="k">class</span> <span class="nc">SpockbotsGyro</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    improved gyro class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># The following link gives some hints why it does not</span>
+    <span class="c1"># work for the Gyro in mindstorm</span>
+    <span class="c1"># http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf</span>
+
+    <span class="c1"># in python we have three issues</span>
+
+    <span class="c1"># sensor value is not 0 after reset</span>
+    <span class="c1"># sensor value drifts after reset as it takes time</span>
+    <span class="c1">#        to settle down</span>
+    <span class="c1"># sensor value is not returned as no value is available</span>
+    <span class="c1">#        from the sensor</span>
+
+    <span class="c1"># This code fixes it.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">robot</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Gyro Sensor</span>
+
+<span class="sd">        :param robot: robot varible</span>
+<span class="sd">        :param port: port number for gyro sensor 1,2,3,4</span>
+<span class="sd">        :param direction: if front if we drive forward</span>
+<span class="sd">                          otherwise backwards</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">robot</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;forward&quot;</span><span class="p">:</span>
+            <span class="n">sensor_direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sensor_direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span>
+
+        <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;FINDING GYRO&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S1</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S2</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S3</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S4</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;SENSOR:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">)</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;No such sensor on Port&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="k">print</span><span class="p">()</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ERROR: THe Gyro Sensor is disconnected&quot;</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">()</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="c1"># bug should be = 0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000</span>  <span class="c1"># just set the current value</span>
+                                 <span class="c1"># to get us started</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;GYRO INITIALIZED&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the angle</span>
+
+<span class="sd">        :return: The angle in degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">speed</span><span class="p">()</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;AS&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span>
+
+        <span class="k">return</span> <span class="n">a</span>
+
+    <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set the gyro angle to 0</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># sleep(0.1)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests if robot dosent move</span>
+<span class="sd">        :return: True if robot dosent move</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">drift</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">drift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests if robot drifts and waits until its still</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># loop in case we get a read error from the gyro speed</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">speed</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>  <span class="c1"># no drift if the speed is 0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># DRIFT IF THE SPEED IS NOT 0</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ERROR: DRIFT no value found&quot;</span><span class="p">)</span>
+                <span class="c1"># No speed value found, so repeat</span>
+
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests count times if robot is still and returns if its still or drifts</span>
+<span class="sd">        :param count: number of times tested if its still</span>
+<span class="sd">        :return: still,drift which are true/false</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">still</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">drift</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">angle</span> <span class="o">==</span> <span class="n">last</span><span class="p">:</span>
+                <span class="n">still</span> <span class="o">=</span> <span class="n">still</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">drift</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">drift</span> <span class="o">=</span> <span class="n">drift</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;GYRO STATUS&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">still</span><span class="p">,</span> <span class="n">drift</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">still</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="p">,</span> <span class="n">drift</span> <span class="o">&gt;=</span> <span class="n">count</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        safely resets the gyro</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># sleep(0.1)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;Gyro Angle: &quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gyro Angle, final: &quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        uses gyro to turn positive to right negative to left</span>
+<span class="sd">        :param speed: speed it turns at</span>
+<span class="sd">        :param degrees: degrees it turns</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">degrees</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">degrees</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The robot turns left with the given number of degrees</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param degrees: The degrees</span>
+<span class="sd">        :param offset:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">8</span>
+
+        <span class="c1"># self.zero()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">speed</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="o">-</span><span class="n">degrees</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">degrees</span> <span class="o">+</span> <span class="n">offset</span><span class="p">:</span>
+            <span class="c1"># print(angle, -degrees + offset)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The robot turns right with the given number of degrees</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param degrees: The degrees</span>
+<span class="sd">        :param offset:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">8</span>
+
+        <span class="c1"># self.zero()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="o">-</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">degrees</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="n">degrees</span> <span class="o">-</span> <span class="n">offset</span><span class="p">:</span>
+            <span class="c1"># print(angle, degrees - offset)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>  <span class="c1"># speed 0 - 100</span>
+                <span class="n">distance</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># distance in cm</span>
+                <span class="n">t</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                <span class="n">port</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># the port number we use to follow the line</span>
+                <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span>  <span class="c1"># control smoothness</span>
+                <span class="n">factor</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>  <span class="c1"># parameters to control smoothness</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Moves forward</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param distance: If set the distance to travle</span>
+<span class="sd">        :param t: If set the time to travel</span>
+<span class="sd">        :param port: The port number of the Gyro sensor</span>
+<span class="sd">        :param delta: controlling the smoothness of the line</span>
+<span class="sd">        :param factor: controlling the smoothness of the line</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">distance</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># the current time</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">current</span> <span class="o">+</span> <span class="n">t</span>  <span class="c1"># the end time</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>  <span class="c1"># get the Gyro angle value</span>
+
+            <span class="c1"># correction = delta + (factor * value)</span>
+            <span class="c1"># calculate the correction for steering</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">correction</span><span class="p">)</span>  <span class="c1"># switch the steering on</span>
+                           <span class="c1"># with the given correction and speed</span>
+
+            <span class="c1"># if the time is used we set run to false once</span>
+            <span class="c1">#        the end time is reached</span>
+            <span class="c1"># if the distance is greater than the</span>
+            <span class="c1">#        position than the leave the</span>
+            <span class="n">distance_angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+            <span class="n">traveled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_to_distance</span><span class="p">(</span><span class="n">distance_angle</span><span class="p">)</span>
+
+            <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># measure the current time</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">end_time</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loopK</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">traveled</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loop</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># stop the robot</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spockbots-motor-code">
+<h2>Spockbots Motor Code<a class="headerlink" href="#spockbots-motor-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">pybricks</span> <span class="kn">import</span> <span class="n">ev3brick</span> <span class="k">as</span> <span class="n">brick</span>
+<span class="kn">from</span> <span class="nn">pybricks.ev3devices</span> <span class="kn">import</span> <span class="n">Motor</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Port</span><span class="p">,</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="kn">import</span> <span class="n">Stop</span><span class="p">,</span> <span class="n">Direction</span>
+<span class="kn">from</span> <span class="nn">pybricks.robotics</span> <span class="kn">import</span> <span class="n">DriveBase</span>
+<span class="c1"># from pybricks.ev3devices import ColorSensor</span>
+<span class="c1"># from spockbots.colorsensor import SpockbotsColorSensor</span>
+<span class="kn">from</span> <span class="nn">spockbots.colorsensor</span> <span class="kn">import</span> <span class="n">SpockbotsColorSensors</span>
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="kn">import</span> <span class="n">PRINT</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Motor</span>
+<span class="c1">#######################################################</span>
+
+
+<span class="k">class</span> <span class="nc">SpockbotsMotor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">check_kill_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Button</span><span class="o">.</span><span class="n">LEFT</span> <span class="ow">in</span> <span class="n">brick</span><span class="o">.</span><span class="n">buttons</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;KILL&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        defines the large motors (left and right),</span>
+<span class="sd">        the tank move, and the medium motors.</span>
+
+<span class="sd">        :param direction: if the direction is &#39;forward&#39;</span>
+<span class="sd">                          the robot moves forward, otherwise</span>
+<span class="sd">                          backwards.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">62.4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># mm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># mm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="c1"># self.axle_track = round(8.0 * 14, 3)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span> <span class="o">=</span> <span class="mf">140.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tank</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">SpockbotsColorSensors</span><span class="p">(</span><span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">beep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        robot will beep.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">sound</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">PRINT</span><span class="p">()</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Robot Info&quot;</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;============================&quot;</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Tire Diameter:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Circumference:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Tire Width:   &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Axle Track:   &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span><span class="p">)</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Angle Left:   &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Angle Right:  &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Direction:    &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span>
+
+        <span class="n">PRINT</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        setup the direction, the motors, and the tank with the appropriate direction.</span>
+
+<span class="sd">        :param direction: if the direction is &#39;forward&#39; the robot moves forward, otherwise backwards.</span>
+<span class="sd">        :return: left, right motors  and tank</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;forward&quot;</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tank</span> <span class="o">=</span> <span class="n">DriveBase</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_medium</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tank</span>
+
+    <span class="k">def</span> <span class="nf">light</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return the reflective color sensor value.</span>
+
+<span class="sd">        :param port: the port number of the color sensor</span>
+<span class="sd">        :return: the reflective color value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">light</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        resets the angle in the large motors to 0.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        turns the large motors on while using steering.</span>
+
+<span class="sd">        :param speed: the speed of the robot</span>
+<span class="sd">        :param steering: an angle for the steering</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tank</span><span class="o">.</span><span class="n">drive</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">steering</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">distance_to_rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculation to convert the distance from cm into rotations.</span>
+
+<span class="sd">        :param distance:  The distance in cm</span>
+<span class="sd">        :return: The rotations to be traveled for the given distance</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rotation</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span>
+        <span class="k">return</span> <span class="n">rotation</span>
+
+    <span class="k">def</span> <span class="nf">distance_to_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculation to convert the distance from cm into angle.</span>
+
+<span class="sd">        :param distance:  The distance in cm</span>
+<span class="sd">        :return: The degrees traveled for the given distance</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_to_rotation</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">*</span> <span class="mf">360.0</span>
+        <span class="k">return</span> <span class="n">rotation</span>
+
+    <span class="k">def</span> <span class="nf">angle_to_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculation to return the distance in cm given an angle.</span>
+
+<span class="sd">        :param angle: the angle</span>
+<span class="sd">        :return: distance in cm for turning an angle</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span> <span class="o">/</span> <span class="mf">360.0</span> <span class="o">*</span> <span class="n">angle</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brake</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        stops all motors on all different drive modes.</span>
+
+<span class="sd">        :param brake: None, brake, coast, hold</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">brake</span> <span class="ow">or</span> <span class="n">brake</span> <span class="o">==</span> <span class="s2">&quot;brake&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tank</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">brake</span> <span class="o">==</span> <span class="s2">&quot;coast&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">COAST</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">COAST</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tank</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">COAST</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">brake</span> <span class="o">==</span> <span class="s2">&quot;hold&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">HOLD</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">HOLD</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tank</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">HOLD</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">still</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        waits till the motors are no longer turning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Still Start&quot;</span><span class="p">)</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">angle_left_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="n">angle_right_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">angle_left_current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="n">angle_right_current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">angle_left_current</span> <span class="o">==</span> <span class="n">angle_left_old</span> <span class="ow">and</span> \
+                    <span class="n">angle_right_current</span> <span class="o">==</span> <span class="n">angle_right_old</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">angle_left_old</span> <span class="o">=</span> <span class="n">angle_left_current</span>
+                <span class="n">angle_right_old</span> <span class="o">=</span> <span class="n">angle_right_current</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Still Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">brake</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        the robot drives forward for a given distance.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param distance: distance that robot goes forward (in cm)</span>
+<span class="sd">        :param brake: one of the values brake, hold, coast</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Forward&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">brake</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">speed</span> <span class="o">=</span> <span class="o">-</span><span class="n">speed</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="o">-</span><span class="n">distance</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distance_to_angle</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">distance</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+
+        <span class="n">run</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">while</span> <span class="n">run</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="n">angle</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">brake</span><span class="o">=</span><span class="n">brake</span><span class="p">)</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Forward Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_forever</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed_left</span><span class="p">,</span> <span class="n">speed_right</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        turns motors on with left and right speed.</span>
+
+<span class="sd">        :param speed_left: speed of left motor</span>
+<span class="sd">        :param speed_right: speed of the right motor</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;on_forever&quot;</span><span class="p">,</span> <span class="n">speed_left</span><span class="p">,</span> <span class="n">speed_right</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed_left</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed_right</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        takes the radius of the robot and dives on it</span>
+<span class="sd">        for a distance based on the angle.</span>
+
+<span class="sd">        :param speed: speed of turn</span>
+<span class="sd">        :param angle: angle of turn</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Turn&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">fraction</span> <span class="o">=</span> <span class="mf">360.0</span> <span class="o">/</span> <span class="n">angle</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="n">fraction</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_to_angle</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
+        <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+
+            <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;TURN CHECK&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span>
+                  <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()),</span>
+                  <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">()))</span>
+            <span class="k">if</span> <span class="n">old</span> <span class="o">==</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()):</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">old</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;FORCED STOP IN TURN&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+                <span class="k">break</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Turn Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turntoblack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">speed</span><span class="p">,</span>
+                    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                    <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">black</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        turns the robot to the black line.</span>
+
+<span class="sd">        :param speed: speed of turn</span>
+<span class="sd">        :param direction: left or right</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param black: value of black</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;turntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">black</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">turntowhite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">speed</span><span class="p">,</span>
+                    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                    <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">white</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        turns the robot to the white line.</span>
+
+<span class="sd">        :param speed: speed of turn</span>
+<span class="sd">        :param direction: left or right</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param white: value of white</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;turntowhite&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">white</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">aligntoblack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        aligns with black line while driving each motor.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param port_left: port of left color sensor</span>
+<span class="sd">        :param port_right: port of right color sensor</span>
+<span class="sd">        :param black: value of black</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="n">left_finished</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">right_finished</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">left_finished</span> <span class="ow">and</span> <span class="n">right_finished</span><span class="p">):</span>
+            <span class="n">left_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port_left</span><span class="p">)</span>
+            <span class="n">right_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port_right</span><span class="p">)</span>
+            <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Light&quot;</span><span class="p">,</span> <span class="n">left_light</span><span class="p">,</span> <span class="n">right_light</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">left_light</span> <span class="o">&lt;</span> <span class="n">black</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="n">left_finished</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="n">right_light</span> <span class="o">&lt;</span> <span class="n">black</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="n">right_finished</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntoblack Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">aligntowhite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        aligns with white line while driving each motor.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param port_left: port of left color sensor</span>
+<span class="sd">        :param port_right: port of right color sensor</span>
+<span class="sd">        :param white: value of white</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="n">left_finished</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">right_finished</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">left_finished</span> <span class="ow">and</span> <span class="n">right_finished</span><span class="p">):</span>
+            <span class="n">left_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port_left</span><span class="p">)</span>
+            <span class="n">right_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port_right</span><span class="p">)</span>
+            <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Light&quot;</span><span class="p">,</span> <span class="n">left_light</span><span class="p">,</span> <span class="n">right_light</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">left_light</span> <span class="o">&gt;</span> <span class="n">white</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="n">left_finished</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="n">right_light</span> <span class="o">&gt;</span> <span class="n">white</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="n">right_finished</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntowhite Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gotoblack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        robot moves to the black line while using the</span>
+<span class="sd">        sensor on the given port.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param black: value of black</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
+
+        <span class="c1"># self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)</span>
+        <span class="c1"># self.right.run_angle(speed * 10, a, Stop.BRAKE, False)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">black</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotoblack Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gotowhite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        robot moves to the white line while using</span>
+<span class="sd">        the sensor on the given port.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param white: value of white</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotowhite&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">white</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotowhite Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gotocolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        robot moves to the black line while using the</span>
+<span class="sd">        sensor on the given port.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param black: value of black</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotocolor&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">run</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">while</span> <span class="n">run</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;COLOR&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="n">run</span> <span class="o">=</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotocolor Stop&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">followline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>  <span class="c1"># speed 0 - 100</span>
+                   <span class="n">distance</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># distance in cm</span>
+                   <span class="n">t</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># the port number we use to follow the line</span>
+                   <span class="n">right</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># the side on which to follow the line</span>
+                   <span class="n">stop_color_sensor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">stop_values</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># [4,5]</span>
+                   <span class="n">stop_color_mode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># color, reflective</span>
+                   <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span>  <span class="c1"># control smoothness</span>
+                   <span class="n">factor</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>  <span class="c1"># parameters to control smoothness</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        follows line for either a distance or for time.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param distance: distance that robot follows line</span>
+<span class="sd">        :param t: time that robot follows line for</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param right: whether the robot is following</span>
+<span class="sd">                      the right or left side of line</span>
+<span class="sd">        :param black: black value</span>
+<span class="sd">        :param white: white value</span>
+<span class="sd">        :param delta: adjustment value to convert from color</span>
+<span class="sd">                      sensor values (0 to 100) to motor</span>
+<span class="sd">                      steering (-100 to 100)</span>
+<span class="sd">        :param factor: factor of adjustment, controls smoothness</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">distance</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># the current time</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">current</span> <span class="o">+</span> <span class="n">t</span>  <span class="c1"># the end time</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>  <span class="c1"># get the light value</span>
+
+            <span class="c1"># correction = delta + (factor * value)</span>
+            <span class="c1"># calculate the correction for steering</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="c1"># correction = f * correction</span>
+            <span class="c1"># if we drive backwards negate the correction</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">correction</span><span class="p">)</span>
+            <span class="c1"># switch the steering on with the given correction and speed</span>
+
+            <span class="c1"># if the time is used we set run to</span>
+            <span class="c1">#        false once the end time is reached</span>
+            <span class="c1"># if the distance is greater than the</span>
+            <span class="c1">#        position than the leave the</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+            <span class="n">traveled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_to_distance</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+
+            <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># measure the current time</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">end_time</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loopK</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">traveled</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loop</span>
+            <span class="k">if</span> <span class="n">stop_color_sensor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                    <span class="c1"># value = self.colorsensor[port].sensor.rgb()</span>
+                <span class="k">elif</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;reflective&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">light</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stop_values</span><span class="p">:</span>
+                    <span class="k">break</span>  <span class="c1"># leave the loop</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># stop the robot</span>
+
+    <span class="k">def</span> <span class="nf">calibrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;front&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calibrates color sensors by driving over black and white line.</span>
+
+<span class="sd">        :param speed: speed of robot</span>
+<span class="sd">        :param distance: distance that robot travels</span>
+<span class="sd">        :param ports: ports of color sensors</span>
+<span class="sd">        :param direction: direction of calibration</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_to_angle</span><span class="p">(</span><span class="n">distance</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_white</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_black</span><span class="p">()</span>
+                <span class="n">PRINT</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
+            <span class="n">PRINT</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+
+    <span class="c1"># followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)</span>
+    <span class="k">def</span> <span class="nf">followline_pid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                       <span class="n">distance</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># distance in cm</span>
+                       <span class="n">t</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                       <span class="n">right</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># the side on which to follow the line</span>
+                       <span class="n">stop_color_sensor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                       <span class="n">stop_values</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># [4,5]</span>
+                       <span class="n">stop_color_mode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># color, reflective</span>
+                       <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">black</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">distance</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># the current time</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">current</span> <span class="o">+</span> <span class="n">t</span>  <span class="c1"># the end time</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">white</span> <span class="o">-</span> <span class="n">black</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">black</span>
+        <span class="n">lasterror</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">loop_start_time</span> <span class="o">=</span> <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;kp=&quot;</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="s2">&quot;ki=&quot;</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="s2">&quot;kd=&quot;</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>  <span class="c1"># get the light value</span>
+
+                <span class="n">error</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="n">value</span>
+                <span class="n">integral</span> <span class="o">=</span> <span class="n">error</span> <span class="o">+</span> <span class="n">integral</span>
+                <span class="n">derivative</span> <span class="o">=</span> <span class="n">error</span> <span class="o">-</span> <span class="n">lasterror</span>
+
+                <span class="n">correction</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">kp</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">kd</span> <span class="o">*</span> <span class="n">derivative</span>
+
+                <span class="n">lasterror</span> <span class="o">=</span> <span class="n">error</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">correction</span><span class="p">)</span>
+                <span class="c1"># switch the steering on with the given correction and speed</span>
+
+                <span class="c1"># if the time is used we set run to</span>
+                <span class="c1">#        false once the end time is reached</span>
+                <span class="c1"># if the distance is greater than the</span>
+                <span class="c1">#        position than the leave the</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+                <span class="n">traveled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_to_distance</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># measure the current time</span>
+
+                <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">correction</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="n">bar</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">30</span> <span class="o">*</span> <span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">correction</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="n">correction</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="n">bar</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="mi">30</span> <span class="o">+</span> <span class="n">correction</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;#&#39;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">correction</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">bar</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="s1">&#39; &#39;</span>
+
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{:4.2f} {:4.2f} {:4.2f} {:3d} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">correction</span><span class="p">,</span> <span class="n">traveled</span><span class="p">,</span> <span class="n">current</span> <span class="o">-</span> <span class="n">loop_start_time</span><span class="p">,</span>
+                                                                    <span class="n">value</span><span class="p">,</span> <span class="n">bar</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">end_time</span><span class="p">:</span>
+                    <span class="k">break</span>  <span class="c1"># leave the loopK</span>
+                <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">traveled</span><span class="p">:</span>
+                    <span class="k">break</span>  <span class="c1"># leave the loop</span>
+                <span class="k">if</span> <span class="n">stop_color_sensor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                        <span class="c1"># value = self.colorsensor[port].sensor.rgb()</span>
+                    <span class="k">elif</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;reflective&quot;</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">light</span><span class="p">()</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stop_values</span><span class="p">:</span>
+                        <span class="k">break</span>  <span class="c1"># leave the loop</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># stop the robot</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spockbots Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#spockbots-output">Spockbots Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spockbots-check">Spockbots Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spockbots-colorsensor">Spockbots Colorsensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spockbots-gyro">Spockbots Gyro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spockbots-motor-code">Spockbots Motor Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">lego</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="spockbots.html" title="previous chapter">Spockbots API</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">lego</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/code.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

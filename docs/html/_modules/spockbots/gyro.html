@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>spockbots.gyro &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for spockbots.gyro</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+
+<span class="kn">from</span> <span class="nn">pybricks.ev3devices</span> <span class="k">import</span> <span class="n">GyroSensor</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="k">import</span> <span class="n">Direction</span>
+<span class="kn">from</span> <span class="nn">pybricks.parameters</span> <span class="k">import</span> <span class="n">Port</span>
+
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Gyro</span>
+<span class="c1">#######################################################</span>
+
+<div class="viewcode-block" id="SpockbotsGyro"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsGyro</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    improved gyro class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># The following link gives some hints why it does not</span>
+    <span class="c1"># work for the Gyro in mindstorm</span>
+    <span class="c1"># http://ev3lessons.com/en/ProgrammingLessons/advanced/Gyro.pdf</span>
+
+    <span class="c1"># in python we have three issues</span>
+
+    <span class="c1"># sensor value is not 0 after reset</span>
+    <span class="c1"># sensor value drifts after reset as it takes time</span>
+    <span class="c1">#        to settle down</span>
+    <span class="c1"># sensor value is not returned as no value is available</span>
+    <span class="c1">#        from the sensor</span>
+
+    <span class="c1"># This code fixes it.</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">robot</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Gyro Sensor</span>
+
+<span class="sd">        :param robot: robot varible</span>
+<span class="sd">        :param port: port number for gyro sensor 1,2,3,4</span>
+<span class="sd">        :param direction: if front if we drive forward</span>
+<span class="sd">                          otherwise backwards</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">robot</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;forward&quot;</span><span class="p">:</span>
+            <span class="n">sensor_direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">CLOCKWISE</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sensor_direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span>
+
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINDING GYRO&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S1</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S2</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S3</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">GyroSensor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">S4</span><span class="p">,</span>
+                                             <span class="n">sensor_direction</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SENSOR:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">)</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;No such sensor on Port&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: THe Gyro Sensor is disconnected&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">()</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="c1"># bug should be = 0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000</span>  <span class="c1"># just set the current value</span>
+                                 <span class="c1"># to get us started</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GYRO INITIALIZED&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SpockbotsGyro.angle"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.angle">[docs]</a>    <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the angle</span>
+
+<span class="sd">        :return: The angle in degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">speed</span><span class="p">()</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AS&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span>
+
+        <span class="k">return</span> <span class="n">a</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.zero"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.zero">[docs]</a>    <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set the gyro angle to 0</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># sleep(0.1)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.still"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.still">[docs]</a>    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests if robot dosent move</span>
+<span class="sd">        :return: True if robot dosent move</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">drift</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.drift"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.drift">[docs]</a>    <span class="k">def</span> <span class="nf">drift</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests if robot drifts and waits until its still</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># loop in case we get a read error from the gyro speed</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">speed</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># no drift if the speed is 0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># DRIFT IF THE SPEED IS NOT 0</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: DRIFT no value found&quot;</span><span class="p">)</span></div>
+                <span class="c1"># No speed value found, so repeat</span>
+
+<div class="viewcode-block" id="SpockbotsGyro.status"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests count times if robot is still and returns if its still or drifts</span>
+<span class="sd">        :param count: number of times tested if its still</span>
+<span class="sd">        :return: still,drift which are true/false</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">still</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">drift</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">angle</span> <span class="o">==</span> <span class="n">last</span><span class="p">:</span>
+                <span class="n">still</span> <span class="o">=</span> <span class="n">still</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">drift</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">drift</span> <span class="o">=</span> <span class="n">drift</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GYRO STATUS&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">still</span><span class="p">,</span> <span class="n">drift</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">still</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="p">,</span> <span class="n">drift</span> <span class="o">&gt;=</span> <span class="n">count</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.reset"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        safely resets the gyro</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">reset_angle</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># sleep(0.1)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gyro read error&quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;Gyro Angle: &quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_angle</span> <span class="o">=</span> <span class="n">angle</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gyro Angle, final: &quot;</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.turn"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.turn">[docs]</a>    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        uses gyro to turn positive to right negative to left</span>
+<span class="sd">        :param speed: speed it turns at</span>
+<span class="sd">        :param degrees: degrees it turns</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">degrees</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">degrees</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="n">speed</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.left"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.left">[docs]</a>    <span class="k">def</span> <span class="nf">left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The robot turns left with the given number of degrees</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param degrees: The degrees</span>
+<span class="sd">        :param offset:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">8</span>
+
+        <span class="c1"># self.zero()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="o">-</span><span class="n">speed</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="o">-</span><span class="n">degrees</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">degrees</span> <span class="o">+</span> <span class="n">offset</span><span class="p">:</span>
+            <span class="c1"># print(angle, -degrees + offset)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpockbotsGyro.right"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.right">[docs]</a>    <span class="k">def</span> <span class="nf">right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The robot turns right with the given number of degrees</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param degrees: The degrees</span>
+<span class="sd">        :param offset:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">speed</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">8</span>
+
+        <span class="c1"># self.zero()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">on_forever</span><span class="p">(</span><span class="o">-</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">degrees</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="n">degrees</span> <span class="o">-</span> <span class="n">offset</span><span class="p">:</span>
+            <span class="c1"># print(angle, degrees - offset)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SpockbotsGyro.forward"><a class="viewcode-back" href="../../spockbots.html#spockbots.gyro.SpockbotsGyro.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>  <span class="c1"># speed 0 - 100</span>
+                <span class="n">distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># distance in cm</span>
+                <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">port</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># the port number we use to follow the line</span>
+                <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span>  <span class="c1"># control smoothness</span>
+                <span class="n">factor</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>  <span class="c1"># parameters to control smoothness</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Moves forward</span>
+
+<span class="sd">        :param speed: The speed</span>
+<span class="sd">        :param distance: If set the distance to travle</span>
+<span class="sd">        :param t: If set the time to travel</span>
+<span class="sd">        :param port: The port number of the Gyro sensor</span>
+<span class="sd">        :param delta: controlling the smoothness of the line</span>
+<span class="sd">        :param factor: controlling the smoothness of the line</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">distance</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># the current time</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">current</span> <span class="o">+</span> <span class="n">t</span>  <span class="c1"># the end time</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>  <span class="c1"># get the Gyro angle value</span>
+
+            <span class="c1"># correction = delta + (factor * value)</span>
+            <span class="c1"># calculate the correction for steering</span>
+            <span class="n">correction</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">correction</span><span class="p">)</span>  <span class="c1"># switch the steering on</span>
+                           <span class="c1"># with the given correction and speed</span>
+
+            <span class="c1"># if the time is used we set run to false once</span>
+            <span class="c1">#        the end time is reached</span>
+            <span class="c1"># if the distance is greater than the</span>
+            <span class="c1">#        position than the leave the</span>
+            <span class="n">distance_angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+            <span class="n">traveled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_to_distance</span><span class="p">(</span><span class="n">distance_angle</span><span class="p">)</span>
+
+            <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># measure the current time</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">end_time</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loopK</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">traveled</span><span class="p">:</span>
+                <span class="k">break</span>  <span class="c1"># leave the loop</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c1"># stop the robot</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">lego</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

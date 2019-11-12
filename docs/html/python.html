@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Python &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Design" href="design.html" />
+    <link rel="prev" title="Spockbots City" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="python">
+<h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Variables allow storing of data values. This is the same as
+the EV3 GUI variable</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>This is the same as the array in EV3 GUI.</p>
+<p>Lists store multiple data values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>A function is a block of code which only runs when it
+is called. It may return a value and can have parameters.
+This is the same as a myblock, but easier to write and modify:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">PRINT</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<p>With classes we can group functions and variables conveniently into an object.
+an object is just like a variable that uses the class as template. we can call
+all variables and functions on this object. Functions in a class are called methods.
+A special method is __init__ which is called once when we declare an
+object from the template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
+    <span class="k">def</span> <span class="nf">grow</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">+</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">how_tall</span><span class="p">():</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+
+<span class="n">seric</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;Seric&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">seric</span><span class="o">.</span><span class="n">grow</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">seric</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>      <span class="c1">#  151</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">seric</span><span class="o">.</span><span class="n">how_tall</span><span class="p">())</span>  <span class="c1">#  151</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conditions">
+<h2>Conditions<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h2>
+<p>Conditions allow is to react if a value is tru or false. It is the same
+as in EV3 GUI but easier to write:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">seric</span><span class="o">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="mi">180</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;He is tall&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">seric</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;He is still growing&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;he is exactly 180cm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loops">
+<h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<p>We used while and for loops the repeat an indented block of code. While loops can
+also loop over elements in a list easily.</p>
+<div class="section" id="loop-forever">
+<h3>Loop forever<a class="headerlink" href="#loop-forever" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I loop forever&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-with-condition">
+<h3>Loop with condition<a class="headerlink" href="#loop-with-condition" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># 1</span>
+<span class="c1"># 2</span>
+<span class="c1"># 3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-with-break">
+<h3>Loop with break<a class="headerlink" href="#loop-with-break" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+       <span class="k">break</span> <span class="c1"># break leaves the loop</span>
+<span class="c1"># 1</span>
+<span class="c1"># 2</span>
+<span class="c1"># 3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-through-a-list">
+<h3>Loop through a list<a class="headerlink" href="#loop-through-a-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>for counter in [1,2,3]:</dt><dd><p>print (counter)</p>
+</dd>
+</dl>
+<p># 1
+# 2
+# 3</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<p>When we create code in separate files they can be made known within a
+program while importing the functions, classes, or variables. This
+allows us to organize the code while grouping topical code into a file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="k">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="program">
+<h2>Program<a class="headerlink" href="#program" title="Permalink to this headline">¶</a></h2>
+<p>A program can be executed in a terminal on teh EV3 brick. It must be executable.
+Let us assume the following core it in the file <cite>run_led.py</cite>.
+we make it executable with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="n">a</span><span class="o">+</span><span class="n">x</span> <span class="n">run_led</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Here an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">flash</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">def</span> <span class="nf">run_led</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flashes the LEDs on the brick</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">flash</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_led</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first line tells us to use python to run the program.</p>
+<p>The if __name__ line tells us to run the next lines (e.g. the function)
+as functions are not run when we define them.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lists">Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conditions">Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loop-forever">Loop forever</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loop-with-condition">Loop with condition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loop-with-break">Loop with break</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loop-through-a-list">Loop through a list</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#import">Import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#program">Program</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">lego</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Spockbots City</a></li>
+      <li>Next: <a href="design.html" title="next chapter">Design</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/python.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

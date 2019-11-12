@@ -1,0 +1,930 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spockbots API &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Spockbots Code" href="code.html" />
+    <link rel="prev" title="City Runs" href="run.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="spockbots-api">
+<h1>Spockbots API<a class="headerlink" href="#spockbots-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-spockbots.output">
+<span id="spockbots-output"></span><h2>spockbots.output<a class="headerlink" href="#module-spockbots.output" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="spockbots.output.PRINT">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">PRINT</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">x=None</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#PRINT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.PRINT" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints message on screen at x and y and on the console.
+if x and y are missing prints on next position on lcd screen
+this message prints test messages.</p>
+<p>The sceensize is maximum x=177, y=127)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – multible strings to be printed in between them</p></li>
+<li><p><strong>x</strong> – x value</p></li>
+<li><p><strong>y</strong> – y value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.beep">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">beep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#beep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.beep" title="Permalink to this definition">¶</a></dt>
+<dd><p>The robot will make a beep</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.clear">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>clears display</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.flash">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">flash</code><span class="sig-paren">(</span><em class="sig-param">colors=['RED', 'BLACK', 'RED', 'BLACK', 'GREEN'], delay=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.flash" title="Permalink to this definition">¶</a></dt>
+<dd><p>The robot will flash the LEDs and beep twice</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.led">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">led</code><span class="sig-paren">(</span><em class="sig-param">color</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#led"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.led" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes color of led light</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – light color</p></li>
+<li><p><strong>brightness</strong> – light brightness</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.readfile">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">readfile</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#readfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.readfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the file with the name and returns it as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The file name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The data in teh file as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.sound">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">sound</code><span class="sig-paren">(</span><em class="sig-param">pitch=1500</em>, <em class="sig-param">duration=300</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#sound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.sound" title="Permalink to this definition">¶</a></dt>
+<dd><p>plays a sound</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pitch</strong> – sound pitch</p></li>
+<li><p><strong>duration</strong> – how long the sound plays</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.voltage">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">voltage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#voltage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.voltage" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints voltage of battery</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="spockbots.output.writefile">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">writefile</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#writefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.writefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a new file with the name. If it exists the
+old file will be deleted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the file</p></li>
+<li><p><strong>msg</strong> – The message to be placed in the file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-spockbots.check">
+<span id="spockbots-check"></span><h2>spockbots.check<a class="headerlink" href="#module-spockbots.check" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="spockbots.check.check">
+<code class="sig-prename descclassname">spockbots.check.</code><code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">speed=100</em>, <em class="sig-param">angle=360</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/check.html#check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.check.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>do a robot check by</p>
+<ol class="loweralpha simple">
+<li><p>turning on the large motors one at a time</p></li>
+<li><p>turning on the medium motors one at a time</p></li>
+<li><p>turning on the light sensors one at a time</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – </p></li>
+<li><p><strong>angle</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-spockbots.motor">
+<span id="spockbots-motor"></span><h2>spockbots.motor<a class="headerlink" href="#module-spockbots.motor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="spockbots.motor.SpockbotsMotor">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.motor.</code><code class="sig-name descname">SpockbotsMotor</code><span class="sig-paren">(</span><em class="sig-param">direction=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.aligntoblack">
+<code class="sig-name descname">aligntoblack</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port_left</em>, <em class="sig-param">port_right</em>, <em class="sig-param">black=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.aligntoblack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.aligntoblack" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligns with black line while driving each motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>port_left</strong> – port of left color sensor</p></li>
+<li><p><strong>port_right</strong> – port of right color sensor</p></li>
+<li><p><strong>black</strong> – value of black</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.aligntowhite">
+<code class="sig-name descname">aligntowhite</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port_left</em>, <em class="sig-param">port_right</em>, <em class="sig-param">white=80</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.aligntowhite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.aligntowhite" title="Permalink to this definition">¶</a></dt>
+<dd><p>aligns with white line while driving each motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>port_left</strong> – port of left color sensor</p></li>
+<li><p><strong>port_right</strong> – port of right color sensor</p></li>
+<li><p><strong>white</strong> – value of white</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.angle_to_distance">
+<code class="sig-name descname">angle_to_distance</code><span class="sig-paren">(</span><em class="sig-param">angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.angle_to_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.angle_to_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculation to return the distance in cm given an angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>angle</strong> – the angle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distance in cm for turning an angle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.beep">
+<code class="sig-name descname">beep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.beep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.beep" title="Permalink to this definition">¶</a></dt>
+<dd><p>robot will beep.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.calibrate">
+<code class="sig-name descname">calibrate</code><span class="sig-paren">(</span><em class="sig-param">speed, distance=15, ports=[2, 3, 4], direction='front'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.calibrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.calibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>calibrates color sensors by driving over black and white line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>distance</strong> – distance that robot travels</p></li>
+<li><p><strong>ports</strong> – ports of color sensors</p></li>
+<li><p><strong>direction</strong> – direction of calibration</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.check_kill_button">
+<code class="sig-name descname">check_kill_button</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.check_kill_button"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.check_kill_button" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.distance_to_angle">
+<code class="sig-name descname">distance_to_angle</code><span class="sig-paren">(</span><em class="sig-param">distance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.distance_to_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.distance_to_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculation to convert the distance from cm into angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>distance</strong> – The distance in cm</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The degrees traveled for the given distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.distance_to_rotation">
+<code class="sig-name descname">distance_to_rotation</code><span class="sig-paren">(</span><em class="sig-param">distance</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.distance_to_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.distance_to_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculation to convert the distance from cm into rotations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>distance</strong> – The distance in cm</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The rotations to be traveled for the given distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.followline">
+<code class="sig-name descname">followline</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">port=3</em>, <em class="sig-param">right=True</em>, <em class="sig-param">stop_color_sensor=None</em>, <em class="sig-param">stop_values=None</em>, <em class="sig-param">stop_color_mode=None</em>, <em class="sig-param">delta=-35</em>, <em class="sig-param">factor=0.4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.followline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.followline" title="Permalink to this definition">¶</a></dt>
+<dd><p>follows line for either a distance or for time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>distance</strong> – distance that robot follows line</p></li>
+<li><p><strong>t</strong> – time that robot follows line for</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>right</strong> – whether the robot is following
+the right or left side of line</p></li>
+<li><p><strong>black</strong> – black value</p></li>
+<li><p><strong>white</strong> – white value</p></li>
+<li><p><strong>delta</strong> – adjustment value to convert from color
+sensor values (0 to 100) to motor
+steering (-100 to 100)</p></li>
+<li><p><strong>factor</strong> – factor of adjustment, controls smoothness</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.followline_pid">
+<code class="sig-name descname">followline_pid</code><span class="sig-paren">(</span><em class="sig-param">debug=False</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">right=True</em>, <em class="sig-param">stop_color_sensor=None</em>, <em class="sig-param">stop_values=None</em>, <em class="sig-param">stop_color_mode=None</em>, <em class="sig-param">port=3</em>, <em class="sig-param">speed=25</em>, <em class="sig-param">black=0</em>, <em class="sig-param">white=100</em>, <em class="sig-param">kp=0.3</em>, <em class="sig-param">ki=0.0</em>, <em class="sig-param">kd=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.followline_pid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.followline_pid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">distance</em>, <em class="sig-param">brake=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>the robot drives forward for a given distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>distance</strong> – distance that robot goes forward (in cm)</p></li>
+<li><p><strong>brake</strong> – one of the values brake, hold, coast</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.gotoblack">
+<code class="sig-name descname">gotoblack</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port</em>, <em class="sig-param">black=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.gotoblack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.gotoblack" title="Permalink to this definition">¶</a></dt>
+<dd><p>robot moves to the black line while using the
+sensor on the given port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>black</strong> – value of black</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.gotocolor">
+<code class="sig-name descname">gotocolor</code><span class="sig-paren">(</span><em class="sig-param">speed, port, colors=[0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.gotocolor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.gotocolor" title="Permalink to this definition">¶</a></dt>
+<dd><p>robot moves to the black line while using the
+sensor on the given port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>black</strong> – value of black</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.gotowhite">
+<code class="sig-name descname">gotowhite</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port</em>, <em class="sig-param">white=90</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.gotowhite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.gotowhite" title="Permalink to this definition">¶</a></dt>
+<dd><p>robot moves to the white line while using
+the sensor on the given port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of robot</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>white</strong> – value of white</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.light">
+<code class="sig-name descname">light</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.light"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.light" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the reflective color sensor value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>port</strong> – the port number of the color sensor</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the reflective color value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.on">
+<code class="sig-name descname">on</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">steering=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.on" title="Permalink to this definition">¶</a></dt>
+<dd><p>turns the large motors on while using steering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – the speed of the robot</p></li>
+<li><p><strong>steering</strong> – an angle for the steering</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.on_forever">
+<code class="sig-name descname">on_forever</code><span class="sig-paren">(</span><em class="sig-param">speed_left</em>, <em class="sig-param">speed_right</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.on_forever"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.on_forever" title="Permalink to this definition">¶</a></dt>
+<dd><p>turns motors on with left and right speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed_left</strong> – speed of left motor</p></li>
+<li><p><strong>speed_right</strong> – speed of the right motor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>resets the angle in the large motors to 0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.setup">
+<code class="sig-name descname">setup</code><span class="sig-paren">(</span><em class="sig-param">direction=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>setup the direction, the motors, and the tank with the appropriate direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>direction</strong> – if the direction is ‘forward’ the robot moves forward, otherwise backwards.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>left, right motors  and tank</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.still">
+<code class="sig-name descname">still</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.still"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.still" title="Permalink to this definition">¶</a></dt>
+<dd><p>waits till the motors are no longer turning.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><em class="sig-param">brake=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>stops all motors on all different drive modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>brake</strong> – None, brake, coast, hold</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.turn">
+<code class="sig-name descname">turn</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">angle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.turn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes the radius of the robot and dives on it
+for a distance based on the angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of turn</p></li>
+<li><p><strong>angle</strong> – angle of turn</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.turntoblack">
+<code class="sig-name descname">turntoblack</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">direction='left'</em>, <em class="sig-param">port=3</em>, <em class="sig-param">black=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.turntoblack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.turntoblack" title="Permalink to this definition">¶</a></dt>
+<dd><p>turns the robot to the black line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of turn</p></li>
+<li><p><strong>direction</strong> – left or right</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>black</strong> – value of black</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.turntowhite">
+<code class="sig-name descname">turntowhite</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">direction='left'</em>, <em class="sig-param">port=3</em>, <em class="sig-param">white=80</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.turntowhite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.turntowhite" title="Permalink to this definition">¶</a></dt>
+<dd><p>turns the robot to the white line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of turn</p></li>
+<li><p><strong>direction</strong> – left or right</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>white</strong> – value of white</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-spockbots.gyro">
+<span id="spockbots-gyro"></span><h2>spockbots.gyro<a class="headerlink" href="#module-spockbots.gyro" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="spockbots.gyro.SpockbotsGyro">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.gyro.</code><code class="sig-name descname">SpockbotsGyro</code><span class="sig-paren">(</span><em class="sig-param">robot</em>, <em class="sig-param">port=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>improved gyro class</p>
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.angle">
+<code class="sig-name descname">angle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the angle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The angle in degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.drift">
+<code class="sig-name descname">drift</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.drift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.drift" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests if robot drifts and waits until its still</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">port=1</em>, <em class="sig-param">delta=-35</em>, <em class="sig-param">factor=0.4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves forward</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – The speed</p></li>
+<li><p><strong>distance</strong> – If set the distance to travle</p></li>
+<li><p><strong>t</strong> – If set the time to travel</p></li>
+<li><p><strong>port</strong> – The port number of the Gyro sensor</p></li>
+<li><p><strong>delta</strong> – controlling the smoothness of the line</p></li>
+<li><p><strong>factor</strong> – controlling the smoothness of the line</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.left">
+<code class="sig-name descname">left</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">degrees=90</em>, <em class="sig-param">offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.left"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.left" title="Permalink to this definition">¶</a></dt>
+<dd><p>The robot turns left with the given number of degrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – The speed</p></li>
+<li><p><strong>degrees</strong> – The degrees</p></li>
+<li><p><strong>offset</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>safely resets the gyro</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.right">
+<code class="sig-name descname">right</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">degrees=90</em>, <em class="sig-param">offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.right"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.right" title="Permalink to this definition">¶</a></dt>
+<dd><p>The robot turns right with the given number of degrees</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – The speed</p></li>
+<li><p><strong>degrees</strong> – The degrees</p></li>
+<li><p><strong>offset</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><em class="sig-param">count=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests count times if robot is still and returns if its still or drifts
+:param count: number of times tested if its still
+:return: still,drift which are true/false</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.still">
+<code class="sig-name descname">still</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.still"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.still" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests if robot dosent move
+:return: True if robot dosent move</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.turn">
+<code class="sig-name descname">turn</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">degrees=90</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.turn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>uses gyro to turn positive to right negative to left
+:param speed: speed it turns at
+:param degrees: degrees it turns
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.zero">
+<code class="sig-name descname">zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the gyro angle to 0
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-spockbots.colorsensor">
+<span id="spockbots-colorsensor"></span><h2>spockbots.colorsensor<a class="headerlink" href="#module-spockbots.colorsensor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensor</code><span class="sig-paren">(</span><em class="sig-param">port=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>defines</p>
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.color">
+<code class="sig-name descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.color" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.flash">
+<code class="sig-name descname">flash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.flash" title="Permalink to this definition">¶</a></dt>
+<dd><p>flashes the color sensor by switching between
+color and reflective mode</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.info">
+<code class="sig-name descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the black and white value read form the
+sensor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.light">
+<code class="sig-name descname">light</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.light"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.light" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the color sensor data form the file
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.reflection">
+<code class="sig-name descname">reflection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.reflection" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_black">
+<code class="sig-name descname">set_black</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_black"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_black" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the current value to black</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_white">
+<code class="sig-name descname">set_white</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_white"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_white" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the current value to white
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the current value mapped between 0 and 100
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>append the black and white value to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensors</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4], speed=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is how we create the sensors:</p>
+<blockquote>
+<div><p>colorsensor = SpockbotsColorSensors(ports=[2,3,4])
+colorsensor.read()</p>
+</div></blockquote>
+<p>Now you can use</p>
+<blockquote>
+<div><p>colorsensor[i].value()</p>
+</div></blockquote>
+<p>to get the reflective value of the colorsensor on port i.
+To get the color value we can use</p>
+<blockquote>
+<div><p>colorsensor[i].color()</p>
+</div></blockquote>
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>removes the file calibrate.txt</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.color">
+<code class="sig-name descname">color</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the color value between 0-100 after
+calibration on the port i</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The color value, blue = 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.flash">
+<code class="sig-name descname">flash</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.flash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flashes the light sensor on teh ports one after another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports to flash</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.info">
+<code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the information for each port, e.g.
+the minimal black and maximum while values
+:param ports: the list of ports to flash</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the black and white values to the file
+calibrate.txt</p>
+<p>The values must be written previously. If the file
+does not exists a default is used.</p>
+<blockquote>
+<div><p>2: 0, 100
+3: 0, 100
+4: 4, 40    # because it is higher up so white does</p>
+<blockquote>
+<div><p>not read that well</p>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_color">
+<code class="sig-name descname">test_color</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the color value of all senors between 0-100</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_reflective">
+<code class="sig-name descname">test_reflective</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_reflective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_reflective" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the reflective value of all senors between 0-100</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the reflective value between 0-100 after
+calibration on the port i</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the reflective color value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes the black and white values to the file
+calibrate.txt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the ports used to write</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spockbots API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.output">spockbots.output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.check">spockbots.check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.motor">spockbots.motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.gyro">spockbots.gyro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.colorsensor">spockbots.colorsensor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lego</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Spockbots API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.output">spockbots.output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.check">spockbots.check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.motor">spockbots.motor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.gyro">spockbots.gyro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.colorsensor">spockbots.colorsensor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="run.html" title="previous chapter">City Runs</a></li>
+      <li>Next: <a href="code.html" title="next chapter">Spockbots Code</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/spockbots.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

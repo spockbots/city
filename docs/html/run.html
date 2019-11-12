@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>City Runs &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Spockbots API" href="spockbots.html" />
+    <link rel="prev" title="Menu" href="0_menu.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="city-runs">
+<h1>City Runs<a class="headerlink" href="#city-runs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="run-red-circle">
+<h2>run.red_circle<a class="headerlink" href="#run-red-circle" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.red_circle"></span><dl class="function">
+<dt id="run.red_circle.run_red_circle">
+<code class="sig-prename descclassname">run.red_circle.</code><code class="sig-name descname">run_red_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/red_circle.html#run_red_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.red_circle.run_red_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+</div>
+<div class="section" id="run-tan-circle">
+<h2>run.tan_circle<a class="headerlink" href="#run-tan-circle" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.tan_circle"></span><dl class="function">
+<dt id="run.tan_circle.run_tan_circle">
+<code class="sig-prename descclassname">run.tan_circle.</code><code class="sig-name descname">run_tan_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/tan_circle.html#run_tan_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.tan_circle.run_tan_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+</div>
+<div class="section" id="run-black-circle">
+<h2>run.black_circle<a class="headerlink" href="#run-black-circle" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.black_circle"></span><dl class="function">
+<dt id="run.black_circle.run_black_circle">
+<code class="sig-prename descclassname">run.black_circle.</code><code class="sig-name descname">run_black_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/black_circle.html#run_black_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.black_circle.run_black_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-run.crane">
+<span id="run-crane"></span><h2>run.crane<a class="headerlink" href="#module-run.crane" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.crane.run_crane">
+<code class="sig-prename descclassname">run.crane.</code><code class="sig-name descname">run_crane</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/crane.html#run_crane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.crane.run_crane" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+
+<span class="k">def</span> <span class="nf">run_crane</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    robot.forward(50, 10)</span>
+<span class="sd">    robot.turn(25, 45)</span>
+<span class="sd">    robot.forward(50, 30)</span>
+<span class="sd">    </span>
+<span class="sd">    robot.turn(25, -45)</span>
+<span class="sd">    </span>
+<span class="sd">    robot.gotowhite(25, 3)</span>
+<span class="sd">    robot.gotoblack(10, 3)</span>
+<span class="sd">    robot.gotowhite(10, 3)</span>
+<span class="sd">    </span>
+<span class="sd">    #robot.forward(5, 2)</span>
+<span class="sd">    #robot.forward(-20, 20)</span>
+<span class="sd">    #robot.right(20, 45)</span>
+<span class="sd">    #robot.forward(-75, 60)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turntoblack</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">turntowhite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">followline</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                     <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotoblack</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># sleep(0.2)</span>
+
+    <span class="c1"># back to base</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># backup slowly</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_crane</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default" id="id1">
+<img alt="_images/crane-setup.png" src="_images/crane-setup.png" />
+<p class="caption"><span class="caption-text">Crane 1. Crane setup does not have to be precise</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id2">
+<img alt="_images/crane-setup-2.png" src="_images/crane-setup-2.png" />
+<p class="caption"><span class="caption-text">Crane 2. Crane setup still works well when the peg points to the line.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+<td><div class="figure align-default" id="id3">
+<img alt="_images/crane.png" src="_images/crane.png" />
+<p class="caption"><span class="caption-text">Crane 4. Successful placement</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reliability</strong>:</p>
+<dl class="simple">
+<dt>Setup</dt><dd><p>The setup for the crane mission is important, but it does not have to be precise.
+There is a balck line that we can allign the blue peg with.</p>
+</dd>
+<dt>Run</dt><dd><p>We use the balck line to align the robot so that the attachment is working well.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the block and activates the
+blue levers at the righ time. The drive must not be fast into the crane. The crane block
+must not swing wne  we start.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>To avoid the swinging of the line (by other teams moving the table), this is our first mission.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="module-run.swing">
+<span id="run-swing"></span><h2>run.swing<a class="headerlink" href="#module-run.swing" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.swing.run_swing">
+<code class="sig-prename descclassname">run.swing.</code><code class="sig-name descname">run_swing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/swing.html#run_swing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.swing.run_swing" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
+
+<span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+
+<span class="k">def</span> <span class="nf">run_crane</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TBD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">SpockbotsMotor</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    robot.forward(50, 10)</span>
+<span class="sd">    robot.turn(25, 45)</span>
+<span class="sd">    robot.forward(50, 30)</span>
+<span class="sd">    </span>
+<span class="sd">    robot.turn(25, -45)</span>
+<span class="sd">    </span>
+<span class="sd">    robot.gotowhite(25, 3)</span>
+<span class="sd">    robot.gotoblack(10, 3)</span>
+<span class="sd">    robot.gotowhite(10, 3)</span>
+<span class="sd">    </span>
+<span class="sd">    #robot.forward(5, 2)</span>
+<span class="sd">    #robot.forward(-20, 20)</span>
+<span class="sd">    #robot.right(20, 45)</span>
+<span class="sd">    #robot.forward(-75, 60)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turntoblack</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">turntowhite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">followline</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                     <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                     <span class="n">delta</span><span class="o">=-</span><span class="mi">35</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotoblack</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># sleep(0.2)</span>
+
+    <span class="c1"># back to base</span>
+
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># backup slowly</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run_crane</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Reliability</strong>:</p>
+<dl class="simple">
+<dt>Setup</dt><dd><p>To help the setup we are using a jig.</p>
+</dd>
+<dt>Run</dt><dd><p>We use the balck lines and that allow us to be more precise.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the house block, a lever that starts the swing, a
+lever that allows us to flip a blue stand
+and a lever tu turn the elevator.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>THis mission would be best to be strarte at the begining as it is mor complex to set up
+the the crane, but the crane may swing so we decided to run the swing first.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="module-run.led">
+<span id="run-led"></span><h2>run.led<a class="headerlink" href="#module-run.led" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.led.run_led">
+<code class="sig-prename descclassname">run.led.</code><code class="sig-name descname">run_led</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/led.html#run_led"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.led.run_led" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-run.turn_to_black">
+<span id="run-turn-to-black-module"></span><h2>run.turn_to_black module<a class="headerlink" href="#module-run.turn_to_black" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.turn_to_black.run_turn_to_black">
+<code class="sig-prename descclassname">run.turn_to_black.</code><code class="sig-name descname">run_turn_to_black</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/turn_to_black.html#run_turn_to_black"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.turn_to_black.run_turn_to_black" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-run.calibrate">
+<span id="run-calibrate"></span><h2>run.calibrate<a class="headerlink" href="#module-run.calibrate" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.calibrate.run_calibrate">
+<code class="sig-prename descclassname">run.calibrate.</code><code class="sig-name descname">run_calibrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/calibrate.html#run_calibrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.calibrate.run_calibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the calibration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a file called calibrate.txt that contains the minimum black and the maximum white value for the sensors</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-run.check">
+<span id="run-check"></span><h2>run.check<a class="headerlink" href="#module-run.check" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="run.check.run_check">
+<code class="sig-prename descclassname">run.check.</code><code class="sig-name descname">run_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/check.html#run_check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.check.run_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the robot by driving the large and medium motors and flashing the color sensors</p>
+<p>Order:</p>
+<ul class="simple">
+<li><p>Large Motor left</p></li>
+<li><p>Large Motor left</p></li>
+<li><p>Medium Motor left</p></li>
+<li><p>Medium Motor left</p></li>
+<li><p>Color Sensor left</p></li>
+<li><p>Color Sensor right</p></li>
+<li><p>Color Sensor back</p></li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">City Runs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.led">run.led</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.turn_to_black">run.turn_to_black module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.calibrate">run.calibrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-run.check">run.check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lego</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">City Runs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.led">run.led</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.turn_to_black">run.turn_to_black module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.calibrate">run.calibrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-run.check">run.check</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="0_menu.html" title="previous chapter">Menu</a></li>
+      <li>Next: <a href="spockbots.html" title="next chapter">Spockbots API</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/run.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
