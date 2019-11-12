@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Design &#8212; Spockbots 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="mechanics.html" />
+    <link rel="prev" title="Python" href="python.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="design">
+<h1>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goals-for-using-python">
+<h2>Goals for using Python<a class="headerlink" href="#goals-for-using-python" title="Permalink to this headline">¶</a></h2>
+<p>Our main goal this year was to learn Python.</p>
+<p>Previously we used Mindstorms GUI and developed a sophisticated library with many myblocks.</p>
+<p>Questions</p>
+<ol class="arabic simple">
+<li><p>Can we convert this library into python?</p></li>
+<li><p>Would python easier than the mindstrom GUI?</p></li>
+<li><p>Would it be easier to define missions with Python?</p></li>
+<li><p>Would the robot perform well with the Python program?</p></li>
+<li><p>What general reasosn are there for and against Python?</p></li>
+</ol>
+<p>Previous Mindstorm GUI programs</p>
+<ul class="simple">
+<li><p>We had an library developed in Mindstorm GUI with
+many myBlocks that we used previously to develop code.
+Can they be redeveloped in Python?</p></li>
+<li><p>We had some issues with using Bluetooth between Mac
+and the robot in Mindstorm. Is this improved in Python</p></li>
+<li><p>In contrast to Windows, the GUI on Mac seems slower.
+Is the development in python faster?</p></li>
+<li><p>We often ran out of screen space as the programs were long.
+Does using python help?</p></li>
+<li><p>We had some issues with the Gyro and light sensors
+in the mindstor GUI. Do these issues occur also in python?</p></li>
+</ul>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Mindtsorm GUI Issues</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 35%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Winner</p></th>
+<th class="head"><p>Mindstorm</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bluetooth on Mac</p></td>
+<td><p>Python</p></td>
+<td><p>Connection could often not be done easily</p></td>
+<td><p>No issues</p></td>
+</tr>
+<tr class="row-odd"><td><p>MyBlocks definition</p></td>
+<td><p>Python</p></td>
+<td><p>Complicated to define, if you make an error in
+the parameters one needs to start over.</p></td>
+<td><p>With functions easy to define and correct</p></td>
+</tr>
+<tr class="row-even"><td><p>Gyro Drift</p></td>
+<td><p>Neither</p></td>
+<td><p>Gyro needs to be plugged in and out to avoid drift</p></td>
+<td><p>Gyro needs to be plugged in and out to avoid drift</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gyro Reset</p></td>
+<td><p>Neither</p></td>
+<td><p>Reset requires a time delay</p></td>
+<td><p>Reset requires a time delay.</p></td>
+</tr>
+<tr class="row-even"><td><p>Color Sensor No value</p></td>
+<td><p>Python</p></td>
+<td><p>Sometimes the color sensor has no value.
+We did not have a fix for that.</p></td>
+<td><p>Easy to fix in python while using the previous value.
+Comes back quickly</p></td>
+</tr>
+<tr class="row-odd"><td><p>Color Sensor reset with mor than one sensor</p></td>
+<td><p>Python</p></td>
+<td><p>Not available</p></td>
+<td><p>We implemented this so that all color sensors return always values
+between 0 -100, this helps line following.</p></td>
+</tr>
+<tr class="row-even"><td><p>Editor</p></td>
+<td><p>Equal</p></td>
+<td><p>GUI is intuitive to undertand but has issues with myblock. Limited space, myblocks do not have names unerd them</p></td>
+<td><p>Visual code is easy a bit mor complex to understand, but once you know it writing programs is easy.
+Upload and run code with F5 is convenient</p></td>
+</tr>
+</tbody>
+</table>
+<p>Overall winner:</p>
+<blockquote>
+<div><p>Python</p>
+</div></blockquote>
+<p>What should be added to Python:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Color Sensor calibration and value code we developed that returns values between 0-100 for all sensors</p></li>
+<li><p>A test to see if the gyro is drifting</p></li>
+<li><p>A solution to avoid the unplugging of the gyro sensor</p></li>
+</ul>
+</div></blockquote>
+<p>Observations and answers:</p>
+<blockquote>
+<div><p>Gyro:</p>
+<ol class="arabic">
+<li><p>The gyro needs to be plugged in and out at the beginning
+to avoid drifting.</p>
+<p>This could not be solved in Python but we implemented a function that
+detects better if the Gyro drifts.</p>
+</li>
+<li><p>We need to have a wait till the Gyro is calm</p>
+<p>We reimplemented this not with  time delay, but a counter to see if
+the angle has changed. This could also be implemented in mindstorm GUI</p>
+</li>
+</ol>
+<p>Light Sensor:</p>
+<ol class="arabic simple">
+<li><p>sometimes the light sensor did not return a result</p></li>
+<li><p>We developed a calibration that drove over a line to
+calibrate our sensors. However, the reset block is only
+designed to use one Gyro and not 2</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="mechanical-design">
+<h2>Mechanical Design<a class="headerlink" href="#mechanical-design" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>TBD</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Spockbots</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goals-for-using-python">Goals for using Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mechanical-design">Mechanical Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">lego</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="python.html" title="previous chapter">Python</a></li>
+      <li>Next: <a href="mechanics.html" title="next chapter">&lt;no title&gt;</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Spockbots.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/design.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

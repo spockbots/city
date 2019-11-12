@@ -13,7 +13,7 @@ pdf:
 	rm -rf docs/latex
 
 pdfview:
-	open -a skim docs/latex/spockbots.pdf
+	open -a skim docs/spockbots.pdf
 
 
 view:
