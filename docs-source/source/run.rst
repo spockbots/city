@@ -1,6 +1,30 @@
 City Runs
 =========
 
+run.red_circle
+-------
+
+.. automodule:: run.red_circle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+run.tan_circle
+-------
+
+.. automodule:: run.tan_circle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+run.black_circle
+-------
+
+.. automodule:: run.black_circle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 run.crane
 ---------
 

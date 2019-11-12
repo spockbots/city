@@ -3,13 +3,15 @@ import time
 
 from pybricks import ev3brick as brick
 from pybricks.ev3devices import Motor
-from pybricks.parameters import Port
+from pybricks.parameters import Port, Button
 from pybricks.parameters import Stop, Direction
 from pybricks.robotics import DriveBase
 # from pybricks.ev3devices import ColorSensor
 # from spockbots.colorsensor import SpockbotsColorSensor
 from spockbots.colorsensor import SpockbotsColorSensors
 from spockbots.output import PRINT
+from threading import Thread
+import sys
 
 
 #######################################################
@@ -18,6 +20,19 @@ from spockbots.output import PRINT
 
 
 class SpockbotsMotor(object):
+
+    def check_kill_button(self):
+        if Button.LEFT in brick.buttons():
+            print("KILL")
+            self.beep()
+            self.beep()
+            self.beep()
+            self.beep()
+
+            self.stop()
+            self.left_medium.stop(Stop.BRAKE)
+            self.right_medium.stop(Stop.BRAKE)
+            sys.exit()
 
     def __init__(self, direction=None):
         """
@@ -76,6 +91,7 @@ class SpockbotsMotor(object):
         :return: left, right motors  and tank
 
         """
+        self.check_kill_button()
 
         if direction is None:
             self.direction = "forward"
@@ -106,7 +122,6 @@ class SpockbotsMotor(object):
         :return: the reflective color value
 
         """
-
         return self.colorsensor[port].light()
 
     def reset(self):
@@ -219,6 +234,7 @@ class SpockbotsMotor(object):
         :param brake: one of the values brake, hold, coast
 
         """
+        self.check_kill_button()
 
         PRINT("Forward", speed, distance, brake)
 
@@ -247,6 +263,7 @@ class SpockbotsMotor(object):
         :param speed_right: speed of the right motor
 
         """
+        self.check_kill_button()
 
         PRINT("on_forever", speed_left, speed_right)
         self.reset()
@@ -263,6 +280,7 @@ class SpockbotsMotor(object):
         :param angle: angle of turn
 
         """
+        self.check_kill_button()
 
         PRINT("Turn", speed, angle)
 
@@ -311,6 +329,7 @@ class SpockbotsMotor(object):
         :param black: value of black
 
         """
+        self.check_kill_button()
 
         PRINT("turntoblack", speed, direction, port, black)
 
@@ -337,6 +356,7 @@ class SpockbotsMotor(object):
         :param white: value of white
 
         """
+        self.check_kill_button()
 
         PRINT("turntowhite", speed, direction, port, white)
 
@@ -359,6 +379,7 @@ class SpockbotsMotor(object):
         :param black: value of black
 
         """
+        self.check_kill_button()
 
         PRINT("aligntoblack", speed, port_left, port_right, black)
 
@@ -390,6 +411,7 @@ class SpockbotsMotor(object):
         :param white: value of white
 
         """
+        self.check_kill_button()
 
         PRINT("aligntoblack", speed, port_left, port_right, white)
 
@@ -421,11 +443,12 @@ class SpockbotsMotor(object):
         :param black: value of black
 
         """
+        self.check_kill_button()
 
         PRINT("gotoblack", speed, port, black)
 
-        self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
-        self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
+        # self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
+        # self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
         self.on(speed, 0)
         while self.light(port) > black:
@@ -444,6 +467,7 @@ class SpockbotsMotor(object):
         :param white: value of white
 
         """
+        self.check_kill_button()
 
         PRINT("gotowhite", speed, port, white)
 
@@ -464,6 +488,7 @@ class SpockbotsMotor(object):
         :param black: value of black
 
         """
+        self.check_kill_button()
 
         PRINT("gotocolor", speed, port, colors)
 
@@ -506,6 +531,7 @@ class SpockbotsMotor(object):
         :param factor: factor of adjustment, controls smoothness
 
         """
+        self.check_kill_button()
 
         if right:
             f = 1.0
@@ -522,6 +548,7 @@ class SpockbotsMotor(object):
         self.reset()
 
         while True:
+            self.check_kill_button()
             value = self.light(port)  # get the light value
 
             # correction = delta + (factor * value)
@@ -568,6 +595,7 @@ class SpockbotsMotor(object):
         :param direction: direction of calibration
 
         """
+        self.check_kill_button()
 
         self.reset()
         self.on(speed, 0)
@@ -589,9 +617,9 @@ class SpockbotsMotor(object):
                   self.colorsensor[i].black,
                   self.colorsensor[i].white)
 
-    #followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)
+    # followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)
     def followline_pid(self,
-                       debug = False,
+                       debug=False,
                        distance=None,  # distance in cm
                        t=None,
                        right=True,  # the side on which to follow the line
@@ -599,6 +627,7 @@ class SpockbotsMotor(object):
                        stop_values=None,  # [4,5]
                        stop_color_mode=None,  # color, reflective
                        port=3, speed=25, black=0, white=100, kp=0.3, ki=0.0, kd=0.0):
+        self.check_kill_button()
 
         if right:
             f = 1.0
@@ -623,6 +652,7 @@ class SpockbotsMotor(object):
 
         print("kp=", kp, "ki=", ki, "kd=", kd)
         while True:
+            self.check_kill_button()
             try:
                 value = self.light(port)  # get the light value
 
@@ -632,9 +662,7 @@ class SpockbotsMotor(object):
 
                 correction = f * kp * error + ki * integral + kd * derivative
 
-
                 lasterror = error
-
 
                 self.on(speed, correction)
                 # switch the steering on with the given correction and speed
@@ -649,13 +677,14 @@ class SpockbotsMotor(object):
 
                 if debug:
                     if correction > 0.0:
-                        bar = str(30 * ' ') +  str('█' * int(correction))
+                        bar = str(30 * ' ') + str('█' * int(correction))
                     elif correction < 0.0:
                         bar = ' ' * int(30 + correction) + '█' * int(abs(correction))
                     else:
                         bar = 60 * ' '
 
-                    print("{:4.2f} {:4.2f} {:4.2f} {:3d} {}".format(correction, traveled, current -loop_start_time, value, bar))
+                    print("{:4.2f} {:4.2f} {:4.2f} {:3d} {}".format(correction, traveled, current - loop_start_time,
+                                                                    value, bar))
 
                 if t is not None and current > end_time:
                     break  # leave the loopK
@@ -671,7 +700,6 @@ class SpockbotsMotor(object):
                     if value in stop_values:
                         break  # leave the loop
             except Exception as e:
-                print (e)
+                print(e)
                 break
         self.stop()  # stop the robot
-

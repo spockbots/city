@@ -10,6 +10,10 @@ from pybricks.tools import wait
 
 from run.crane import run_crane
 from run.swing import run_swing
+from run.black_circle import run_black_circle
+from run.red_circle import run_red_circle
+from run.tan_circle import run_tan_circle
+
 from run.led import run_led
 from run.calibrate import run_calibrate
 from run.check import run_check
@@ -20,11 +24,13 @@ from pybricks import ev3brick as brick
 # brick.display.text(text)
 
 menu = [
-    [0, "Crane", 40, 10, run_crane],
-    [1, "Swing", 40, 20, run_swing],
-    [2, "Red Building", 40, 30, run_led],
-    [3, "LED", 40, 40, run_led],
-    [4, "Turn to black", 40, 50, run_turn_to_black]
+    ["Crane", run_crane],
+    ["Swing", run_swing],
+    ["Red Building", run_red_building],
+    ["Tan Building", run_tan_building],
+    ["Black/White Building", run_black_building],
+    ["LED", run_led],
+    ["Turn to black", run_turn_to_black]
 ]
 
 selection = 0
@@ -47,12 +53,13 @@ def print_menu():
     :return:
     """
     brick.display.clear()
+    i = 0
     for line in menu:
-        i = line[0]
-        text = line[1]
-        x = line[2]
-        y = line[3]
+        text = line[0]
+        x = 40
+        y = i * 10 + 10
         brick.display.text(text, (x, y))
+        i = i + 1
     marker(selection)
 
 
