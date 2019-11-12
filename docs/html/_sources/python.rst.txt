@@ -1,9 +1,5 @@
-*********
-Python
-*********
-
 Variables
----------
+=========
 
 Variables allow storing of data values. This is the same as
 the EV3 GUI variable
@@ -14,7 +10,7 @@ Example::
     y = 10
 
 Lists
------
+=====
 
 This is the same as the array in EV3 GUI.
 
@@ -24,7 +20,7 @@ Lists store multiple data values::
     vector = [5, 10]
 
 Functions
----------
+=========
 
 A function is a block of code which only runs when it
 is called. It may return a value and can have parameters.
@@ -37,7 +33,7 @@ This is the same as a myblock, but easier to write and modify::
         print("Message", message)
 
 Classes
--------
+=======
 
 With classes we can group functions and variables conveniently into an object.
 an object is just like a variable that uses the class as template. we can call
@@ -65,7 +61,7 @@ object from the template::
 
 
 Conditions
-----------
+==========
 
 Conditions allow is to react if a value is tru or false. It is the same
 as in EV3 GUI but easier to write::
@@ -78,7 +74,7 @@ as in EV3 GUI but easier to write::
         print("he is exactly 180cm")
 
 Loops
------
+=====
 
 We used while and for loops the repeat an indented block of code. While loops can
 also loop over elements in a list easily.
@@ -131,7 +127,7 @@ Loop through a list
     # 3
 
 Import
-------
+======
 When we create code in separate files they can be made known within a
 program while importing the functions, classes, or variables. This
 allows us to organize the code while grouping topical code into a file.
@@ -142,7 +138,7 @@ allows us to organize the code while grouping topical code into a file.
     from time import sleep
 
 Program
--------
+=======
 
 A program can be executed in a terminal on teh EV3 brick. It must be executable.
 Let us assume the following core it in the file `run_led.py`.

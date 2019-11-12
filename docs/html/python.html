@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Python &#8212; Spockbots 1.0 documentation</title>
+    <title>Variables &#8212; Spockbots 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,10 +32,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="python">
-<h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="variables">
-<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h1>
 <p>Variables allow storing of data values. This is the same as
 the EV3 GUI variable</p>
 <p>Example:</p>
@@ -45,7 +43,7 @@ the EV3 GUI variable</p>
 </div>
 </div>
 <div class="section" id="lists">
-<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<h1>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
 <p>This is the same as the array in EV3 GUI.</p>
 <p>Lists store multiple data values:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
@@ -54,7 +52,7 @@ the EV3 GUI variable</p>
 </div>
 </div>
 <div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
 <p>A function is a block of code which only runs when it
 is called. It may return a value and can have parameters.
 This is the same as a myblock, but easier to write and modify:</p>
@@ -67,7 +65,7 @@ This is the same as a myblock, but easier to write and modify:</p>
 </div>
 </div>
 <div class="section" id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<h1>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h1>
 <p>With classes we can group functions and variables conveniently into an object.
 an object is just like a variable that uses the class as template. we can call
 all variables and functions on this object. Functions in a class are called methods.
@@ -94,7 +92,7 @@ object from the template:</p>
 </div>
 </div>
 <div class="section" id="conditions">
-<h2>Conditions<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h2>
+<h1>Conditions<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h1>
 <p>Conditions allow is to react if a value is tru or false. It is the same
 as in EV3 GUI but easier to write:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">seric</span><span class="o">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="mi">180</span><span class="p">:</span>
@@ -107,18 +105,18 @@ as in EV3 GUI but easier to write:</p>
 </div>
 </div>
 <div class="section" id="loops">
-<h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<h1>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h1>
 <p>We used while and for loops the repeat an indented block of code. While loops can
 also loop over elements in a list easily.</p>
 <div class="section" id="loop-forever">
-<h3>Loop forever<a class="headerlink" href="#loop-forever" title="Permalink to this headline">¶</a></h3>
+<h2>Loop forever<a class="headerlink" href="#loop-forever" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I loop forever&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="loop-with-condition">
-<h3>Loop with condition<a class="headerlink" href="#loop-with-condition" title="Permalink to this headline">¶</a></h3>
+<h2>Loop with condition<a class="headerlink" href="#loop-with-condition" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
     <span class="nb">print</span> <span class="p">(</span><span class="n">counter</span><span class="p">)</span>
@@ -131,7 +129,7 @@ also loop over elements in a list easily.</p>
 </div>
 </div>
 <div class="section" id="loop-with-break">
-<h3>Loop with break<a class="headerlink" href="#loop-with-break" title="Permalink to this headline">¶</a></h3>
+<h2>Loop with break<a class="headerlink" href="#loop-with-break" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="nb">print</span> <span class="p">(</span><span class="n">counter</span><span class="p">)</span>
@@ -145,7 +143,7 @@ also loop over elements in a list easily.</p>
 </div>
 </div>
 <div class="section" id="loop-through-a-list">
-<h3>Loop through a list<a class="headerlink" href="#loop-through-a-list" title="Permalink to this headline">¶</a></h3>
+<h2>Loop through a list<a class="headerlink" href="#loop-through-a-list" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="simple">
 <dt>for counter in [1,2,3]:</dt><dd><p>print (counter)</p>
@@ -158,7 +156,7 @@ also loop over elements in a list easily.</p>
 </div>
 </div>
 <div class="section" id="import">
-<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<h1>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h1>
 <p>When we create code in separate files they can be made known within a
 program while importing the functions, classes, or variables. This
 allows us to organize the code while grouping topical code into a file.</p>
@@ -168,7 +166,7 @@ allows us to organize the code while grouping topical code into a file.</p>
 </div>
 </div>
 <div class="section" id="program">
-<h2>Program<a class="headerlink" href="#program" title="Permalink to this headline">¶</a></h2>
+<h1>Program<a class="headerlink" href="#program" title="Permalink to this headline">¶</a></h1>
 <p>A program can be executed in a terminal on teh EV3 brick. It must be executable.
 Let us assume the following core it in the file <cite>run_led.py</cite>.
 we make it executable with:</p>
@@ -198,7 +196,6 @@ we make it executable with:</p>
 <p>The if __name__ line tells us to run the next lines (e.g. the function)
 as functions are not run when we define them.</p>
 </div>
-</div>
 
 
           </div>
@@ -218,23 +215,22 @@ as functions are not run when we define them.</p>
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Python</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lists">Lists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conditions">Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#loop-forever">Loop forever</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loop-with-condition">Loop with condition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loop-with-break">Loop with break</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loop-through-a-list">Loop through a list</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#lists">Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conditions">Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#loops">Loops</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loop-forever">Loop forever</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loop-with-condition">Loop with condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loop-with-break">Loop with break</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loop-through-a-list">Loop through a list</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#import">Import</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#program">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#import">Import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#program">Program</a></li>
 </ul>
-</li>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>

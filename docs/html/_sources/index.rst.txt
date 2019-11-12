@@ -3,12 +3,21 @@
 Spockbots City
 ==============
 
-Spockbots API
+Python
+======
+
+We show how simple it is to program in python with some examples.
+
+.. toctree::
+
+    python
+
+
+Spockbots Robot
 ==============
 
 .. toctree::
 
-   python
    design
    mechanics
    0_menu

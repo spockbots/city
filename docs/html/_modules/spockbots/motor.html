@@ -55,6 +55,11 @@
 <div class="viewcode-block" id="SpockbotsMotor"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsMotor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
 <div class="viewcode-block" id="SpockbotsMotor.check_kill_button"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.check_kill_button">[docs]</a>    <span class="k">def</span> <span class="nf">check_kill_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This will stop all motors  and finish the program.</span>
+<span class="sd">        It can be used in the programs to check if the program should be</span>
+<span class="sd">        finished early du to an error in the runs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Button</span><span class="o">.</span><span class="n">LEFT</span> <span class="ow">in</span> <span class="n">brick</span><span class="o">.</span><span class="n">buttons</span><span class="p">():</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KILL&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
@@ -64,8 +69,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">left_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -755,7 +759,16 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#lists">Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#functions">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#classes">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#conditions">Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#loops">Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#import">Import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python.html#program">Program</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
