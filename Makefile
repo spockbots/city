@@ -6,7 +6,7 @@ simple: html
 html:
 	mkdir -p docs-source/source/src
 	# cd lego; sphinx-apidoc  -f -o ../docs-source/source/ .
-	rm -rf docs/html
+	# rm -rf docs/html
 	cd docs-source; make html
 
 pdf:

@@ -129,8 +129,6 @@ Observations and answers:
 
 
 
-Mechanical Design
------------------
 
-* TBD
+
 
