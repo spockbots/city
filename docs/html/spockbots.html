@@ -370,20 +370,6 @@ the sensor on the given port.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="spockbots.motor.SpockbotsMotor.light">
-<code class="sig-name descname">light</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.light"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.light" title="Permalink to this definition">¶</a></dt>
-<dd><p>return the reflective color sensor value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>port</strong> – the port number of the color sensor</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the reflective color value</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="spockbots.motor.SpockbotsMotor.on">
 <code class="sig-name descname">on</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">steering=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.on" title="Permalink to this definition">¶</a></dt>
 <dd><p>turns the large motors on while using steering.</p>
@@ -491,6 +477,20 @@ for a distance based on the angle.</p>
 <li><p><strong>port</strong> – port of color sensor</p></li>
 <li><p><strong>white</strong> – value of white</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the reflective color sensor value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>port</strong> – the port number of the color sensor</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the reflective color value</p>
 </dd>
 </dl>
 </dd></dl>
@@ -625,13 +625,14 @@ for a distance based on the angle.</p>
 <dt id="spockbots.colorsensor.SpockbotsColorSensor">
 <em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensor</code><span class="sig-paren">(</span><em class="sig-param">port=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>defines</p>
+<p>defines a Colorsensor with values between 0 and 100</p>
 <dl class="method">
 <dt id="spockbots.colorsensor.SpockbotsColorSensor.color">
 <code class="sig-name descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.color" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>returns the color value</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>the color value</p>
 </dd>
 </dl>
 </dd></dl>
@@ -651,16 +652,6 @@ sensor</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.light">
-<code class="sig-name descname">light</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.light"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.light" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="spockbots.colorsensor.SpockbotsColorSensor.read">
 <code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>reads the color sensor data form the file
@@ -670,9 +661,10 @@ sensor</p>
 <dl class="method">
 <dt id="spockbots.colorsensor.SpockbotsColorSensor.reflection">
 <code class="sig-name descname">reflection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.reflection" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>gets the reflection from the sensor</p>
+<dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>the original reflective lit value without</p>
 </dd>
 </dl>
 </dd></dl>
@@ -693,8 +685,8 @@ sensor</p>
 <dl class="method">
 <dt id="spockbots.colorsensor.SpockbotsColorSensor.value">
 <code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads the current value mapped between 0 and 100
-:return:</p>
+<dd><p>reads the current value mapped b&lt;etween 0 and 100
+:return: returns the reflective light mapped between 0 to 100</p>
 </dd></dl>
 
 <dl class="method">

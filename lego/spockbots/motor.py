@@ -22,6 +22,11 @@ import sys
 class SpockbotsMotor(object):
 
     def check_kill_button(self):
+        """
+        This will stop all motors  and finish the program.
+        It can be used in the programs to check if the program should be
+        finished early du to an error in the runs.
+        """
         if Button.LEFT in brick.buttons():
             print("KILL")
             self.beep()
@@ -32,7 +37,6 @@ class SpockbotsMotor(object):
             self.stop()
             self.left_medium.stop(Stop.BRAKE)
             self.right_medium.stop(Stop.BRAKE)
-            sys.exit()
 
     def __init__(self, direction=None):
         """
@@ -114,7 +118,7 @@ class SpockbotsMotor(object):
 
         return self.left, self.right, self.tank
 
-    def light(self, port):
+    def value(self, port):
         """
         return the reflective color sensor value.
 
@@ -122,7 +126,7 @@ class SpockbotsMotor(object):
         :return: the reflective color value
 
         """
-        return self.colorsensor[port].light()
+        return self.colorsensor[port].value()
 
     def reset(self):
         """
@@ -338,7 +342,7 @@ class SpockbotsMotor(object):
         else:
             self.right.run(speed * 10)
 
-        while self.light(port) > black:
+        while self.value(port) > black:
             pass
         self.stop()
 
@@ -365,7 +369,7 @@ class SpockbotsMotor(object):
         else:
             self.right.run(speed * 10)
 
-        while self.light(port) < white:
+        while self.value(port) < white:
             pass
         self.stop()
 
@@ -388,8 +392,8 @@ class SpockbotsMotor(object):
         right_finished = False
 
         while not (left_finished and right_finished):
-            left_light = self.light(port_left)
-            right_light = self.light(port_right)
+            left_light = self.value(port_left)
+            right_light = self.value(port_right)
             PRINT("Light", left_light, right_light)
             if left_light < black:
                 self.left.stop(Stop.BRAKE)
@@ -420,8 +424,8 @@ class SpockbotsMotor(object):
         right_finished = False
 
         while not (left_finished and right_finished):
-            left_light = self.light(port_left)
-            right_light = self.light(port_right)
+            left_light = self.value(port_left)
+            right_light = self.value(port_right)
             PRINT("Light", left_light, right_light)
             if left_light > white:
                 self.left.stop(Stop.BRAKE)
@@ -451,7 +455,7 @@ class SpockbotsMotor(object):
         # self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
         self.on(speed, 0)
-        while self.light(port) > black:
+        while self.value(port) > black:
             pass
         self.stop()
 
@@ -472,7 +476,7 @@ class SpockbotsMotor(object):
         PRINT("gotowhite", speed, port, white)
 
         self.on(speed, 0)
-        while self.light(port) < white:
+        while self.value(port) < white:
             pass
         self.stop()
 
@@ -549,7 +553,7 @@ class SpockbotsMotor(object):
 
         while True:
             self.check_kill_button()
-            value = self.light(port)  # get the light value
+            value = self.value(port)  # get the light value
 
             # correction = delta + (factor * value)
             # calculate the correction for steering
@@ -578,7 +582,7 @@ class SpockbotsMotor(object):
                     value = self.colorsensor[port].sensor.color()
                     # value = self.colorsensor[port].sensor.rgb()
                 elif stop_color_mode == "reflective":
-                    value = self.colorsensor[port].light()
+                    value = self.colorsensor[port].value()
                 print("VALUE", value)
                 if value in stop_values:
                     break  # leave the loop
@@ -654,7 +658,7 @@ class SpockbotsMotor(object):
         while True:
             self.check_kill_button()
             try:
-                value = self.light(port)  # get the light value
+                value = self.value(port)  # get the light value
 
                 error = midpoint - value
                 integral = error + integral
@@ -695,7 +699,7 @@ class SpockbotsMotor(object):
                         value = self.colorsensor[port].sensor.color()
                         # value = self.colorsensor[port].sensor.rgb()
                     elif stop_color_mode == "reflective":
-                        value = self.colorsensor[port].light()
+                        value = self.colorsensor[port].value()
                     print("VALUE", value)
                     if value in stop_values:
                         break  # leave the loop

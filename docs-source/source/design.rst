@@ -39,7 +39,7 @@ Previous Mindstorm GUI programs
   in the mindstor GUI. Do these issues occur also in python?
 
 
-.. list-table:: Mindtsorm GUI Issues
+.. list-table:: Python and Mindtsorm GUI comparison
    :widths: 20 10 35 35
    :width: 100
    :header-rows: 1

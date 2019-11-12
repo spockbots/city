@@ -9,7 +9,7 @@ from pybricks.parameters import Port
 
 class SpockbotsColorSensor:
     """
-    defines
+    defines a Colorsensor with values between 0 and 100
     """
 
     def __init__(self, port=3):
@@ -53,29 +53,24 @@ class SpockbotsColorSensor:
 
     def reflection(self):
         """
+        gets the reflection from the sensor
 
-        :return:
+        :return: the original reflective lit value without
         """
         return self.sensor.reflection()
 
-    def light(self):
-        """
-
-        :return:
-        """
-        return self.value()
-
     def color(self):
         """
+        returns the color value
 
-        :return:
+        :return: the color value
         """
         return self.sensor.color()
 
     def value(self):
         """
-        reads the current value mapped between 0 and 100
-        :return:
+        reads the current value mapped b<etween 0 and 100
+        :return: returns the reflective light mapped between 0 to 100
         """
         val = self.sensor.reflection()
         b = self.black

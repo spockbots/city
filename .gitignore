@@ -1,3 +1,4 @@
+*.pickle
 .idea
 .DS*
 # Byte-compiled / optimized / DLL files
