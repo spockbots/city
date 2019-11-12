@@ -60,7 +60,6 @@ def run_swing():
 
     robot.followline_pid(distance=77, speed=10, kp=0.30, ki=0.0, kd=0.0)
 
-
     robot.forward(10, 5)
 
     # turn to knock out strut and place building

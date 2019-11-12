@@ -8,6 +8,7 @@ Spockbots API
 
 .. toctree::
 
+   python
    design
    mechanics
    0_menu

@@ -24,8 +24,7 @@ def run_color():
     print(robot)
 
     while True:
-        color = robot.colorsensor[3].sensor.color()
-        print(color)
+        color = robot.colorsensor.test_color()
         time.sleep(0.1)
 
 if __name__ == "__main__":

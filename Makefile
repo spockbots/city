@@ -9,6 +9,8 @@ all:
 
 pdf:
 	cd docs-source; make latexpdf
+	mv docs/latex/spockbots.pdf docs
+	rm -rf docs/latex
 
 pdfview:
 	open -a skim docs/latex/spockbots.pdf

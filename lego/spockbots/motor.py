@@ -677,9 +677,9 @@ class SpockbotsMotor(object):
 
                 if debug:
                     if correction > 0.0:
-                        bar = str(30 * ' ') + str('█' * int(correction))
+                        bar = str(30 * ' ') + str('#' * int(correction))
                     elif correction < 0.0:
-                        bar = ' ' * int(30 + correction) + '█' * int(abs(correction))
+                        bar = ' ' * int(30 + correction) + '#' * int(abs(correction))
                     else:
                         bar = 60 * ' '
 
