@@ -15,16 +15,7 @@ robot.color.read()
 print(robot)
 
 gyro = Gyro(robot)
-# gyro.connect()
-gyro.reset()
-if gyro.still():
-    PRINT("ROBOT STILL")
-else:
-    PRINT("ROBOT DRIFT")
-    led("RED")
-    robot.beep()
-    robot.beep()
-    robot.beep()
+gyro.setup()
 
 # from importlib import reload
 

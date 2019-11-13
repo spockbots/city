@@ -117,6 +117,13 @@ def flash(colors=["RED", "BLACK", "RED", "BLACK", "GREEN"],
     beep()
 
 
+def signal(t=0.05, pitch=1500, duration=300):
+    for i in [1,2,3]:
+        led("YELLOW")
+        sleep(t)
+        led("RED")
+        sound(pitch=pitch, duration=duration)
+
 #######################################################
 # LCD
 #######################################################

@@ -1,6 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 
-from spockbots.gyro import SpockbotsGyro
+from spockbots.gyro import SpockbotsGyro as Gyro
 # from spockbots.systemgyro import Gyro
 
 
@@ -16,11 +16,7 @@ from spockbots.output import PRINT
 
 def run_gyro():
     gyro = Gyro(1)
-    gyro.reset()
-    if gyro.still():
-        PRINT("ROBOT STILL")
-    else:
-        PRINT("ROBOT DRIFT")
+    gyro.setup()
 
     # gyro.test(30)
     # gyro.reset()

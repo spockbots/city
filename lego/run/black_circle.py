@@ -2,6 +2,7 @@
 
 from spockbots.motor import SpockbotsMotor
 from time import sleep
+from spockbots.gyro import SpockbotsGyro as Gyro
 
 
 def run_black_circle():
@@ -13,10 +14,19 @@ def run_black_circle():
 
     robot.setup()
     robot.color.read()
-
     print(robot)
 
-    robot.forward(30,48)
+    #
+    # setup gyro
+    #
+    gyro = Gyro(robot)
+    gyro.setup()
+
+    gyro.forward(30,48)
+
+    #
+    # does not need to be that accurate just bo back
+    #
     robot.forward(10,-15)
     robot.forward(50, -30)
 

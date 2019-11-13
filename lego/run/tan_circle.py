@@ -21,17 +21,7 @@ def run_tan_circle():
     # setup gyro
     #
     gyro = Gyro(robot)
-    # gyro.connect()
-    gyro.reset()
-    if gyro.still():
-        PRINT("ROBOT STILL")
-    else:
-        PRINT("ROBOT DRIFT")
-        led("RED")
-        robot.beep()
-        robot.beep()
-        robot.beep()
-
+    gyro.setup()
 
     # move a long distance
     robot.forward(30,85)

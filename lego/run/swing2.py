@@ -27,16 +27,7 @@ def run_swing():
     # setup gyro
     #
     gyro = Gyro(robot)
-    # gyro.connect()
-    gyro.reset()
-    if gyro.still():
-        PRINT("ROBOT STILL")
-    else:
-        PRINT("ROBOT DRIFT")
-        led("RED")
-        robot.beep()
-        robot.beep()
-        robot.beep()
+    gyro.setup()
 
     dt = 1.0
 
@@ -60,8 +51,12 @@ def run_swing():
 
     robot.followline_pid(distance=77, speed=10, kp=0.30, ki=0.0, kd=0.0)
 
-    robot.forward(10, 5)
 
+    robot.forward(10, 4)
+    robot.gotocolor(speed=10, port=2, colors=[6])
+
+    #robot.forward(10, 8)
+    """
     # turn to knock out strut and place building
     robot.turn(25,45)
 
@@ -73,6 +68,13 @@ def run_swing():
     # find the black line
 
     robot.turntoblack(25, direction="left", port=2)
+
+
+    """
+
+
+
+
 
     """
     robot.forward(70, 10)

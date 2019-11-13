@@ -5,7 +5,7 @@ from time import sleep
 from pybricks.ev3devices import GyroSensor
 from pybricks.parameters import Direction
 from pybricks.parameters import Port
-
+from spockbots.output import led, PRINT, beep, sound, signal
 
 #######################################################
 # Gyro
@@ -28,6 +28,8 @@ class SpockbotsGyro(object):
     #        from the sensor
 
     # This code fixes it.
+
+
 
     def __init__(self, robot, port=1):
         """
@@ -67,10 +69,11 @@ class SpockbotsGyro(object):
                 self.sensor.reset_angle(0)
                 found = True
             except Exception as e:
-                print(e)
+                signal()
+                beep()
                 if "No such sensor on Port" in str(e):
                     print()
-                    print("ERROR: THe Gyro Sensor is disconnected")
+                    print("ERROR: The Gyro Sensor is disconnected")
                     print()
                     sys.exit()
 
@@ -88,7 +91,7 @@ class SpockbotsGyro(object):
         try:
             s = self.sensor.speed()
             a = self.sensor.angle()
-            print("AS", a, s)
+            print("Gyro",  "angle", a, "speed", s)
             self.last_angle = a
         except:
             print("Gyro read error")
@@ -178,17 +181,61 @@ class SpockbotsGyro(object):
         self.last_angle = angle
         print("Gyro Angle, final: ", angle)
 
-    def turn(self, speed=25, degrees=90):
+    def setup(self):
+        self.reset()
+        if self.still():
+            PRINT("ROBOT STILL")
+            led("GREEN")
+        else:
+            PRINT("ROBOT DRIFT")
+            led("RED")
+            self.robot.beep()
+            self.robot.beep()
+            self.robot.beep()
+
+    def turn(self, speed=25, degrees=90, offset=None):
         """
-        uses gyro to turn positive to right negative to left
+        uses gyro to turn positive to right negative to left. As it may turn too much, it
+        will correct itself at a lower speed and turn. As the sensor is accurate to 2 degrees,
+        we only do the correction if the robot is more than two degrees off.
+
         :param speed: speed it turns at
         :param degrees: degrees it turns
         :return:
         """
-        if degrees < 0:
-            self.left(speed=speed, degrees=abs(degrees))
-        elif degrees > 0:
-            self.right(speed=speed, degrees=abs(degrees))
+
+        if offset is None:
+            if speed == 50:
+                offset = 45
+            elif speed == 25:
+                offset = 17
+            else:
+                offset = 0
+
+        if degrees < 0: # Turn LEFT
+
+            self.left(speed=speed, degrees=abs(degrees), offset=offset)
+            # correct if angle is wrong
+            angle = self.angle()
+            if abs(angle - degrees) > 2:
+                if angle < degrees: # correct if angle is wrong
+                    self.right(speed=5, degrees=abs(degrees - angle))
+                elif angle > degrees:
+                    self.left(speed=5, degrees=abs(degrees - angle))
+
+        elif degrees > 0: # Turn RIGHT
+
+            self.right(speed=speed, degrees=abs(degrees), offset=offset)
+            # correct if angle is wrong
+            angle = self.angle()
+            if abs(angle - degrees) > 2:
+                if angle > degrees:
+                    self.left(speed=5, degrees=abs(degrees - angle))
+                elif angle < degrees:
+                    self.right(speed=5, degrees=abs(degrees - angle))
+
+        angle = self.angle()
+        print(angle)
 
     def left(self, speed=25, degrees=90, offset=0):
         """
@@ -214,6 +261,8 @@ class SpockbotsGyro(object):
             # print(angle, -degrees + offset)
             angle = self.angle()
         self.robot.stop()
+        angle = self.angle()
+        print("LEFT", angle)
 
     def right(self, speed=25, degrees=90, offset=0):
         """
@@ -238,15 +287,19 @@ class SpockbotsGyro(object):
             # print(angle, degrees - offset)
             angle = self.angle()
         self.robot.stop()
+        angle = self.angle()
+        print("RIGHT", angle)
 
 
     def forward(self,
-                speed=25,  # speed 0 - 100
+                speed=10,  # speed 0 - 100
                 distance=None,  # distance in cm
                 t=None,
+                min_speed=1,
+                acceleration=2,
                 port=1,  # the port number we use to follow the line
-                delta=-35,  # control smoothness
-                factor=0.4):  # parameters to control smoothness
+                delta=-180,  # control smoothness
+                factor=0.01):  # parameters to control smoothness
         """
         Moves forward
 
@@ -256,13 +309,17 @@ class SpockbotsGyro(object):
         :param port: The port number of the Gyro sensor
         :param delta: controlling the smoothness of the line
         :param factor: controlling the smoothness of the line
-        :return:
+
+        Examples:
+
+        gyro.forward(50, distance=30, factor=0.005)
+
         """
 
-        if right:
-            f = 1.0
-        else:
-            f = - 1.0
+        current_speed = min_speed
+
+        if self.robot.check_kill_button():
+            return
 
         if distance is not None:
             distance = 10 * distance
@@ -271,25 +328,27 @@ class SpockbotsGyro(object):
         if t is not None:
             end_time = current + t  # the end time
 
+        self.robot.reset()
         self.reset()
-
         while True:
+            if self.robot.check_kill_button():
+                return
             value = self.angle()  # get the Gyro angle value
 
             # correction = delta + (factor * value)
             # calculate the correction for steering
-            correction = f * factor * (value + delta)
+            correction = factor * (value + delta) / 180.0 * 100.0
 
-            self.on(speed, correction)  # switch the steering on
+            self.robot.on(current_speed, correction)  # switch the steering on
                            # with the given correction and speed
 
             # if the time is used we set run to false once
             #        the end time is reached
             # if the distance is greater than the
             #        position than the leave the
-            distance_angle = self.left.angle()
+            distance_angle = self.robot.left.angle()
 
-            traveled = self.angle_to_distance(distance_angle)
+            traveled = self.robot.angle_to_distance(distance_angle)
 
             current = time.time()  # measure the current time
             if t is not None and current > end_time:
@@ -297,4 +356,8 @@ class SpockbotsGyro(object):
             if distance is not None and distance < traveled:
                 break  # leave the loop
 
-        self.stop()  # stop the robot
+            # accelerate to make the robot start slowly to not effect the angle
+            if current_speed < speed:
+                current_speed = current_speed + acceleration
+
+        self.robot.stop()  # stop the robot

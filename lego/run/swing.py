@@ -27,16 +27,7 @@ def run_swing():
     # setup gyro
     #
     gyro = Gyro(robot)
-    # gyro.connect()
-    gyro.reset()
-    if gyro.still():
-        PRINT("ROBOT STILL")
-    else:
-        PRINT("ROBOT DRIFT")
-        led("RED")
-        robot.beep()
-        robot.beep()
-        robot.beep()
+    gyro.setup()
 
     dt = 1.0
 

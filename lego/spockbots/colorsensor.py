@@ -290,7 +290,7 @@ class SpockbotsColorSensors:
         print("")
 
         for port in ports:
-            v = self.colorsensor[port].value()
+            v = self.colorsensor[port].color()
             print("Color sensor", port, v)
         print()
 
