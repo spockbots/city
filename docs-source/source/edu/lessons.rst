@@ -12,7 +12,7 @@ activities.
 
 As a coach I put together this material so that they or even other
 teams can benefit form this information. For example I am planing to
-visit the regional St. Charles Elementary School, Bloomington, IN to
+visit the regional SElementary School to
 discuss expansion and potential adoption of the material into local
 schools. The reason we target elementary schools is taht I believe
 this material can be taught on that grade level with the help of a
