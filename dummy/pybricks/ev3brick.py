@@ -1,4 +1,5 @@
-def buttons(): pass
+def buttons():
+    return [1]
 def light(color): pass
 
 class sound:

@@ -1,6 +1,27 @@
 Lessons
 =======
 
+.. note:: PLEASE NOTE THAT ALL LIBRARY CLASSES METHODS AND FUNCTIONS HAVE PREVIOUSLY BEEN
+          DEVELOPED OVER A PERIOD OF 2 YEARS BY THE
+
+            SPOCKBOTS TEAM
+
+          USING THE MINDSORM GUI. THIS DOCUMENT HAS BEEN CREATED TO DEMONSTRATE HOW THIS
+          LIBRARY WAS CONVERTED.
+
+.. note:: However, some ideas were discussed and explicitly targeted as lessons, such as
+          how to design a more reliable GYro reset, and how to deal with the different black/white
+          values when using more than one color sensor.
+
+          We found that through structured activities such enhancements are possible
+          to be developed by the team. Guidance from the coach was integrated in the solutions.
+          Just as a teacher points out wrong problems solutions it is important for the coach to
+          provide suggestions for debugging the code. Which we have done. However, as explained in
+          the pitfalls of python some aspects are currently beyond the needed scope for the teams using
+          python and we encourace LEGO to improve their library with feedback from those having used
+          python on the EV3 extensively
+
+
 Python Programming Templates and Activities
 -------------------------------------------
 
@@ -97,8 +118,6 @@ Experiment and move the sensor over various different plaxes to measure the diff
 
 
 ::
-
-    #!/usr/bin/env pybricks-micropython
 
     from spockbots.colorsensor import SpockbotsColorSensor
     from time import sleep
@@ -271,6 +290,7 @@ Now we can use it in a program as follows to print rpeatedly the values from all
 every half second
 
 ::
+
     colorsensors = SpockbotsColorSensors(port=[2,3,4])
     colorsensors.read(port=[2,3,4])
 
@@ -280,104 +300,108 @@ every half second
                colorsensors.value(4))
         time.sleep(0.5)
 
-class SpockbotsColorSensors:
-    """
+Here is the template for the multi color sensor class
 
-    This is how we create the sensors:
+::
 
-        colorsensor = SpockbotsColorSensors(ports=[2,3,4])
-        colorsensor.read()
-
-    Now you can use
-
-        colorsensor[i].value()
-
-    to get the reflective value of the colorsensor on port i.
-    To get the color value we can use
-
-        colorsensor[i].color()
-
-    """
-
-    def __init__(self, ports=[2, 3, 4], speed=5):
+    class SpockbotsColorSensors:
         """
-        Creates the color sensors for our robot.
-        Once calibrated, the sensor values always return 0-100,
-        where 0 is black and 100 is white
 
-        :param ports: the list of ports we use on the robot for color sensors
-        :param speed: The speed for the calibration run
+        This is how we create the sensors:
+
+            colorsensor = SpockbotsColorSensors(ports=[2,3,4])
+            colorsensor.read()
+
+        Now you can use
+
+            colorsensor[i].value()
+
+        to get the reflective value of the colorsensor on port i.
+        To get the color value we can use
+
+            colorsensor[i].color()
+
         """
-        self.ports = ports
-        self.speed = speed
-        self.colorsensor = [None, None, None, None, None]
-            # in python lists start from 0 not 1
-            # so we simply do not use the first element in the list
-        # our robot uses only
-        #  colorsensor[2]
-        #  colorsensor[3]
-        #  colorsensor[4]
-        #  the ports are passed along as a list [2,3,4]
-        self.ports = ports
-        for i in ports:
-            print("SETUP COLORSENSOR", i)
-            self.colorsensor[i] = SpockbotsColorSensor(port=i)
 
-    def value(self, i):
-        """
-        returns the reflective value between 0-100 after
-        calibration on the port i
+        def __init__(self, ports=[2, 3, 4], speed=5):
+            """
+            Creates the color sensors for our robot.
+            Once calibrated, the sensor values always return 0-100,
+            where 0 is black and 100 is white
 
-        :param i: number of the port
-        :return: the reflective color value
-        """
-        # return the reflective value form the port i
+            :param ports: the list of ports we use on the robot for color sensors
+            :param speed: The speed for the calibration run
+            """
+            self.ports = ports
+            self.speed = speed
+            self.colorsensor = [None, None, None, None, None]
+                # in python lists start from 0 not 1
+                # so we simply do not use the first element in the list
+            # our robot uses only
+            #  colorsensor[2]
+            #  colorsensor[3]
+            #  colorsensor[4]
+            #  the ports are passed along as a list [2,3,4]
+            self.ports = ports
+            for i in ports:
+                print("SETUP COLORSENSOR", i)
+                self.colorsensor[i] = SpockbotsColorSensor(port=i)
 
-    def color(self, i):
-        """
-        returns the color value between 0-100 after
-        calibration on the port i
+        def value(self, i):
+            """
+            returns the reflective value between 0-100 after
+            calibration on the port i
 
-        :param i: number of the port
-        :return: The color value, blue = 2
-        """
-        # return the color value from the port i
+            :param i: number of the port
+            :return: the reflective color value
+            """
+            # return the reflective value form the port i
 
-    def write(self, ports=[2, 3, 4]):
-        """
-        writes the black and white values to the file
-        calibrate.txt
+        def color(self, i):
+            """
+            returns the color value between 0-100 after
+            calibration on the port i
 
-        :param ports: the ports used to write
-        """
-        # write the min black and maximum white to a file
+            :param i: number of the port
+            :return: The color value, blue = 2
+            """
+            # return the color value from the port i
+
+        def write(self, ports=[2, 3, 4]):
+            """
+            writes the black and white values to the file
+            calibrate.txt
+
+            :param ports: the ports used to write
+            """
+            # write the min black and maximum white to a file
 
 
-    def read(self, ports=[2, 3, 4]):
-        """
-        reads the black and white values to the file
-        calibrate.txt
+        def read(self, ports=[2, 3, 4]):
+            """
+            reads the black and white values to the file
+            calibrate.txt
 
-        The values must be written previously. If the file
-        does not exists a default is used.
-            2: 0, 100
-            3: 0, 100
-            4: 4, 40    # because it is higher up so white does
-                          not read that well
-        """
-        #
-        # loop over the ports and read in the values from the file
-        #
+            The values must be written previously. If the file
+            does not exists a default is used.
+                2: 0, 100
+                3: 0, 100
+                4: 4, 40    # because it is higher up so white does
+                              not read that well
+            """
+            #
+            # loop over the ports and read in the values from the file
+            #
 
-    def flash(self, ports=[2, 3, 4]):
-        """
-        Flashes the light sensor on teh ports one after another
+        def flash(self, ports=[2, 3, 4]):
+            """
+            Flashes the light sensor on teh ports one after another
 
-        :param ports: the list of ports to flash
-        """
-        #
-        # loop over the porst and flash the color sensor
-        #
+            :param ports: the list of ports to flash
+            """
+            #
+            # loop over the porst and flash the color sensor
+            #
 
 
 

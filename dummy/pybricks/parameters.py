@@ -10,15 +10,16 @@ class Port:
     S4 = None
 
 class Direction:
-    CLOCKWISE = None
-    COUNTERCLOCKWISE = None
+    CLOCKWISE = 1
+    COUNTERCLOCKWISE = 2
 
 class Button:
-    pass
+    LEFT_UP = 1
 
 
 class Color:
-    pass
+    GREEN = 1
+    RED = 2
 
 
 class ImageFile:

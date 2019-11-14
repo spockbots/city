@@ -35,7 +35,7 @@ def run_tan_circle():
     robot.followline(speed=10, distance=15, port=2, right=True)
     gyro.turn(10, -85)
     gyro.forward(10, 6)
-    
+
     robot.forward(10, -10)
     gyro.turn(10, 100)
     robot.forward(75, -140)

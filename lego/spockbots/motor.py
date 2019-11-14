@@ -37,8 +37,7 @@ class SpockbotsMotor(object):
         self.diameter = round(62.4, 3)  # mm
         self.width = 20.0  # mm
         self.circumference = round(self.diameter * math.pi, 3)
-        # self.axle_track = round(8.0 * 14, 3)
-        self.axle_track = 140.0
+        self.axle_track = 140.0 # not used, width between middle of tires
         self.direction = "forward"
 
         self.left, self.right, self.tank = \

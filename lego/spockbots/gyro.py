@@ -113,8 +113,8 @@ class SpockbotsGyro(object):
 
     def still(self):
         """
-        tests if robot dosent move
-        :return: True if robot dosent move
+        tests if robot does not move
+        :return: True if robot does not move
         """
         return not self.drift()
 

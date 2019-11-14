@@ -6,7 +6,7 @@ from spockbots.gyro import SpockbotsGyro as Gyro
 
 """GYRO-ANG GYRO-RATE GYRO-FAS GYRO-G&A GYRO-CAL TILT-RATE TILT-ANG"""
 
-gyro = Gyro()
+gyro = Gyro(1)
 # gyro.connect()
 gyro.reset()
 if gyro.still():
