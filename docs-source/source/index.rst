@@ -1,5 +1,15 @@
 
 
+Coaches Notes
+==============
+
+.. toctree::
+   :numbered:
+
+   edu/disclaimer
+   edu/python
+   edu/lessons
+
 Spockbots City
 ==============
 
@@ -11,15 +21,6 @@ Summary
    summary
 
 
-
-Python
-======
-
-We show how simple it is to program in python with some examples.
-
-.. toctree::
-
-    python
 
 
 Spockbots Robot

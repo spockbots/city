@@ -1,5 +1,8 @@
+Python Essentials
+=================
+
 Variables
-=========
+---------
 
 Variables allow storing of data values. This is the same as
 the EV3 GUI variable
@@ -10,7 +13,7 @@ Example::
     y = 10
 
 Lists
-=====
+-----
 
 This is the same as the array in EV3 GUI.
 
@@ -20,7 +23,7 @@ Lists store multiple data values::
     vector = [5, 10]
 
 Functions
-=========
+---------
 
 A function is a block of code which only runs when it
 is called. It may return a value and can have parameters.
@@ -33,7 +36,7 @@ This is the same as a myblock, but easier to write and modify::
         print("Message", message)
 
 Classes
-=======
+-------
 
 With classes we can group functions and variables conveniently into an object.
 an object is just like a variable that uses the class as template. we can call
@@ -54,27 +57,27 @@ object from the template::
         def how_tall():
             return self.height
 
-    seric = Person("Seric", 14, 150)
-    seric.grow(1)
-    print (seric.height)      #  151
-    print (seric.how_tall())  #  151
+    sandra = Person("Sandra", 14, 150)
+    sandra.grow(1)
+    print (sandra.height)      #  151
+    print (sandra.how_tall())  #  151
 
 
 Conditions
-==========
+----------
 
 Conditions allow is to react if a value is tru or false. It is the same
 as in EV3 GUI but easier to write::
 
-    if seric.height > 180:
+    if Sandra.height > 180:
         print("He is tall")
-    elif seric.height < 180:
+    elif Sandra.height < 180:
         print("He is still growing")
     else:
         print("he is exactly 180cm")
 
 Loops
-=====
+-----
 
 We used while and for loops the repeat an indented block of code. While loops can
 also loop over elements in a list easily.
@@ -126,8 +129,106 @@ Loop through a list
     # 2
     # 3
 
+Exceptions
+----------
+
+When working with the mindstorm sensors we sometimes find that the sensors
+do not work properly and return no result. Python has a special mechanism
+for this that is called try/except. Let us illustrate this.
+
+Let us simulate a sensor with a fault that we can set that returns an
+error if we pass the parameter value 1 but returns its value for all other inputs.
+
+::
+
+    def sensor(number):
+        if number == 1:
+            rasie ValueError # this just creates an error
+        else
+            return number
+
+Now we can simulate a faulty sensor and deal with its exceptions.
+Let us test the sensor in a loop such as
+
+    last_value=0 # we set a last value
+    for number in [0,1,2]:
+        try: here we try to see if the function works
+            value = sensor(number)
+            last_value = value  # stores the last value and when
+                                # an exception occurs we read that
+            print("Success:", number)
+        except:
+            value = last_value
+            print("Error:", value)
+
+The nice thing with this loop is that not only do we know when there is
+an error, but we correct the error with just the last value we found
+
+The result is
+
+::
+    Success: 0
+    Error: 1
+    Success: 2
+
+THis is naturaly helpful in cases of the Light sensors, when once in a while the
+light sensor value dos not return properly.
+
+Function as a parameter
+-----------------------
+
+The Mindtsorm GUI has a convenient Wait method and loop exits that probe certain conditions.
+Python does not directly provide them, but allows you to create loops.
+
+Inseta of just testing for a condition such as introduced in teh previous sections,
+we can also use a functionname as a parameter.
+
+Let us demonstrate and assume that he function
+
+* motor.angle() - returns the angle of the angle of the gyro
+
+
+we can now create a test function such as
+
+::
+
+    def run_for_a_distance(): # is true for running
+        return motor.angle() <= 1000
+
+This allows us now to define a function that contains a loop to with we pass the running() condition:
+
+::
+
+    def followline(speed, until=None):
+
+        while until():
+            print("I am following the line ")
+            time.sleep(0.1)
+
+Now e can call it just as follows
+
+::
+
+    followline(25, run_for_a_distance)
+
+The convenient thing now is that we can create other functions so we
+do not have to rewrite the function that loops but just change the termination
+function such as
+
+::
+
+    def run_till_black(): # is true for running
+        return colorsensor.reflection() > 10
+
+and run it with
+
+::
+
+    followline(25, run_till_black)
+
+
 Import
-======
+------
 When we create code in separate files they can be made known within a
 program while importing the functions, classes, or variables. This
 allows us to organize the code while grouping topical code into a file.
@@ -138,7 +239,7 @@ allows us to organize the code while grouping topical code into a file.
     from time import sleep
 
 Program
-=======
+-------
 
 A program can be executed in a terminal on teh EV3 brick. It must be executable.
 Let us assume the following core it in the file `run_led.py`.
