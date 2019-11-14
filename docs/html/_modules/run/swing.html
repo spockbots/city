@@ -52,7 +52,7 @@
     <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
 
@@ -60,16 +60,7 @@
     <span class="c1"># setup gyro</span>
     <span class="c1">#</span>
     <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
-    <span class="c1"># gyro.connect()</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">gyro</span><span class="o">.</span><span class="n">still</span><span class="p">():</span>
-        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT STILL&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;ROBOT DRIFT&quot;</span><span class="p">)</span>
-        <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
-        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-        <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 
     <span class="n">dt</span> <span class="o">=</span> <span class="mf">1.0</span>
 
@@ -148,25 +139,21 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/disclaimer.html">1. Coaches Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/python.html">2. Python Essentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/lessons.html">3. Lessons</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html">Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#lists">Lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#functions">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#classes">Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#conditions">Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#loops">Loops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#import">Import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#program">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../summary.html">1. Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mechanics.html">2. MECAHNICS TBD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">3. Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">lego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">7. lego</a></li>
 </ul>
 
 <div class="relations">

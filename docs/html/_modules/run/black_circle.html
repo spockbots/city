@@ -35,6 +35,7 @@
 
 <span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="k">import</span> <span class="n">SpockbotsMotor</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="k">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
 
 
 <div class="viewcode-block" id="run_black_circle"><a class="viewcode-back" href="../../run.html#run.black_circle.run_black_circle">[docs]</a><span class="k">def</span> <span class="nf">run_black_circle</span><span class="p">():</span>
@@ -45,11 +46,20 @@
     <span class="n">robot</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
+    <span class="n">robot</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
 
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># setup gyro</span>
+    <span class="c1">#</span>
+    <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># does not need to be that accurate just bo back</span>
+    <span class="c1">#</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span></div>
 
@@ -76,25 +86,21 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/disclaimer.html">1. Coaches Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/python.html">2. Python Essentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/lessons.html">3. Lessons</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html">Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#lists">Lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#functions">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#classes">Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#conditions">Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#loops">Loops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#import">Import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#program">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../summary.html">1. Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mechanics.html">2. MECAHNICS TBD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">3. Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">lego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">7. lego</a></li>
 </ul>
 
 <div class="relations">

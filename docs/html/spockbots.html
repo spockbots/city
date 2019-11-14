@@ -104,6 +104,11 @@ this message prints test messages.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="spockbots.output.signal">
+<code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">signal</code><span class="sig-paren">(</span><em class="sig-param">t=0.05</em>, <em class="sig-param">pitch=1500</em>, <em class="sig-param">duration=300</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#signal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.signal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="spockbots.output.sound">
 <code class="sig-prename descclassname">spockbots.output.</code><code class="sig-name descname">sound</code><span class="sig-paren">(</span><em class="sig-param">pitch=1500</em>, <em class="sig-param">duration=300</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/output.html#sound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.output.sound" title="Permalink to this definition">¶</a></dt>
 <dd><p>plays a sound</p>
@@ -176,6 +181,11 @@ old file will be deleted.</p>
 <dt id="spockbots.motor.SpockbotsMotor">
 <em class="property">class </em><code class="sig-prename descclassname">spockbots.motor.</code><code class="sig-name descname">SpockbotsMotor</code><span class="sig-paren">(</span><em class="sig-param">direction=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.alignonblackline">
+<code class="sig-name descname">alignonblackline</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port_left</em>, <em class="sig-param">port_right</em>, <em class="sig-param">black</em>, <em class="sig-param">white</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.alignonblackline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.alignonblackline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="spockbots.motor.SpockbotsMotor.aligntoblack">
 <code class="sig-name descname">aligntoblack</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">port_left</em>, <em class="sig-param">port_right</em>, <em class="sig-param">black=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.aligntoblack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.aligntoblack" title="Permalink to this definition">¶</a></dt>
@@ -250,6 +260,20 @@ old file will be deleted.</p>
 <dd><p>This will stop all motors  and finish the program.
 It can be used in the programs to check if the program should be
 finished early du to an error in the runs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.color">
+<code class="sig-name descname">color</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the reflective color sensor value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>port</strong> – the port number of the color sensor</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the reflective color value</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -421,6 +445,11 @@ the sensor on the given port.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.sleep">
+<code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param">seconds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.sleep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="spockbots.motor.SpockbotsMotor.still">
 <code class="sig-name descname">still</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.still"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.still" title="Permalink to this definition">¶</a></dt>
 <dd><p>waits till the motors are no longer turning.</p>
@@ -455,6 +484,22 @@ for a distance based on the angle.</p>
 <dl class="method">
 <dt id="spockbots.motor.SpockbotsMotor.turntoblack">
 <code class="sig-name descname">turntoblack</code><span class="sig-paren">(</span><em class="sig-param">speed</em>, <em class="sig-param">direction='left'</em>, <em class="sig-param">port=3</em>, <em class="sig-param">black=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.turntoblack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.turntoblack" title="Permalink to this definition">¶</a></dt>
+<dd><p>turns the robot to the black line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed of turn</p></li>
+<li><p><strong>direction</strong> – left or right</p></li>
+<li><p><strong>port</strong> – port of color sensor</p></li>
+<li><p><strong>black</strong> – value of black</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.motor.SpockbotsMotor.turntocolor">
+<code class="sig-name descname">turntocolor</code><span class="sig-paren">(</span><em class="sig-param">speed, direction='left', port=2, colors=[6]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/motor.html#SpockbotsMotor.turntocolor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.motor.SpockbotsMotor.turntocolor" title="Permalink to this definition">¶</a></dt>
 <dd><p>turns the robot to the black line.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -527,7 +572,7 @@ for a distance based on the angle.</p>
 
 <dl class="method">
 <dt id="spockbots.gyro.SpockbotsGyro.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">port=1</em>, <em class="sig-param">delta=-35</em>, <em class="sig-param">factor=0.4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">speed=10</em>, <em class="sig-param">distance=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">finish=None</em>, <em class="sig-param">min_speed=1</em>, <em class="sig-param">acceleration=2</em>, <em class="sig-param">port=1</em>, <em class="sig-param">delta=-180</em>, <em class="sig-param">factor=0.01</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Moves forward</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -540,10 +585,9 @@ for a distance based on the angle.</p>
 <li><p><strong>factor</strong> – controlling the smoothness of the line</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
 </dl>
+<p>Examples:</p>
+<p>gyro.forward(50, distance=30, factor=0.005)</p>
 </dd></dl>
 
 <dl class="method">
@@ -589,6 +633,11 @@ for a distance based on the angle.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="spockbots.gyro.SpockbotsGyro.setup">
+<code class="sig-name descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="spockbots.gyro.SpockbotsGyro.status">
 <code class="sig-name descname">status</code><span class="sig-paren">(</span><em class="sig-param">count=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.status" title="Permalink to this definition">¶</a></dt>
 <dd><p>tests count times if robot is still and returns if its still or drifts
@@ -599,17 +648,27 @@ for a distance based on the angle.</p>
 <dl class="method">
 <dt id="spockbots.gyro.SpockbotsGyro.still">
 <code class="sig-name descname">still</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.still"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.still" title="Permalink to this definition">¶</a></dt>
-<dd><p>tests if robot dosent move
-:return: True if robot dosent move</p>
+<dd><p>tests if robot does not move
+:return: True if robot does not move</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="spockbots.gyro.SpockbotsGyro.turn">
-<code class="sig-name descname">turn</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">degrees=90</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.turn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.turn" title="Permalink to this definition">¶</a></dt>
-<dd><p>uses gyro to turn positive to right negative to left
-:param speed: speed it turns at
-:param degrees: degrees it turns
-:return:</p>
+<code class="sig-name descname">turn</code><span class="sig-paren">(</span><em class="sig-param">speed=25</em>, <em class="sig-param">degrees=90</em>, <em class="sig-param">offset=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/gyro.html#SpockbotsGyro.turn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.gyro.SpockbotsGyro.turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>uses gyro to turn positive to right negative to left. As it may turn too much, it
+will correct itself at a lower speed and turn. As the sensor is accurate to 2 degrees,
+we only do the correction if the robot is more than two degrees off.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> – speed it turns at</p></li>
+<li><p><strong>degrees</strong> – degrees it turns</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -847,18 +906,17 @@ calibrate.txt</p>
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="python.html">Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#lists">Lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#functions">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#classes">Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#conditions">Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#loops">Loops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#import">Import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python.html#program">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/disclaimer.html">1. Coaches Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/python.html">2. Python Essentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/lessons.html">3. Lessons</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">1. Summary of Robot Features</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mechanics.html">2. MECAHNICS TBD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_menu.html">3. Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spockbots API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-spockbots.output">spockbots.output</a></li>
@@ -869,7 +927,7 @@ calibrate.txt</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">lego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">7. lego</a></li>
 </ul>
 
 <div class="relations">

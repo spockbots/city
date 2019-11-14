@@ -45,7 +45,7 @@
 <span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">PRINT</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">led</span>
 
 <span class="c1">#######################################################</span>
 <span class="c1"># Motor</span>
@@ -54,22 +54,6 @@
 
 <div class="viewcode-block" id="SpockbotsMotor"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor">[docs]</a><span class="k">class</span> <span class="nc">SpockbotsMotor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-<div class="viewcode-block" id="SpockbotsMotor.check_kill_button"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.check_kill_button">[docs]</a>    <span class="k">def</span> <span class="nf">check_kill_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This will stop all motors  and finish the program.</span>
-<span class="sd">        It can be used in the programs to check if the program should be</span>
-<span class="sd">        finished early du to an error in the runs.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">Button</span><span class="o">.</span><span class="n">LEFT</span> <span class="ow">in</span> <span class="n">brick</span><span class="o">.</span><span class="n">buttons</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KILL&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">left_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -81,22 +65,46 @@
 <span class="sd">                          backwards.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">led</span><span class="p">(</span><span class="s2">&quot;GREEN&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">62.4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># mm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># mm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circumference</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="c1"># self.axle_track = round(8.0 * 14, 3)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span> <span class="o">=</span> <span class="mf">140.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axle_track</span> <span class="o">=</span> <span class="mf">140.0</span> <span class="c1"># not used, width between middle of tires</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tank</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">SpockbotsColorSensors</span><span class="p">(</span><span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span> <span class="o">=</span> <span class="n">SpockbotsColorSensors</span><span class="p">(</span><span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
-        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span>
+
+<div class="viewcode-block" id="SpockbotsMotor.check_kill_button"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.check_kill_button">[docs]</a>    <span class="k">def</span> <span class="nf">check_kill_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This will stop all motors  and finish the program.</span>
+<span class="sd">        It can be used in the programs to check if the program should be</span>
+<span class="sd">        finished early du to an error in the runs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">Button</span><span class="o">.</span><span class="n">LEFT_UP</span> <span class="ow">in</span> <span class="n">brick</span><span class="o">.</span><span class="n">buttons</span><span class="p">():</span> <span class="c1"># backspace</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">led</span><span class="p">(</span><span class="s2">&quot;RED&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KILL&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_medium</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span></div>
+
+<div class="viewcode-block" id="SpockbotsMotor.sleep"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.sleep">[docs]</a>    <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seconds</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.beep"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.beep">[docs]</a>    <span class="k">def</span> <span class="nf">beep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -128,7 +136,8 @@
 <span class="sd">        :return: left, right motors  and tank</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">direction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
@@ -159,7 +168,17 @@
 <span class="sd">        :return: the reflective color value</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SpockbotsMotor.color"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.color">[docs]</a>    <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return the reflective color sensor value.</span>
+
+<span class="sd">        :param port: the port number of the color sensor</span>
+<span class="sd">        :return: the reflective color value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SpockbotsMotor.reset"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -271,7 +290,8 @@
 <span class="sd">        :param brake: one of the values brake, hold, coast</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Forward&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">brake</span><span class="p">)</span>
 
@@ -300,7 +320,8 @@
 <span class="sd">        :param speed_right: speed of the right motor</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;on_forever&quot;</span><span class="p">,</span> <span class="n">speed_left</span><span class="p">,</span> <span class="n">speed_right</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -317,7 +338,8 @@
 <span class="sd">        :param angle: angle of turn</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Turn&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
 
@@ -352,6 +374,34 @@
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Turn Stop&quot;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="SpockbotsMotor.turntocolor"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.turntocolor">[docs]</a>    <span class="k">def</span> <span class="nf">turntocolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">speed</span><span class="p">,</span>
+                    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                    <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        turns the robot to the black line.</span>
+
+<span class="sd">        :param speed: speed of turn</span>
+<span class="sd">        :param direction: left or right</span>
+<span class="sd">        :param port: port of color sensor</span>
+<span class="sd">        :param black: value of black</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;turntocolors&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="SpockbotsMotor.turntoblack"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.turntoblack">[docs]</a>    <span class="k">def</span> <span class="nf">turntoblack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">speed</span><span class="p">,</span>
                     <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
@@ -366,7 +416,8 @@
 <span class="sd">        :param black: value of black</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;turntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
 
@@ -393,7 +444,8 @@
 <span class="sd">        :param white: value of white</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;turntowhite&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
 
@@ -416,7 +468,8 @@
 <span class="sd">        :param black: value of black</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
 
@@ -429,10 +482,10 @@
             <span class="n">right_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port_right</span><span class="p">)</span>
             <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Light&quot;</span><span class="p">,</span> <span class="n">left_light</span><span class="p">,</span> <span class="n">right_light</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">left_light</span> <span class="o">&lt;</span> <span class="n">black</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
                 <span class="n">left_finished</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">right_light</span> <span class="o">&lt;</span> <span class="n">black</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
                 <span class="n">right_finished</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
@@ -448,7 +501,8 @@
 <span class="sd">        :param white: value of white</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
 
@@ -461,14 +515,24 @@
             <span class="n">right_light</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port_right</span><span class="p">)</span>
             <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Light&quot;</span><span class="p">,</span> <span class="n">left_light</span><span class="p">,</span> <span class="n">right_light</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">left_light</span> <span class="o">&gt;</span> <span class="n">white</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
                 <span class="n">left_finished</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">right_light</span> <span class="o">&gt;</span> <span class="n">white</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
                 <span class="n">right_finished</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;aligntowhite Stop&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SpockbotsMotor.alignonblackline"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.alignonblackline">[docs]</a>    <span class="k">def</span> <span class="nf">alignonblackline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">white</span><span class="p">):</span>
+        <span class="c1">#s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aligntoblack</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aligntoblack</span><span class="p">(</span><span class="o">-</span><span class="n">speed</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aligntowhite</span><span class="p">(</span><span class="n">speed</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aligntoblack</span><span class="p">(</span><span class="o">-</span><span class="n">speed</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">port_left</span><span class="p">,</span> <span class="n">port_right</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span></div>
+
+
+
 
 <div class="viewcode-block" id="SpockbotsMotor.gotoblack"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.gotoblack">[docs]</a>    <span class="k">def</span> <span class="nf">gotoblack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -480,7 +544,8 @@
 <span class="sd">        :param black: value of black</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotoblack&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">black</span><span class="p">)</span>
 
@@ -504,7 +569,8 @@
 <span class="sd">        :param white: value of white</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotowhite&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">white</span><span class="p">)</span>
 
@@ -525,14 +591,15 @@
 <span class="sd">        :param black: value of black</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;gotocolor&quot;</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">run</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">while</span> <span class="n">run</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;COLOR&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="n">run</span> <span class="o">=</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">colors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -568,7 +635,8 @@
 <span class="sd">        :param factor: factor of adjustment, controls smoothness</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -585,7 +653,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+                <span class="k">return</span>
+
             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>  <span class="c1"># get the light value</span>
 
             <span class="c1"># correction = delta + (factor * value)</span>
@@ -612,10 +682,9 @@
                 <span class="k">break</span>  <span class="c1"># leave the loop</span>
             <span class="k">if</span> <span class="n">stop_color_sensor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-                    <span class="c1"># value = self.colorsensor[port].sensor.rgb()</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;reflective&quot;</span><span class="p">:</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stop_values</span><span class="p">:</span>
                     <span class="k">break</span>  <span class="c1"># leave the loop</span>
@@ -632,7 +701,8 @@
 <span class="sd">        :param direction: direction of calibration</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -641,18 +711,18 @@
         <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">distance</span><span class="p">:</span>
 
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_white</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_black</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_white</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_black</span><span class="p">()</span>
                 <span class="n">PRINT</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
-                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
             <span class="n">PRINT</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
-                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
-                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span></div>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">black</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">white</span><span class="p">)</span></div>
 
     <span class="c1"># followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)</span>
 <div class="viewcode-block" id="SpockbotsMotor.followline_pid"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.followline_pid">[docs]</a>    <span class="k">def</span> <span class="nf">followline_pid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -664,7 +734,8 @@
                        <span class="n">stop_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># [4,5]</span>
                        <span class="n">stop_color_mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># color, reflective</span>
                        <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">black</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">white</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+            <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -689,7 +760,8 @@
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kp=&quot;</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="s2">&quot;ki=&quot;</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="s2">&quot;kd=&quot;</span><span class="p">,</span> <span class="n">kd</span><span class="p">)</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_kill_button</span><span class="p">():</span>
+                <span class="k">return</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>  <span class="c1"># get the light value</span>
 
@@ -729,10 +801,9 @@
                     <span class="k">break</span>  <span class="c1"># leave the loop</span>
                 <span class="k">if</span> <span class="n">stop_color_sensor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-                        <span class="c1"># value = self.colorsensor[port].sensor.rgb()</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="n">stop_color_mode</span> <span class="o">==</span> <span class="s2">&quot;reflective&quot;</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorsensor</span><span class="p">[</span><span class="n">port</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">stop_values</span><span class="p">:</span>
                         <span class="k">break</span>  <span class="c1"># leave the loop</span>
@@ -759,25 +830,21 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/disclaimer.html">1. Coaches Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/python.html">2. Python Essentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../edu/lessons.html">3. Lessons</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html">Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#lists">Lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#functions">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#classes">Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#conditions">Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#loops">Loops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#import">Import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../python.html#program">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../summary.html">1. Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">Menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mechanics.html">2. MECAHNICS TBD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_menu.html">3. Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">lego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">7. lego</a></li>
 </ul>
 
 <div class="relations">
