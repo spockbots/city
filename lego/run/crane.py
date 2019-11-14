@@ -12,7 +12,7 @@ def run_crane():
     robot.debug = True
 
     robot.setup()
-    robot.color.read()
+    robot.colorsensors.read()
 
     print(robot)
 

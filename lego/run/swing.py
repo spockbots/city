@@ -19,7 +19,7 @@ def run_swing():
     robot.debug = True
 
     robot.setup()
-    robot.color.read()
+    robot.colorsensors.read()
 
     print(robot)
 

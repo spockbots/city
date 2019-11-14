@@ -7,13 +7,13 @@ from spockbots.output import led, PRINT
 
 def run_red_circle():
     """
-    TBD
+    Drive the red peces in the red circle
     """
     robot = SpockbotsMotor()
     robot.debug = True
 
     robot.setup()
-    robot.color.read()
+    robot.colorsensors.read()
 
     print(robot)
 
@@ -24,11 +24,22 @@ def run_red_circle():
     gyro.setup()
 
 
+
     gyro.forward(25, 62)
     gyro.turn(10,-30)
     robot.forward(10,-10)
     gyro.turn(10,45)
     robot.forward(75,-70)
+
+
+
+    #def till_tan():
+    #    v = robot.colorsensors.color(2) in [7]
+    #    print("TAN", v)
+    #    return v
+
+    #gyro.forward(speed=25, distance=82, finish=till_tan)
+    #robot.turntocolor(10, direction="left", port=3, colors=[1])
 
 
     #followline(10, port=3, stop_color_sensor=2, stop_values=[7], stop_color_mode="color")

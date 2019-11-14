@@ -18,6 +18,6 @@ robot.beep()
 
 # robot.calibrate(10, ports=[4], direction='back')
 
-robot.color.write()
+robot.colorsensors.write()
 
 time.sleep(1)

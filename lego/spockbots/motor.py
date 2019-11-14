@@ -44,12 +44,7 @@ class SpockbotsMotor(object):
         self.left, self.right, self.tank = \
             self.setup(direction=direction)
 
-        self.color = SpockbotsColorSensors(ports=[2, 3, 4])
-        self.colorsensor = [None, None, None, None, None]
-
-        for port in [2, 3, 4]:
-            self.colorsensor[port] = self.color.colorsensor[port]
-
+        self.colorsensors = SpockbotsColorSensors(ports=[2, 3, 4])
 
 
     def check_kill_button(self):
@@ -141,7 +136,17 @@ class SpockbotsMotor(object):
         :return: the reflective color value
 
         """
-        return self.colorsensor[port].value()
+        return self.colorsensors.value(port)
+
+    def color(self, port):
+        """
+        return the reflective color sensor value.
+
+        :param port: the port number of the color sensor
+        :return: the reflective color value
+
+        """
+        return self.colorsensors.color(port)
 
     def reset(self):
         """
@@ -337,6 +342,34 @@ class SpockbotsMotor(object):
 
         PRINT("Turn Stop")
 
+    def turntocolor(self,
+                    speed,
+                    direction="left",
+                    port=2,
+                    colors=[6]):
+        """
+        turns the robot to the black line.
+
+        :param speed: speed of turn
+        :param direction: left or right
+        :param port: port of color sensor
+        :param black: value of black
+
+        """
+        if self.check_kill_button():
+            return
+
+        PRINT("turntocolors", speed, direction, port, colors)
+
+        if direction == "left":
+            self.left.run(speed * 10)
+        else:
+            self.right.run(speed * 10)
+
+        while self.color(port) not in colors:
+            pass
+        self.stop()
+
     def turntoblack(self,
                     speed,
                     direction="left",
@@ -417,10 +450,10 @@ class SpockbotsMotor(object):
             right_light = self.value(port_right)
             PRINT("Light", left_light, right_light)
             if left_light < black:
-                self.left.stop(Stop.BRAKE)
+                self.right.stop(Stop.BRAKE)
                 left_finished = True
             if right_light < black:
-                self.right.stop(Stop.BRAKE)
+                self.left.stop(Stop.BRAKE)
                 right_finished = True
         self.stop()
 
@@ -450,14 +483,24 @@ class SpockbotsMotor(object):
             right_light = self.value(port_right)
             PRINT("Light", left_light, right_light)
             if left_light > white:
-                self.left.stop(Stop.BRAKE)
+                self.right.stop(Stop.BRAKE)
                 left_finished = True
             if right_light > white:
-                self.right.stop(Stop.BRAKE)
+                self.left.stop(Stop.BRAKE)
                 right_finished = True
         self.stop()
 
         PRINT("aligntowhite Stop")
+
+    def alignonblackline(self, speed, port_left, port_right, black, white):
+        #s
+        self.aligntoblack(speed, port_left, port_right, black)
+        self.aligntoblack(-speed, port_left, port_right, black)
+        self.aligntowhite(speed/2, port_left, port_right, white)
+        self.aligntoblack(-speed/2, port_left, port_right, black)
+
+
+
 
     def gotoblack(self, speed, port, black=10):
         """
@@ -524,7 +567,7 @@ class SpockbotsMotor(object):
         self.on(speed, 0)
         run = True
         while run:
-            value = self.colorsensor[port].sensor.color()
+            value = self.color(port)
             print("COLOR", value)
             run = value not in colors
         self.stop()
@@ -607,10 +650,9 @@ class SpockbotsMotor(object):
                 break  # leave the loop
             if stop_color_sensor is not None:
                 if stop_color_mode == "color":
-                    value = self.colorsensor[port].sensor.color()
-                    # value = self.colorsensor[port].sensor.rgb()
+                    value = self.color(port)
                 elif stop_color_mode == "reflective":
-                    value = self.colorsensor[port].value()
+                    value = self.value(port)
                 print("VALUE", value)
                 if value in stop_values:
                     break  # leave the loop
@@ -637,18 +679,18 @@ class SpockbotsMotor(object):
         while self.left.angle() < distance:
 
             for i in ports:
-                self.colorsensor[i].set_white()
-                self.colorsensor[i].set_black()
+                self.colorsensors.colorsensor[i].set_white()
+                self.colorsensors.colorsensor[i].set_black()
                 PRINT(i,
-                      self.colorsensor[i].black,
-                      self.colorsensor[i].white)
+                      self.colorsensors.colorsensor[i].black,
+                      self.colorsensors.colorsensor[i].white)
 
         self.stop()
 
         for i in ports:
             PRINT(i,
-                  self.colorsensor[i].black,
-                  self.colorsensor[i].white)
+                  self.colorsensors.colorsensor[i].black,
+                  self.colorsensors.colorsensor[i].white)
 
     # followline_pid(distance=45, port=3, speed=20, black=0, white=100, kp=0.3, ki=0.01, kd=0.0)
     def followline_pid(self,
@@ -727,10 +769,9 @@ class SpockbotsMotor(object):
                     break  # leave the loop
                 if stop_color_sensor is not None:
                     if stop_color_mode == "color":
-                        value = self.colorsensor[port].sensor.color()
-                        # value = self.colorsensor[port].sensor.rgb()
+                        value = self.color(port)
                     elif stop_color_mode == "reflective":
-                        value = self.colorsensor[port].value()
+                        value = self.value(port)
                     print("VALUE", value)
                     if value in stop_values:
                         break  # leave the loop

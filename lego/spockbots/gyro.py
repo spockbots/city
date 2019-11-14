@@ -295,6 +295,7 @@ class SpockbotsGyro(object):
                 speed=10,  # speed 0 - 100
                 distance=None,  # distance in cm
                 t=None,
+                finish=None,
                 min_speed=1,
                 acceleration=2,
                 port=1,  # the port number we use to follow the line
@@ -316,6 +317,14 @@ class SpockbotsGyro(object):
 
         """
 
+        def forever():
+            return False
+
+        if finish == None:
+            finish = forever
+
+        print ("GGGG")
+
         current_speed = min_speed
 
         if self.robot.check_kill_button():
@@ -330,7 +339,7 @@ class SpockbotsGyro(object):
 
         self.robot.reset()
         self.reset()
-        while True:
+        while not finish():
             if self.robot.check_kill_button():
                 return
             value = self.angle()  # get the Gyro angle value

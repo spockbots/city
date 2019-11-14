@@ -11,7 +11,7 @@ def run_turn_to_black():
     robot = SpockbotsMotor()
     robot.debug = True
     robot.setup()
-    robot.color.read()
+    robot.colorsensors.read()
 
     print(robot)
 

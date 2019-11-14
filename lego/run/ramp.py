@@ -13,7 +13,7 @@ def run_ramp():
     robot.debug = True
 
     robot.setup(direction="backwards")
-    robot.color.read()
+    robot.colorsensors.read()
 
     print(robot)
 

@@ -159,7 +159,7 @@ class SpockbotsColorSensors:
         """
         self.ports = ports
         self.speed = speed
-        self.colorsensor = [0, 0, 0, 0, 0]
+        self.colorsensor = [None, None, None, None, None]
             # in python lists start from 0 not 1
             # so we simply do not use the firts element in the list
         # our robot uses only
@@ -169,6 +169,7 @@ class SpockbotsColorSensors:
         #  the ports are passed along as a list [2,3,4]
         self.ports = ports
         for i in ports:
+            print("SETUP COLORSENSOR", i)
             self.colorsensor[i] = SpockbotsColorSensor(port=i)
 
     def value(self, i):
@@ -239,7 +240,7 @@ class SpockbotsColorSensors:
             self.colorsensor[4].black = 4
             self.colorsensor[4].white = 48
             print("Using the following defaults")
-            self.info()
+        self.info()
 
     def flash(self, ports=[2, 3, 4]):
         """

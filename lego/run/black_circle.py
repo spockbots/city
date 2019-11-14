@@ -13,7 +13,7 @@ def run_black_circle():
     robot.debug = True
 
     robot.setup()
-    robot.color.read()
+    robot.colorsensors.read()
     print(robot)
 
     #

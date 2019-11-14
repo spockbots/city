@@ -18,7 +18,7 @@ robot.turn(25, -90)
 robot.gotoblack(25, 3)
 """
 
-# robot.color.flash()
+# robot.colorsensors.flash()
 
 
 robot.followline(speed=20, port=3, distance=40)

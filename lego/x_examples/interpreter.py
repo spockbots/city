@@ -11,7 +11,7 @@ import os
 robot = SpockbotsMotor()
 robot.setup()
 
-robot.color.read()
+robot.colorsensors.read()
 print(robot)
 
 gyro = Gyro(robot)
