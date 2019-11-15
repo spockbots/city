@@ -39,7 +39,7 @@ Classes
 -------
 
 With classes we can group functions and variables conveniently into an object.
-an object is just like a variable that uses the class as template. we can call
+An object is just like a variable that uses the class as template. We can refer to
 all variables and functions on this object. Functions in a class are called methods.
 A special method is __init__ which is called once when we declare an
 object from the template::
@@ -66,7 +66,7 @@ object from the template::
 Conditions
 ----------
 
-Conditions allow is to react if a value is tru or false. It is the same
+Conditions allow us to react if a value is true or false. It is the same
 as in EV3 GUI but easier to write::
 
     if Sandra.height > 180:
@@ -79,8 +79,8 @@ as in EV3 GUI but easier to write::
 Loops
 -----
 
-We used while and for loops the repeat an indented block of code. While loops can
-also loop over elements in a list easily.
+We used while and for loops to repeat an indented block of code. While loops can
+also easily loop over elements in a list.
 
 Loop forever
 ~~~~~~~~~~~~
@@ -132,7 +132,7 @@ Loop through a list
 Exceptions
 ----------
 
-When working with the mindstorm sensors we sometimes find that the sensors
+When working with the Mindstorm sensors we sometimes find that the sensors
 do not work properly and return no result. Python has a special mechanism
 for this that is called try/except. Let us illustrate this.
 
@@ -171,7 +171,7 @@ The result is
     Error: 1
     Success: 2
 
-THis is naturaly helpful in cases of the Light sensors, when once in a while the
+This is naturaly helpful in cases of the Light sensors, when once in a while the
 light sensor value dos not return properly.
 
 Function as a parameter
@@ -180,10 +180,10 @@ Function as a parameter
 The Mindtsorm GUI has a convenient Wait method and loop exits that probe certain conditions.
 Python does not directly provide them, but allows you to create loops.
 
-Inseta of just testing for a condition such as introduced in teh previous sections,
+Instead of just testing for a condition such as introduced in the previous sections,
 we can also use a functionname as a parameter.
 
-Let us demonstrate and assume that he function
+Let us demonstrate and assume that the function
 
 * motor.angle() - returns the angle of the angle of the gyro
 
@@ -195,7 +195,7 @@ we can now create a test function such as
     def run_for_a_distance(): # is true for running
         return motor.angle() <= 1000
 
-This allows us now to define a function that contains a loop to with we pass the running() condition:
+This allows us now to define a function that contains a loop to which we pass the running() condition:
 
 ::
 
@@ -205,7 +205,7 @@ This allows us now to define a function that contains a loop to with we pass the
             print("I am following the line ")
             time.sleep(0.1)
 
-Now e can call it just as follows
+Now we can call it just as follows
 
 ::
 
@@ -241,13 +241,13 @@ allows us to organize the code while grouping topical code into a file.
 Program
 -------
 
-A program can be executed in a terminal on teh EV3 brick. It must be executable.
+A program can be executed in a terminal on the EV3 brick. It must be executable.
 Let us assume the following core it in the file `run_led.py`.
 we make it executable with::
 
     chmod a+x run_led.py
 
-Here an example::
+Here is an example::
 
     #!/usr/bin/env pybricks-micropython
 
@@ -266,10 +266,9 @@ Here an example::
     if __name__ == "__main__":
         run_led()
 
-The first line tells us to use python to run the program.
+The first line tells us to use Python to run the program.
 
 The if __name__ line tells us to run the next lines (e.g. the function)
-as functions are not run when we define them.
-
+as functions are not run when we simply define them.
 
 

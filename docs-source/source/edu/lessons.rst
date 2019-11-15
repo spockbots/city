@@ -10,16 +10,16 @@ Lessons
           LIBRARY WAS CONVERTED.
 
 .. note:: However, some ideas were discussed and explicitly targeted as lessons, such as
-          how to design a more reliable GYro reset, and how to deal with the different black/white
+          how to design a more reliable Gyro reset, and how to deal with the different black/white
           values when using more than one color sensor.
 
           We found that through structured activities such enhancements are possible
           to be developed by the team. Guidance from the coach was integrated in the solutions.
-          Just as a teacher points out wrong problems solutions it is important for the coach to
+          Just as a teacher points out wrong problems to solutions it is important for the coach to
           provide suggestions for debugging the code. Which we have done. However, as explained in
           the pitfalls of python some aspects are currently beyond the needed scope for the teams using
-          python and we encourace LEGO to improve their library with feedback from those having used
-          python on the EV3 extensively
+          Python and we encourace LEGO to improve their library with feedback from those having used
+          Python on the EV3 extensively
 
 
 Python Programming Templates and Activities
@@ -27,15 +27,15 @@ Python Programming Templates and Activities
 
 The activities conducted by the team were centered around a number of
 coordinated educational interactions with a subset of team members.
-Due to extensive travel and tie constraints of some team members and
+Due to extensive travel and time constraints of some team members and
 focus on other portions they could not participate in these
 activities.
 
 As a coach I put together this material so that they or even other
-teams can benefit form this information. For example I am planing to
-visit the regional SElementary School to
+teams can benefit form this information. For example I am planning to
+visit the regional Elementary School to
 discuss expansion and potential adoption of the material into local
-schools. The reason we target elementary schools is taht I believe
+schools. The reason we target elementary schools is that we believe
 this material can be taught on that grade level with the help of a
 qualified teacher.
 
@@ -54,16 +54,16 @@ Goals:
 Problem: In our first exercise we are exploring the color
 sensor. Often you only have a single color sensor, but when looking at
 the different sensors in your kits, they may all behave slightly
-different. What registers as black 8 on one sensor may register as
+differently. What registers as black 8 on one sensor may register as
 black 15 on another. The same is valid with white, we may see values
 such as 80, 100, and so on.
 
 However we know that the color values are always between 0 - 100.
 With one significant issue. Once in a while no value is returned and
-if we were to expect an integer we need to make sure that python can
+if we were to expect an integer we need to make sure that Python can
 react towards such errors.
 
-As we also want you to learn about classes in python we provide you
+As we also want you to learn about classes in Python we provide you
 with a template that you need to complete. Please revisit our Python
 material and look at how we define classes. Now let us define a class
 for a `better` Color sensor and we call this class
@@ -73,23 +73,23 @@ for a `better` Color sensor and we call this class
 We do the usual things such as importing the needed abstractions from the
 pybricks and python libraries. We have provided this as an example for you.
 
-We also demonstrate to you how to initialize the color sensor while
+We also demonstrate how to initialize the color sensor while
 you can pass along simply the port number so you can reflect once more
-on who if conditions work. The keyword `self` can be most simply
-understood while knowing that programmers do not lite to always write
+on which conditions work. The keyword `self` can be most simply
+understood while knowing that programmers do not like to always write
 the class name, so they use self in this particular case.
 
-The init class also contains a number of variables that we cann access
-within other methods defined as part of this class. We also showcase you how
+The init class also contains a number of variables that we can access
+within other methods defined as part of this class. We also showcase yohow
 to define simple methods while leveraging other variables such as the `self.sensor`
 we define in the init method.
 In the class methods `reflection()` and `color()`. What would happen if the
-color sensor cuts out or does not read a value. To avoid this case we simply put a loop
-around the method that returns the value. We simply try if it works and if it word it
-returns a value if not it tries it again.
+color sensor cuts out or does not read a value. To avoid this case we simply
+put a loop around the method that returns the value. We simply try if it
+works and if it does, then return a value if not it tries it again.
 
-We store the minimum black and maximum white values that we can
-detect under the current light conditions.
+We store the minimum black and maximum white values that we are
+detected under the current light conditions.
 
 You have the following tasks:
 
@@ -98,8 +98,8 @@ You have the following tasks:
 #. In case we have more than one color sensor its sometimes interesting to
    see which one is which, thus this function just flashes the sensor by
    switching to different modes
-#. As we have not talked yet about files we like to take this example to
-   teach you about how to write files in python. This is demonstrated in
+#. As we have not yet talked about files, we would like to take this example to
+   teach you about how to write files in Python. This is demonstrated in
    the write function and it shows how to write values to a file. We also
    provide you with a read function so you know how to read a file.  The
    read function also shows how easy it is to use try and except. In case
@@ -108,13 +108,13 @@ You have the following tasks:
    we write it.
 
 
-Now after you have written the better sensor let us see how we use it
+Now after you have written the better sensor class let us see how we use it
 
 The sensor is stored in a directory called `spockbots` that has a file __init__.py in it
-this allows us to import the sensor class into a program as follows, while reading a
-value and wait for a while till we read the next value amd printing it pout.
+this allows us to import the sensor class into a program as follows, while
+reading a value and wait for a while until we read the next value and print it out.
 
-Experiment and move the sensor over various different plaxes to measure the difference.
+Experiment and move the sensor over various different places to measure the difference.
 
 
 ::
@@ -133,7 +133,7 @@ Experiment and move the sensor over various different plaxes to measure the diff
         sleep(0.5)
 
 
-Next modify the program to print th color instead of the reflecive value.
+Next, modify the program to print th color instead of the reflective value.
 
 
 Here is the template for this assignment to complete the file `colorsensor.py`:
@@ -208,7 +208,7 @@ Here is the template for this assignment to complete the file `colorsensor.py`:
 
         def set_black(self):
             """
-            sets the current value to black if its smaller than what is stored
+            sets the current value to black if it is smaller than what is stored
             """
             #
             # PLEASE PUT YOUR CODE HERE
@@ -272,8 +272,8 @@ Here is the template for this assignment to complete the file `colorsensor.py`:
 Three color sensors
 -------------------
 
-Now we have a beautiful example for a python class in our color sensow. The next lesson will
-introduce you on how you can use the same class to define a new one that includes a number of colorsensors.
+Now we have a beautiful example for a Python class in our color sensor. The next lesson will
+introduce you to how you can use the same class to define a new one that includes a number of colorsensors.
 We specify the ports simply as a list at time of creation. So our goal is to do something like
 
 
@@ -286,8 +286,8 @@ We specify the ports simply as a list at time of creation. So our goal is to do 
     colorsensors.write(port=[2,3,4])
 
 
-Now we can use it in a program as follows to print rpeatedly the values from all sensors
-every half second
+Now we can use it in a program as follows to print repeatedly the
+values from all sensors every half second
 
 ::
 
@@ -408,21 +408,21 @@ Here is the template for the multi color sensor class
 Driving The Robot
 -----------------
 
-Now its time to drive around with our robot and our improved color sensors. So what we have to do is
+Now it's time to drive around with our robot and our improved color sensors. So what we have to do is
 simple create a class that includes all the Robot motors and Sensors.  So lets get started.
-First, you must import all the needed classes from pybrics and python. This includes a long list and
+First, you must import all the needed classes from pybrics and Python. This includes a long list and
 you can find them in our template
 
 We simply call the class `SpockbotsMotor`. We define in that calss basic parameters such as wheel size
-NAturally, we need a left and right motor, but also want to access the motor as part of a tank to do
+Naturally, we need a left and right motor, but also want to access the motor as part of a tank to do
 steering just the same way as we do it in the GUI version. In addition we need to create as many color
-sensors as your robot has, in case of the SPockbots team they decided to use three.
+sensors as your robot has, in case of the Spockbots team they decided to use three.
 
-One function that is not provided by python is a kill button when something goes wrong. To achieve this
+One function that is not provided by Python is a kill button when something goes wrong. To achieve this
 we simply create a kill method, that sets a variable called `self.running` to false. This function returns
 True if the LEFT_UP button is pressed.
 
-when can than use it in functions in an if condition such as
+we can then use it in functions in an if condition such as
 
 ::
 
@@ -435,15 +435,15 @@ And if the button is pressed the program running variable is set. Within the fun
 False, we know the button has previously been pressed and thus the check button will be True. The return in the
 function simply means that you leave the function once it reaches the return.
 We know this function is not ideal but is good enough for us to try things out and if things do not go well we can at
-least try to stop the robot. To deomonstrate its use we like you to take a look at the sleep function. naturally we do
-not like to sleep if the button has been pressed. THis is just how we use it elsewhere. We even can
+least try to stop the robot. To demonstrate its use we like you to take a look at the sleep function. naturally we do
+not like to sleep if the button has been pressed. This is just how we use it elsewhere. We even can
 use the check_kill_button in loops to leave the loops when the button is pressed.
 
 The setup method includes all the motor variables so we have values such as self.left, self.right, and self.tank
 That we can use in the robot.
 
-Sometimes programmers like to make things simple. As writing ` self.colorsensors.value(port)` to get the refelctive
-value on the given port it seems mor econvenient to create a method that can abbreviate things such as
+Sometimes programmers like to make things simple. As writing `self.colorsensors.value(port)` to get the refelctive
+value on the given port it seems more convenient to create a method that can abbreviate things such as
 `self.value(port)`
 
 So insead of writing
@@ -454,7 +454,7 @@ So insead of writing
     light = self.colorsensors.value(2)
     light = self.colorsensors.color(2)
 
-we acn simply write
+we can simply write
 
 ::
         light_value = self.value(2)
@@ -464,11 +464,11 @@ Next write a function on how to reset the angle in the left and right motors to 
 This will be useful when we measure the distance traveled.
 
 
-In our next tasks we like to calculate which distance we traveld given an angle from the motor or the rotations.
-we use the circumferance for this and apply the formula that you need to research.
+In our next tasks we will calculate which distance we traveled given an angle from the motor or the rotations.
+We use the circumferance for this and apply the formula that you need to research.
 
-There ar various methods tha the spockbots team developed in previous years to be found useful.
-Reimplement these methods in python.
+There are various methods that the spockbots team developed in previous years to be found useful.
+Reimplement these methods in Python.
 
 ::
 
@@ -675,7 +675,7 @@ Reimplement these methods in python.
 
             """
             #
-            # This function just stops all the lareg motors and waits till the robot no longer moves
+            # This function just stops all the large motors and waits until the robot no longer moves
             #
             if not brake or brake == "brake":
                 self.left.stop(Stop.BRAKE)
@@ -694,10 +694,10 @@ Reimplement these methods in python.
 
         def still(self):
             """
-            waits till the motors are no longer turning.
+            waits until the motors are no longer turning.
             """
             # Implement a function that tells if the robot is still, you can use
-            #the motor angle or the gyro sensor
+            # the motor angle or the gyro sensor
 
             PRINT("Still Stop")
 
@@ -716,7 +716,7 @@ Reimplement these methods in python.
 
             """
             #
-            # write a function that truns while only spinning the right motor till it
+            # write a function that turns while only spinning the right motor till it
             # finds any of the colors in the list
             #
 
@@ -753,7 +753,7 @@ Reimplement these methods in python.
 
             """
             #
-            # write a function that truns while only spinning the right motor till it finds a white line
+            # write a function that turns while only spinning the right motor till it finds a white line
             #
 
         def aligntoblack(self, speed, port_left, port_right, black=10):
@@ -878,20 +878,20 @@ First it can be achieved while probing the motors that store an angle
 reporting back how much the motor has turned. However, what the
 Spockbots team found is although the motor forward is convenient, it
 often does not return the desired result, e.g. when the robot caries a
-heavy load not in the center it may turn to the one or other side.
+heavy unbalanced load it may turn to the one or other side.
 
 Second, you can use the Gyro sensor that measures the angle and speed
-the robot turns.  Also the gyro sensor is not super precise, but allows good enough results.
+the robot turns.  While the gyro sensor is not very precise, it allows adequate results.
 When you experiment with the Gyro sensor you will notice the following issues
 
-#. when turning it may turn to much as you turn with a speed and braking takes time
+#. when turning it may turn too much as you turn with a speed and braking takes time
 #. when starting the robot with highspeed to go forward the robot "jumps" and when
    dropping often looses its orientation.
 
 So let us discuss how we deal with the issue while using a Gyro Server
 template that you will gradually improve.
 
-In python we have these issues
+In Python we have these issues
 
 #. Sensor value is not 0 after reset
 #. Sensor value drifts after reset as it takes time to settle down
@@ -904,7 +904,7 @@ Tasks and lessons
 
 #. Conceptualize that the robot can go forward and backwards, for this
    reason the Gyro can count clockwise or counter clockwise.
-   The direction is the same as your robots direction
+   The direction is the same as your robot's direction
 #. Conceptualize the angle function and compare it with the Color sensor.
    The while loop with the try except deals with missing values.
 #. (Optional) Please change the code so that instead of looping use the last
@@ -912,13 +912,13 @@ Tasks and lessons
 #. Define a reset method that waits till the gyro is still and the angle is 0
 #. Develop methods for turning left
 #. Develop methods for turning right
-#. Integrate the left and right method in a better turn method. This method chacs at
-   the end if its at the expected angle, and if not corrects it while moving with a
+#. Integrate the left and right method in a better turn method. This method checs at
+   the end if its at the expected angle, and if not corrects it while moving at a
    slow speed.
 #. Test out your robot to see how accurate the turn is
 #. Define a move forward function that avoids the "jump" and making the gyro start problematic
-   Remember sometimes if we move slw we are more precise. Can you accelerate your robot from slow to fast.
-   Use a proportional line following algorithm. YOu developed that as part of your previous mindstorm GUI library
+   Remember sometimes if we move slow we are more precise. Can you accelerate your robot from slow to fast.
+   Use a proportional line following algorithm. You developed that as part of your previous mindstorm GUI library
 
 
 ::
@@ -1046,7 +1046,7 @@ Tasks and lessons
         # Implement this method
         #
 
-        # remember the function to tun is self.robot.on_forever(speed, -speed)
+        # remember the function to run is self.robot.on_forever(speed, -speed)
 
         def right(self, speed=25, degrees=90, offset=0):
             """

@@ -38,12 +38,12 @@ Buying other lego parts
 
 Ebay
 
-Be careful for people that sell non genuan Lego parts
+Be careful for people that sell non genuine Lego parts
 * <https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR5.TRC1.A0.H0.Xlego+technic+parts.TRS0&_nkw=lego+technic+parts&_sacat=0&LH_TitleDesc=0&_osacat=0&_odkw=lego+technic>
 
-Stay away from electronoc components such as sensors, bricks and motors as they can get damaged and you do not know how to potentially identify if they are.
-THerea ar lots of counterfit Lego parts sold
+Stay away from electronic components such as sensors, bricks and motors as they can get damaged and you do not know how to potentially identify if they are.
+There are lots of counterfeit Lego parts sold
 
 Shipping and handeling
 
-Shipping anad handeling costs are at times high so its worthwhile to order more parts than yu initially think you need
+Shipping anad handeling costs are at times high so its worthwhile to order more parts than you initially think you need

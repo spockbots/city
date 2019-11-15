@@ -8,5 +8,5 @@ We named it `0_menu.py` so it shows up on the top in the brick program::
              Calibrate
              ....
 
-Displays a menu in which we muve with the UP DOWN keys up and down. We leave with the left
+Displays a menu in which we move with the UP DOWN keys up and down. We leave with the left
 key and select a program with the right key.
