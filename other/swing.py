@@ -37,28 +37,29 @@ def run_swing():
 
     # PUT IN COLOR CALIBRATE VALUES
 
-    # go forward over the black line and reliably set up for line following
+    # go forward overthe curve in line
+    robot.forward(25, 35)
 
-    robot.forward(25, 30)
-    robot.gotowhite(25, 3, white=90)
-    robot.gotoblack(25, 3, black=10)
-    robot.gotowhite(25, 3, white=90)
-    robot.forward(25,4)
+    # find the white lien so we can start with line following
+    robot.turntowhite(25, direction="right", port=3)
+
+    # follow the line but stop before the dent
+    robot.followline(speed=10, distance=45, port=3, right=False, delta=-35, factor=0.4)
+
+    # move over the dent
+    robot.forward(25,30)
+
+    # find the line reliably
+    robot.turn(10, -5)
     robot.turntoblack(25, direction="right", port=3)
     robot.turntowhite(25, direction="left", port=3)
 
-    # follow the line till the dent
+    # follow the line and hit the swing
+    robot.followline(speed=10, distance=16, port=3, right=False, delta=-35, factor=0.4)
+    robot.forward(10, 5)
 
-    robot.followline_pid(distance=77, speed=10, kp=0.30, ki=0.0, kd=0.0)
-
-
-    robot.forward(10, 4)
-    robot.gotocolor(speed=10, port=2, colors=[6])
-
-    #robot.forward(10, 8)
-    """
     # turn to knock out strut and place building
-    robot.turn(25,45)
+    robot.turn(25,30)
 
     # back up
     robot.forward(70, -25)
@@ -66,26 +67,7 @@ def run_swing():
     # turn to elevator
     robot.turn(25, -30)
     # find the black line
-
     robot.turntoblack(25, direction="left", port=2)
-
-
-    """
-
-
-
-
-
-    """
-    robot.forward(70, 10)
-
-    robot.turn(25, 90)
-
-    robot.forward(70, -10)
-
-
-    robot.turn(75, 180)
-
     # follow the line to the elevator
     robot.followline(speed=10, distance=13,
                      port=2, right=True,
@@ -100,7 +82,7 @@ def run_swing():
     robot.turn(75, 130)
     # go home
     robot.forward(100, 130)
-    """
+
 
 
 if __name__ == "__main__":

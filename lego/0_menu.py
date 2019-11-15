@@ -13,11 +13,13 @@ from run.swing import run_swing
 from run.black_circle import run_black_circle
 from run.red_circle import run_red_circle
 from run.tan_circle import run_tan_circle
+from run.ramp import run_ramp
 
-from run.led import run_led
 from run.calibrate import run_calibrate
-from run.check import run_check
-from run.turn_to_black import run_turn_to_black
+
+# from run.led import run_led
+# from run.check import run_check
+# from run.turn_to_black import run_turn_to_black
 
 from pybricks import ev3brick as brick
 
@@ -26,11 +28,11 @@ from pybricks import ev3brick as brick
 menu = [
     ["Crane", run_crane],
     ["Swing", run_swing],
-    ["Red Building", run_red_building],
-    ["Tan Building", run_tan_building],
-    ["Black/White Building", run_black_building],
-    ["LED", run_led],
-    ["Turn to black", run_turn_to_black]
+    ["Red Circle", run_red_circle],
+    ["Tan Circle", run_tan_circle],
+    ["White to Black Circle", run_black_circle],
+    ["Ramp", run_ramp],
+#    ["Calibrate", run_calibrate]
 ]
 
 selection = 0
@@ -77,10 +79,14 @@ while True:
         print_menu()
 
     elif Button.RIGHT in brick.buttons():
-        prg = menu[selection][4]
+        prg = menu[selection][1]
+        brick.display.clear()
         prg()
+        brick.display.clear()
+        print_menu()
 
     elif Button.LEFT in brick.buttons():
+        brick.display.clear()
         break
 
     wait(100)
