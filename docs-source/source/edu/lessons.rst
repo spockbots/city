@@ -21,6 +21,8 @@ Lessons
           Python and we encourace LEGO to improve their library with feedback from those having used
           Python on the EV3 extensively
 
+.. warning:: Although python could be used by beginning teams, we find that due to some current
+             limitations beginning teams should use the GUI and not python.
 
 Python Programming Templates and Activities
 -------------------------------------------
@@ -852,8 +854,9 @@ Reimplement these methods in Python.
 
             """
             #
-            # you have decided to have 3 color sensors, write a program that drives over the black line to
-            calibrate it for balck and white and write the values to a file
+            # you have decided to have 3 color sensors, write a program that drives
+            # over the black line to calibrate it for balck and white and write the
+            # values to a file
             #
 
 

@@ -4,19 +4,19 @@ Coaches Disclaimer
 We have included in this document some information provided to the
 kids in order to be transparent with the help and educational material
 that has been issued to the team and to clearly distinguish
-what ws done by coaches and what was done by the team.
+what was done by coaches and what was done by the team.
 
 We apologize for this long document, but we want to make sure we
 communicate our activities properly to all.
 However, the judges can skip this section and go directly to the
-`Spockbots CIty` section.
+`Spockbots City` section if they wish.
 
 The information in the coaches disclaimer has been collected by the
 coaches, with some input from the team but in large part it has been
 conducted just by the coaches as what we have done here is only needed
 due to the evolving python mindstorm ecosystem. Naturally, in the
-mindstorm GUI you do not have this issue as everything seems to be
-stable there.
+mindstorm GUI you do not have these issue as the GUI is very stable and a proven way of
+doing competitions.
 
 Team background
 ---------------
@@ -34,10 +34,8 @@ library that includes:
 * Color sensor based
 
   * calibration of multiple sensors while storing the failures in a file
-
-    * using the calibrated minimum and maximum values for decisions if
-      it is black and white
-
+  * using the calibrated minimum and maximum values for decisions if
+    it is black and white
   * line following on black
   * line following on color
   * drive to black
@@ -48,8 +46,10 @@ library that includes:
 * One of the other strengths of the team was to build fancy attachments
   to their box robot they improved over the last two years.
 
-So the team has an existing library and they could have made it easy
-on themselves to just reuse this Mindstorm Myblocks library.
+
+.. note:: Thus, he team has an existing library for minstorm GUI
+          and they could have made it easy
+          on themselves to just reuse this Mindstorm Myblocks library.
 
 
 Choice of not using Scratch or Java
@@ -123,7 +123,7 @@ pybricks-micropython
     increase in productivity as the kids could focus on programming
     and not on waiting for the program to get started. However, this
     OS and the python version is far less than ideal as it does not
-    provide the more advanced features than the ev3dev OS provides. We also
+    provide the more advanced features that the ev3dev OS provides. We also
     found that the micropython version of pybricks is faster than the
     one on ev3dev.
 
@@ -142,9 +142,11 @@ Runaway Motors
     motors simply run away and can not be made to stop. This seems to
     be discussed online as one of the open bugs.  A solution is posted
     in the ev3dev documentation but uses threads and can not be
-    applied to all micropython versions. However, when applying this
-    solution we sometimes still ended up in runaway motors.
+    applied to all micropython versions. However, even when applying this
+    solution we sometimes still ended up in runaway motors that could
+    not be stopped easily.
 
+    .. note:: We need a build in system wide stop button.
 
 Gyro Hardware Differences
 
@@ -170,7 +172,7 @@ Gyro Hardware Differences
     coaches took a closer look at it and identified a hardware
     difference/fault. If we would not have had more than one robot we
     would not have been able to identify this and the team would still
-    try to get the gyro to get working ;-) The interesting part was
+    try to get the gyro to get working ;-( The interesting part was
     that just switching to a different sensor it worked much more
     reliable.
 
@@ -178,6 +180,8 @@ Gyro Hardware Differences
     coach that discusses the difference between the many Gyro
     sensors. I think in python we see the same issue as discussed for
     the GUI version.
+
+    .. note:: We need a build in hardware test for testing sensors.
 
 Motor Stall on Angle:
 
@@ -198,6 +202,9 @@ Motor Stall on Angle:
     We would like to see a better discussion of this issue in the
     manual as this is a feature that is not commonly discussed.
 
+    .. note:: We need provided eductational material that explains
+              this issue of angle inacurracy and motor stall.
+
 Light Sensor Blackout:
 
     (+) GUI: Although this error occurs also on the GUI version it seems that
@@ -207,6 +214,10 @@ Light Sensor Blackout:
     an error during the reading of an unknown type, programs will no longer
     work -- we must write a special light sensor function that ignors this
     error and instead return a previous value
+
+    .. note:: We need a software solution in EV3 GUI and python so sensor blackouts
+              can be avoided or we need better educational material
+              that explains this issue.
 
 Program Loading Time:
 
@@ -226,6 +237,15 @@ Program Loading Time:
     * Bluetooth copy: 15 seconds
     * wireless copy: 3-5 seconds
 
+    .. note:: We need faster loading times
+
+Font size:
+
+    (+) GUI: when printing messages to teh screen the font is big
+
+    (-) Python: The default font is too small
+
+    .. note:: We need a way to select the font size in pybricks.
 
 Thread Support:
 
@@ -236,6 +256,8 @@ Thread Support:
     The official version of micropython points this out in its release notes.
     This should be made available.
 
+    .. note:: We need to Thread support and documentation about it in pybricks
+
 OSX Bluetooth:
 
     (-) GUI: We had issues with reliability of the initial connection
@@ -244,6 +266,8 @@ OSX Bluetooth:
 
     (+) Python: other than sometimes having to reboot the brick multiple
     times, bluetooth works much better in ev3dev
+
+    .. note:: The support of the GUI version in macOS needs to be improved.
 
 Documenting the Code:
 
@@ -286,6 +310,13 @@ Documenting the Code:
     system such as sphinx is able to generate a sophisticated
     documentation that fosters easier learning achievements.
 
+    .. note:: We need educational material on how to leverage Sphinx
+              for documenting projects.
+
+    .. note:: We need software support to allow creating Sphinx documentation
+              on the host system such as demonstrated here.
+
+
 SSH Key Management and Config:
 
     As the robots are in a secure area, they were not allowed to
@@ -310,3 +341,7 @@ SSH Key Management and Config:
 
     or a button in Visual code that does this so inexperienced teams can
     also leverage this.
+
+    .. note:: We need a coaches manual on how to use elementary ssh key management
+              to manage a fleet of robots for class activities.
+
