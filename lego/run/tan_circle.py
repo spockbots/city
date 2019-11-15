@@ -2,12 +2,13 @@
 
 from spockbots.motor import SpockbotsMotor
 from spockbots.gyro import SpockbotsGyro as Gyro
-from time import sleep
+import time
 from spockbots.output import led, PRINT
+
 
 def run_tan_circle():
     """
-    TBD
+    Place the tan building in the circle
     """
     robot = SpockbotsMotor()
     robot.debug = True
@@ -41,23 +42,22 @@ def run_tan_circle():
     robot.forward(75, -140)
 
     # move a long distance
-    #robot.forward(30,85)
+    # robot.forward(30,85)
     # trun towards the white line
-    #robot.turn(25,-45)
+    # robot.turn(25,-45)
     # move a bit forward so we are not in the red circle as it colld be interpreted as white
-    #robot.forward(25,23)
+    # robot.forward(25,23)
 
     # back up and leave the building
-    #robot.forward(25,-15)
+    # robot.forward(25,-15)
     # turn to home
-    #robot.turn(25, 15)
+    # robot.turn(25, 15)
     # go back to base
-    #robot.forward(100, -100)
-
-
-
-
+    # robot.forward(100, -100)
 
 
 if __name__ == "__main__":
+    time_start = time.time()
     run_tan_circle()
+    time_end = time.time()
+    print("Time:", time_end - time_start)

@@ -6,7 +6,7 @@ import time
 
 def run_led():
     """
-    TBD
+    Test the LEDs
     """
 
     led("RED")

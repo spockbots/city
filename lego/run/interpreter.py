@@ -28,7 +28,7 @@ while True:
         sys.exit()
     elif line.startswith("gyro.") or \
             line.startswith("robot.") or \
-                line.startswith("run."):
+            line.startswith("run."):
         try:
             print(line)
             eval(line)

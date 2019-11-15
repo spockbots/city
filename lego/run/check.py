@@ -1,5 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 from spockbots.check import check
+import time
 
 
 def run_check():

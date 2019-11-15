@@ -7,8 +7,7 @@ from spockbots.gyro import SpockbotsGyro as Gyro
 import time
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
-from time import sleep
-
+import time
 from spockbots.output import PRINT
 
 """GYRO-ANG GYRO-RATE GYRO-FAS GYRO-G&A GYRO-CAL TILT-RATE TILT-ANG"""

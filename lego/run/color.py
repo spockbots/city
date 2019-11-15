@@ -27,5 +27,6 @@ def run_color():
         color = robot.color.test_color(ports=[2, 3])
         time.sleep(0.4)
 
+
 if __name__ == "__main__":
     run_color()

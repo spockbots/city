@@ -6,7 +6,8 @@ def run_calibrate():
     """
     Run the calibration
 
-    :return: a file called calibrate.txt that contains the minimum black and the maximum white value for the sensors
+    :return: a file called calibrate.txt that contains the minimum black and the
+             aximum white value for the sensors
     """
     robot = SpockbotsMotor()
     robot.debug = True
@@ -29,4 +30,7 @@ def run_calibrate():
 
 
 if __name__ == "__main__":
+    time_start = time.time()
     run_calibrate()
+    time_end = time.time()
+    print("Time:", time_end - time_start)

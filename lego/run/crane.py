@@ -1,12 +1,13 @@
 #!/usr/bin/env pybricks-micropython
 
+from spockbots.gyro import SpockbotsGyro as Gyro
 from spockbots.motor import SpockbotsMotor
-from time import sleep
+import time
 
 
 def run_crane():
     """
-    TBD
+    lower the block from the crane
     """
     robot = SpockbotsMotor()
     robot.debug = True
@@ -16,24 +17,11 @@ def run_crane():
 
     print(robot)
 
-    """
-    robot.forward(50, 10)
-    robot.turn(25, 45)
-    robot.forward(50, 30)
-    
-    robot.turn(25, -45)
-    
-    robot.gotowhite(25, 3)
-    robot.gotoblack(10, 3)
-    robot.gotowhite(10, 3)
-    
-    #robot.forward(5, 2)
-    #robot.forward(-20, 20)
-    #robot.right(20, 45)
-    #robot.forward(-75, 60)
-    """
-
-    dt = 0.0
+    #
+    # setup gyro
+    #
+    gyro = Gyro(robot)
+    gyro.setup()
 
     robot.forward(50, 20)
 
@@ -57,17 +45,18 @@ def run_crane():
     robot.forward(2, 4)
     robot.forward(10, 1)
 
-    # sleep(0.2)
-
     # back to base
 
     robot.forward(5, -5)  # backup slowly
-    robot.forward(75, -20)
-    robot.turn(25, 45)
-    robot.forward(75, -30)
-    robot.turn(25, 45)
-    robot.forward(75, -20)
+    robot.forward(100, -20)
+    robot.turn(25, 56)
+    robot.forward(100, -60)
 
 
 if __name__ == "__main__":
+    time_start = time.time()
     run_crane()
+    time_end = time.time()
+    print("Time:", time_end - time_start)
+
+    # Time: 27.17

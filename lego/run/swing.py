@@ -12,7 +12,7 @@ from spockbots.output import PRINT
 
 def run_swing():
     """
-    TBD
+    Activate the seing, place the white block, go to the elevator, turn over the elevator
     """
 
     robot = SpockbotsMotor()
@@ -29,79 +29,53 @@ def run_swing():
     gyro = Gyro(robot)
     gyro.setup()
 
-    dt = 1.0
+    def arm_motor(speed, degrees):
+        robot.left_medium.run_angle(speed * 10, degrees)
 
-    def wait():
-        time.sleep(dt)
-        robot.beep()
+    def six():
+        return robot.color(2) in [6]
 
-    # PUT IN COLOR CALIBRATE VALUES
+    def blue():
+        return robot.color(2) in [2]
 
-    # go forward over the black line and reliably set up for line following
+    def white():
+        return robot.value(2) >= 90
 
-    robot.forward(25, 30)
-    robot.gotowhite(25, 3, white=90)
-    robot.gotoblack(25, 3, black=10)
-    robot.gotowhite(25, 3, white=90)
-    robot.forward(25,4)
-    robot.turntoblack(25, direction="right", port=3)
-    robot.turntowhite(25, direction="left", port=3)
+    gyro.forward(25, 30)
+    gyro.turn(10, -15)
+    gyro.forward(25, 16)
+    robot.turntowhite(15, direction="right", port=3)
+    robot.turntoblack(15, direction="right", port=3)
+    robot.turntowhite(15, direction="left", port=3)
 
-    # follow the line till the dent
+    robot.followline_pid(distance=30, speed=10, kp=0.30, ki=0.0, kd=0.0)
 
-    robot.followline_pid(distance=77, speed=10, kp=0.30, ki=0.0, kd=0.0)
+    gyro.forward(speed=25, distance=1.8, finish=blue, min_speed=1, acceleration=2)
+    gyro.forward(speed=25, distance=10.6, finish=white, min_speed=1, acceleration=2)
+    gyro.forward(speed=25, distance=11, finish=blue, min_speed=1, acceleration=2)
+    robot.beep()
+    robot.beep()
 
+    robot.turntoblack(15, direction="right", port=3)
 
-    robot.forward(10, 4)
-    robot.gotocolor(speed=10, port=2, colors=[6])
+    robot.followline_pid(distance=20, speed=10, kp=0.30, ki=0.0, kd=0.0)
 
-    #robot.forward(10, 8)
-    """
-    # turn to knock out strut and place building
-    robot.turn(25,45)
+    robot.beep()
+    gyro.forward(speed=25, distance=9.5)
+    gyro.turn(30, 45)
+    robot.forward(25, -25)
+    gyro.turn(25, 33)
 
-    # back up
-    robot.forward(70, -25)
-
-    # turn to elevator
-    robot.turn(25, -30)
-    # find the black line
-
-    robot.turntoblack(25, direction="left", port=2)
-
-
-    """
-
-
-
-
-
-    """
-    robot.forward(70, 10)
-
-    robot.turn(25, 90)
-
-    robot.forward(70, -10)
-
-
-    robot.turn(75, 180)
-
-    # follow the line to the elevator
-    robot.followline(speed=10, distance=13,
-                     port=2, right=True,
-                     delta=-35, factor=0.4)
-
-    # turn to the elevator
-    robot.turn(25, 90)
-    # move toward the elavator to position arm
-    robot.forward(20, -15)
-
-    # turn the elevator and turn home at the same time
-    robot.turn(75, 130)
-    # go home
-    robot.forward(100, 130)
-    """
+    robot.forward(25, -10)
+    gyro.turn(100, 60)
+    gyro.turn(25, 45)
+    gyro.forward(speed=100, distance=135)
 
 
 if __name__ == "__main__":
+    time_start = time.time()
     run_swing()
+    time_end = time.time()
+    print("Time:", time_end - time_start)
+
+    # Time: 43.13

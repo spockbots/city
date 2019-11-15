@@ -2,12 +2,13 @@
 
 from spockbots.motor import SpockbotsMotor
 from spockbots.gyro import SpockbotsGyro as Gyro
-from time import sleep
 from spockbots.output import led, PRINT
+import time
+
 
 def run_ramp():
     """
-    TBD
+    Drive up the ramp
     """
     robot = SpockbotsMotor()
     robot.debug = True
@@ -24,18 +25,18 @@ def run_ramp():
     gyro.setup()
 
     # move towards the black line
-    gyro.forward(50,72)
+    gyro.forward(50, 72)
     # go with the robot towards the white  line
     robot.gotowhite(10, 4)
-    #Turn so we are allinged with the black line
-    gyro.turn(10,20)
-    #Go over the line
+    # Turn so we are allinged with the black line
+    gyro.turn(10, 20)
+    # Go over the line
     gyro.forward(10, 12)
 
     # turn to the ramp
-    gyro.turn(10,85)
+    gyro.turn(10, 85)
 
-    #move back
+    # move back
     robot.forward(10, -15)
 
     # find the line
@@ -57,4 +58,7 @@ def run_ramp():
 
 
 if __name__ == "__main__":
+    time_start = time.time()
     run_ramp()
+    time_end = time.time()
+    print("Time:", time_end - time_start)

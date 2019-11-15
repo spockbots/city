@@ -1,7 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 
 from spockbots.motor import SpockbotsMotor
-from time import sleep
+import time
 
 
 def run_turn_to_black():
@@ -31,7 +31,7 @@ def run_turn_to_black():
 
     robot.beep()
 
-    sleep(1)
+    time.sleep(1)
 
 
 if __name__ == "__main__":
