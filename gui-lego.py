@@ -26,7 +26,9 @@ python="bybricks-micropython"
 
 robots = ['red', 'blue']
 prgs = ['interpreter']
-actions = ['Update robot.py', 'Upload', 'Run', 'Clean', 'Quit']
+#actions = ['Update robot.py', 'Upload', 'Run', 'Clean', 'Quit']
+actions = ['Upload', 'Clean', 'Quit']
+
 pythons=['python3', 'micropython', 'bybricks-micropython']
 clean = ['clean']
 
