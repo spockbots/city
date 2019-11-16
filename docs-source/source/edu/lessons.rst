@@ -135,7 +135,7 @@ Experiment and move the sensor over various different places to measure the diff
         sleep(0.5)
 
 
-Next, modify the program to print th color instead of the reflective value.
+Next, modify the program to print the color instead of the reflective value.
 
 
 Here is the template for this assignment to complete the file `colorsensor.py`:

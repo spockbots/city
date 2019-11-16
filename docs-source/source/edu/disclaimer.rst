@@ -229,7 +229,7 @@ Program Loading Time:
 
     (+) pybricks-micropython: Loading times are reasonable
 
-    Times (need to be verified):
+    Times:
 
     * python3: 35 seconds
     * EV3DEVr micropython: 15 seconds
