@@ -83,7 +83,7 @@ Mindtsorm. This was new to us and we were not sure if we can do the missions in 
 * Our main goal was to learn python and test various functionssuch as line following, gyro, movements
 * We picked missions that were easy to do but give us some number of points
 
-TODO: list of missions with their points
+  .. warning:: TODO: list of missions with their points
 
 **Innovation** - Team identifies their sources of inspiration and creates new, unique, or
 unexpected feature(s) (e.g. designs, programs, strategies or applications) that are

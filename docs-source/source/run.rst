@@ -1,29 +1,53 @@
 City Runs
 =========
 
-run.red_circle
--------
+run.check
+---------
 
-.. automodule:: run.red_circle
+.. automodule:: run.check
    :members:
    :undoc-members:
    :show-inheritance:
 
-run.tan_circle
--------
+run.calibrate
+-------------
 
-.. automodule:: run.tan_circle
+.. automodule:: run.calibrate
    :members:
    :undoc-members:
    :show-inheritance:
 
-run.black_circle
--------
 
-.. automodule:: run.black_circle
+
+run.swing
+---------
+
+.. automodule:: run.swing
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. literalinclude:: ../../lego/run/crane.py
+   :language: python
+
+
+**Reliability**:
+
+Setup
+  To help the setup we are using a jig.
+
+Run
+  We use the balck lines and that allow us to be more precise.
+
+Mechanical
+  We have an attachment designed that pushes the house block, a lever that starts the swing, a
+  lever that allows us to flip a blue stand
+  and a lever tu turn the elevator.
+
+Mission Order
+  THis mission would be best to be strarte at the begining as it is mor complex to set up
+  the the crane, but the crane may swing so we decided to run the swing first.
+
 
 run.crane
 ---------
@@ -69,64 +93,26 @@ Mission Order
   To avoid the swinging of the line (by other teams moving the table), this is our first mission.
 
 
-run.swing
----------
-
-.. automodule:: run.swing
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. literalinclude:: ../../lego/run/crane.py
-   :language: python
-
-
-**Reliability**:
-
-Setup
-  To help the setup we are using a jig.
-
-Run
-  We use the balck lines and that allow us to be more precise.
-
-Mechanical
-  We have an attachment designed that pushes the house block, a lever that starts the swing, a
-  lever that allows us to flip a blue stand
-  and a lever tu turn the elevator.
-
-Mission Order
-  THis mission would be best to be strarte at the begining as it is mor complex to set up
-  the the crane, but the crane may swing so we decided to run the swing first.
-
-run.led
+run.tan_circle
 -------
 
-.. automodule:: run.led
+.. automodule:: run.tan_circle
    :members:
    :undoc-members:
    :show-inheritance:
 
-run.turn\_to\_black module
--------------------------------
+run.red_circle
+-------
 
-.. automodule:: run.turn_to_black
+.. automodule:: run.red_circle
    :members:
    :undoc-members:
    :show-inheritance:
 
-run.calibrate
--------------
+run.black_circle
+-------
 
-.. automodule:: run.calibrate
+.. automodule:: run.black_circle
    :members:
    :undoc-members:
    :show-inheritance:
-
-run.check
----------
-
-.. automodule:: run.check
-   :members:
-   :undoc-members:
-   :show-inheritance:
-

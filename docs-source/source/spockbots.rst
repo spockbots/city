@@ -17,6 +17,14 @@ spockbots.check
    :undoc-members:
    :show-inheritance:
 
+spockbots.colorsensor
+---------------------------------
+
+.. automodule:: spockbots.colorsensor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 spockbots.motor
 ---------------------------
 
@@ -29,14 +37,6 @@ spockbots.gyro
 --------------------------
 
 .. automodule:: spockbots.gyro
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-spockbots.colorsensor
----------------------------------
-
-.. automodule:: spockbots.colorsensor
    :members:
    :undoc-members:
    :show-inheritance:
