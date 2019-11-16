@@ -182,3 +182,33 @@ Mechanical
 Mission Order
   This is an optional run if we have time.
 
+run.ramp
+-------
+
+.. automodule:: run.ramp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Setup
+  We align on the 15 degree line in the starter space.
+
+Run
+  We send the robot forward 72cm using the gryo, then search for a white line,
+  then align to a black line, turn 20 degrees right, go forward 12cm.  Then
+  we turn almost 90 degrees (85) right, back up 15cm and turn to the black line
+  then turn to the white line to make sure we are aligned to the line following
+  line, follow that for 25cm, and then go straight very fast for 80 cm and stop
+  at the top of the ramp.
+
+Points
+  If the robot successfully stops at the top of the ramp with both flags up,
+  we earn 50 points, plus the 5 point "advantage" bonus points.
+
+Mechanical
+  We use an attachment with extra wheels to help get over the bottom of the ramp.
+
+Mission Order
+  This run works about half of the time, so we would only use it if all the
+  other runs have been completed.
+
