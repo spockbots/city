@@ -30,11 +30,11 @@ from pybricks import ev3brick as brick
 menu = [
     ["Swing", run_swing],
     ["Crane", run_crane],
-    ["Red Circle", run_red_circle],
     ["Tan Circle", run_tan_circle],
     ["White to Black Circle", run_black_circle],
     ["Ramp", run_ramp],
-#    ["Calibrate", run_calibrate]
+    ["Red Circle", run_red_circle],
+    #    ["Calibrate", run_calibrate]
 ]
 
 selection = 0

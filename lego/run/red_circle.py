@@ -37,6 +37,7 @@ def run_red_circle():
     # got to base
     robot.forward(75, -70)
 
+
 if __name__ == "__main__":
     time_start = time.time()
     run_red_circle()
