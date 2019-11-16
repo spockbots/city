@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Spockbots API" href="spockbots.html" />
-    <link rel="prev" title="1. Design" href="design.html" />
+    <link rel="prev" title="Design" href="design.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -78,8 +78,9 @@ aximum white value for the sensors</p>
 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
 
+<span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="kn">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
 <span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">time</span>
 
 
 <span class="k">def</span> <span class="nf">run_crane</span><span class="p">():</span>
@@ -100,31 +101,12 @@ aximum white value for the sensors</p>
     <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    robot.forward(50, 10)</span>
-<span class="sd">    robot.turn(25, 45)</span>
-<span class="sd">    robot.forward(50, 30)</span>
-<span class="sd">    </span>
-<span class="sd">    robot.turn(25, -45)</span>
-<span class="sd">    </span>
-<span class="sd">    robot.gotowhite(25, 3)</span>
-<span class="sd">    robot.gotoblack(10, 3)</span>
-<span class="sd">    robot.gotowhite(10, 3)</span>
-<span class="sd">    </span>
-<span class="sd">    #robot.forward(5, 2)</span>
-<span class="sd">    #robot.forward(-20, 20)</span>
-<span class="sd">    #robot.right(20, 45)</span>
-<span class="sd">    #robot.forward(-75, 60)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">turntoblack</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">turntowhite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -138,37 +120,41 @@ aximum white value for the sensors</p>
     <span class="n">robot</span><span class="o">.</span><span class="n">gotoblack</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># sleep(0.2)</span>
 
     <span class="c1"># back to base</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># backup slowly</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">56</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">run_crane</span><span class="p">()</span>
+    <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time:&quot;</span><span class="p">,</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">)</span>
+
+    <span class="c1"># Time: 27.17</span>
 </pre></div>
 </div>
 <p><strong>Reliability</strong>:</p>
 <dl class="simple">
 <dt>Setup</dt><dd><p>To help the setup we are using a jig.</p>
 </dd>
-<dt>Run</dt><dd><p>We use the balck lines and that allow us to be more precise.</p>
+<dt>Run</dt><dd><p>We use the black lines and that allow us to be more precise.</p>
+</dd>
+<dt>Points</dt><dd><p>Including the “advantage” points for containing all parts in the small home,
+we can score a maximimum of 90 points on this run.</p>
 </dd>
 <dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the house block, a lever that starts the swing, a
-lever that allows us to flip a blue stand
-and a lever tu turn the elevator.</p>
+lever that allows us to flip a blue house stilt
+and a lever to flip the elevator.</p>
 </dd>
-<dt>Mission Order</dt><dd><p>THis mission would be best to be strarte at the begining as it is mor complex to set up
-the the crane, but the crane may swing so we decided to run the swing first.</p>
+<dt>Mission Order</dt><dd><p>This mission would be best to be start at the begining as it is more complex to set up
+than the crane, but the crane may fall off so we decided to run the swing first.</p>
 </dd>
 </dl>
 </div>
@@ -182,8 +168,9 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
 
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env pybricks-micropython</span>
 
+<span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="kn">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
 <span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="kn">import</span> <span class="n">SpockbotsMotor</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">time</span>
 
 
 <span class="k">def</span> <span class="nf">run_crane</span><span class="p">():</span>
@@ -204,31 +191,12 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
     <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    robot.forward(50, 10)</span>
-<span class="sd">    robot.turn(25, 45)</span>
-<span class="sd">    robot.forward(50, 30)</span>
-<span class="sd">    </span>
-<span class="sd">    robot.turn(25, -45)</span>
-<span class="sd">    </span>
-<span class="sd">    robot.gotowhite(25, 3)</span>
-<span class="sd">    robot.gotoblack(10, 3)</span>
-<span class="sd">    robot.gotowhite(10, 3)</span>
-<span class="sd">    </span>
-<span class="sd">    #robot.forward(5, 2)</span>
-<span class="sd">    #robot.forward(-20, 20)</span>
-<span class="sd">    #robot.right(20, 45)</span>
-<span class="sd">    #robot.forward(-75, 60)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">turntoblack</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">turntowhite</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
@@ -242,23 +210,24 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
     <span class="n">robot</span><span class="o">.</span><span class="n">gotoblack</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">gotowhite</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># sleep(0.2)</span>
 
     <span class="c1"># back to base</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># backup slowly</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">56</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">run_crane</span><span class="p">()</span>
+    <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Time:&quot;</span><span class="p">,</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">)</span>
+
+    <span class="c1"># Time: 27.17</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -289,15 +258,67 @@ the the crane, but the crane may swing so we decided to run the swing first.</p>
 <p><strong>Reliability</strong>:</p>
 <dl class="simple">
 <dt>Setup</dt><dd><p>The setup for the crane mission is important, but it does not have to be precise.
-There is a balck line that we can allign the blue peg with.</p>
+There is a balck line that we can align the blue peg with.  There is no jig for
+this run.</p>
 </dd>
-<dt>Run</dt><dd><p>We use the balck line to align the robot so that the attachment is working well.</p>
+<dt>Run</dt><dd><p>We use the black line to align the robot so that the attachment is working well.</p>
+</dd>
+<dt>Points</dt><dd><p>If the blue blocks stack properly, we will earn 50 points, plus the 5 point
+“advantage” bonus for fitting in the small home.</p>
 </dd>
 <dt>Mechanical</dt><dd><p>We have an attachment designed that pushes the block and activates the
 blue levers at the righ time. The drive must not be fast into the crane. The crane block
 must not swing wne  we start.</p>
 </dd>
 <dt>Mission Order</dt><dd><p>To avoid the swinging of the line (by other teams moving the table), this is our first mission.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="run-black-circle">
+<h2>run.black_circle<a class="headerlink" href="#run-black-circle" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.black_circle"></span><dl class="function">
+<dt id="run.black_circle.run_black_circle">
+<code class="sig-prename descclassname">run.black_circle.</code><code class="sig-name descname">run_black_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/black_circle.html#run_black_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.black_circle.run_black_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drive the white building in the black circle</p>
+</dd></dl>
+
+<dl class="simple">
+<dt>Setup</dt><dd><p>We use the grid in the starting section to align and aim the robot.</p>
+</dd>
+<dt>Run</dt><dd><p>We just send the robot forward 48cm using the gryo, then back up 48cm back to base.</p>
+</dd>
+<dt>Points</dt><dd><p>If the building is entirely in the circle we score 40, plus the 5 point
+mission bonus for all attachments in the small home.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We use a simple and light building holder attachment that shoves the building
+to the circle.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>This run is done after the crane.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="run-red-circle">
+<h2>run.red_circle<a class="headerlink" href="#run-red-circle" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.red_circle"></span><dl class="function">
+<dt id="run.red_circle.run_red_circle">
+<code class="sig-prename descclassname">run.red_circle.</code><code class="sig-name descname">run_red_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/red_circle.html#run_red_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.red_circle.run_red_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drive the red peces in the red circle</p>
+</dd></dl>
+
+<dl class="simple">
+<dt>Setup</dt><dd><p>We use our standard jig to align the robot at the correct angle</p>
+</dd>
+<dt>Run</dt><dd><p>We send the robot forward 59cm using the gryo, then turn left 40 degrees,
+then forward another 3cm.  Then reverse 10cm, turn left 45 degrees, and back 70cm
+to base.</p>
+</dd>
+<dt>Points</dt><dd><p>If the building is entirely in the circle we score 50, plus the 5 point
+“advantage” bonus for all attachments in the small home.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We use a simple and light building holder attachment that shoves the building
+to the circle.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>This run is done last, after the black run.</p>
 </dd>
 </dl>
 </div>
@@ -309,24 +330,50 @@ must not swing wne  we start.</p>
 <dd><p>Place the tan building in the circle</p>
 </dd></dl>
 
+<dl class="simple">
+<dt>Setup</dt><dd><p>We use our standard jig to align the robot at the correct angle</p>
+</dd>
+<dt>Run</dt><dd><p>We send the robot forward 85cm using the gryo, then turn left 50 degrees,
+then forward 25cm.  Then reverse 10cm, turn right 50 degrees, and back 120cm
+to base.</p>
+</dd>
+<dt>Points</dt><dd><p>If the building is entirely in the circle we score 45, plus the 5 point
+“advantage” bonus for all attachments in the small home.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We use a simple and light building holder attachment that shoves the building
+to the circle.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>This is an optional run if we have time.</p>
+</dd>
+</dl>
 </div>
-<div class="section" id="run-red-circle">
-<h2>run.red_circle<a class="headerlink" href="#run-red-circle" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-run.red_circle"></span><dl class="function">
-<dt id="run.red_circle.run_red_circle">
-<code class="sig-prename descclassname">run.red_circle.</code><code class="sig-name descname">run_red_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/red_circle.html#run_red_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.red_circle.run_red_circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drive the red peces in the red circle</p>
+<div class="section" id="run-ramp">
+<h2>run.ramp<a class="headerlink" href="#run-ramp" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-run.ramp"></span><dl class="function">
+<dt id="run.ramp.run_ramp">
+<code class="sig-prename descclassname">run.ramp.</code><code class="sig-name descname">run_ramp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/ramp.html#run_ramp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.ramp.run_ramp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drive up the ramp</p>
 </dd></dl>
 
-</div>
-<div class="section" id="run-black-circle">
-<h2>run.black_circle<a class="headerlink" href="#run-black-circle" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-run.black_circle"></span><dl class="function">
-<dt id="run.black_circle.run_black_circle">
-<code class="sig-prename descclassname">run.black_circle.</code><code class="sig-name descname">run_black_circle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/run/black_circle.html#run_black_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.black_circle.run_black_circle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drive the white building in the black circle</p>
-</dd></dl>
-
+<dl class="simple">
+<dt>Setup</dt><dd><p>We align on the 15 degree line in the starter space.</p>
+</dd>
+<dt>Run</dt><dd><p>We send the robot forward 72cm using the gryo, then search for a white line,
+then align to a black line, turn 20 degrees right, go forward 12cm.  Then
+we turn almost 90 degrees (85) right, back up 15cm and turn to the black line
+then turn to the white line to make sure we are aligned to the line following
+line, follow that for 25cm, and then go straight very fast for 80 cm and stop
+at the top of the ramp.</p>
+</dd>
+<dt>Points</dt><dd><p>If the robot successfully stops at the top of the ramp with both flags up,
+we earn 50 points, plus the 5 point “advantage” bonus points.</p>
+</dd>
+<dt>Mechanical</dt><dd><p>We use an attachment with extra wheels to help get over the bottom of the ramp.</p>
+</dd>
+<dt>Mission Order</dt><dd><p>This run works about half of the time, so we would only use it if all the
+other runs have been completed.</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -357,15 +404,16 @@ must not swing wne  we start.</p>
 <li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">City Runs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.check">run.check</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.calibrate">run.calibrate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-ramp">run.ramp</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
@@ -376,9 +424,10 @@ must not swing wne  we start.</p>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.calibrate">run.calibrate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.swing">run.swing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-run.crane">run.crane</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-black-circle">run.black_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-red-circle">run.red_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-tan-circle">run.tan_circle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-ramp">run.ramp</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
@@ -390,7 +439,7 @@ must not swing wne  we start.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="design.html" title="previous chapter">1. Design</a></li>
+      <li>Previous: <a href="design.html" title="previous chapter">Design</a></li>
       <li>Next: <a href="spockbots.html" title="next chapter">Spockbots API</a></li>
   </ul></li>
 </ul>

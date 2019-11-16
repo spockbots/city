@@ -35,8 +35,9 @@
 
 <span class="kn">from</span> <span class="nn">spockbots.motor</span> <span class="k">import</span> <span class="n">SpockbotsMotor</span>
 <span class="kn">from</span> <span class="nn">spockbots.gyro</span> <span class="k">import</span> <span class="n">SpockbotsGyro</span> <span class="k">as</span> <span class="n">Gyro</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">PRINT</span>
+
 
 <div class="viewcode-block" id="run_red_circle"><a class="viewcode-back" href="../../run.html#run.red_circle.run_red_circle">[docs]</a><span class="k">def</span> <span class="nf">run_red_circle</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -56,53 +57,27 @@
     <span class="n">gyro</span> <span class="o">=</span> <span class="n">Gyro</span><span class="p">(</span><span class="n">robot</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 
-
-
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">62</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">45</span><span class="p">)</span>
-    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">)</span></div>
-
-
-
-    <span class="c1">#def till_tan():</span>
-    <span class="c1">#    v = robot.colorsensors.color(2) in [7]</span>
-    <span class="c1">#    print(&quot;TAN&quot;, v)</span>
-    <span class="c1">#    return v</span>
-
-    <span class="c1">#gyro.forward(speed=25, distance=82, finish=till_tan)</span>
-    <span class="c1">#robot.turntocolor(10, direction=&quot;left&quot;, port=3, colors=[1])</span>
-
-
-    <span class="c1">#followline(10, port=3, stop_color_sensor=2, stop_values=[7], stop_color_mode=&quot;color&quot;)</span>
-
-    <span class="c1"># go forward overthe curve in line</span>
-    <span class="c1"># go forward over the black line and reliably set up for line following</span>
-
-
-    <span class="c1">#robot.gotowhite(10, 3, white=90)</span>
-    <span class="c1">#robot.gotoblack(10, 3, black=10)</span>
-    <span class="c1">#robot.gotowhite(10, 3, white=90)</span>
-    <span class="c1">#gyro.forward(10, 4)</span>
-
-
-    <span class="c1">#robot.turntoblack(10, direction=&quot;right&quot;, port=3)</span>
-    <span class="c1">#robot.turntowhite(25, direction=&quot;left&quot;, port=3)</span>
-
-    <span class="c1"># find the white lien so we can start with line following</span>
-    <span class="c1">#robot.turntowhite(25, direction=&quot;right&quot;, port=3)</span>
-
-    <span class="c1">#robot.followline(10, distance=10, port=3, right=False)</span>
-    <span class="c1">#robot.gotocolor(10, 2, colors=[7])</span>
-    <span class="c1">#robot.turn(10,-62)</span>
-    <span class="c1">#robot.forward(25,-10)</span>
-    <span class="c1">#robot.turn(50,45)</span>
-    <span class="c1">#robot.forward(100,-80)</span>
+    <span class="c1"># run forward</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">59</span><span class="p">)</span>
+    <span class="c1"># turn to red circle</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+    <span class="c1"># move it a bit more in</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># back up</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># turn to base</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+    <span class="c1"># got to base</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">70</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">run_red_circle</span><span class="p">()</span>
+    <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time:&quot;</span><span class="p">,</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">)</span>
+
+    <span class="c1"># Time: 17.00</span>
 </pre></div>
 
           </div>
@@ -131,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>

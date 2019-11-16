@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>1. Design &#8212; Spockbots 1.0 documentation</title>
+    <title>Design &#8212; Spockbots 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. MECAHNICS TBD" href="mechanics.html" />
-    <link rel="prev" title="1. Summary of Robot Features" href="summary.html" />
+    <link rel="next" title="City Runs" href="run.html" />
+    <link rel="prev" title="Summary of Robot Features" href="summary.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,15 +33,15 @@
           <div class="body" role="main">
             
   <div class="section" id="design">
-<h1>1. Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
+<h1>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="goals-for-using-python">
-<h2>1.1. Goals for using Python<a class="headerlink" href="#goals-for-using-python" title="Permalink to this headline">¶</a></h2>
+<h2>Goals for using Python<a class="headerlink" href="#goals-for-using-python" title="Permalink to this headline">¶</a></h2>
 <p>Our main goal this year was to learn Python.</p>
 <p>Previously we used Mindstorms GUI and developed a sophisticated library with many myblocks.</p>
-<p>Questions</p>
+<p>Questions we wanted to answer:</p>
 <ol class="arabic simple">
-<li><p>Can we convert this library into python?</p></li>
-<li><p>Would python easier than the mindstrom GUI?</p></li>
+<li><p>Can we convert this library into Python?</p></li>
+<li><p>Would Python easier than the mindstrom GUI?</p></li>
 <li><p>Would it be easier to define missions with Python?</p></li>
 <li><p>Would the robot perform well with the Python program?</p></li>
 <li><p>What general reasons are there for and against Python or Mindstorm?</p></li>
@@ -54,11 +54,11 @@ Can they be redeveloped in Python?</p></li>
 <li><p>We had some issues with using Bluetooth between Mac
 and the robot in Mindstorm. Is this improved in Python</p></li>
 <li><p>In contrast to Windows, the GUI on Mac seems slower.
-Is the development in python faster?</p></li>
+Is the development in Python faster?</p></li>
 <li><p>We often ran out of screen space as the programs were long.
-Does using python help?</p></li>
+Does using Python help?</p></li>
 <li><p>We had some issues with the Gyro and light sensors
-in the mindstor GUI. Do these issues occur also in python?</p></li>
+in the mindstor GUI. Do these issues occur also in Python?</p></li>
 </ul>
 <table class="colwidths-given docutils align-default" id="id1">
 <caption><span class="caption-text">Python and Mindtsorm GUI comparison</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
@@ -104,7 +104,7 @@ We did not have a fix for that.</p></td>
 <td><p>Easy to fix in python while using the previous value.
 Comes back quickly</p></td>
 </tr>
-<tr class="row-odd"><td><p>Color Sensor reset with mor than one sensor</p></td>
+<tr class="row-odd"><td><p>Color Sensor reset with more than one sensor</p></td>
 <td><p>Python</p></td>
 <td><p>Not available</p></td>
 <td><p>We implemented this so that all color sensors return always values
@@ -163,10 +163,11 @@ the angle has changed. This could also be implemented in mindstorm GUI</p>
 <ol class="arabic simple">
 <li><p>sometimes the light sensor did not return a result</p></li>
 <li><p>We developed a calibration that drove over a line to
-calibrate our sensors. However, the reset block is only
-designed to use one Gyro and not 2</p></li>
+calibrate our sensors.</p></li>
 </ol>
 </div></blockquote>
+<p>Runs we are doing:</p>
+<p>Mission 1 – Swing:</p>
 </div>
 </div>
 
@@ -188,27 +189,31 @@ designed to use one Gyro and not 2</p></li>
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="summary.html">1. Summary of Robot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/disclaimer.html">1. Coaches Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/python.html">2. Python Essentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/python.html#advanced-python">3. Advanced Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/lessons.html">4. Lessons</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#goals-for-using-python">1.1. Goals for using Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goals-for-using-python">Goals for using Python</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="mechanics.html">2. MECAHNICS TBD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0_menu.html">3. Menu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run.html">4. City Runs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="spockbots.html">5. Spockbots API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code.html">6. Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">7. lego</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spockbots.html">Spockbots API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">lego</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="summary.html" title="previous chapter">1. Summary of Robot Features</a></li>
-      <li>Next: <a href="mechanics.html" title="next chapter">2. MECAHNICS TBD</a></li>
+      <li>Previous: <a href="summary.html" title="previous chapter">Summary of Robot Features</a></li>
+      <li>Next: <a href="run.html" title="next chapter">City Runs</a></li>
   </ul></li>
 </ul>
 </div>

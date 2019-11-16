@@ -74,7 +74,6 @@
     <span class="k">def</span> <span class="nf">white</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">robot</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">90</span>
 
-
     <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
@@ -84,24 +83,21 @@
 
     <span class="n">robot</span><span class="o">.</span><span class="n">followline_pid</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">white</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">10.6</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">white</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">min_speed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">turntoblack</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-
     <span class="n">robot</span><span class="o">.</span><span class="n">followline_pid</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
     <span class="n">robot</span><span class="o">.</span><span class="n">beep</span><span class="p">()</span>
-    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">9.5</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">25</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
-    
-    
 
     <span class="n">robot</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">gyro</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
@@ -109,9 +105,13 @@
     <span class="n">gyro</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">135</span><span class="p">)</span></div>
 
 
-
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">run_swing</span><span class="p">()</span>
+    <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time:&quot;</span><span class="p">,</span> <span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">)</span>
+
+    <span class="c1"># Time: 43.13</span>
 </pre></div>
 
           </div>
@@ -140,7 +140,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>

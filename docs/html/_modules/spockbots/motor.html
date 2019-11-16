@@ -42,7 +42,7 @@
 <span class="c1"># from pybricks.ev3devices import ColorSensor</span>
 <span class="c1"># from spockbots.colorsensor import SpockbotsColorSensor</span>
 <span class="kn">from</span> <span class="nn">spockbots.colorsensor</span> <span class="k">import</span> <span class="n">SpockbotsColorSensors</span>
-<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">PRINT</span>
+<span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">PRINT</span><span class="p">,</span> <span class="n">voltage</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">spockbots.output</span> <span class="k">import</span> <span class="n">led</span>
@@ -77,6 +77,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">colorsensors</span> <span class="o">=</span> <span class="n">SpockbotsColorSensors</span><span class="p">(</span><span class="n">ports</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
 
 
 <div class="viewcode-block" id="SpockbotsMotor.check_kill_button"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.check_kill_button">[docs]</a>    <span class="k">def</span> <span class="nf">check_kill_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -259,14 +260,13 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">still</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SpockbotsMotor.still"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.still">[docs]</a>    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SpockbotsMotor.still"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.still">[docs]</a>    <span class="k">def</span> <span class="nf">still</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        waits till the motors are no longer turning.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">PRINT</span><span class="p">(</span><span class="s2">&quot;Still Start&quot;</span><span class="p">)</span>
 
-        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">angle_left_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
         <span class="n">angle_right_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
         <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -329,7 +329,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed_left</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">speed_right</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SpockbotsMotor.turn"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.turn">[docs]</a>    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+<div class="viewcode-block" id="SpockbotsMotor.turn"><a class="viewcode-back" href="../../spockbots.html#spockbots.motor.SpockbotsMotor.turn">[docs]</a>    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        takes the radius of the robot and dives on it</span>
 <span class="sd">        for a distance based on the angle.</span>
@@ -353,7 +353,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="n">speed</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-        <span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">old</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span>
         <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> \
                 <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
@@ -839,7 +838,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../design.html">1. Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../run.html">City Runs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../spockbots.html">Spockbots API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Spockbots Code</a></li>

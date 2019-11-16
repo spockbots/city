@@ -8,11 +8,11 @@ Our main goal this year was to learn Python.
 
 Previously we used Mindstorms GUI and developed a sophisticated library with many myblocks.
 
-Questions
+Questions we wanted to answer:
 
-#. Can we convert this library into python?
+#. Can we convert this library into Python?
 
-#. Would python easier than the mindstrom GUI?
+#. Would Python easier than the mindstrom GUI?
 
 #. Would it be easier to define missions with Python?
 
@@ -30,13 +30,13 @@ Previous Mindstorm GUI programs
   and the robot in Mindstorm. Is this improved in Python
 
 * In contrast to Windows, the GUI on Mac seems slower.
-  Is the development in python faster?
+  Is the development in Python faster?
 
 * We often ran out of screen space as the programs were long.
-  Does using python help?
+  Does using Python help?
 
 * We had some issues with the Gyro and light sensors
-  in the mindstor GUI. Do these issues occur also in python?
+  in the mindstor GUI. Do these issues occur also in Python?
 
 
 .. list-table:: Python and Mindtsorm GUI comparison
@@ -71,7 +71,7 @@ Previous Mindstorm GUI programs
        We did not have a fix for that.
      - Easy to fix in python while using the previous value.
        Comes back quickly
-   * - Color Sensor reset with mor than one sensor
+   * - Color Sensor reset with more than one sensor
      - Python
      - Not available
      - We implemented this so that all color sensors return always values
@@ -123,12 +123,14 @@ Observations and answers:
 
   1. sometimes the light sensor did not return a result
   2. We developed a calibration that drove over a line to
-     calibrate our sensors. However, the reset block is only
-     designed to use one Gyro and not 2
+     calibrate our sensors.
 
 
 
 
 
+Runs we are doing:
+
+Mission 1 -- Swing:
 
 

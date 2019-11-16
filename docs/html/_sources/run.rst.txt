@@ -37,16 +37,20 @@ Setup
   To help the setup we are using a jig.
 
 Run
-  We use the balck lines and that allow us to be more precise.
+  We use the black lines and that allow us to be more precise.
+
+Points
+  Including the "advantage" points for containing all parts in the small home,
+  we can score a maximimum of 90 points on this run.
 
 Mechanical
   We have an attachment designed that pushes the house block, a lever that starts the swing, a
-  lever that allows us to flip a blue stand
-  and a lever tu turn the elevator.
+  lever that allows us to flip a blue house stilt
+  and a lever to flip the elevator.
 
 Mission Order
-  THis mission would be best to be strarte at the begining as it is mor complex to set up
-  the the crane, but the crane may swing so we decided to run the swing first.
+  This mission would be best to be start at the begining as it is more complex to set up
+  than the crane, but the crane may fall off so we decided to run the swing first.
 
 
 run.crane
@@ -79,10 +83,15 @@ run.crane
 
 Setup
   The setup for the crane mission is important, but it does not have to be precise.
-  There is a balck line that we can allign the blue peg with.
+  There is a balck line that we can align the blue peg with.  There is no jig for
+  this run.
 
 Run
-  We use the balck line to align the robot so that the attachment is working well.
+  We use the black line to align the robot so that the attachment is working well.
+
+Points
+  If the blue blocks stack properly, we will earn 50 points, plus the 5 point
+  "advantage" bonus for fitting in the small home.
 
 Mechanical
   We have an attachment designed that pushes the block and activates the
@@ -93,13 +102,31 @@ Mission Order
   To avoid the swinging of the line (by other teams moving the table), this is our first mission.
 
 
-run.tan_circle
+run.black_circle
 -------
 
-.. automodule:: run.tan_circle
+.. automodule:: run.black_circle
    :members:
    :undoc-members:
    :show-inheritance:
+
+Setup
+  We use the grid in the starting section to align and aim the robot.
+
+Run
+  We just send the robot forward 48cm using the gryo, then back up 48cm back to base.
+
+Points
+  If the building is entirely in the circle we score 40, plus the 5 point
+  mission bonus for all attachments in the small home.
+
+Mechanical
+  We use a simple and light building holder attachment that shoves the building
+  to the circle.
+
+Mission Order
+  This run is done after the crane.
+
 
 run.red_circle
 -------
@@ -109,10 +136,79 @@ run.red_circle
    :undoc-members:
    :show-inheritance:
 
-run.black_circle
+Setup
+  We use our standard jig to align the robot at the correct angle
+
+Run
+  We send the robot forward 59cm using the gryo, then turn left 40 degrees,
+  then forward another 3cm.  Then reverse 10cm, turn left 45 degrees, and back 70cm
+  to base.
+
+Points
+  If the building is entirely in the circle we score 50, plus the 5 point
+  "advantage" bonus for all attachments in the small home.
+
+Mechanical
+  We use a simple and light building holder attachment that shoves the building
+  to the circle.
+
+Mission Order
+  This run is done last, after the black run.
+
+run.tan_circle
 -------
 
-.. automodule:: run.black_circle
+.. automodule:: run.tan_circle
    :members:
    :undoc-members:
    :show-inheritance:
+
+Setup
+  We use our standard jig to align the robot at the correct angle
+
+Run
+  We send the robot forward 85cm using the gryo, then turn left 50 degrees,
+  then forward 25cm.  Then reverse 10cm, turn right 50 degrees, and back 120cm
+  to base.
+
+Points
+  If the building is entirely in the circle we score 45, plus the 5 point
+  "advantage" bonus for all attachments in the small home.
+
+Mechanical
+  We use a simple and light building holder attachment that shoves the building
+  to the circle.
+
+Mission Order
+  This is an optional run if we have time.
+
+run.ramp
+-------
+
+.. automodule:: run.ramp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Setup
+  We align on the 15 degree line in the starter space.
+
+Run
+  We send the robot forward 72cm using the gryo, then search for a white line,
+  then align to a black line, turn 20 degrees right, go forward 12cm.  Then
+  we turn almost 90 degrees (85) right, back up 15cm and turn to the black line
+  then turn to the white line to make sure we are aligned to the line following
+  line, follow that for 25cm, and then go straight very fast for 80 cm and stop
+  at the top of the ramp.
+
+Points
+  If the robot successfully stops at the top of the ramp with both flags up,
+  we earn 50 points, plus the 5 point "advantage" bonus points.
+
+Mechanical
+  We use an attachment with extra wheels to help get over the bottom of the ramp.
+
+Mission Order
+  This run works about half of the time, so we would only use it if all the
+  other runs have been completed.
+
