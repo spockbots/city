@@ -175,6 +175,211 @@ old file will be deleted.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-spockbots.colorsensor">
+<span id="spockbots-colorsensor"></span><h2>spockbots.colorsensor<a class="headerlink" href="#module-spockbots.colorsensor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensor</code><span class="sig-paren">(</span><em class="sig-param">port=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>defines a Colorsensor with values between 0 and 100</p>
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.color">
+<code class="sig-name descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the color value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the color value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.flash">
+<code class="sig-name descname">flash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.flash" title="Permalink to this definition">¶</a></dt>
+<dd><p>flashes the color sensor by switching between
+color and reflective mode</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.info">
+<code class="sig-name descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the black and white value read form the
+sensor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the color sensor data form the file
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.reflection">
+<code class="sig-name descname">reflection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.reflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the reflection from the sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the original reflective lit value without</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_black">
+<code class="sig-name descname">set_black</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_black"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_black" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the current value to black</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_white">
+<code class="sig-name descname">set_white</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_white"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_white" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the current value to white
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the current value mapped b&lt;etween 0 and 100
+:return: returns the reflective light mapped between 0 to 100</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensor.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>append the black and white value to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors">
+<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensors</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4], speed=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is how we create the sensors:</p>
+<blockquote>
+<div><p>colorsensor = SpockbotsColorSensors(ports=[2,3,4])
+colorsensor.read()</p>
+</div></blockquote>
+<p>Now you can use</p>
+<blockquote>
+<div><p>colorsensor[i].value()</p>
+</div></blockquote>
+<p>to get the reflective value of the colorsensor on port i.
+To get the color value we can use</p>
+<blockquote>
+<div><p>colorsensor[i].color()</p>
+</div></blockquote>
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>removes the file calibrate.txt</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.color">
+<code class="sig-name descname">color</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the color value between 0-100 after
+calibration on the port i</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The color value, blue = 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.flash">
+<code class="sig-name descname">flash</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.flash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flashes the light sensor on teh ports one after another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports to flash</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.info">
+<code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the information for each port, e.g.
+the minimal black and maximum while values
+:param ports: the list of ports to flash</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the black and white values to the file
+calibrate.txt</p>
+<p>The values must be written previously. If the file
+does not exists a default is used.</p>
+<blockquote>
+<div><p>2: 0, 100
+3: 0, 100
+4: 4, 40    # because it is higher up so white does</p>
+<blockquote>
+<div><p>not read that well</p>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_color">
+<code class="sig-name descname">test_color</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the color value of all senors between 0-100</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_reflective">
+<code class="sig-name descname">test_reflective</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_reflective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_reflective" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the reflective value of all senors between 0-100</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the reflective value between 0-100 after
+calibration on the port i</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the reflective color value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="spockbots.colorsensor.SpockbotsColorSensors.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes the black and white values to the file
+calibrate.txt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ports</strong> – the ports used to write</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-spockbots.motor">
 <span id="spockbots-motor"></span><h2>spockbots.motor<a class="headerlink" href="#module-spockbots.motor" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -681,211 +886,6 @@ we only do the correction if the robot is more than two degrees off.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-spockbots.colorsensor">
-<span id="spockbots-colorsensor"></span><h2>spockbots.colorsensor<a class="headerlink" href="#module-spockbots.colorsensor" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor">
-<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensor</code><span class="sig-paren">(</span><em class="sig-param">port=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>defines a Colorsensor with values between 0 and 100</p>
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.color">
-<code class="sig-name descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.color" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the color value</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the color value</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.flash">
-<code class="sig-name descname">flash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.flash" title="Permalink to this definition">¶</a></dt>
-<dd><p>flashes the color sensor by switching between
-color and reflective mode</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.info">
-<code class="sig-name descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.info" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the black and white value read form the
-sensor</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.read">
-<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads the color sensor data form the file
-:return:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.reflection">
-<code class="sig-name descname">reflection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.reflection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.reflection" title="Permalink to this definition">¶</a></dt>
-<dd><p>gets the reflection from the sensor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the original reflective lit value without</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_black">
-<code class="sig-name descname">set_black</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_black"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_black" title="Permalink to this definition">¶</a></dt>
-<dd><p>sets the current value to black</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.set_white">
-<code class="sig-name descname">set_white</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.set_white"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.set_white" title="Permalink to this definition">¶</a></dt>
-<dd><p>sets the current value to white
-:return:</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.value">
-<code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads the current value mapped b&lt;etween 0 and 100
-:return: returns the reflective light mapped between 0 to 100</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensor.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensor.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensor.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>append the black and white value to a file</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors">
-<em class="property">class </em><code class="sig-prename descclassname">spockbots.colorsensor.</code><code class="sig-name descname">SpockbotsColorSensors</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4], speed=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This is how we create the sensors:</p>
-<blockquote>
-<div><p>colorsensor = SpockbotsColorSensors(ports=[2,3,4])
-colorsensor.read()</p>
-</div></blockquote>
-<p>Now you can use</p>
-<blockquote>
-<div><p>colorsensor[i].value()</p>
-</div></blockquote>
-<p>to get the reflective value of the colorsensor on port i.
-To get the color value we can use</p>
-<blockquote>
-<div><p>colorsensor[i].color()</p>
-</div></blockquote>
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.clear">
-<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.clear" title="Permalink to this definition">¶</a></dt>
-<dd><p>removes the file calibrate.txt</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.color">
-<code class="sig-name descname">color</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.color" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the color value between 0-100 after
-calibration on the port i</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The color value, blue = 2</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.flash">
-<code class="sig-name descname">flash</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.flash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.flash" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flashes the light sensor on teh ports one after another</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ports</strong> – the list of ports to flash</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.info">
-<code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.info" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the information for each port, e.g.
-the minimal black and maximum while values
-:param ports: the list of ports to flash</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.read">
-<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads the black and white values to the file
-calibrate.txt</p>
-<p>The values must be written previously. If the file
-does not exists a default is used.</p>
-<blockquote>
-<div><p>2: 0, 100
-3: 0, 100
-4: 4, 40    # because it is higher up so white does</p>
-<blockquote>
-<div><p>not read that well</p>
-</div></blockquote>
-</div></blockquote>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_color">
-<code class="sig-name descname">test_color</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_color" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the color value of all senors between 0-100</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.test_reflective">
-<code class="sig-name descname">test_reflective</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.test_reflective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.test_reflective" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the reflective value of all senors between 0-100</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ports</strong> – the list of ports</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.value">
-<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the reflective value between 0-100 after
-calibration on the port i</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>i</strong> – number of the port</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the reflective color value</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="spockbots.colorsensor.SpockbotsColorSensors.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">ports=[2, 3, 4]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spockbots/colorsensor.html#SpockbotsColorSensors.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spockbots.colorsensor.SpockbotsColorSensors.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>writes the black and white values to the file
-calibrate.txt</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ports</strong> – the ports used to write</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 </div>
 
 
@@ -908,26 +908,36 @@ calibrate.txt</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="edu/disclaimer.html">1. Coaches Disclaimer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edu/python.html">2. Python Essentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edu/lessons.html">3. Lessons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/python.html#advanced-python">3. Advanced Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edu/lessons.html">4. Lessons</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="summary.html">1. Summary of Robot Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary of Robot Features</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="design.html">1. Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mechanics.html">2. MECAHNICS TBD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0_menu.html">3. Menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run.html">City Runs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Spockbots API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-spockbots.output">spockbots.output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-spockbots.check">spockbots.check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.colorsensor">spockbots.colorsensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-spockbots.motor">spockbots.motor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-spockbots.gyro">spockbots.gyro</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-spockbots.colorsensor">spockbots.colorsensor</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Spockbots Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">7. lego</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lego</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="run.html">City Runs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Spockbots API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.output">spockbots.output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.check">spockbots.check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.colorsensor">spockbots.colorsensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.motor">spockbots.motor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spockbots.gyro">spockbots.gyro</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">

@@ -1,6 +1,5 @@
 import sys
 import time
-from time import sleep
 
 from pybricks.ev3devices import GyroSensor
 from pybricks.parameters import Direction
@@ -65,7 +64,7 @@ class SpockbotsGyro(object):
                                              sensor_direction)
 
                 print("SENSOR:", self.sensor)
-                sleep(0.1)
+                time.sleep(0.1)
                 self.sensor.reset_angle(0)
                 found = True
             except Exception as e:
@@ -108,7 +107,7 @@ class SpockbotsGyro(object):
 
         angle = 1000
         while angle != 0:
-            # sleep(0.1)
+            # time.sleep(0.1)
             angle = self.angle()
 
     def still(self):
@@ -135,7 +134,7 @@ class SpockbotsGyro(object):
                 print("ERROR: DRIFT no value found")
                 # No speed value found, so repeat
 
-    def status(self, count=10):
+    def status(self, count=5):
         """
         tests count times if robot is still and returns if its still or drifts
         :param count: number of times tested if its still
@@ -156,7 +155,7 @@ class SpockbotsGyro(object):
         print("GYRO STATUS", i, still, drift)
         return still >= count, drift >= count
 
-    def reset(self):
+    def reset(self, count=5):
         """
         safely resets the gyro
         """
@@ -168,7 +167,6 @@ class SpockbotsGyro(object):
             print("Gyro read error")
             self.last_angle = angle = -1000
 
-        count = 10
         while count >= 0:
             # sleep(0.1)
             try:
@@ -193,7 +191,7 @@ class SpockbotsGyro(object):
             self.robot.beep()
             self.robot.beep()
 
-    def turn(self, speed=25, degrees=90, offset=None):
+    def turn(self, speed=25, degrees=90, offset=None, killtime=5):
         """
         uses gyro to turn positive to right negative to left. As it may turn too much, it
         will correct itself at a lower speed and turn. As the sensor is accurate to 2 degrees,
@@ -214,7 +212,7 @@ class SpockbotsGyro(object):
 
         if degrees < 0: # Turn LEFT
 
-            self.left(speed=speed, degrees=abs(degrees), offset=offset)
+            self.left(speed=speed, degrees=abs(degrees), offset=offset, killtime = killtime)
             # correct if angle is wrong
             angle = self.angle()
             if abs(angle - degrees) > 2:
@@ -225,7 +223,7 @@ class SpockbotsGyro(object):
 
         elif degrees > 0: # Turn RIGHT
 
-            self.right(speed=speed, degrees=abs(degrees), offset=offset)
+            self.right(speed=speed, degrees=abs(degrees), offset=offset, killtime = killtime)
             # correct if angle is wrong
             angle = self.angle()
             if abs(angle - degrees) > 2:
@@ -237,7 +235,7 @@ class SpockbotsGyro(object):
         angle = self.angle()
         print(angle)
 
-    def left(self, speed=25, degrees=90, offset=0):
+    def left(self, speed=25, degrees=90, offset=0, killtime=5):
         """
         The robot turns left with the given number of degrees
 
@@ -257,14 +255,18 @@ class SpockbotsGyro(object):
 
         print(angle, -degrees + offset)
 
-        while angle > -degrees + offset:
+        time_start = time.time()
+
+        while angle > -degrees + offset and (time.time() - time_start < killtime):
+        #while angle > -degrees + offset:
+
             # print(angle, -degrees + offset)
             angle = self.angle()
         self.robot.stop()
         angle = self.angle()
         print("LEFT", angle)
 
-    def right(self, speed=25, degrees=90, offset=0):
+    def right(self, speed=25, degrees=90, offset=0, killtime=5):
         """
         The robot turns right with the given number of degrees
 
@@ -283,7 +285,12 @@ class SpockbotsGyro(object):
         self.robot.on_forever(-speed, speed)
         angle = self.angle()
         print(angle, degrees - offset)
-        while angle < degrees - offset:
+
+        time_start = time.time()
+
+        while angle < degrees - offset and (time.time() - time_start < killtime):
+        #while angle < degrees - offset:
+
             # print(angle, degrees - offset)
             angle = self.angle()
         self.robot.stop()
@@ -370,3 +377,4 @@ class SpockbotsGyro(object):
                 current_speed = current_speed + acceleration
 
         self.robot.stop()  # stop the robot
+        print("GYRO FORWARD TRAVELED", traveled)

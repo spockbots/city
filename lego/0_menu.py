@@ -25,9 +25,11 @@ from pybricks import ev3brick as brick
 
 # brick.display.text(text)
 
+# the menu contains a label and the name of the functions
+# we call when we select the line with the label
 menu = [
-    ["Crane", run_crane],
     ["Swing", run_swing],
+    ["Crane", run_crane],
     ["Red Circle", run_red_circle],
     ["Tan Circle", run_tan_circle],
     ["White to Black Circle", run_black_circle],
@@ -41,9 +43,7 @@ selections = len(menu)
 
 def marker(line):
     """
-
-    :param line:
-    :return:
+    Place a marker in fornt of the selected line
     """
     y = line * 10 + 10
     brick.display.text(">>>", (10, y))
@@ -51,8 +51,7 @@ def marker(line):
 
 def print_menu():
     """
-
-    :return:
+    Print the menu
     """
     brick.display.clear()
     i = 0
@@ -79,11 +78,11 @@ while True:
         print_menu()
 
     elif Button.RIGHT in brick.buttons():
-        prg = menu[selection][1]
-        brick.display.clear()
-        prg()
-        brick.display.clear()
-        print_menu()
+        prg = menu[selection][1] # get the function name from the menu
+        brick.display.clear() # clear the scree
+        prg() # run the selected function
+        brick.display.clear() # clear the screen as we are now done with the prg
+        print_menu() # print the screen
 
     elif Button.LEFT in brick.buttons():
         brick.display.clear()

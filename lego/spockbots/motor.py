@@ -9,7 +9,7 @@ from pybricks.robotics import DriveBase
 # from pybricks.ev3devices import ColorSensor
 # from spockbots.colorsensor import SpockbotsColorSensor
 from spockbots.colorsensor import SpockbotsColorSensors
-from spockbots.output import PRINT
+from spockbots.output import PRINT, voltage
 from threading import Thread
 import sys
 from spockbots.output import led
@@ -44,6 +44,7 @@ class SpockbotsMotor(object):
             self.setup(direction=direction)
 
         self.colorsensors = SpockbotsColorSensors(ports=[2, 3, 4])
+
 
 
     def check_kill_button(self):
@@ -226,14 +227,13 @@ class SpockbotsMotor(object):
 
         self.still()
 
-    def still(self):
+    def still(self, count=5):
         """
         waits till the motors are no longer turning.
         """
 
         PRINT("Still Start")
 
-        count = 10
         angle_left_old = self.left.angle()
         angle_right_old = self.right.angle()
         while count > 0:
@@ -296,7 +296,7 @@ class SpockbotsMotor(object):
         self.left.run(speed_left * 10)
         self.right.run(speed_right * 10)
 
-    def turn(self, speed, angle):
+    def turn(self, speed, angle, count=5):
         """
         takes the radius of the robot and dives on it
         for a distance based on the angle.
@@ -320,7 +320,6 @@ class SpockbotsMotor(object):
         self.left.run_angle(speed * 10, -a, Stop.BRAKE, False)
         self.right.run_angle(speed * 10, a, Stop.BRAKE, False)
 
-        count = 10
         old = abs(self.left.angle())
         while abs(self.left.angle()) < abs(a) or \
                 abs(self.right.angle()) < abs(a):

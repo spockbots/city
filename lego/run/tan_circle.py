@@ -34,11 +34,11 @@ def run_tan_circle():
     robot.turntowhite(10, "right", 2, 90)
 
     robot.followline(speed=10, distance=15, port=2, right=True)
-    gyro.turn(10, -85)
+    gyro.turn(speed=10, degrees=-85, killtime=2)
     gyro.forward(10, 6)
 
     robot.forward(10, -10)
-    gyro.turn(10, 100)
+    gyro.turn(speed=10, degrees=100, killtime=2)
     robot.forward(75, -140)
 
     # move a long distance
